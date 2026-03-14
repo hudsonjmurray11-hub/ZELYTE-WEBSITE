@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZELYTE — Hydration You Don't Have to Drink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="glowing-effect.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <iframe src="zelyte-3d-logo.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+    </div>
+
+    <!-- Header Bar -->
+    <div id="header-bar" class="header-bar">
+        <a href="index.html"><img src="Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
+        <div class="spacer"></div>
+        <nav class="nav-links">
+            <a href="#products">Products</a>
+            <a href="#science">Science</a>
+            <a href="#reviews">Reviews</a>
+            <a href="faq.html">FAQ</a>
+            <a href="#about">About</a>
+        </nav>
+        <a href="#" class="cart-icon" aria-label="Cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+        </a>
+        <a href="lemon-lime.html" class="shop-button gradient-button">Shop Now</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="pouch-scene" id="pouchScene"></div>
+        <div class="hero-content">
+            <div class="hero-badge">ZERO SUGAR &nbsp;·&nbsp; ZERO CALORIES &nbsp;·&nbsp; HANDS-FREE</div>
+            <h1><span class="hero-blue">HYDRATION YOU</span><br><span class="hero-gold">DON'T DRINK.</span></h1>
+            <p class="hero-sub">Electrolytes and natural caffeine delivered through a pouch. Hydration and energy without the bottle.</p>
+            <div class="hero-ctas">
+                <a href="lemon-lime.html" class="btn-primary gradient-button">Shop Now</a>
+                <a href="#how-it-works" class="btn-outline">How It Works ↓</a>
+            </div>
+        </div>
+        <div class="hero-image-wrap">
+            <a href="lemon-lime.html" id="product-link">
+                <img src="LEMON LIME NEW TIN .png" alt="Lemon Lime Hydration Pouch" class="hero-image">
+            </a>
+        </div>
+    </section>
+
+    <!-- What Is ZELYTE -->
+    <section id="about" class="section-what">
+        <div class="section-inner">
+            <span class="section-label reveal-up">A NEW CATEGORY</span>
+            <h2 class="reveal-up">Not a drink. A new category.</h2>
+            <p class="section-sub reveal-up">ZELYTE is the first Active Hydration Pouch — worn in your upper lip, delivering electrolytes and natural caffeine through your gums. No liquid. No hands. No stopping.</p>
+            <div class="what-cards">
+                <div class="what-card reveal-left">
+                    <div class="what-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg></div>
+                    <strong>New Category</strong>
+                    <p>ZELYTE is creating an entirely new product category: Active Hydration Pouches — the future of performance hydration.</p>
+                </div>
+                <div class="what-card reveal-up">
+                    <div class="what-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/></svg></div>
+                    <strong>Buccal Hydration</strong>
+                    <p>Electrolytes are absorbed through your gums — no swallowing, no drinking required.</p>
+                </div>
+                <div class="what-card reveal-right">
+                    <div class="what-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                    <strong>Natural Caffeine</strong>
+                    <p>40mg of plant-derived caffeine for clean, focused energy with no crash.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section-how">
+        <div class="section-inner">
+            <div class="glass-pill how-label-pill reveal-up"><span class="section-label">HOW IT WORKS</span></div>
+            <div class="steps">
+                <div class="step reveal-left">
+                    <div class="step-num">01</div>
+                    <h3>Place</h3>
+                    <p>Tuck a ZELYTE pouch between your upper lip and gum. It sits comfortably and discretely — no hands needed.</p>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step reveal-up">
+                    <div class="step-num">02</div>
+                    <h3>Activate</h3>
+                    <p>The pouch slowly releases electrolytes and caffeine, absorbed directly through your gums via buccal absorption.</p>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step reveal-right">
+                    <div class="step-num">03</div>
+                    <h3>Perform</h3>
+                    <p>Stay hydrated and focused for 20–40 minutes. No drinking. No stopping. No compromise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Not Drinks -->
+    <section id="why" class="section-why">
+        <div class="section-inner">
+            <span class="section-label reveal-up">THE PROBLEM WITH DRINKS</span>
+            <h2 class="reveal-up">Drinks can't keep up.</h2>
+            <p class="section-sub reveal-up">Every time you reach for a bottle, you slow down. ZELYTE doesn't ask you to slow down.</p>
+            <div class="comparison">
+                <div class="comparison-col drinks-col reveal-left">
+                    <div class="comparison-header">Sports Drinks</div>
+                    <ul class="comparison-list">
+                        <li><span class="x">✗</span> Requires both hands</li>
+                        <li><span class="x">✗</span> Spills during activity</li>
+                        <li><span class="x">✗</span> Full of sugar &amp; calories</li>
+                        <li><span class="x">✗</span> Bulky to carry</li>
+                        <li><span class="x">✗</span> Increases bathroom breaks</li>
+                        <li><span class="x">✗</span> Can't use mid-play</li>
+                    </ul>
+                </div>
+                <div class="comparison-col zelyte-col reveal-right">
+                    <div class="comparison-header zelyte-header">ZELYTE</div>
+                    <ul class="comparison-list">
+                        <li><span class="check">✓</span> Completely hands-free</li>
+                        <li><span class="check">✓</span> Zero spills, ever</li>
+                        <li><span class="check">✓</span> Zero sugar, zero calories</li>
+                        <li><span class="check">✓</span> Fits in your pocket</li>
+                        <li><span class="check">✓</span> No extra liquid intake</li>
+                        <li><span class="check">✓</span> Use during any activity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits" class="section-benefits">
+        <div class="section-inner">
+            <span class="section-label reveal-up">BUILT FOR PERFORMANCE</span>
+            <h2 class="reveal-up benefits-headline">Built for the ones who don't stop.</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card reveal-left">
+                    <div class="benefit-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round"><line x1="6.5" y1="12" x2="17.5" y2="12"/><line x1="6.5" y1="8.5" x2="6.5" y2="15.5"/><line x1="17.5" y1="8.5" x2="17.5" y2="15.5"/><line x1="3.5" y1="9.5" x2="3.5" y2="14.5"/><line x1="20.5" y1="9.5" x2="20.5" y2="14.5"/></svg></div>
+                    <h3>Lift Without Stopping</h3>
+                    <p>Stay hydrated between sets without putting the bar down or interrupting your flow.</p>
+                </div>
+                <div class="benefit-card reveal-up">
+                    <div class="benefit-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/><line x1="2" y1="8" x2="7" y2="8"/><line x1="2" y1="16" x2="5" y2="16"/></svg></div>
+                    <h3>Run Without Carrying</h3>
+                    <p>Electrolyte support on long runs without a water bottle or hydration vest slowing you down.</p>
+                </div>
+                <div class="benefit-card reveal-right">
+                    <div class="benefit-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                    <h3>On the Field</h3>
+                    <p>Built for hockey, lacrosse, football, and competitive sports where drinks aren't an option.</p>
+                </div>
+                <div class="benefit-card reveal-left">
+                    <div class="benefit-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 4H7a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4z"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="16" cy="11.5" r="1" fill="#1a73e8" stroke="none"/><circle cx="18.5" cy="13" r="1" fill="#1a73e8" stroke="none"/></svg></div>
+                    <h3>Lock In</h3>
+                    <p>Natural caffeine and hydration support for gamers who can't step away from the game.</p>
+                </div>
+                <div class="benefit-card reveal-up">
+                    <div class="benefit-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                    <h3>Focus in Class</h3>
+                    <p>Discreet hydration and clean energy for lectures, exams, and the grind.</p>
+                </div>
+                <div class="benefit-card reveal-right">
+                    <div class="benefit-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
+                    <h3>Travel &amp; Commute</h3>
+                    <p>Pocket-sized convenience for long commutes, flights, and wherever life takes you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flavors -->
+    <section id="products" class="section-flavors">
+        <div class="section-inner">
+            <span class="section-label reveal-up">FLAVORS</span>
+            <h2 class="reveal-up">Engineered flavors. No noise.</h2>
+            <div class="flavors-grid">
+                <a href="lemon-lime.html" class="flavor-card reveal-left">
+                    <div class="flavor-img-wrap">
+                        <img src="Untitled (1).png" alt="Lemon Lime" class="flavor-img">
+                    </div>
+                    <h3>Lemon Lime</h3>
+                    <p>Electrolytes + 40mg Natural Caffeine · 15 pouches per tin</p>
+                    <span class="flavor-badge available">$10.00 — Coming Soon</span>
+                </a>
+                <div class="flavor-card flavor-upcoming reveal-up">
+                    <div class="flavor-img-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="6"/><path d="M12 19 C8 18 5 14 7 11 C9 13 11 16 12 19"/><path d="M12 19 C16 18 19 14 17 11 C15 13 13 16 12 19"/><path d="M12 14 C8 13 5 9 7 6 C9 8 11 11 12 14"/><path d="M12 14 C16 13 19 9 17 6 C15 8 13 11 12 14"/><path d="M12 7 C10 5 10 2 12 2 C14 2 14 5 12 7"/></svg></div>
+                    <h3>Peppermint</h3>
+                    <p>Electrolytes + 40mg Natural Caffeine · 15 pouches per tin</p>
+                    <span class="flavor-badge">Coming Soon</span>
+                </div>
+                <div class="flavor-card flavor-upcoming reveal-right">
+                    <div class="flavor-img-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+                    <h3>Wintergreen</h3>
+                    <p>Electrolytes + 40mg Natural Caffeine · 15 pouches per tin</p>
+                    <span class="flavor-badge">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science / Ingredients -->
+    <section id="science" class="section-science">
+        <div class="section-inner">
+            <span class="section-label reveal-up">WHAT'S INSIDE</span>
+            <h2 class="reveal-up">Transparent ingredients. Zero compromises.</h2>
+            <p class="section-sub reveal-up">Every ingredient earns its place. Nothing in a ZELYTE pouch is there by accident.</p>
+            <div class="ingredients-grid">
+                <div class="ingredient-card reveal-left">
+                    <strong>Sodium</strong>
+                    <p>Supports fluid balance and muscle function during activity.</p>
+                </div>
+                <div class="ingredient-card reveal-up">
+                    <strong>Potassium</strong>
+                    <p>Helps maintain proper hydration and muscle performance.</p>
+                </div>
+                <div class="ingredient-card reveal-right">
+                    <strong>Magnesium</strong>
+                    <p>Supports energy metabolism and reduces muscle fatigue.</p>
+                </div>
+                <div class="ingredient-card reveal-left">
+                    <strong>Natural Caffeine</strong>
+                    <p>40mg of plant-derived caffeine for clean, focused energy.</p>
+                </div>
+                <div class="ingredient-card reveal-up">
+                    <strong>Natural Flavors</strong>
+                    <p>No artificial flavors — just fresh, clean taste you can feel good about.</p>
+                </div>
+                <div class="ingredient-card reveal-right">
+                    <strong>Stevia</strong>
+                    <p>Naturally sweetened. Zero sugar, zero calories, zero compromise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="reviews" class="section-reviews">
+        <div class="section-inner">
+            <span class="section-label reveal-up">REVIEWS</span>
+            <h2 class="reveal-up">Real athletes. Real results.</h2>
+            <div class="reviews-grid">
+                <div class="review-card reveal-left">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"I use it during lifting sessions. No more stopping to chug water mid-set. This is a game changer."</p>
+                    <strong>Jake M. — Division I Lacrosse</strong>
+                </div>
+                <div class="review-card reveal-up">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"I've been looking for something like this for years. Lemon lime tastes incredible and I feel the difference."</p>
+                    <strong>Mia T. — Marathon Runner</strong>
+                </div>
+                <div class="review-card reveal-right">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"I use it before exams. Keeps me focused without the jitters. No crash. Exactly what I needed."</p>
+                    <strong>Connor R. — College Student</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Preview -->
+    <section id="faq" class="section-faq">
+        <div class="section-inner">
+            <span class="section-label reveal-up">FAQ</span>
+            <h2 class="reveal-up">The facts.</h2>
+            <div class="faq-list">
+                <div class="faq-item reveal-left">
+                    <strong>Do I swallow it?</strong>
+                    <p>No. The pouch is worn in your upper lip and removed after use, similar to a breath strip or mint strip.</p>
+                </div>
+                <div class="faq-item reveal-right">
+                    <strong>How long does it last?</strong>
+                    <p>Each pouch releases electrolytes and caffeine over approximately 20–40 minutes.</p>
+                </div>
+                <div class="faq-item reveal-left">
+                    <strong>Is caffeine optional?</strong>
+                    <p>Yes — ZELYTE will offer both caffeinated (40mg natural caffeine) and caffeine-free options.</p>
+                </div>
+                <div class="faq-item reveal-right">
+                    <strong>When should I use it?</strong>
+                    <p>Before, during, or after workouts, competitions, study sessions, commutes, or any time you need convenient hydration support.</p>
+                </div>
+            </div>
+            <a href="faq.html" class="btn-primary faq-more-btn reveal-up">View All FAQs →</a>
+        </div>
+    </section>
+
+    <!-- Bundle Packs -->
+    <section id="bundles" class="section-bundles">
+        <div class="section-inner">
+            <span class="section-label reveal-up">BUNDLE &amp; SAVE</span>
+            <h2 class="reveal-up">Load up. Lock in.</h2>
+            <p class="section-sub reveal-up">The more you train, the more you need. Stock accordingly.</p>
+            <div class="bundles-grid">
+
+                <!-- Starter Pack -->
+                <div class="bundle-card reveal-left">
+                    <div class="bundle-qty">1 Tin</div>
+                    <h3 class="bundle-name">Starter Pack</h3>
+                    <div class="bundle-price-wrap">
+                        <span class="bundle-price">$10.00</span>
+                        <span class="bundle-per">per tin</span>
+                    </div>
+                    <div class="bundle-pouches">15 pouches</div>
+                    <ul class="bundle-features">
+                        <li>✓ 1 Tin of your choice</li>
+                        <li>✓ 15 pouches per tin</li>
+                        <li>✓ All flavors available</li>
+                    </ul>
+                    <a href="lemon-lime.html" class="bundle-cta gradient-button">Get Started</a>
+                </div>
+
+                <!-- Pro Pack (featured) -->
+                <div class="bundle-card bundle-featured reveal-up">
+                    <div class="bundle-popular-badge">MOST POPULAR</div>
+                    <div class="bundle-qty">3 Tins</div>
+                    <h3 class="bundle-name">Pro Pack</h3>
+                    <div class="bundle-price-wrap">
+                        <span class="bundle-price">$27.00</span>
+                        <span class="bundle-per">($9/tin)</span>
+                    </div>
+                    <div class="bundle-savings">Save 10% — $3 off</div>
+                    <div class="bundle-pouches">45 pouches total</div>
+                    <ul class="bundle-features">
+                        <li>✓ 3 Tins of your choice</li>
+                        <li>✓ 45 pouches total</li>
+                        <li>✓ Mix &amp; match flavors</li>
+                    </ul>
+                    <a href="lemon-lime.html" class="bundle-cta bundle-cta-white">Shop Pro Pack</a>
+                </div>
+
+                <!-- Elite Pack -->
+                <div class="bundle-card reveal-right">
+                    <div class="bundle-qty">5 Tins</div>
+                    <h3 class="bundle-name">Elite Pack</h3>
+                    <div class="bundle-price-wrap">
+                        <span class="bundle-price">$40.00</span>
+                        <span class="bundle-per">($8/tin)</span>
+                    </div>
+                    <div class="bundle-savings bundle-savings-best">Save 20% — $10 off</div>
+                    <div class="bundle-pouches">75 pouches total</div>
+                    <ul class="bundle-features">
+                        <li>✓ 5 Tins of your choice</li>
+                        <li>✓ 75 pouches total</li>
+                        <li>✓ Mix &amp; match flavors</li>
+                    </ul>
+                    <a href="lemon-lime.html" class="bundle-cta gradient-button">Best Value</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-cta">
+        <div class="section-inner">
+            <span class="section-label cta-label reveal-up">PERFORM WITHOUT LIMITS</span>
+            <h2 class="reveal-up">No bottle. No compromise. Just performance.</h2>
+            <p class="section-sub cta-sub reveal-up">Hydration you don't have to drink. Zero sugar. Zero calories. Built for performance.</p>
+            <a href="lemon-lime.html" class="btn-white btn-large reveal-up gradient-button">Shop Now →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <img src="Zelyte (3).png" alt="ZELYTE" class="footer-logo">
+            <p class="footer-tagline">Active Hydration Pouches · Zero Sugar · Zero Calories · Hands-Free</p>
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+                <a href="#about">About</a>
+                <a href="#science">Science</a>
+                <a href="lemon-lime.html">Shop</a>
+            </div>
+            <p class="footer-legal">© 2026 ZELYTE Inc. All rights reserved. This product has not been evaluated by the FDA and is not intended to diagnose, treat, cure, or prevent any disease.</p>
+        </div>
+    </footer>
+
+    <div id="main-content"></div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const headerBar = document.getElementById('header-bar');
+
+            function startReveal() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in-view');
+                        } else {
+                            entry.target.classList.remove('in-view');
+                        }
+                    });
+                }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+                document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            // Wait for splash to fully fade out, then start reveal animations
+            splashScreen.addEventListener('transitionend', function handler(e) {
+                if (e.propertyName !== 'opacity') return;
+                splashScreen.removeEventListener('transitionend', handler);
+                startReveal();
+            });
+
+            setTimeout(() => {
+                splashScreen.classList.add('fade-out');
+                if (headerBar) headerBar.classList.add('visible');
+            }, 450);
+        });
+    </script>
+
+    <script>
+    (function () {
+        'use strict';
+
+        const POUCH_SRC = 'Adobe Express - file (2).png';
+
+        // Ring configs: radius (px), count, width (px), bobDur (s), orbitDur (s|null), dir (1=CW/-1=CCW), alpha
+        const RINGS = [
+            { radius: 250,  count: 12, width: 70, bobDur: 3.2, orbitDur:  30,  dir: -1, alpha: 1.00 },
+            { radius: 380,  count: 18, width: 55, bobDur: 4.2, orbitDur:  55,  dir:  1, alpha: 0.85 },
+            { radius: 510,  count: 25, width: 42, bobDur: 5.1, orbitDur:  80,  dir: -1, alpha: 0.70 },
+            { radius: 640,  count: 32, width: 32, bobDur: 6.0, orbitDur: 110,  dir:  1, alpha: 0.58 },
+            { radius: 770,  count: 42, width: 25, bobDur: 6.8, orbitDur: 140,  dir: -1, alpha: 0.44 },
+            { radius: 900,  count: 52, width: 20, bobDur: 7.5, orbitDur: 170,  dir:  1, alpha: 0.32 },
+            { radius: 1030, count: 64, width: 16, bobDur: 8.2, orbitDur: 200,  dir: -1, alpha: 0.22 },
+        ];
+
+        function buildScene() {
+            const scene  = document.getElementById('pouchScene');
+            const canImg = document.querySelector('.hero-image');
+            if (!scene || !canImg) return;
+
+            const sceneRect = scene.getBoundingClientRect();
+            const canRect   = canImg.getBoundingClientRect();
+            const centerX   = canRect.left - sceneRect.left + canRect.width  / 2;
+            const centerY   = canRect.top  - sceneRect.top  + canRect.height / 2;
+
+            RINGS.forEach(function (ring, ringIdx) {
+                const halfW = ring.width / 2;
+
+                // All rings — wrapped in a rotating orbit container
+                const orbitDiv = document.createElement('div');
+                orbitDiv.className = 'ring-orbit';
+                const animName = ring.dir === 1 ? 'orbitCW' : 'orbitCCW';
+                orbitDiv.style.cssText = `
+                    left: ${centerX.toFixed(1)}px;
+                    top:  ${centerY.toFixed(1)}px;
+                    opacity: ${ring.alpha};
+                    animation: ${animName} ${ring.orbitDur}s linear infinite;
+                `;
+
+                for (let i = 0; i < ring.count; i++) {
+                    const angle = (2 * Math.PI / ring.count) * i;
+                    // Position relative to orbit container's origin (= can center)
+                    const x = Math.cos(angle) * ring.radius - halfW;
+                    const y = Math.sin(angle) * ring.radius - halfW;
+
+                    const img = document.createElement('img');
+                    img.src       = POUCH_SRC;
+                    img.alt       = 'Zelyte pouch';
+                    img.className = 'pouch-float';
+                    img.draggable = false;
+
+                    const rotateDeg = Math.round(angle * (180 / Math.PI) + 90);
+                    const bobDelay  = -((i / ring.count) * ring.bobDur).toFixed(2);
+
+                    if (ringIdx === 0) {
+                        img.style.cssText = `
+                            left:      ${x.toFixed(1)}px;
+                            top:       ${y.toFixed(1)}px;
+                            width:     ${ring.width}px;
+                            transform: rotate(${rotateDeg}deg);
+                            animation: none;
+                        `;
+                    } else {
+                        img.style.cssText = `
+                            left:           ${x.toFixed(1)}px;
+                            top:            ${y.toFixed(1)}px;
+                            width:          ${ring.width}px;
+                            --rotate:       ${rotateDeg}deg;
+                            --bob-duration: ${ring.bobDur}s;
+                            --bob-delay:    ${bobDelay}s;
+                        `;
+                    }
+
+                    if (ringIdx === 0) {
+                        img.addEventListener('click', function () {
+                            window.location.href = 'lemon-lime.html';
+                        });
+                    }
+
+                    orbitDiv.appendChild(img);
+                }
+
+                scene.appendChild(orbitDiv);
+            });
+        }
+
+        window.addEventListener('load', buildScene);
+    }());
+    </script>
+
+    <script>
+    /* ── Wave background for BUILT FOR PERFORMANCE section ── */
+    (function initBenefitsWave() {
+        var section = document.getElementById('benefits');
+        if (!section || typeof SimplexNoise === 'undefined') return;
+
+        var svgNS = 'http://www.w3.org/2000/svg';
+        var X_GAP = 12, Y_GAP = 12;
+        var STROKE = 'rgba(255,255,255,0.18)';
+
+        /* Wave container (behind content) */
+        var container = document.createElement('div');
+        Object.assign(container.style, {
+            position: 'absolute', top: '0', left: '0',
+            width: '100%', height: '100%',
+            overflow: 'hidden', pointerEvents: 'none', zIndex: '0'
+        });
+        var svgEl = document.createElementNS(svgNS, 'svg');
+        svgEl.style.cssText = 'display:block;width:100%;height:100%;';
+        container.appendChild(svgEl);
+        section.insertBefore(container, section.firstChild);
+
+        /* Lift content above wave */
+        var inner = section.querySelector('.section-inner');
+        if (inner) { inner.style.position = 'relative'; inner.style.zIndex = '1'; }
+
+        var simplex = new SimplexNoise();
+        var bounding = null;
+        var lines = [], paths = [];
+        var mouse = { x: -10, y: 0, lx: 0, ly: 0, sx: 0, sy: 0, v: 0, vs: 0, a: 0, set: false };
+
+        function updateBounding() { bounding = section.getBoundingClientRect(); }
+
+        function setSize() {
+            updateBounding();
+            if (!bounding) return;
+            svgEl.style.width  = bounding.width  + 'px';
+            svgEl.style.height = bounding.height + 'px';
+        }
+
+        function setLines() {
+            paths.forEach(function(p) { p.remove(); });
+            paths = []; lines = [];
+            if (!bounding) return;
+            var w = bounding.width, h = bounding.height;
+            var totalLines  = Math.ceil((w + 200) / X_GAP);
+            var totalPoints = Math.ceil((h +  30) / Y_GAP);
+            var xStart = (w - X_GAP * totalLines)  / 2;
+            var yStart = (h - Y_GAP * totalPoints) / 2;
+
+            for (var i = 0; i < totalLines; i++) {
+                var pts = [];
+                for (var j = 0; j < totalPoints; j++) {
+                    pts.push({
+                        x: xStart + X_GAP * i, y: yStart + Y_GAP * j,
+                        wave: { x: 0, y: 0 },
+                        cursor: { x: 0, y: 0, vx: 0, vy: 0 }
+                    });
+                }
+                var path = document.createElementNS(svgNS, 'path');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', STROKE);
+                path.setAttribute('stroke-width', '1');
+                svgEl.appendChild(path);
+                paths.push(path);
+                lines.push(pts);
+            }
+        }
+
+        function movePoints(time) {
+            lines.forEach(function(pts) {
+                pts.forEach(function(p) {
+                    var move = simplex.noise2D(
+                        (p.x + time * 0.008) * 0.003,
+                        (p.y + time * 0.003) * 0.002
+                    ) * 8;
+                    p.wave.x = Math.cos(move) * 12;
+                    p.wave.y = Math.sin(move) * 6;
+
+                    var dx = p.x - mouse.sx, dy = p.y - mouse.sy;
+                    var d = Math.hypot(dx, dy);
+                    var l = Math.max(175, mouse.vs);
+                    if (d < l) {
+                        var s = 1 - d / l;
+                        var f = Math.cos(d * 0.001) * s;
+                        p.cursor.vx += Math.cos(mouse.a) * f * l * mouse.vs * 0.00035;
+                        p.cursor.vy += Math.sin(mouse.a) * f * l * mouse.vs * 0.00035;
+                    }
+                    p.cursor.vx += (0 - p.cursor.x) * 0.01;
+                    p.cursor.vy += (0 - p.cursor.y) * 0.01;
+                    p.cursor.vx *= 0.95; p.cursor.vy *= 0.95;
+                    p.cursor.x += p.cursor.vx; p.cursor.y += p.cursor.vy;
+                    p.cursor.x = Math.min(50, Math.max(-50, p.cursor.x));
+                    p.cursor.y = Math.min(50, Math.max(-50, p.cursor.y));
+                });
+            });
+        }
+
+        function moved(p, withCursor) {
+            return {
+                x: p.x + p.wave.x + (withCursor ? p.cursor.x : 0),
+                y: p.y + p.wave.y + (withCursor ? p.cursor.y : 0)
+            };
+        }
+
+        function drawLines() {
+            lines.forEach(function(pts, i) {
+                if (pts.length < 2 || !paths[i]) return;
+                var f = moved(pts[0], false);
+                var d = 'M ' + f.x + ' ' + f.y;
+                for (var j = 1; j < pts.length; j++) {
+                    var c = moved(pts[j], true);
+                    d += ' L ' + c.x + ' ' + c.y;
+                }
+                paths[i].setAttribute('d', d);
+            });
+        }
+
+        function tick(time) {
+            mouse.sx += (mouse.x - mouse.sx) * 0.1;
+            mouse.sy += (mouse.y - mouse.sy) * 0.1;
+            var dx = mouse.x - mouse.lx, dy = mouse.y - mouse.ly;
+            var d = Math.hypot(dx, dy);
+            mouse.v = d;
+            mouse.vs += (d - mouse.vs) * 0.1;
+            mouse.vs = Math.min(100, mouse.vs);
+            mouse.lx = mouse.x; mouse.ly = mouse.y;
+            mouse.a = Math.atan2(dy, dx);
+            movePoints(time);
+            drawLines();
+            requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('mousemove', function(e) {
+            updateBounding();
+            if (!bounding) return;
+            mouse.x = e.clientX - bounding.left;
+            mouse.y = e.clientY - bounding.top;
+            if (!mouse.set) {
+                mouse.sx = mouse.x; mouse.sy = mouse.y;
+                mouse.lx = mouse.x; mouse.ly = mouse.y;
+                mouse.set = true;
+            }
+        });
+
+        window.addEventListener('resize', function() { setSize(); setLines(); });
+
+        setSize();
+        setLines();
+        requestAnimationFrame(tick);
+    }());
+    </script>
+
+    <script>
+    /* ── Dotted surface for WHAT'S INSIDE / ingredients section ── */
+    (function initDottedSurface() {
+        var section = document.getElementById('science');
+        if (!section || typeof THREE === 'undefined') return;
+
+        section.style.position = 'relative';
+
+        /* Background wrapper (behind content) */
+        var wrapper = document.createElement('div');
+        Object.assign(wrapper.style, {
+            position: 'absolute', top: '0', left: '0',
+            width: '100%', height: '100%',
+            overflow: 'hidden', pointerEvents: 'none', zIndex: '0'
+        });
+        section.insertBefore(wrapper, section.firstChild);
+
+        /* Lift section content above canvas */
+        var inner = section.querySelector('.section-inner');
+        if (inner) { inner.style.position = 'relative'; inner.style.zIndex = '1'; }
+
+        var SEPARATION = 150, AMOUNTX = 40, AMOUNTY = 50;
+
+        var w = section.offsetWidth;
+        var h = section.offsetHeight;
+
+        /* Scene */
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(60, w / h, 1, 10000);
+        camera.position.set(0, 355, 1220);
+
+        var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(w, h);
+        renderer.setClearColor(0x000000, 0);
+        wrapper.appendChild(renderer.domElement);
+
+        /* Geometry — darker blue dots */
+        var positions = [], colors = [];
+        for (var ix = 0; ix < AMOUNTX; ix++) {
+            for (var iy = 0; iy < AMOUNTY; iy++) {
+                positions.push(
+                    ix * SEPARATION - (AMOUNTX * SEPARATION) / 2,
+                    0,
+                    iy * SEPARATION - (AMOUNTY * SEPARATION) / 2
+                );
+                /* White dots */
+                colors.push(1.0, 1.0, 1.0);
+            }
+        }
+
+        var geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geometry.setAttribute('color',    new THREE.Float32BufferAttribute(colors,    3));
+
+        var material = new THREE.PointsMaterial({
+            size: 9,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.9,
+            sizeAttenuation: true
+        });
+
+        var points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        var count = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            var posAttr = geometry.attributes.position;
+            var pos = posAttr.array;
+            var i = 0;
+            for (var ix = 0; ix < AMOUNTX; ix++) {
+                for (var iy = 0; iy < AMOUNTY; iy++) {
+                    pos[i * 3 + 1] =
+                        Math.sin((ix + count) * 0.3) * 50 +
+                        Math.sin((iy + count) * 0.5) * 50;
+                    i++;
+                }
+            }
+            posAttr.needsUpdate = true;
+            renderer.render(scene, camera);
+            count += 0.03;
+        }
+
+        window.addEventListener('resize', function() {
+            w = section.offsetWidth;
+            h = section.offsetHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+
+        animate();
+    }());
+    </script>
+    <script src="glowing-effect.js"></script>
+    <script>
+    (function() {
+        var section = document.querySelector('.section-flavors');
+        if (!section) return;
+        var imgs = [
+            'ChatGPT Image Mar 4, 2026, 11_24_45 PM.png',
+            'ChatGPT Image Mar 4, 2026, 11_29_26 PM.png'
+        ];
+        var count = 15; // per image
+        imgs.forEach(function(src) {
+            for (var i = 0; i < count; i++) {
+                var el = document.createElement('img');
+                el.src = src;
+                el.className = 'chatgpt-flyer';
+                var size = 28 + Math.random() * 27; // 28–55px
+                var topPct = 5 + Math.random() * 85;
+                var duration = 6 + Math.random() * 12; // 6–18s
+                var delay = -(Math.random() * 20);     // start mid-flight
+                var dir = Math.random() < 0.5 ? 'fly-ltr' : 'fly-rtl';
+                el.style.cssText = [
+                    'width:' + size + 'px',
+                    'height:' + size + 'px',
+                    'top:' + topPct + '%',
+                    'left:0',
+                    'animation:' + dir + ' ' + duration + 's linear ' + delay + 's infinite'
+                ].join(';');
+                section.appendChild(el);
+            }
+        });
+    }());
+    </script>
+</body>
+
+</html>

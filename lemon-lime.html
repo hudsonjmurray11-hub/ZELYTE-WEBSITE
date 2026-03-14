@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Lime — ZELYTE</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(
+                to bottom,
+                rgb(90, 150, 235) 0%,
+                rgb(110, 170, 240) 30%,
+                rgb(180, 215, 248) 65%,
+                #ffffff 100%
+            );
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ---- Header ---- */
+        .header-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            max-width: 900px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            z-index: 99;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,0.4);
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+        }
+        .spacer { flex: 1; }
+        .nav-links {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1a73e8;
+            font-weight: 600;
+            font-size: 0.88rem;
+            letter-spacing: 0.4px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-links a:hover { background: rgba(26, 115, 232, 0.1); color: #0d5bb8; }
+        .cart-icon { margin-right: 20px; display: flex; align-items: center; }
+        .nav-logo { width: 130px; height: auto; max-height: 44px; object-fit: contain; }
+        .shop-button {
+            padding: 8px 16px;
+            background: linear-gradient(160deg, #4f9cf9 0%, #1a73e8 50%, #1252c4 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 2px 12px rgba(26, 115, 232, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+            animation: btn-pulse 2.5s ease-in-out infinite;
+            transition: transform 0.15s, box-shadow 0.3s;
+        }
+        .shop-button:hover {
+            background: linear-gradient(160deg, #60a5fa 0%, #2563eb 50%, #1d4ed8 100%);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            animation-play-state: paused;
+        }
+
+        @keyframes btn-pulse {
+            0%, 100% { box-shadow: 0 4px 18px rgba(26, 115, 232, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22); }
+            50%       { box-shadow: 0 6px 28px rgba(37, 99, 235, 0.7), 0 0 50px rgba(96, 165, 250, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22); }
+        }
+
+        /* ── Gradient Button ── */
+        @keyframes gradient-sweep {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-button {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: none;
+            background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
+            background-size: 300% 100%;
+            animation: gradient-sweep 3s ease infinite;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+        .gradient-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: linear-gradient(135deg, #60a5fa, #bae6fd, #93c5fd, #60a5fa);
+            background-size: 300% 100%;
+            animation: gradient-sweep 3s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .gradient-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5);
+        }
+
+        /* ---- Page Layout ---- */
+        .page-wrap {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 100px 60px 100px;
+        }
+
+        /* ---- Product Hero Row ---- */
+        .product-hero {
+            display: flex;
+            align-items: flex-start;
+            gap: 64px;
+        }
+
+        /* ---- Image Column ---- */
+        .product-img-col {
+            flex: 1;
+            max-width: 640px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: -20px;
+        }
+
+        .product-img-col .main-img {
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.35));
+            transition: transform 0.3s ease;
+        }
+        .product-img-col .main-img:hover { transform: scale(1.03); }
+
+        .product-img-gallery {
+            display: flex;
+            gap: 14px;
+        }
+        .product-img-gallery img {
+            flex: 1;
+            width: 0;
+            height: auto;
+            object-fit: contain;
+            border-radius: 16px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .product-img-gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+        }
+
+        /* ---- Info Column ---- */
+        .product-info-col {
+            flex: 1;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* ---- Liquid Glass Base ---- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255,255,255,0.45);
+        }
+        .glass-breadcrumb { padding: 10px 20px; border-radius: 100px; width: fit-content; }
+        .glass-title    { padding: 22px 26px; }
+        .glass-rating   { padding: 10px 20px; border-radius: 100px; display: flex; align-items: center; width: fit-content; }
+        .glass-desc     { padding: 18px 24px; }
+
+        /* ---- Text Styles ---- */
+        .breadcrumb { font-size: 0.8rem; color: rgba(255,255,255,0.8); font-weight: 600; letter-spacing: 0.5px; }
+        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .breadcrumb a:hover { color: #fff; }
+
+        .product-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .glass-card h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+        .product-subheading {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.82);
+            font-weight: 500;
+        }
+        .product-rating { display: flex; align-items: center; gap: 8px; }
+        .product-rating .stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
+        .product-rating .count { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 600; }
+        .product-description { font-size: 0.95rem; color: rgba(255,255,255,0.88); line-height: 1.7; }
+
+        /* ---- Feature Tags ---- */
+        .tags-glass-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 16px;
+            padding: 14px 18px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.35);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: fit-content;
+        }
+        .feature-tag {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ---- Purchase Glass Card ---- */
+        .purchase-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255,255,255,0.45);
+        }
+
+        .price-row { display: flex; align-items: baseline; gap: 10px; }
+        .price-main { font-size: 2rem; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .price-meta { font-size: 0.88rem; color: rgba(255,255,255,0.7); }
+
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 243, 205, 0.25);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 220, 100, 0.5);
+            width: fit-content;
+            margin-top: 10px;
+        }
+
+        .purchase-row { display: flex; flex-direction: column; gap: 8px; }
+        .purchase-row label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .purchase-row select,
+        .purchase-row input {
+            padding: 10px 14px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.2s;
+            backdrop-filter: blur(8px);
+        }
+        .purchase-row select option { background: #1a73e8; color: #fff; }
+        .purchase-row input::placeholder { color: rgba(255,255,255,0.5); }
+        .purchase-row select:focus,
+        .purchase-row input:focus { border-color: rgba(255,255,255,0.7); }
+
+        .qty-row {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            border-radius: 10px;
+            overflow: hidden;
+            width: fit-content;
+            background: rgba(255,255,255,0.1);
+        }
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #fff;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+        .qty-btn:hover { background: rgba(255,255,255,0.15); }
+        .qty-val {
+            width: 48px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            border-left: 1.5px solid rgba(255,255,255,0.35);
+            border-right: 1.5px solid rgba(255,255,255,0.35);
+            line-height: 40px;
+        }
+
+        .promo-row { display: flex; gap: 8px; }
+        .promo-row input { flex: 1; }
+        .promo-apply {
+            padding: 10px 18px;
+            background: rgba(255,255,255,0.25);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+            backdrop-filter: blur(8px);
+        }
+        .promo-apply:hover { background: rgba(255,255,255,0.35); }
+
+        .add-cart-btn {
+            padding: 16px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            background: rgba(255,255,255,0.22);
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.45);
+            border-radius: 12px;
+            cursor: not-allowed;
+            opacity: 0.75;
+            width: 100%;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 18px rgba(96, 165, 250, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            animation: btn-pulse 2.5s ease-in-out infinite;
+        }
+
+        /* ---- Details Section ---- */
+        .product-details {
+            max-width: 1300px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,0.4);
+            color: #222;
+        }
+
+        .detail-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: #1a73e8;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .detail-card h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+
+        .ingredient-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .ingredient-list li {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e8eef8;
+        }
+        .ingredient-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .ingredient-list strong { font-size: 0.95rem; color: #1e90ff; }
+        .ingredient-list span { font-size: 0.85rem; color: #777; }
+
+        .use-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .use-steps li { display: flex; gap: 16px; align-items: flex-start; }
+        .step-circle {
+            width: 28px;
+            height: 28px;
+            background: #1a73e8;
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .use-steps p { font-size: 0.95rem; color: #555; line-height: 1.6; }
+        .use-steps strong { display: block; font-size: 0.95rem; color: #1e90ff; margin-bottom: 2px; }
+
+        /* ---- Footer ---- */
+        .site-footer {
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding: 60px 40px 40px;
+            width: 100%;
+            text-align: center;
+            margin-top: 80px;
+        }
+        .footer-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .footer-logo { width: 120px; height: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+        .footer-tagline { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-legal { color: rgba(255,255,255,0.35); font-size: 0.78rem; max-width: 600px; line-height: 1.6; }
+
+        /* ---- Purchase Toggle ---- */
+        .pur-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+        }
+        .pur-tab {
+            flex: 1;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 9px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .pur-tab.active {
+            background: rgba(255,255,255,0.88);
+            color: #1a73e8;
+        }
+        .pur-tab:not(.active):hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+        /* ---- Bundle Selector ---- */
+        .bun-sel-wrap { display: flex; flex-direction: column; gap: 8px; }
+        .purchase-row-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .bundle-sel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .bso {
+            background: rgba(255,255,255,0.1);
+            border: 1.5px solid rgba(255,255,255,0.22);
+            border-radius: 13px;
+            padding: 14px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, transform 0.15s;
+            color: #fff;
+            position: relative;
+            font-family: inherit;
+        }
+        .bso:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
+        .bso.active {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.65);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .bso-badge {
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ffa500, #ffdd57, #ffc200, #ffdd57, #ffa500);
+            background-size: 200% 100%;
+            animation: badge-shimmer 2.5s linear infinite;
+            color: #111;
+            font-size: 0.55rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            padding: 3px 9px;
+            border-radius: 100px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(255,180,0,0.4);
+        }
+        .bso-qty {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+        .bso-price { font-size: 1.05rem; font-weight: 900; color: #fff; }
+        .bso-save {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #86efac;
+            background: rgba(134,239,172,0.15);
+            padding: 2px 7px;
+            border-radius: 100px;
+        }
+
+        /* ---- Product Bundles ---- */
+        .product-bundles {
+            margin-top: 40px;
+            padding: 32px 36px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+        .product-bundles-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .pb-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: rgba(255,255,255,0.85);
+            text-transform: uppercase;
+        }
+        .pb-sub {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.55);
+        }
+        .product-bundles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-items: center;
+        }
+        .pb-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 18px;
+            padding: 22px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            text-align: center;
+            position: relative;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .pb-card:hover {
+            background: rgba(255,255,255,0.18);
+            transform: translateY(-3px);
+        }
+        .pb-card-featured {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.55);
+            padding: 30px 16px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+        }
+        @keyframes badge-shimmer {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        .pb-popular {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ffa500, #ffdd57, #ffc200, #ffdd57, #ffa500);
+            background-size: 200% 100%;
+            animation: badge-shimmer 2.5s linear infinite;
+            color: #111;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            padding: 4px 13px;
+            border-radius: 100px;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(255,180,0,0.45);
+        }
+        .pb-qty {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+        .pb-name { font-size: 1rem; font-weight: 800; color: #fff; }
+        .pb-price { font-size: 1.55rem; font-weight: 900; color: #fff; line-height: 1; margin-top: 2px; }
+        .pb-per { font-size: 0.68rem; color: rgba(255,255,255,0.55); }
+        .pb-savings {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #86efac;
+            background: rgba(134,239,172,0.15);
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+        .pb-savings-best { color: #4ade80; background: rgba(74,222,128,0.18); }
+        .pb-btn {
+            display: inline-block;
+            padding: 9px 16px;
+            border-radius: 9px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .pb-btn-white {
+            background: #fff;
+            color: #1a73e8;
+            transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .pb-btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            background: #f0f4ff;
+            color: #0d5bb8;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 900px) {
+            .page-wrap { padding: 90px 24px 60px; }
+            .product-hero { flex-direction: column; gap: 32px; }
+            .product-img-col { max-width: 320px; margin-top: 0; align-self: center; }
+            .product-info-col { max-width: 100%; }
+            .glass-card h1 { font-size: 2.2rem; }
+            .product-details { grid-template-columns: 1fr; margin-top: 32px; }
+            .nav-links { display: none; }
+            .product-bundles { padding: 24px 20px; }
+            .product-bundles-header { flex-direction: column; gap: 4px; }
+            .product-bundles-grid { grid-template-columns: 1fr; gap: 12px; }
+            .pb-card-featured { padding: 22px 16px; }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const promo = document.getElementById('promo');
+            const applyPromo = document.getElementById('apply-promo');
+
+            let purchaseType = 'one-time';
+            let bundleQty = 1;
+
+            const PRICES = {
+                'one-time':  { 1: 10.00, 3: 27.00, 5: 40.00 },
+                'subscribe': { 1: 10.00, 3: 27.00, 5: 40.00 }
+            };
+            const SAVES = {
+                'one-time':  { 1: '',  3: 'Save 10%', 5: 'Save 20%' },
+                'subscribe': { 1: '',  3: 'Save 10%', 5: 'Save 20%' }
+            };
+            const SERVINGS = { 1: 15, 3: 45, 5: 75 };
+            const QTY_LABEL = { 1: '/ tin', 3: 'total', 5: 'total' };
+
+            function fmt(n) { return '$' + n.toFixed(2); }
+
+            function update() {
+                const price = PRICES[purchaseType][bundleQty];
+                const perServing = (price / SERVINGS[bundleQty]).toFixed(2);
+                document.getElementById('price-display').textContent = fmt(price);
+                document.getElementById('price-meta-display').textContent =
+                    QTY_LABEL[bundleQty] + ' · $' + perServing + '/serving';
+
+                [1, 3, 5].forEach(qty => {
+                    const p = PRICES[purchaseType][qty];
+                    const s = SAVES[purchaseType][qty];
+                    document.getElementById('bso-price-' + qty).textContent = fmt(p);
+                    const saveEl = document.getElementById('bso-save-' + qty);
+                    if (s) { saveEl.textContent = s; saveEl.style.display = ''; }
+                    else   { saveEl.style.display = 'none'; }
+                });
+            }
+
+            // Purchase type toggle
+            ['onetime', 'subscribe'].forEach(id => {
+                document.getElementById('tab-' + id).addEventListener('click', () => {
+                    purchaseType = id === 'onetime' ? 'one-time' : 'subscribe';
+                    document.getElementById('tab-onetime').classList.toggle('active', id === 'onetime');
+                    document.getElementById('tab-subscribe').classList.toggle('active', id === 'subscribe');
+                    update();
+                });
+            });
+
+            // Bundle selection
+            [1, 3, 5].forEach(qty => {
+                document.getElementById('bso-' + qty).addEventListener('click', () => {
+                    bundleQty = qty;
+                    document.querySelectorAll('.bso').forEach(el => el.classList.remove('active'));
+                    document.getElementById('bso-' + qty).classList.add('active');
+                    update();
+                });
+            });
+
+            applyPromo.addEventListener('click', () => {
+                if (promo.value.trim()) alert('Promo "' + promo.value + '" applied!');
+            });
+
+            update();
+        });
+    </script>
+    <link rel="stylesheet" href="glowing-effect.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-bar">
+        <a href="index.html"><img src="Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
+        <div class="spacer"></div>
+        <nav class="nav-links">
+            <a href="index.html#products">Products</a>
+            <a href="index.html#science">Science</a>
+            <a href="index.html#reviews">Reviews</a>
+            <a href="faq.html">FAQ</a>
+            <a href="index.html#about">About</a>
+        </nav>
+        <a href="#" class="cart-icon" aria-label="Cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+        </a>
+        <a href="lemon-lime.html" class="shop-button gradient-button">Shop Now</a>
+    </div>
+
+    <div class="page-wrap">
+
+        <!-- Product Hero -->
+        <div class="product-hero">
+
+            <!-- Image -->
+            <div class="product-img-col">
+                <img src="LEMON LIME NEW TIN .png" alt="Lemon Lime Tin" class="main-img">
+                <div class="product-img-gallery">
+                    <img src="BIKING ZELYTE.png" alt="Biking with ZELYTE">
+                    <img src="ROWING ZELYTE.png" alt="Rowing with ZELYTE">
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="product-info-col">
+
+                <!-- Breadcrumb pill -->
+                <div class="glass-card glass-breadcrumb">
+                    <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Products &nbsp;/&nbsp; Lemon Lime</div>
+                </div>
+
+                <!-- Title card -->
+                <div class="glass-card glass-title">
+                    <span class="product-label">Active Hydration Pouch</span>
+                    <h1>Lemon Lime</h1>
+                    <p class="product-subheading">Electrolytes + 40mg Natural Caffeine · 15 pouches per tin</p>
+                </div>
+
+                <!-- Rating pill -->
+                <div class="glass-card glass-rating">
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="count">4.9 · 1,156 reviews</span>
+                    </div>
+                </div>
+
+                <!-- Description card -->
+                <div class="glass-card glass-desc">
+                    <p class="product-description">Classic citrus with a focused kick — energizing hands-free hydration for peak performance. Zero sugar. Zero interruptions.</p>
+                </div>
+
+                <!-- Feature tags -->
+                <div class="tags-glass-card">
+                    <span class="feature-tag">No Artificial Flavors</span>
+                    <span class="feature-tag">Zero Sugar</span>
+                    <span class="feature-tag">Natural Caffeine</span>
+                </div>
+
+                <!-- Purchase card -->
+                <div class="purchase-card">
+                    <div>
+                        <div class="price-row">
+                            <span class="price-main" id="price-display">$10.00</span>
+                            <span class="price-meta" id="price-meta-display">/ tin · $0.67/serving</span>
+                        </div>
+                        <div class="coming-soon-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>&nbsp;COMING SOON</div>
+                    </div>
+                    <!-- Purchase Type Toggle -->
+                    <div class="pur-toggle">
+                        <button class="pur-tab active" id="tab-onetime">One-Time</button>
+                        <button class="pur-tab" id="tab-subscribe">Subscribe and Never Run Out</button>
+                    </div>
+
+                    <!-- Bundle Selection -->
+                    <div class="bun-sel-wrap">
+                        <span class="purchase-row-label">Bundle</span>
+                        <div class="bundle-sel">
+                            <button class="bso active" id="bso-1">
+                                <span class="bso-qty">1 Tin</span>
+                                <span class="bso-price" id="bso-price-1">$10.00</span>
+                                <span class="bso-save" id="bso-save-1" style="display:none"></span>
+                            </button>
+                            <button class="bso" id="bso-3">
+                                <span class="bso-badge">POPULAR</span>
+                                <span class="bso-qty">3 Tins</span>
+                                <span class="bso-price" id="bso-price-3">$27.00</span>
+                                <span class="bso-save" id="bso-save-3">Save 10%</span>
+                            </button>
+                            <button class="bso" id="bso-5">
+                                <span class="bso-qty">5 Tins</span>
+                                <span class="bso-price" id="bso-price-5">$40.00</span>
+                                <span class="bso-save" id="bso-save-5">Save 20%</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="purchase-row">
+                        <label for="promo">Promo Code</label>
+                        <div class="promo-row">
+                            <input type="text" id="promo" placeholder="Enter promo code">
+                            <button class="promo-apply" id="apply-promo">Apply</button>
+                        </div>
+                    </div>
+                    <button class="add-cart-btn gradient-button" id="add-cart" disabled>Add to Cart — Coming Soon</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Detail Cards -->
+        <div class="product-details">
+            <div class="detail-card">
+                <span class="detail-label">What's Inside</span>
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li><strong>Sodium</strong><span>Supports fluid balance and muscle function</span></li>
+                    <li><strong>Potassium</strong><span>Helps maintain hydration and performance</span></li>
+                    <li><strong>Magnesium</strong><span>Supports energy metabolism</span></li>
+                    <li><strong>Natural Caffeine (40mg)</strong><span>Plant-derived, clean focus with no crash</span></li>
+                    <li><strong>Natural Lemon Lime Flavor</strong><span>No artificial flavors</span></li>
+                    <li><strong>Stevia</strong><span>Zero sugar, naturally sweetened</span></li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <span class="detail-label">How to Use</span>
+                <h2>Three steps</h2>
+                <ul class="use-steps">
+                    <li>
+                        <div class="step-circle">1</div>
+                        <div><strong>Place</strong><p>Tuck one pouch between your upper lip and gum. It sits comfortably and discretely.</p></div>
+                    </li>
+                    <li>
+                        <div class="step-circle">2</div>
+                        <div><strong>Activate</strong><p>Electrolytes and caffeine are absorbed through your gums over 20–40 minutes.</p></div>
+                    </li>
+                    <li>
+                        <div class="step-circle">3</div>
+                        <div><strong>Perform</strong><p>Stay hydrated and focused hands-free. No drinking. No stopping.</p></div>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <img src="Zelyte (3).png" alt="ZELYTE" class="footer-logo">
+            <p class="footer-tagline">Active Hydration Pouches · Zero Sugar · Zero Calories · Hands-Free</p>
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#science">Science</a>
+                <a href="lemon-lime.html">Shop</a>
+            </div>
+            <p class="footer-legal">© 2026 ZELYTE Inc. All rights reserved. This product has not been evaluated by the FDA and is not intended to diagnose, treat, cure, or prevent any disease.</p>
+        </div>
+    </footer>
+    <script src="glowing-effect.js"></script>
+</body>
+</html>

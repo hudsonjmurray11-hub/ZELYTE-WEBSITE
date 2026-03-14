@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelyte 3D Logo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(rgb(242, 242, 244), rgb(205, 220, 244), rgb(165, 199, 243), rgb(118, 179, 242), rgb(44, 159, 241));
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 7);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000, 0);
+    document.body.appendChild(renderer.domElement);
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+    const d1 = new THREE.DirectionalLight(0xffffff, 0.9);
+    d1.position.set(4, 4, 6);
+    scene.add(d1);
+    const d2 = new THREE.DirectionalLight(0x5599dd, 0.5);
+    d2.position.set(-3, -2, -4);
+    scene.add(d2);
+    const d3 = new THREE.DirectionalLight(0x88bbff, 0.3);
+    d3.position.set(0, 5, -2);
+    scene.add(d3);
+
+    const extrudeOpts = {
+      depth: 0.5,
+      bevelEnabled: true,
+      bevelThickness: 0.05,
+      bevelSize: 0.03,
+      bevelSegments: 8
+    };
+
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x4a86c8,
+      metalness: 0.15,
+      roughness: 0.35,
+      flatShading: false
+    });
+
+    // === PIECE 1: TOP BAR (parallelogram) ===
+    const bar1 = new THREE.Shape();
+    bar1.moveTo(-0.842, 1.383);  // TL
+    bar1.lineTo(1.018, 1.383);  // TR
+    bar1.lineTo(0.900, 1.218);  // BR
+    bar1.lineTo(-0.900, 1.218);  // BL
+    bar1.closePath();
+
+    // === PIECE 2: SECOND BAR (parallelogram) ===
+    const bar2 = new THREE.Shape();
+    bar2.moveTo(-0.942, 1.090);  // TL
+    bar2.lineTo(0.808, 1.090);  // TR
+    bar2.lineTo(0.648, 0.865);  // BR
+    bar2.lineTo(-1.018, 0.865);  // BL
+    bar2.closePath();
+
+    // === PIECE 3: MIDDLE SECTION (upper diagonal + third bar) ===
+    const mid = new THREE.Shape();
+    mid.moveTo(-0.068, 0.863);   // top-left
+    mid.lineTo(0.645, 0.863);   // top-right
+    mid.lineTo(0.190, 0.235);   // diagonal down to inner-right corner
+    mid.lineTo(0.818, 0.233);   // third bar extends right
+    mid.lineTo(0.343, -0.242);   // diagonal down to bottom-right
+    mid.lineTo(-0.825, -0.242);   // bottom-left
+    mid.lineTo(-0.500, 0.235);   // back up left side to inner-left corner
+    mid.closePath();
+
+    // === PIECE 4: BOTTOM BOLT (triangle) ===
+    const bot = new THREE.Shape();
+    bot.moveTo(-0.247, -0.245);  // top-left
+    bot.lineTo(0.340, -0.245);  // top-right
+    bot.lineTo(-0.800, -1.380);  // bottom point
+    bot.closePath();
+
+    // Build group
+    const group = new THREE.Group();
+
+    [bar1, bar2, mid, bot].forEach(shape => {
+      const geo = new THREE.ExtrudeGeometry(shape, extrudeOpts);
+
+      // Merge duplicate vertices and recompute smooth normals to eliminate seam lines
+      const merged = new THREE.BufferGeometry();
+      const posAttr = geo.getAttribute('position');
+      const map = {};
+      const newPositions = [];
+      const indexMap = [];
+
+      for (let i = 0; i < posAttr.count; i++) {
+        const x = posAttr.getX(i), y = posAttr.getY(i), z = posAttr.getZ(i);
+        const key = x.toFixed(5) + ',' + y.toFixed(5) + ',' + z.toFixed(5);
+        if (map[key] === undefined) {
+          map[key] = newPositions.length / 3;
+          newPositions.push(x, y, z);
+        }
+        indexMap.push(map[key]);
+      }
+
+      merged.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3));
+      const oldIndex = geo.getIndex();
+      if (oldIndex) {
+        const newIdx = [];
+        for (let i = 0; i < oldIndex.count; i++) newIdx.push(indexMap[oldIndex.getX(i)]);
+        merged.setIndex(newIdx);
+      } else {
+        merged.setIndex(indexMap);
+      }
+      merged.computeVertexNormals();
+
+      const mesh = new THREE.Mesh(merged, material);
+      mesh.position.z = -extrudeOpts.depth / 2;
+      group.add(mesh);
+    });
+
+    scene.add(group);
+
+    // === INTERACTION & ANIMATION SEQUENCE ===
+    let phase = 'spin'; // 'spin' | 'fade' | 'done'
+    const spinDuration = 1800;
+    const fadeDuration = 600;
+    let isDragging = false;
+    let prev = { x: 0, y: 0 }, vel = { x: 0, y: 0 };
+    let startTime = Date.now();
+    let fadeStart = 0;
+
+    function onDown(x, y) { isDragging = true; phase = 'done'; prev = { x, y }; }
+    function onMove(x, y) {
+      if (!isDragging) return;
+      vel.y = (x - prev.x) * 0.005;
+      vel.x = (y - prev.y) * 0.005;
+      group.rotation.y += vel.y;
+      group.rotation.x += vel.x;
+      prev = { x, y };
+    }
+    function onUp() { isDragging = false; }
+
+    const c = renderer.domElement;
+    c.addEventListener('mousedown', e => onDown(e.clientX, e.clientY));
+    c.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+    c.addEventListener('mouseup', onUp);
+    c.addEventListener('touchstart', e => onDown(e.touches[0].clientX, e.touches[0].clientY));
+    c.addEventListener('touchmove', e => onMove(e.touches[0].clientX, e.touches[0].clientY));
+    c.addEventListener('touchend', onUp);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const now = Date.now();
+
+      if (phase === 'spin') {
+        const t = Math.min((now - startTime) / spinDuration, 1);
+        const eased = 1 - Math.pow(1 - t, 3); // cubic ease-out
+        group.rotation.y = eased * Math.PI * 2;
+        if (t >= 1) {
+          group.rotation.y = 0;
+          phase = 'fade';
+          fadeStart = now;
+        }
+      } else if (phase === 'fade') {
+        const ft = Math.min((now - fadeStart) / fadeDuration, 1);
+        c.style.opacity = 1 - ft;
+        if (ft >= 1) phase = 'done';
+      } else if (!isDragging) {
+        group.rotation.y += vel.y;
+        group.rotation.x += vel.x;
+        vel.x *= 0.95;
+        vel.y *= 0.95;
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+
+  </script>
+</body>
+
+</html>
