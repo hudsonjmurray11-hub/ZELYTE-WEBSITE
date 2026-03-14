@@ -1286,6 +1286,12 @@ body {
         padding: 0 18px;
         height: 56px;
     }
+
+    /* Show pouch animation on mobile — overflow:hidden on hero clips it naturally */
+    .pouch-scene { display: block; }
+
+    /* Remove the negative margin that causes the section to overlap the hero on mobile */
+    .section-what { margin-top: 0; }
 }
 
 @media (max-width: 600px) {
