@@ -218,14 +218,7 @@ body {
     justify-content: center;
     gap: 60px;
     padding: 140px 80px 200px;
-    background: linear-gradient(
-        to bottom,
-        rgb(104, 176, 236),
-        rgb(145, 192, 238),
-        rgb(180, 208, 240),
-        rgb(212, 225, 242),
-        rgb(242, 242, 244)
-    );
+    background: linear-gradient(rgb(10, 153, 236), rgb(111, 174, 239), rgb(162, 197, 241), rgb(204, 220, 243), rgb(244, 243, 245));
     box-sizing: border-box;
 }
 
