@@ -1,499 +1,613 @@
 /* =============================================================
-   ZELYTE — Premium Dark Redesign Override Layer
-   Loaded after index.css — surgical overrides only.
-   Accent: #3DD6F5 (electric cyan)
-   Base bg: #080c16 / #0a0f1a
+   ZELYTE — Clean Athletic Redesign Override Layer
+   Loaded after index.css. Full replacement of dark theme.
+   Accent: #00AEEF (electric blue)
+   Typography: Barlow Condensed (headings) + DM Sans (body)
    ============================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
 /* =====================
-   GRAIN OVERLAY
+   GRAIN OVERLAY — hide
    ===================== */
 .grain-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    background-size: 256px 256px;
-    opacity: 0.028;
+    display: none;
 }
 
 /* =====================
-   GLOBAL BODY
+   TYPOGRAPHY
    ===================== */
 body {
-    background: #080c16;
-    color: #e0e8f5;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    background: #ffffff;
+    color: #333333;
+}
+
+h1, h2, h3 {
+    font-family: 'Barlow Condensed', 'Poppins', sans-serif;
+    letter-spacing: -0.3px;
+}
+
+/* Reset all section h2s to clean dark (override gradient from index.css) */
+.section-inner h2 {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: #0D0D0D;
+    color: #0D0D0D;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.6rem;
+    letter-spacing: -0.5px;
+}
+
+/* Keep white headings on dark-background sections */
+.section-how .section-inner h2 {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+}
+
+.section-cta h2 {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
 }
 
 .section-sub {
-    color: rgba(255, 255, 255, 0.65);
+    color: #666;
+}
+
+/* =====================
+   HERO — fade to white
+   ===================== */
+.hero-section::after {
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
 }
 
 /* =====================
    NAVBAR
    ===================== */
 .header-bar {
-    background: rgba(6, 10, 22, 0.88);
-    border: 1px solid rgba(61, 214, 245, 0.18);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 -1px 0 rgba(61, 214, 245, 0.15);
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
 }
 
 .nav-links a {
-    color: rgba(255, 255, 255, 0.75);
+    color: #444;
+    text-decoration: none;
 }
 
 .nav-links a:hover {
-    background: rgba(61, 214, 245, 0.08);
-    color: #3DD6F5;
+    background: transparent;
+    color: #00AEEF;
+    text-decoration: underline;
+    text-decoration-color: #00AEEF;
+    text-underline-offset: 3px;
 }
 
 .cart-icon svg {
-    stroke: rgba(255, 255, 255, 0.75);
+    stroke: #444;
 }
 
 /* =====================
    SECTION LABELS
    ===================== */
 .section-label {
-    color: #3DD6F5;
-    letter-spacing: 3px;
+    color: #00AEEF;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .section-label::before {
     content: '';
     display: block;
-    width: 28px;
-    height: 1.5px;
-    background: #3DD6F5;
-    opacity: 0.7;
+    width: 20px;
+    height: 2px;
+    background: #00AEEF;
     flex-shrink: 0;
 }
 
-/* In the How It Works section the label sits inside glass-pill — keep it white there */
+/* How It Works label sits inside glass pill — keep white, no line */
 .how-label-pill .section-label {
     color: rgba(255, 255, 255, 0.9);
+    justify-content: center;
 }
+
 .how-label-pill .section-label::before {
     display: none;
 }
 
-/* =====================
-   HERO — fades to dark instead of white
-   ===================== */
-.hero-section::after {
-    background: linear-gradient(to bottom, transparent 0%, #080c16 100%);
+/* Benefits section label (dark bg) — keep electric blue, readable */
+.section-benefits .section-label {
+    color: #00AEEF;
 }
 
 /* =====================
    WHAT IS ZELYTE
    ===================== */
 .section-what {
-    background: #0a0f1a;
-}
-
-.section-what .section-inner h2 {
-    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: #ffffff;
 }
 
 .what-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(61, 214, 245, 0.12);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    background: #F4F5F7;
+    border: 1px solid #E5E7EB;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .what-card:hover {
-    border-color: rgba(61, 214, 245, 0.4);
-    box-shadow: 0 0 28px rgba(61, 214, 245, 0.1), 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: #00AEEF;
     transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
 }
 
 .what-card strong {
-    color: #3DD6F5;
+    color: #0D0D0D;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
 }
 
 .what-card p {
-    color: rgba(255, 255, 255, 0.65);
+    color: #555;
 }
 
 /* =====================
-   HOW IT WORKS — steps
+   HOW IT WORKS — revert steps to white
    ===================== */
 .step {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: none;
+    background: #fff;
+    border: none;
+    box-shadow: 0 4px 20px rgba(26, 115, 232, 0.08);
 }
 
 .step-num {
-    color: #3DD6F5;
-    opacity: 0.35;
+    color: #1a73e8;
+    opacity: 0.2;
 }
 
 .step h3 {
-    color: #3DD6F5;
+    color: #1e90ff;
 }
 
 .step p {
-    color: rgba(255, 255, 255, 0.65);
+    color: #555;
 }
 
 .step-divider {
-    background: rgba(61, 214, 245, 0.3);
-    opacity: 1;
+    background: #1a73e8;
+    opacity: 0.25;
 }
 
 /* =====================
    WHY NOT DRINKS (comparison)
    ===================== */
 .section-why {
-    background: #0a0f1a;
+    background: #F4F5F7;
 }
 
 .section-why .section-inner h2 {
-    color: #e0e8f5;
-    -webkit-text-fill-color: #e0e8f5;
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
     background: none;
 }
 
 .comparison-col {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+}
+
+.drinks-col .comparison-header {
+    color: #BBBBBB;
+    border-bottom-color: #EEEEEE;
+}
+
+.drinks-col .comparison-list li {
+    color: #BBBBBB;
+}
+
+.drinks-col .x {
+    color: #CCCCCC;
 }
 
 .zelyte-col {
-    background: rgba(61, 214, 245, 0.05);
-    border: 1.5px solid rgba(61, 214, 245, 0.45);
-    box-shadow: 0 0 48px rgba(61, 214, 245, 0.1), inset 0 0 30px rgba(61, 214, 245, 0.03);
-}
-
-.comparison-header {
-    color: rgba(255, 255, 255, 0.55);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+    background: #FAFCFF;
+    border: 1px solid #D6E8F8;
+    border-top: 4px solid #00AEEF;
+    box-shadow: none;
 }
 
 .zelyte-header {
-    color: #3DD6F5;
-    border-bottom-color: rgba(61, 214, 245, 0.25);
-}
-
-.comparison-list li {
-    color: rgba(255, 255, 255, 0.7);
+    color: #00AEEF;
+    border-bottom-color: #D6E8F8;
 }
 
 .check {
-    color: #3DD6F5;
+    color: #00AEEF;
 }
 
 /* =====================
-   BENEFITS
+   BENEFITS — reset dark navy to white
    ===================== */
 .section-benefits {
-    background: #080c16;
+    background: #ffffff;
+}
+
+.section-benefits .section-inner > h2 {
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
+    background: none;
 }
 
 .section-benefits .benefit-card {
-    border: 1px solid rgba(61, 214, 245, 0.1);
+    background: #F4F5F7;
+    border: 1px solid #E5E7EB;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .section-benefits .benefit-card:hover {
-    border-color: rgba(61, 214, 245, 0.32);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(61, 214, 245, 0.1);
-    transform: translateY(-4px);
+    background: #F4F5F7;
+    border-color: #00AEEF;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
 }
 
 .section-benefits .benefit-card h3 {
-    color: #3DD6F5;
+    color: #0D0D0D;
+}
+
+.section-benefits .benefit-card p {
+    color: #555;
 }
 
 /* =====================
    FLAVORS
    ===================== */
 .section-flavors {
-    background: #0d1525;
+    background: #F4F5F7;
 }
 
 .section-flavors .section-inner h2 {
-    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
+    background: none;
 }
 
 .flavor-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 2px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
 }
 
 .flavor-card:hover {
-    transform: translateY(-4px);
-    border-color: #3DD6F5;
-    box-shadow: 0 0 36px rgba(61, 214, 245, 0.2), 0 12px 32px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+    border-color: #00AEEF;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
 }
 
 .flavor-card h3 {
-    color: #3DD6F5;
+    color: #0D0D0D;
 }
 
 .flavor-card p {
-    color: rgba(255, 255, 255, 0.6);
+    color: #666;
 }
 
 .flavor-badge {
-    background: rgba(61, 214, 245, 0.12);
-    color: #3DD6F5;
+    background: #E8F7FE;
+    color: #00AEEF;
 }
 
 .flavor-badge.available {
-    background: #3DD6F5;
-    color: #080c16;
+    background: #00AEEF;
+    color: #fff;
 }
 
 .flavor-img-placeholder {
-    background: rgba(255, 255, 255, 0.06);
+    background: #E8ECEF;
 }
 
 /* =====================
-   SCIENCE / INGREDIENTS
+   SCIENCE / INGREDIENTS — reset dark blue to white
    ===================== */
 .section-science {
-    background: #080c16;
+    background: #ffffff;
 }
 
-.section-science .section-inner h2 {
-    color: #e0e8f5;
-    -webkit-text-fill-color: #e0e8f5;
+.section-science .section-inner > h2 {
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
     background: none;
 }
 
 .section-science .section-label {
-    color: #3DD6F5;
+    color: #00AEEF;
 }
 
 .section-science .section-sub {
-    color: rgba(255, 255, 255, 0.6);
+    color: #666;
 }
 
 .section-science .ingredient-card {
-    background: rgba(61, 214, 245, 0.04);
-    border: 1px solid rgba(61, 214, 245, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    background: #F4F5F7;
+    border: 1px solid #E5E7EB;
+    border-left: 3px solid #00AEEF;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .section-science .ingredient-card:hover {
-    border-color: rgba(61, 214, 245, 0.42);
-    box-shadow: 0 0 28px rgba(61, 214, 245, 0.12), 0 8px 24px rgba(0, 0, 0, 0.35);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
 }
 
 .section-science .ingredient-card strong {
-    color: #3DD6F5;
+    color: #0D0D0D;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
 }
 
 .section-science .ingredient-card p {
-    color: rgba(255, 255, 255, 0.65);
+    color: #555;
 }
 
 /* =====================
    REVIEWS
    ===================== */
 .section-reviews {
-    background: #0a0f1a;
+    background: #F4F5F7;
 }
 
 .section-reviews .section-inner h2 {
-    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
+    background: none;
 }
 
 .review-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    transition: box-shadow 0.2s ease;
 }
 
 .review-card:hover {
-    border-color: rgba(61, 214, 245, 0.28);
-    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
 }
 
 .review-card p {
-    color: rgba(255, 255, 255, 0.72);
+    color: #444;
 }
 
 .review-card strong {
-    color: #3DD6F5;
+    color: #00AEEF;
 }
 
 /* =====================
    FAQ
    ===================== */
 .section-faq {
-    background: #080c16;
+    background: #ffffff;
 }
 
 .section-faq .section-inner h2 {
-    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
+    background: none;
 }
 
 .faq-item {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #F4F5F7;
+    border: 1px solid #E5E7EB;
+    transition: border-color 0.2s ease;
 }
 
 .faq-item:hover {
-    border-color: rgba(61, 214, 245, 0.25);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-color: #00AEEF;
 }
 
 .faq-item strong {
-    color: #3DD6F5;
+    color: #0D0D0D;
 }
 
 .faq-item p {
-    color: rgba(255, 255, 255, 0.65);
+    color: #555;
 }
 
 /* =====================
    BUNDLE PACKS
    ===================== */
 .section-bundles {
-    background: #080c16;
+    background: #F4F5F7;
 }
 
 .section-bundles .section-inner h2 {
-    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #0D0D0D;
+    -webkit-text-fill-color: #0D0D0D;
+    background: none;
 }
 
 .bundle-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    border: 1.5px solid #E5E7EB;
 }
 
 .bundle-card:hover {
-    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.55);
-    border-color: rgba(61, 214, 245, 0.28);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: #CCCCCC;
 }
 
 .bundle-qty {
-    color: #3DD6F5;
+    color: #00AEEF;
 }
 
 .bundle-name {
-    color: #e0e8f5;
+    color: #0D0D0D;
 }
 
 .bundle-price {
-    color: #ffffff;
+    color: #0D0D0D;
+}
+
+.bundle-per {
+    color: #999;
+}
+
+.bundle-pouches {
+    color: #aaa;
 }
 
 .bundle-features {
-    border-top-color: rgba(255, 255, 255, 0.1);
+    border-top-color: #E5E7EB;
 }
 
 .bundle-features li {
-    color: rgba(255, 255, 255, 0.65);
+    color: #555;
 }
 
-/* Pro Pack (featured) — enhanced cyan glow */
+/* Pro Pack — reset animated gradient, clean electric blue top border */
 .bundle-featured {
-    border: 2px solid rgba(61, 214, 245, 0.5);
+    background: #FAFCFF !important;
+    background-size: unset !important;
+    animation: none !important;
+    border: 1.5px solid #D6E8F8 !important;
+    border-top: 4px solid #00AEEF !important;
+    box-shadow: 0 8px 32px rgba(0, 174, 239, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
-@keyframes bundle-glow-premium {
-    0%, 100% {
-        box-shadow: 0 0 50px rgba(61, 214, 245, 0.18), 0 20px 52px rgba(26, 115, 232, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 80px rgba(61, 214, 245, 0.32), 0 24px 72px rgba(26, 115, 232, 0.6);
-    }
+.bundle-featured:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 174, 239, 0.16), 0 4px 12px rgba(0, 0, 0, 0.07) !important;
 }
 
-.bundle-featured {
-    animation: gradient-sweep 5s ease infinite, bundle-glow-premium 3s ease-in-out infinite;
+.bundle-featured .bundle-qty {
+    color: #00AEEF;
 }
 
-/* CTA buttons on dark non-featured cards */
+.bundle-featured .bundle-name {
+    color: #0D0D0D;
+}
+
+.bundle-featured .bundle-price {
+    color: #0D0D0D;
+}
+
+.bundle-featured .bundle-per {
+    color: #888;
+}
+
+.bundle-featured .bundle-savings {
+    background: #E0F4FC;
+    color: #007DAB;
+}
+
+.bundle-featured .bundle-pouches {
+    color: #999;
+}
+
+.bundle-featured .bundle-features {
+    border-top-color: #E5E7EB;
+}
+
+.bundle-featured .bundle-features li {
+    color: #555;
+}
+
+/* CTA buttons on all bundle cards */
 .bundle-cta-white {
-    background: rgba(255, 255, 255, 0.08);
-    color: #e0e8f5;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #ffffff;
+    color: #00AEEF;
+    border: 1.5px solid #E5E7EB;
     box-shadow: none;
 }
 
 .bundle-cta-white:hover {
-    background: rgba(61, 214, 245, 0.14);
-    color: #3DD6F5;
-    border-color: rgba(61, 214, 245, 0.4);
-    box-shadow: 0 4px 20px rgba(61, 214, 245, 0.12);
+    background: #ffffff;
+    color: #0090C8;
+    border-color: #00AEEF;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 174, 239, 0.12);
 }
 
 /* =====================
-   FINAL CTA
+   FINAL CTA — keep existing but ensure font
    ===================== */
-.section-cta {
-    background: linear-gradient(135deg, #061830 0%, #0d2a5a 50%, #1a4a8a 100%);
+.section-cta .section-label {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.section-cta .section-label::before {
+    background: rgba(255, 255, 255, 0.75);
 }
 
 /* =====================
    FOOTER
    ===================== */
 .site-footer {
-    background: #040810;
+    background: #F0F2F4;
     padding-top: 0;
 }
 
+/* Clean gray top separator (replaces cyan gradient from old theme) */
 .site-footer::before {
     content: '';
     display: block;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, #3DD6F5 30%, #1a73e8 70%, transparent 100%);
+    height: 1px;
+    background: #E5E7EB;
     margin-bottom: 60px;
 }
 
 .footer-container {
-    gap: 28px;
+    gap: 20px;
+}
+
+/* Logo is dark on light bg — remove invert filter */
+.footer-logo {
+    filter: none;
+    opacity: 0.85;
 }
 
 .footer-tagline {
-    color: rgba(255, 255, 255, 0.45);
+    color: #888;
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.45);
+    color: #777;
 }
 
 .footer-links a:hover {
-    color: #3DD6F5;
+    color: #00AEEF;
 }
 
 .footer-legal {
-    color: rgba(255, 255, 255, 0.25);
+    color: #AAAAAA;
 }
 
 /* =====================
-   RESPONSIVE OVERRIDES
+   RESPONSIVE
    ===================== */
 @media (max-width: 960px) {
     .header-bar {
-        background: rgba(6, 10, 22, 0.92);
+        background: rgba(255, 255, 255, 0.98);
+    }
+
+    .section-inner h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-inner h2 {
+        font-size: 1.8rem;
     }
 }
