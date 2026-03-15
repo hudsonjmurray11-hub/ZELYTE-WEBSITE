@@ -220,11 +220,11 @@ body {
     padding: 140px 80px 200px;
     background: linear-gradient(
         to bottom,
-        rgb(44, 159, 241)  0%,
-        rgb(44, 159, 241)  60%,
-        rgb(110, 182, 244) 78%,
-        rgb(190, 215, 248) 90%,
-        #ffffff            100%
+        rgb(104, 176, 236),
+        rgb(145, 192, 238),
+        rgb(180, 208, 240),
+        rgb(212, 225, 242),
+        rgb(242, 242, 244)
     );
     box-sizing: border-box;
 }
