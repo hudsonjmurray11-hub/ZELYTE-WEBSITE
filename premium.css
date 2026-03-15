@@ -1,0 +1,499 @@
+/* =============================================================
+   ZELYTE — Premium Dark Redesign Override Layer
+   Loaded after index.css — surgical overrides only.
+   Accent: #3DD6F5 (electric cyan)
+   Base bg: #080c16 / #0a0f1a
+   ============================================================= */
+
+/* =====================
+   GRAIN OVERLAY
+   ===================== */
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    opacity: 0.028;
+}
+
+/* =====================
+   GLOBAL BODY
+   ===================== */
+body {
+    background: #080c16;
+    color: #e0e8f5;
+}
+
+.section-sub {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* =====================
+   NAVBAR
+   ===================== */
+.header-bar {
+    background: rgba(6, 10, 22, 0.88);
+    border: 1px solid rgba(61, 214, 245, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 -1px 0 rgba(61, 214, 245, 0.15);
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.nav-links a:hover {
+    background: rgba(61, 214, 245, 0.08);
+    color: #3DD6F5;
+}
+
+.cart-icon svg {
+    stroke: rgba(255, 255, 255, 0.75);
+}
+
+/* =====================
+   SECTION LABELS
+   ===================== */
+.section-label {
+    color: #3DD6F5;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1.5px;
+    background: #3DD6F5;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+/* In the How It Works section the label sits inside glass-pill — keep it white there */
+.how-label-pill .section-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+.how-label-pill .section-label::before {
+    display: none;
+}
+
+/* =====================
+   HERO — fades to dark instead of white
+   ===================== */
+.hero-section::after {
+    background: linear-gradient(to bottom, transparent 0%, #080c16 100%);
+}
+
+/* =====================
+   WHAT IS ZELYTE
+   ===================== */
+.section-what {
+    background: #0a0f1a;
+}
+
+.section-what .section-inner h2 {
+    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.what-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(61, 214, 245, 0.12);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.what-card:hover {
+    border-color: rgba(61, 214, 245, 0.4);
+    box-shadow: 0 0 28px rgba(61, 214, 245, 0.1), 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+.what-card strong {
+    color: #3DD6F5;
+}
+
+.what-card p {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* =====================
+   HOW IT WORKS — steps
+   ===================== */
+.step {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+.step-num {
+    color: #3DD6F5;
+    opacity: 0.35;
+}
+
+.step h3 {
+    color: #3DD6F5;
+}
+
+.step p {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.step-divider {
+    background: rgba(61, 214, 245, 0.3);
+    opacity: 1;
+}
+
+/* =====================
+   WHY NOT DRINKS (comparison)
+   ===================== */
+.section-why {
+    background: #0a0f1a;
+}
+
+.section-why .section-inner h2 {
+    color: #e0e8f5;
+    -webkit-text-fill-color: #e0e8f5;
+    background: none;
+}
+
+.comparison-col {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.zelyte-col {
+    background: rgba(61, 214, 245, 0.05);
+    border: 1.5px solid rgba(61, 214, 245, 0.45);
+    box-shadow: 0 0 48px rgba(61, 214, 245, 0.1), inset 0 0 30px rgba(61, 214, 245, 0.03);
+}
+
+.comparison-header {
+    color: rgba(255, 255, 255, 0.55);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.zelyte-header {
+    color: #3DD6F5;
+    border-bottom-color: rgba(61, 214, 245, 0.25);
+}
+
+.comparison-list li {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.check {
+    color: #3DD6F5;
+}
+
+/* =====================
+   BENEFITS
+   ===================== */
+.section-benefits {
+    background: #080c16;
+}
+
+.section-benefits .benefit-card {
+    border: 1px solid rgba(61, 214, 245, 0.1);
+}
+
+.section-benefits .benefit-card:hover {
+    border-color: rgba(61, 214, 245, 0.32);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(61, 214, 245, 0.1);
+    transform: translateY(-4px);
+}
+
+.section-benefits .benefit-card h3 {
+    color: #3DD6F5;
+}
+
+/* =====================
+   FLAVORS
+   ===================== */
+.section-flavors {
+    background: #0d1525;
+}
+
+.section-flavors .section-inner h2 {
+    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.flavor-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.flavor-card:hover {
+    transform: translateY(-4px);
+    border-color: #3DD6F5;
+    box-shadow: 0 0 36px rgba(61, 214, 245, 0.2), 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.flavor-card h3 {
+    color: #3DD6F5;
+}
+
+.flavor-card p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.flavor-badge {
+    background: rgba(61, 214, 245, 0.12);
+    color: #3DD6F5;
+}
+
+.flavor-badge.available {
+    background: #3DD6F5;
+    color: #080c16;
+}
+
+.flavor-img-placeholder {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* =====================
+   SCIENCE / INGREDIENTS
+   ===================== */
+.section-science {
+    background: #080c16;
+}
+
+.section-science .section-inner h2 {
+    color: #e0e8f5;
+    -webkit-text-fill-color: #e0e8f5;
+    background: none;
+}
+
+.section-science .section-label {
+    color: #3DD6F5;
+}
+
+.section-science .section-sub {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.section-science .ingredient-card {
+    background: rgba(61, 214, 245, 0.04);
+    border: 1px solid rgba(61, 214, 245, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.section-science .ingredient-card:hover {
+    border-color: rgba(61, 214, 245, 0.42);
+    box-shadow: 0 0 28px rgba(61, 214, 245, 0.12), 0 8px 24px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
+}
+
+.section-science .ingredient-card strong {
+    color: #3DD6F5;
+}
+
+.section-science .ingredient-card p {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* =====================
+   REVIEWS
+   ===================== */
+.section-reviews {
+    background: #0a0f1a;
+}
+
+.section-reviews .section-inner h2 {
+    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    border-color: rgba(61, 214, 245, 0.28);
+    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.35);
+}
+
+.review-card p {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.review-card strong {
+    color: #3DD6F5;
+}
+
+/* =====================
+   FAQ
+   ===================== */
+.section-faq {
+    background: #080c16;
+}
+
+.section-faq .section-inner h2 {
+    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(61, 214, 245, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.faq-item strong {
+    color: #3DD6F5;
+}
+
+.faq-item p {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* =====================
+   BUNDLE PACKS
+   ===================== */
+.section-bundles {
+    background: #080c16;
+}
+
+.section-bundles .section-inner h2 {
+    background: linear-gradient(135deg, #7ecfff 0%, #3DD6F5 40%, #a8eeff 72%, #3DD6F5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bundle-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.bundle-card:hover {
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.55);
+    border-color: rgba(61, 214, 245, 0.28);
+}
+
+.bundle-qty {
+    color: #3DD6F5;
+}
+
+.bundle-name {
+    color: #e0e8f5;
+}
+
+.bundle-price {
+    color: #ffffff;
+}
+
+.bundle-features {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.bundle-features li {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* Pro Pack (featured) — enhanced cyan glow */
+.bundle-featured {
+    border: 2px solid rgba(61, 214, 245, 0.5);
+}
+
+@keyframes bundle-glow-premium {
+    0%, 100% {
+        box-shadow: 0 0 50px rgba(61, 214, 245, 0.18), 0 20px 52px rgba(26, 115, 232, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 80px rgba(61, 214, 245, 0.32), 0 24px 72px rgba(26, 115, 232, 0.6);
+    }
+}
+
+.bundle-featured {
+    animation: gradient-sweep 5s ease infinite, bundle-glow-premium 3s ease-in-out infinite;
+}
+
+/* CTA buttons on dark non-featured cards */
+.bundle-cta-white {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e0e8f5;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: none;
+}
+
+.bundle-cta-white:hover {
+    background: rgba(61, 214, 245, 0.14);
+    color: #3DD6F5;
+    border-color: rgba(61, 214, 245, 0.4);
+    box-shadow: 0 4px 20px rgba(61, 214, 245, 0.12);
+}
+
+/* =====================
+   FINAL CTA
+   ===================== */
+.section-cta {
+    background: linear-gradient(135deg, #061830 0%, #0d2a5a 50%, #1a4a8a 100%);
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+.site-footer {
+    background: #040810;
+    padding-top: 0;
+}
+
+.site-footer::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #3DD6F5 30%, #1a73e8 70%, transparent 100%);
+    margin-bottom: 60px;
+}
+
+.footer-container {
+    gap: 28px;
+}
+
+.footer-tagline {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-links a:hover {
+    color: #3DD6F5;
+}
+
+.footer-legal {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+/* =====================
+   RESPONSIVE OVERRIDES
+   ===================== */
+@media (max-width: 960px) {
+    .header-bar {
+        background: rgba(6, 10, 22, 0.92);
+    }
+}
