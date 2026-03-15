@@ -804,6 +804,72 @@
         });
     }());
     </script>
+
+    <!-- Liquid Glass SVG Filter -->
+    <div style="position:absolute;width:0;height:0;overflow:hidden;z-index:-1;">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="liquid-glass-nav" primitiveUnits="objectBoundingBox" x="0" y="0" width="1" height="1">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.65 0.75"
+              numOctaves="3"
+              seed="2"
+              result="noise"/>
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="0.008"
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="displaced"/>
+            <feGaussianBlur in="displaced" stdDeviation="0.005" result="blurred"/>
+            <feComposite in="blurred" in2="SourceGraphic" operator="in"/>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+
+    <script>
+    // Liquid Glass Navbar — scroll density toggle
+    (function () {
+      var nav = document.getElementById('header-bar');
+      if (!nav) return;
+      var onScroll = function () {
+        if (window.scrollY > 30) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    (function () {
+      var nav = document.getElementById('header-bar');
+      var hero = document.getElementById('hero');
+      if (!nav || !hero) return;
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      var ticking = false;
+      function update() {
+        var progress = Math.max(0, Math.min(1, window.scrollY / hero.offsetHeight));
+        var r = Math.round(lerp(255, 10,  progress));
+        var g = Math.round(lerp(255, 153, progress));
+        var b = Math.round(lerp(255, 236, progress));
+        nav.style.setProperty('--nav-text-color', 'rgb(' + r + ',' + g + ',' + b + ')');
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+
+      update();
+    })();
+    </script>
 </body>
 
 </html>
