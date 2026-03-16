@@ -979,6 +979,14 @@ body {
 
 .faq-more-btn {
     margin-top: 40px;
+    background: #fff;
+    color: #1252c4;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.faq-more-btn:hover {
+    background: #f0f5ff;
+    color: #1252c4;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* =====================
