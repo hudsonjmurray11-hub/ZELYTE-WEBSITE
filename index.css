@@ -945,7 +945,9 @@ body {
 /* =====================
    FAQ
    ===================== */
-.section-faq { background: #f8f9fb; }
+.section-faq { background: linear-gradient(135deg, #1252c4 0%, #1e90ff 100%); }
+.section-faq .section-label { color: rgba(255, 255, 255, 0.7); }
+.section-faq .section-inner > h2 { color: #fff; -webkit-text-fill-color: #fff; background: none; }
 
 .faq-list {
     display: flex;
@@ -956,8 +958,8 @@ body {
 }
 
 .faq-item {
-    background: #fff;
-    border: 1px solid #e0e8f5;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 12px;
     padding: 24px 28px;
 }
@@ -965,12 +967,12 @@ body {
 .faq-item strong {
     display: block;
     font-size: 1rem;
-    color: #1e90ff;
+    color: #fff;
     margin-bottom: 8px;
 }
 
 .faq-item p {
-    color: #555;
+    color: rgba(255, 255, 255, 0.82);
     font-size: 0.95rem;
     line-height: 1.65;
 }
