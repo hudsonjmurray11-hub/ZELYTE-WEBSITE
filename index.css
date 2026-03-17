@@ -206,7 +206,7 @@ body {
    ===================== */
 .hero-section {
     position: relative;
-    min-height: 140vh;
+    min-height: 160vh;
     width: 100vw;
     overflow: hidden;
     display: flex;
