@@ -465,7 +465,7 @@ body {
 /* =====================
    WHAT IS ZELYTE
    ===================== */
-.section-what { background: #fff; margin-top: -120px; }
+.section-what { background: #fff; margin-top: -120px; padding-top: 160px; }
 
 .what-cards {
     display: grid;
