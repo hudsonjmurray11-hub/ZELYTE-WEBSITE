@@ -775,6 +775,15 @@ body {
     width: fit-content;
 }
 
+.flavor-sub {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #888;
+    text-transform: uppercase;
+    margin: -6px 0 0;
+}
+
 .flavor-desc {
     font-size: 0.95rem;
     color: #555;
@@ -835,9 +844,17 @@ body {
 }
 
 .flavor-card--rect .flavor-img-wrap {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
     flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f4f7fb;
+}
+
+.flavor-card--rect .flavor-img {
+    object-fit: cover;
+    border-radius: 16px;
 }
 
 .flavor-upcoming {
