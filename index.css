@@ -903,6 +903,7 @@ body {
 
 .flavor-badge {
     display: inline-block;
+    align-self: flex-start;
     padding: 6px 14px;
     background: #eef4fd;
     color: #1a73e8;
