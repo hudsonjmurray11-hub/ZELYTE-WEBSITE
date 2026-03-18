@@ -755,20 +755,6 @@ body {
     margin-right: auto;
 }
 
-.flavor-card--rect {
-    flex-direction: row;
-    text-align: left;
-    align-items: center;
-    padding: 40px 44px;
-    border-radius: 16px;
-    gap: 40px;
-}
-
-.flavor-card--rect .flavor-img-wrap {
-    width: 200px;
-    height: 200px;
-    flex-shrink: 0;
-}
 
 .flavor-card-info {
     display: flex;
@@ -837,6 +823,21 @@ body {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(26, 115, 232, 0.12);
     border-color: #1a73e8;
+}
+
+.flavor-card--rect {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    padding: 40px 44px;
+    border-radius: 16px;
+    gap: 40px;
+}
+
+.flavor-card--rect .flavor-img-wrap {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
 }
 
 .flavor-upcoming {
