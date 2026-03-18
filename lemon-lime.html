@@ -393,12 +393,30 @@
         .product-details {
             max-width: 1300px;
             margin: 60px auto 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: stretch;
             gap: 24px;
         }
 
+        .detail-row-img {
+            flex: 1;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            box-shadow: 0 0 16px 6px rgba(255,255,255,0.5), 0 8px 24px rgba(0,0,0,0.2);
+            min-height: 320px;
+            max-height: 440px;
+            width: 0;
+        }
+
         .detail-card {
+            flex: 1;
             background: rgba(255, 255, 255, 0.82);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -893,45 +911,50 @@
             </div>
         </div>
 
-        <!-- Lifestyle Gallery -->
-        <div class="product-img-gallery">
-            <img src="BIKING ZELYTE.png" alt="Biking with ZELYTE">
-            <img src="ROWING ZELYTE.png" alt="Rowing with ZELYTE">
-        </div>
-
         <!-- Detail Cards -->
         <div class="product-details">
-            <div class="detail-card">
-                <span class="detail-label">What's Inside</span>
-                <h2>Ingredients</h2>
-                <ul class="ingredient-list">
-                    <li><strong>Sodium</strong><span>Supports fluid balance and muscle function</span></li>
-                    <li><strong>Potassium</strong><span>Helps maintain hydration and performance</span></li>
-                    <li><strong>Magnesium</strong><span>Supports energy metabolism</span></li>
-                    <li><strong>Natural Caffeine (40mg)</strong><span>Plant-derived, clean focus with no crash</span></li>
-                    <li><strong>Natural Lemon Lime Flavor</strong><span>No artificial flavors</span></li>
-                    <li><strong>Stevia</strong><span>Zero sugar, naturally sweetened</span></li>
-                </ul>
+
+            <!-- Row 1: Biking image left, Ingredients right -->
+            <div class="detail-row">
+                <img src="BIKING ZELYTE.png" alt="Biking with ZELYTE" class="detail-row-img">
+                <div class="detail-card">
+                    <span class="detail-label">What's Inside</span>
+                    <h2>Ingredients</h2>
+                    <ul class="ingredient-list">
+                        <li><strong>Sodium</strong><span>Supports fluid balance and muscle function</span></li>
+                        <li><strong>Potassium</strong><span>Helps maintain hydration and performance</span></li>
+                        <li><strong>Magnesium</strong><span>Supports energy metabolism</span></li>
+                        <li><strong>Natural Caffeine (40mg)</strong><span>Plant-derived, clean focus with no crash</span></li>
+                        <li><strong>Natural Lemon Lime Flavor</strong><span>No artificial flavors</span></li>
+                        <li><strong>Stevia</strong><span>Zero sugar, naturally sweetened</span></li>
+                    </ul>
+                </div>
             </div>
-            <div class="detail-card">
-                <span class="detail-label">How to Use</span>
-                <h2>Three steps</h2>
-                <ul class="use-steps">
-                    <li>
-                        <div class="step-circle">1</div>
-                        <div><strong>Place</strong><p>Tuck one pouch between your upper lip and gum. It sits comfortably and discretely.</p></div>
-                    </li>
-                    <li>
-                        <div class="step-circle">2</div>
-                        <div><strong>Activate</strong><p>Electrolytes and caffeine are absorbed through your gums over 20–40 minutes.</p></div>
-                    </li>
-                    <li>
-                        <div class="step-circle">3</div>
-                        <div><strong>Perform</strong><p>Stay hydrated and focused hands-free. No drinking. No stopping.</p></div>
-                    </li>
-                </ul>
+
+            <!-- Row 2: How to Use left, Rowing image right -->
+            <div class="detail-row">
+                <div class="detail-card">
+                    <span class="detail-label">How to Use</span>
+                    <h2>Three steps</h2>
+                    <ul class="use-steps">
+                        <li>
+                            <div class="step-circle">1</div>
+                            <div><strong>Place</strong><p>Tuck one pouch between your upper lip and gum. It sits comfortably and discretely.</p></div>
+                        </li>
+                        <li>
+                            <div class="step-circle">2</div>
+                            <div><strong>Activate</strong><p>Electrolytes and caffeine are absorbed through your gums over 20–40 minutes.</p></div>
+                        </li>
+                        <li>
+                            <div class="step-circle">3</div>
+                            <div><strong>Perform</strong><p>Stay hydrated and focused hands-free. No drinking. No stopping.</p></div>
+                        </li>
+                    </ul>
+                </div>
+                <img src="ROWING ZELYTE.png" alt="Rowing with ZELYTE" class="detail-row-img">
             </div>
-    </div>
+
+        </div>
     </div>
 
     <!-- Footer -->
