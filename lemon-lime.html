@@ -422,7 +422,7 @@
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            padding: 36px;
+            padding: 48px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,0.4);
             color: #222;
         }
@@ -437,29 +437,35 @@
             margin-bottom: 16px;
         }
         .detail-card h2 {
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: 800;
             color: #2196F3;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+        }
+        .detail-card .card-intro {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 24px;
         }
 
-        .ingredient-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .ingredient-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
         .ingredient-list li {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            padding-bottom: 16px;
+            gap: 6px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #e8eef8;
         }
         .ingredient-list li:last-child { border-bottom: none; padding-bottom: 0; }
-        .ingredient-list strong { font-size: 1.15rem; color: #1e90ff; }
-        .ingredient-list span { font-size: 1rem; color: #777; }
+        .ingredient-list strong { font-size: 1.4rem; color: #1e90ff; }
+        .ingredient-list span { font-size: 1.15rem; color: #777; }
 
-        .use-steps { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+        .use-steps { list-style: none; display: flex; flex-direction: column; gap: 32px; }
         .use-steps li { display: flex; gap: 20px; align-items: flex-start; }
         .step-circle {
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             background: #1a73e8;
             border: none;
             color: #fff;
@@ -467,13 +473,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             font-weight: 800;
             flex-shrink: 0;
             margin-top: 2px;
         }
-        .use-steps p { font-size: 1.1rem; color: #555; line-height: 1.6; }
-        .use-steps strong { display: block; font-size: 1.15rem; color: #1e90ff; margin-bottom: 4px; }
+        .use-steps p { font-size: 1.25rem; color: #555; line-height: 1.6; }
+        .use-steps strong { display: block; font-size: 1.4rem; color: #1e90ff; margin-bottom: 6px; }
+        .use-steps-note {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e8eef8;
+            font-size: 1.1rem;
+            color: #888;
+            font-style: italic;
+        }
 
         /* ---- Footer ---- */
         .site-footer {
@@ -920,13 +934,14 @@
                 <div class="detail-card">
                     <span class="detail-label">What's Inside</span>
                     <h2>Ingredients</h2>
+                    <p class="card-intro">Every ingredient in ZELYTE is there for a reason — zero fillers, zero compromises. Clean, effective, and built for performance.</p>
                     <ul class="ingredient-list">
-                        <li><strong>Sodium</strong><span>Supports fluid balance and muscle function</span></li>
-                        <li><strong>Potassium</strong><span>Helps maintain hydration and performance</span></li>
-                        <li><strong>Magnesium</strong><span>Supports energy metabolism</span></li>
-                        <li><strong>Natural Caffeine (40mg)</strong><span>Plant-derived, clean focus with no crash</span></li>
-                        <li><strong>Natural Lemon Lime Flavor</strong><span>No artificial flavors</span></li>
-                        <li><strong>Stevia</strong><span>Zero sugar, naturally sweetened</span></li>
+                        <li><strong>Sodium</strong><span>Essential electrolyte that drives fluid into your cells — keeping you hydrated at the source.</span></li>
+                        <li><strong>Potassium</strong><span>Balances sodium and powers muscle contractions so you can push harder, longer.</span></li>
+                        <li><strong>Magnesium</strong><span>Reduces fatigue and supports the cellular energy production that fuels every rep.</span></li>
+                        <li><strong>Natural Caffeine (40mg)</strong><span>Sourced from green tea — smooth, focused energy with no spike and no crash.</span></li>
+                        <li><strong>Natural Lemon Lime Flavor</strong><span>Crisp, refreshing citrus taste with zero artificial ingredients.</span></li>
+                        <li><strong>Stevia</strong><span>Plant-based sweetness with zero sugar, zero calories, and no bitter aftertaste.</span></li>
                     </ul>
                 </div>
             </div>
@@ -939,17 +954,18 @@
                     <ul class="use-steps">
                         <li>
                             <div class="step-circle">1</div>
-                            <div><strong>Place</strong><p>Tuck one pouch between your upper lip and gum. It sits comfortably and discretely.</p></div>
+                            <div><strong>Place</strong><p>Tuck one ZELYTE pouch between your upper lip and gum. It sits flush and discreet — no one will notice, and nothing will fall out.</p></div>
                         </li>
                         <li>
                             <div class="step-circle">2</div>
-                            <div><strong>Activate</strong><p>Electrolytes and caffeine are absorbed through your gums over 20–40 minutes.</p></div>
+                            <div><strong>Activate</strong><p>Electrolytes and 40mg of natural caffeine absorb through your gums via buccal absorption. Effects build gradually over 20–40 minutes for sustained performance.</p></div>
                         </li>
                         <li>
                             <div class="step-circle">3</div>
-                            <div><strong>Perform</strong><p>Stay hydrated and focused hands-free. No drinking. No stopping.</p></div>
+                            <div><strong>Perform</strong><p>Stay hydrated and focused with zero interruptions. No bottle. No hands. No stopping. Just pure, clean performance from start to finish.</p></div>
                         </li>
                     </ul>
+                    <p class="use-steps-note">One tin contains 15 pouches. Use one pouch per session for best results.</p>
                 </div>
                 <img src="ROWING ZELYTE.png" alt="Rowing with ZELYTE" class="detail-row-img">
             </div>
