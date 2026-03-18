@@ -9,12 +9,7 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(
-                to bottom,
-                #9FB3BA 0%,
-                #A9BDC5 50%,
-                #7F97A0 100%
-            );
+            background: linear-gradient(rgb(216, 219, 223), rgb(187, 204, 224), rgb(156, 190, 224), rgb(121, 176, 224), rgb(76, 162, 224));
             min-height: 100vh;
             color: #fff;
             overflow-x: hidden;
@@ -182,7 +177,7 @@
             max-width: 480px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         /* ---- Liquid Glass Base ---- */
@@ -191,14 +186,14 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 20px;
-            padding: 20px 24px;
+            border-radius: 16px;
+            padding: 14px 18px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255,255,255,0.45);
         }
-        .glass-breadcrumb { padding: 10px 20px; border-radius: 100px; width: fit-content; }
-        .glass-title    { padding: 22px 26px; }
-        .glass-rating   { padding: 10px 20px; border-radius: 100px; display: flex; align-items: center; width: fit-content; }
-        .glass-desc     { padding: 18px 24px; }
+        .glass-breadcrumb { padding: 7px 16px; border-radius: 100px; width: fit-content; }
+        .glass-title    { padding: 16px 20px; }
+        .glass-rating   { padding: 7px 16px; border-radius: 100px; display: flex; align-items: center; width: fit-content; }
+        .glass-desc     { padding: 12px 18px; }
 
         /* ---- Text Styles ---- */
         .breadcrumb { font-size: 0.8rem; color: rgba(255,255,255,0.8); font-weight: 600; letter-spacing: 0.5px; }
@@ -207,30 +202,30 @@
 
         .product-label {
             display: block;
-            font-size: 0.98rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: rgba(255,255,255,0.8);
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         .glass-card h1 {
-            font-size: 4.5rem;
+            font-size: 3rem;
             font-weight: 800;
             color: #fff;
             line-height: 1.1;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             text-shadow: 0 2px 12px rgba(0,0,0,0.2);
         }
         .product-subheading {
-            font-size: 1.35rem;
+            font-size: 0.95rem;
             color: rgba(255,255,255,0.82);
             font-weight: 500;
         }
-        .product-rating { display: flex; align-items: center; gap: 8px; }
-        .product-rating .stars { color: #fbbf24; font-size: 1.4rem; letter-spacing: 1px; }
-        .product-rating .count { font-size: 1.2rem; color: rgba(255,255,255,0.8); font-weight: 600; }
-        .product-description { font-size: 1.35rem; color: rgba(255,255,255,0.88); line-height: 1.7; }
+        .product-rating { display: flex; align-items: center; gap: 6px; }
+        .product-rating .stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
+        .product-rating .count { font-size: 0.9rem; color: rgba(255,255,255,0.8); font-weight: 600; }
+        .product-description { font-size: 0.95rem; color: rgba(255,255,255,0.88); line-height: 1.6; }
 
         /* ---- Feature Tags ---- */
         .tags-glass-card {
@@ -250,9 +245,9 @@
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.4);
             color: #fff;
-            padding: 5px 14px;
+            padding: 4px 11px;
             border-radius: 100px;
-            font-size: 1.05rem;
+            font-size: 0.82rem;
             font-weight: 600;
         }
 
@@ -262,17 +257,17 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 20px;
-            padding: 28px;
+            border-radius: 16px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 14px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255,255,255,0.45);
         }
 
-        .price-row { display: flex; align-items: baseline; gap: 10px; }
-        .price-main { font-size: 3.1rem; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .price-meta { font-size: 1.2rem; color: rgba(255,255,255,0.7); }
+        .price-row { display: flex; align-items: baseline; gap: 8px; }
+        .price-main { font-size: 2.2rem; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .price-meta { font-size: 0.95rem; color: rgba(255,255,255,0.7); }
 
         .coming-soon-badge {
             display: inline-flex;
