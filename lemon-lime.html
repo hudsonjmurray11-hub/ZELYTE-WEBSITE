@@ -9,7 +9,7 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(rgb(216, 219, 223), rgb(187, 204, 224), rgb(156, 190, 224), rgb(121, 176, 224), rgb(76, 162, 224));
+            background: linear-gradient(rgb(76, 162, 224), rgb(121, 176, 224), rgb(156, 190, 224), rgb(187, 204, 224), rgb(216, 219, 223));
             min-height: 100vh;
             color: #fff;
             overflow-x: hidden;
@@ -97,7 +97,7 @@
             color: #fff;
             text-decoration: none;
             box-shadow: none;
-            background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
+            background: linear-gradient(135deg, #14532d, #166534, #16a34a, #4ade80, #86efac, #4ade80, #16a34a, #166534, #14532d);
             background-size: 300% 100%;
             animation: gradient-sweep 3s ease infinite;
             transition: transform 0.15s, box-shadow 0.2s;
@@ -108,7 +108,7 @@
             inset: 0;
             border-radius: inherit;
             padding: 1.5px;
-            background: linear-gradient(135deg, #60a5fa, #bae6fd, #93c5fd, #60a5fa);
+            background: linear-gradient(135deg, #4ade80, #bbf7d0, #86efac, #4ade80);
             background-size: 300% 100%;
             animation: gradient-sweep 3s ease infinite;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -119,7 +119,7 @@
         }
         .gradient-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5);
+            box-shadow: 0 6px 24px rgba(22, 163, 74, 0.5);
         }
 
         /* ---- Page Layout ---- */
@@ -348,7 +348,7 @@
             font-weight: 700;
             transition: background 0.2s;
         }
-        .qty-btn:hover { background: rgba(255,255,255,0.15); }
+        .qty-btn:hover { background: rgba(22, 163, 74, 0.3); }
         .qty-val {
             width: 48px;
             text-align: center;
@@ -364,9 +364,9 @@
         .promo-row input { flex: 1; }
         .promo-apply {
             padding: 10px 18px;
-            background: rgba(255,255,255,0.25);
+            background: rgba(22, 163, 74, 0.4);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(74, 222, 128, 0.5);
             border-radius: 10px;
             font-weight: 700;
             font-size: 0.88rem;
@@ -375,7 +375,7 @@
             white-space: nowrap;
             backdrop-filter: blur(8px);
         }
-        .promo-apply:hover { background: rgba(255,255,255,0.35); }
+        .promo-apply:hover { background: rgba(22, 163, 74, 0.55); }
 
         .add-cart-btn {
             padding: 16px;
@@ -531,8 +531,8 @@
             font-family: inherit;
         }
         .pur-tab.active {
-            background: rgba(255,255,255,0.88);
-            color: #1a73e8;
+            background: #16a34a;
+            color: #fff;
         }
         .pur-tab:not(.active):hover { background: rgba(255,255,255,0.12); color: #fff; }
 
@@ -565,11 +565,11 @@
             position: relative;
             font-family: inherit;
         }
-        .bso:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
+        .bso:hover { background: rgba(22, 163, 74, 0.2); transform: translateY(-2px); }
         .bso.active {
-            background: rgba(255,255,255,0.22);
-            border-color: rgba(255,255,255,0.65);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            background: rgba(22, 163, 74, 0.3);
+            border-color: rgba(74, 222, 128, 0.7);
+            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.25);
         }
         .bso-badge {
             position: absolute;
@@ -594,6 +594,12 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: rgba(255,255,255,0.6);
+        }
+        .bso-orig-price {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+            text-decoration: line-through;
         }
         .bso-price { font-size: 1.05rem; font-weight: 900; color: #fff; }
         .bso-save {
@@ -776,6 +782,11 @@
                     const saveEl = document.getElementById('bso-save-' + qty);
                     if (s) { saveEl.textContent = s; saveEl.style.display = ''; }
                     else   { saveEl.style.display = 'none'; }
+                    const origEl = document.getElementById('bso-orig-' + qty);
+                    if (origEl) {
+                        if (s) { origEl.textContent = fmt(qty * 10); origEl.style.display = ''; }
+                        else   { origEl.style.display = 'none'; }
+                    }
                 });
             }
 
@@ -902,11 +913,13 @@
                             <button class="bso" id="bso-3">
                                 <span class="bso-badge">POPULAR</span>
                                 <span class="bso-qty">3 Tins</span>
+                                <span class="bso-orig-price" id="bso-orig-3">$30.00</span>
                                 <span class="bso-price" id="bso-price-3">$27.00</span>
                                 <span class="bso-save" id="bso-save-3">Save 10%</span>
                             </button>
                             <button class="bso" id="bso-5">
                                 <span class="bso-qty">5 Tins</span>
+                                <span class="bso-orig-price" id="bso-orig-5">$50.00</span>
                                 <span class="bso-price" id="bso-price-5">$40.00</span>
                                 <span class="bso-save" id="bso-save-5">Save 20%</span>
                             </button>
