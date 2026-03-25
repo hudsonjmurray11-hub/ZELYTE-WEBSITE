@@ -36,6 +36,7 @@
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
+            <span class="cart-badge" id="cart-badge">1</span>
         </button>
         <a href="lemon-lime.html" class="shop-button gradient-button">Shop Now</a>
     </div>
@@ -61,24 +62,29 @@
                         <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
                         <span class="qty-val">1</span>
                         <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                        <span class="cart-item-price">$10.00</span>
                     </div>
                 </div>
-                <p class="cart-item-price">$10.00</p>
+                <button class="cart-item-remove" onclick="removeItem(this)" aria-label="Remove item">✕</button>
             </div>
         </div>
         <div class="cart-empty" style="display:none;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
             </svg>
             <p>Your cart is empty</p>
+            <button class="cart-empty-shop gradient-button" onclick="window.location='lemon-lime.html'">Shop Now</button>
         </div>
         <div class="cart-footer">
             <div class="cart-subtotal">
                 <span>Subtotal</span>
                 <span id="cart-total">$10.00</span>
             </div>
+            <p class="cart-per-serving" id="cart-per-serving">$0.67 per serving</p>
+            <p class="cart-shipping">Free shipping on orders over $30</p>
             <a href="lemon-lime.html" class="cart-checkout gradient-button">Checkout →</a>
+            <button class="cart-continue" onclick="closeCartDrawer()">← Continue Shopping</button>
         </div>
     </div>
 
@@ -897,8 +903,12 @@
         var drawer = document.getElementById('cart-drawer');
         var overlay = document.getElementById('cart-overlay');
         var toggle = document.getElementById('cart-toggle');
-        var close = document.getElementById('cart-close');
+        var closeBtn = document.getElementById('cart-close');
+        var badge = document.getElementById('cart-badge');
+        var emptyEl = document.querySelector('.cart-empty');
+        var footerEl = document.querySelector('.cart-footer');
         var prices = { 'Lemon Lime': 10.00 };
+        var servingsPerTin = 15;
 
         function openCart() {
             drawer.classList.add('open');
@@ -910,29 +920,65 @@
             overlay.classList.remove('open');
             document.body.style.overflow = '';
         }
+        window.closeCartDrawer = closeCart;
 
         toggle.addEventListener('click', openCart);
-        close.addEventListener('click', closeCart);
+        closeBtn.addEventListener('click', closeCart);
         overlay.addEventListener('click', closeCart);
 
         window.changeQty = function(btn, delta) {
             var row = btn.closest('.cart-item');
             var valEl = row.querySelector('.qty-val');
-            var qty = Math.max(1, parseInt(valEl.textContent) + delta);
-            valEl.textContent = qty;
-            updateTotal();
+            var qty = parseInt(valEl.textContent) + delta;
+            if (qty < 1) {
+                row.remove();
+            } else {
+                valEl.textContent = qty;
+                var name = row.querySelector('.cart-item-name').textContent;
+                var priceEl = row.querySelector('.cart-item-price');
+                priceEl.textContent = '$' + (prices[name] * qty).toFixed(2);
+            }
+            syncCartState();
         };
 
-        function updateTotal() {
-            var total = 0;
-            document.querySelectorAll('.cart-item').forEach(function(item) {
+        window.removeItem = function(btn) {
+            btn.closest('.cart-item').remove();
+            syncCartState();
+        };
+
+        function syncCartState() {
+            var items = document.querySelectorAll('.cart-item');
+            var totalItems = 0;
+            var totalPrice = 0;
+            var totalServings = 0;
+
+            items.forEach(function(item) {
                 var name = item.querySelector('.cart-item-name').textContent;
                 var qty = parseInt(item.querySelector('.qty-val').textContent);
                 var price = prices[name] || 0;
-                total += price * qty;
+                totalItems += qty;
+                totalPrice += price * qty;
+                totalServings += qty * servingsPerTin;
             });
-            document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+
+            document.getElementById('cart-total').textContent = '$' + totalPrice.toFixed(2);
+
+            var perServing = totalServings > 0 ? (totalPrice / totalServings).toFixed(2) : '0.00';
+            document.getElementById('cart-per-serving').textContent = '$' + perServing + ' per serving';
+
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            var hasItems = items.length > 0;
+            emptyEl.style.display = hasItems ? 'none' : 'flex';
+            footerEl.style.display = hasItems ? 'flex' : 'none';
         }
+
+        syncCartState();
     })();
     </script>
 </body>
