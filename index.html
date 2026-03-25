@@ -30,14 +30,56 @@
             <a href="faq.html">FAQ</a>
             <a href="#about">About</a>
         </nav>
-        <a href="#" class="cart-icon" aria-label="Cart">
+        <button class="cart-icon" id="cart-toggle" aria-label="Cart">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
-        </a>
+        </button>
         <a href="lemon-lime.html" class="shop-button gradient-button">Shop Now</a>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart">
+        <div class="cart-drawer-header">
+            <h2>Your Cart</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="LEMON LIME NEW TIN .png" alt="Lemon Lime" class="cart-item-img">
+                <div class="cart-item-info">
+                    <p class="cart-item-name">Lemon Lime — Starter Tin</p>
+                    <p class="cart-item-sub">20 pouches · Zero sugar</p>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                        <span class="qty-val">1</span>
+                        <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </div>
+                <p class="cart-item-price">$14.99</p>
+            </div>
+        </div>
+        <div class="cart-empty" style="display:none;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <p>Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-total">$14.99</span>
+            </div>
+            <a href="lemon-lime.html" class="cart-checkout gradient-button">Checkout →</a>
+        </div>
     </div>
 
     <!-- Hero Section -->
@@ -847,6 +889,50 @@
       }, { passive: true });
 
       update();
+    })();
+    </script>
+
+    <script>
+    (function() {
+        var drawer = document.getElementById('cart-drawer');
+        var overlay = document.getElementById('cart-overlay');
+        var toggle = document.getElementById('cart-toggle');
+        var close = document.getElementById('cart-close');
+        var prices = { 'Lemon Lime — Starter Tin': 14.99 };
+
+        function openCart() {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCart() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        toggle.addEventListener('click', openCart);
+        close.addEventListener('click', closeCart);
+        overlay.addEventListener('click', closeCart);
+
+        window.changeQty = function(btn, delta) {
+            var row = btn.closest('.cart-item');
+            var valEl = row.querySelector('.qty-val');
+            var qty = Math.max(1, parseInt(valEl.textContent) + delta);
+            valEl.textContent = qty;
+            updateTotal();
+        };
+
+        function updateTotal() {
+            var total = 0;
+            document.querySelectorAll('.cart-item').forEach(function(item) {
+                var name = item.querySelector('.cart-item-name').textContent;
+                var qty = parseInt(item.querySelector('.qty-val').textContent);
+                var price = prices[name] || 0;
+                total += price * qty;
+            });
+            document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+        }
     })();
     </script>
 </body>
