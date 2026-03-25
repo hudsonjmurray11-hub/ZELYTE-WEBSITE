@@ -55,15 +55,15 @@
             <div class="cart-item">
                 <img src="LEMON LIME NEW TIN .png" alt="Lemon Lime" class="cart-item-img">
                 <div class="cart-item-info">
-                    <p class="cart-item-name">Lemon Lime — Starter Tin</p>
-                    <p class="cart-item-sub">20 pouches · Zero sugar</p>
+                    <p class="cart-item-name">Lemon Lime</p>
+                    <p class="cart-item-sub">15 pouches · Active Hydration Pouch</p>
                     <div class="cart-item-qty">
                         <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
                         <span class="qty-val">1</span>
                         <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
                     </div>
                 </div>
-                <p class="cart-item-price">$14.99</p>
+                <p class="cart-item-price">$10.00</p>
             </div>
         </div>
         <div class="cart-empty" style="display:none;">
@@ -76,7 +76,7 @@
         <div class="cart-footer">
             <div class="cart-subtotal">
                 <span>Subtotal</span>
-                <span id="cart-total">$14.99</span>
+                <span id="cart-total">$10.00</span>
             </div>
             <a href="lemon-lime.html" class="cart-checkout gradient-button">Checkout →</a>
         </div>
@@ -898,7 +898,7 @@
         var overlay = document.getElementById('cart-overlay');
         var toggle = document.getElementById('cart-toggle');
         var close = document.getElementById('cart-close');
-        var prices = { 'Lemon Lime — Starter Tin': 14.99 };
+        var prices = { 'Lemon Lime': 10.00 };
 
         function openCart() {
             drawer.classList.add('open');
