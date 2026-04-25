@@ -1812,6 +1812,124 @@ body {
     font-weight: 700;
 }
 
+/* ── Our Story ── */
+.section-story {
+    padding: 100px 40px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.story-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+}
+
+.story-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a73e8;
+    background: rgba(26, 115, 232, 0.09);
+    border-radius: 100px;
+    padding: 6px 14px;
+    margin-bottom: 20px;
+}
+
+.section-story h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #0d2357 0%, #1a73e8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+.story-sub {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a73e8;
+    font-style: italic;
+    line-height: 1.45;
+    margin-bottom: 32px;
+}
+
+.story-body p {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.story-closing {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0d2357;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(26, 115, 232, 0.15);
+    letter-spacing: -0.2px;
+}
+
+.story-visual {
+    width: 440px;
+    flex-shrink: 0;
+}
+
+.story-img-wrap {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #eef4ff, #dde9ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+}
+
+.story-img-wrap img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+.story-text.reveal-left.in-view    { transition-delay: 0s; }
+.story-visual.reveal-right.in-view { transition-delay: 0.15s; }
+
+@media (max-width: 960px) {
+    .story-inner {
+        flex-direction: column;
+        gap: 48px;
+    }
+    .story-visual {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-story {
+        padding: 72px 20px;
+    }
+    .story-sub {
+        font-size: 1rem;
+    }
+    .story-body p {
+        font-size: 0.97rem;
+    }
+}
+
 /* ============================================================
    INGREDIENTS SECTION
    ============================================================ */
