@@ -567,8 +567,8 @@ body {
 }
 
 .hero-gold {
-    color: #7dd3fc;
-    -webkit-text-fill-color: #7dd3fc;
+    color: #1e40af;
+    -webkit-text-fill-color: #1e40af;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
     display: inline-block;
 }
