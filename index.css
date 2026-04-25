@@ -567,11 +567,11 @@ body {
 }
 
 .hero-gold {
-    background: linear-gradient(135deg, #ffe066 0%, #ffc200 40%, #ffdd57 70%, #ffa500 100%);
+    background: linear-gradient(135deg, #a8d8ff 0%, #4db8ff 30%, #00aaff 60%, #0077ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 18px rgba(255, 185, 0, 0.75)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 4px 18px rgba(0, 170, 255, 0.75)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
     display: inline-block;
 }
 
