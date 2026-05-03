@@ -93,24 +93,21 @@
     btn.textContent = 'Signing up…';
     if (msgEl) { msgEl.textContent = ''; msgEl.className = 'email-signup-msg'; }
 
-    const { error } = await window._sb
-      .from('email_signups')
-      .insert({ email: email, source: 'homepage' });
+    const { alreadySubscribed, error } = await window._zelyteSubmitEmail(email, 'homepage');
 
     btn.disabled    = false;
     btn.textContent = 'Get Early Access →';
 
     if (!msgEl) return;
 
+    if (alreadySubscribed) {
+      msgEl.textContent = "You're already on the list!";
+      msgEl.classList.add('success');
+      return;
+    }
     if (error) {
-      // Postgres unique violation code
-      if (error.code === '23505') {
-        msgEl.textContent = "You're already on the list!";
-        msgEl.classList.add('success');
-      } else {
-        msgEl.textContent = 'Something went wrong — please try again.';
-        msgEl.classList.add('error');
-      }
+      msgEl.textContent = 'Something went wrong — please try again.';
+      msgEl.classList.add('error');
       return;
     }
 

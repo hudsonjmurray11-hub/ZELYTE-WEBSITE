@@ -246,20 +246,18 @@
     submitBtn.textContent = 'Please wait…';
     showMsg('');
 
-    const { error } = await window._sb
-      .from('email_signups')
-      .insert({ email: email, source: 'popup' });
+    const { alreadySubscribed, error } = await window._zelyteSubmitEmail(email, 'popup');
 
     submitBtn.disabled    = false;
     submitBtn.textContent = 'Get Early Access →';
 
+    if (alreadySubscribed) {
+      showMsg("You're already on the list!", 'success');
+      setTimeout(close, 2000);
+      return;
+    }
     if (error) {
-      if (error.code === '23505') {
-        showMsg("You're already on the list!", 'success');
-        setTimeout(close, 2000);
-      } else {
-        showMsg('Something went wrong — please try again.', 'error');
-      }
+      showMsg('Something went wrong — please try again.', 'error');
       return;
     }
 
