@@ -127,7 +127,7 @@
       letter-spacing: 0.3px;
       background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
       background-size: 300% 100%;
-      animation: ep-sweep 3s ease infinite;
+      animation: zelyte-gradient-sweep 3s ease infinite;
       box-shadow: 0 4px 20px rgba(26,115,232,0.45);
       transition: transform 0.15s, box-shadow 0.2s;
     }
@@ -139,12 +139,6 @@
       opacity: 0.55;
       cursor: not-allowed;
       animation: none;
-    }
-
-    @keyframes ep-sweep {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .ep-msg {

@@ -220,7 +220,7 @@
       color: #fff;
       background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
       background-size: 300% 100%;
-      animation: auth-gradient-sweep 3s ease infinite;
+      animation: zelyte-gradient-sweep 3s ease infinite;
       transition: transform 0.15s, box-shadow 0.2s;
       box-shadow: 0 4px 18px rgba(26,115,232,0.4);
     }
@@ -232,12 +232,6 @@
       opacity: 0.55;
       cursor: not-allowed;
       animation: none;
-    }
-
-    @keyframes auth-gradient-sweep {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .auth-divider {
