@@ -185,7 +185,7 @@
             max-width: 480px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         /* ---- Liquid Glass Base ---- */
@@ -732,6 +732,114 @@
             color: #0d5bb8;
         }
 
+        /* ---- New Product Info Section ---- */
+        .prod-title-block { display: flex; flex-direction: column; gap: 10px; }
+        .prod-heading { font-size: 3.8rem; font-weight: 800; color: #fff; line-height: 1.1; text-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+        .prod-rating { display: flex; align-items: center; gap: 8px; }
+        .prod-rating .stars { color: #fbbf24; font-size: 1.25rem; letter-spacing: 1px; }
+        .rating-text { font-size: 1.1rem; color: rgba(255,255,255,0.8); font-weight: 600; }
+
+        /* Variant pills — white/blue */
+        .variant-pill-wrap { display: flex; gap: 12px; }
+        .variant-pill {
+            padding: 13px 28px; border-radius: 100px; font-weight: 700; font-size: 1.05rem;
+            cursor: pointer; border: 1.5px solid #c7d9f5;
+            background: #fff; color: #0d5bb8;
+            position: relative; font-family: inherit;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            box-shadow: 0 2px 8px rgba(13,91,184,0.10);
+        }
+        .variant-pill.selected {
+            background: #0d5bb8; color: #fff;
+            border-color: #0d5bb8;
+            box-shadow: 0 4px 14px rgba(13,91,184,0.22);
+        }
+        .variant-badge {
+            position: absolute; top: -10px; right: -6px;
+            background: linear-gradient(90deg, #ffa500, #ffdd57, #ffc200, #ffdd57, #ffa500);
+            background-size: 200% 100%; animation: badge-shimmer 2.5s linear infinite;
+            color: #111; font-size: 0.72rem; font-weight: 800;
+            padding: 3px 9px; border-radius: 100px; letter-spacing: 0.5px;
+            white-space: nowrap; box-shadow: 0 2px 8px rgba(255,180,0,0.4);
+        }
+
+        /* Info card — white/blue */
+        .info-card {
+            background: #fff;
+            border-radius: 20px; padding: 20px 22px;
+            display: flex; align-items: center; gap: 20px;
+            border: 1.5px solid #c7d9f5;
+            box-shadow: 0 2px 12px rgba(13,91,184,0.08);
+        }
+        .info-card-icon {
+            width: 56px; height: 56px; background: #e8f0fd;
+            border: 1px solid #c7d9f5; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .info-card-heading { font-size: 1.15rem; font-weight: 800; color: #0d5bb8; margin-bottom: 4px; }
+        .info-card-desc { font-size: 1rem; color: #4a6fa0; line-height: 1.4; }
+
+        /* Purchase option cards — white/blue */
+        .option-cards-wrap { display: flex; flex-direction: column; gap: 12px; }
+        .option-card {
+            background: #f7f9ff;
+            border-radius: 20px; padding: 22px 24px;
+            border: 1.5px solid #e0eafc;
+            cursor: pointer; position: relative;
+            transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+        .option-card.selected {
+            background: #fff;
+            border-color: #0d5bb8;
+            box-shadow: 0 4px 18px rgba(13,91,184,0.14);
+        }
+        .option-row { display: flex; align-items: center; gap: 14px; }
+        .option-divider { border: none; border-top: 1px solid #e8f0fd; margin: 16px 0; }
+        .option-badge {
+            position: absolute; top: -12px; right: 14px;
+            background: linear-gradient(90deg, #ffa500, #ffdd57, #ffc200, #ffdd57, #ffa500);
+            background-size: 200% 100%; animation: badge-shimmer 2.5s linear infinite;
+            color: #111; font-size: 0.75rem; font-weight: 800;
+            padding: 4px 11px; border-radius: 100px; letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(255,180,0,0.4);
+        }
+        .opt-radio {
+            width: 22px; height: 22px; border-radius: 50%;
+            border: 2px solid #c7d9f5; display: inline-block; flex-shrink: 0;
+            background: transparent; box-sizing: border-box; transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .opt-radio-filled { border-color: #0d5bb8; box-shadow: inset 0 0 0 5px #0d5bb8; }
+        .opt-name { font-weight: 700; font-size: 1.15rem; color: #0d5bb8; flex: 1; }
+        .opt-per { font-size: 1rem; color: #7a99c4; }
+        .opt-price-group { display: flex; align-items: baseline; gap: 8px; margin-left: auto; }
+        .opt-price { font-size: 1.3rem; font-weight: 800; color: #0d5bb8; }
+        .opt-orig { font-size: 1rem; color: #b0bec5; text-decoration: line-through; }
+        .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .benefit-list li { font-size: 1rem; color: #4a6fa0; display: flex; gap: 10px; align-items: center; }
+        .benefit-list li::before { content: "✓"; color: #0d5bb8; font-weight: 800; font-size: 1.05rem; }
+
+        /* Action row */
+        .action-row { display: flex; align-items: center; gap: 16px; }
+        .qty-stepper {
+            display: flex; align-items: center;
+            border: 1.5px solid #c7d9f5; border-radius: 100px;
+            overflow: hidden; background: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(13,91,184,0.08);
+        }
+        .qty-step-btn {
+            width: 52px; height: 54px; background: transparent; border: none;
+            font-size: 1.6rem; font-weight: 700; cursor: pointer; color: #0d5bb8;
+            transition: background 0.15s; font-family: inherit;
+        }
+        .qty-step-btn:hover { background: #e8f0fd; }
+        .qty-step-val {
+            width: 54px; text-align: center; font-weight: 800; font-size: 1.2rem; color: #0d5bb8;
+            border-left: 1px solid #c7d9f5; border-right: 1px solid #c7d9f5;
+            line-height: 54px;
+        }
+        .action-row .add-cart-btn { width: auto; flex: 1; padding: 18px 20px; }
+
         /* ---- Responsive ---- */
         @media (max-width: 900px) {
             .page-wrap { padding: 90px 24px 60px; }
@@ -749,72 +857,47 @@
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const promo = document.getElementById('promo');
-            const applyPromo = document.getElementById('apply-promo');
+            // Option card selection
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.option-card').forEach(c => {
+                        c.classList.remove('selected');
+                        c.querySelector('.opt-radio').classList.remove('opt-radio-filled');
+                    });
+                    card.classList.add('selected');
+                    card.querySelector('.opt-radio').classList.add('opt-radio-filled');
+                });
+            });
 
-            let purchaseType = 'one-time';
-            let bundleQty = 1;
-
+            // Variant pill selection + price update
             const PRICES = {
-                'one-time':  { 1: 10.00, 3: 27.00, 5: 40.00 },
-                'subscribe': { 1: 10.00, 3: 27.00, 5: 40.00 }
+                '3': { sub: '$27.00', subOrig: '$30.00', subSave: 'Save $3.00', otp: '$30.00', otpPer: '$0.67 / pouch' },
+                '5': { sub: '$45.00', subOrig: '$50.00', subSave: 'Save $5.00', otp: '$50.00', otpPer: '$0.67 / pouch' }
             };
-            const SAVES = {
-                'one-time':  { 1: '',  3: 'Save 10%', 5: 'Save 20%' },
-                'subscribe': { 1: '',  3: 'Save 10%', 5: 'Save 20%' }
-            };
-            const SERVINGS = { 1: 15, 3: 45, 5: 75 };
-            const QTY_LABEL = { 1: '/ tin', 3: 'total', 5: 'total' };
-
-            function fmt(n) { return '$' + n.toFixed(2); }
-
-            function update() {
-                const price = PRICES[purchaseType][bundleQty];
-                const perServing = (price / SERVINGS[bundleQty]).toFixed(2);
-                document.getElementById('price-display').textContent = fmt(price);
-                document.getElementById('price-meta-display').textContent =
-                    QTY_LABEL[bundleQty] + ' · $' + perServing + '/serving';
-
-                [1, 3, 5].forEach(qty => {
-                    const p = PRICES[purchaseType][qty];
-                    const s = SAVES[purchaseType][qty];
-                    document.getElementById('bso-price-' + qty).textContent = fmt(p);
-                    const saveEl = document.getElementById('bso-save-' + qty);
-                    if (s) { saveEl.textContent = s; saveEl.style.display = ''; }
-                    else   { saveEl.style.display = 'none'; }
-                    const origEl = document.getElementById('bso-orig-' + qty);
-                    if (origEl) {
-                        if (s) { origEl.textContent = fmt(qty * 10); origEl.style.display = ''; }
-                        else   { origEl.style.display = 'none'; }
-                    }
-                });
-            }
-
-            // Purchase type toggle
-            ['onetime', 'subscribe'].forEach(id => {
-                document.getElementById('tab-' + id).addEventListener('click', () => {
-                    purchaseType = id === 'onetime' ? 'one-time' : 'subscribe';
-                    document.getElementById('tab-onetime').classList.toggle('active', id === 'onetime');
-                    document.getElementById('tab-subscribe').classList.toggle('active', id === 'subscribe');
-                    update();
+            document.querySelectorAll('.variant-pill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    document.querySelectorAll('.variant-pill').forEach(p => p.classList.remove('selected'));
+                    pill.classList.add('selected');
+                    const pack = pill.textContent.trim().startsWith('3') ? '3' : '5';
+                    const p = PRICES[pack];
+                    document.getElementById('sub-price').textContent = p.sub;
+                    document.getElementById('sub-orig').textContent = p.subOrig;
+                    document.getElementById('sub-save').textContent = p.subSave;
+                    document.getElementById('otp-price').textContent = p.otp;
+                    document.getElementById('otp-per').textContent = p.otpPer;
                 });
             });
 
-            // Bundle selection
-            [1, 3, 5].forEach(qty => {
-                document.getElementById('bso-' + qty).addEventListener('click', () => {
-                    bundleQty = qty;
-                    document.querySelectorAll('.bso').forEach(el => el.classList.remove('active'));
-                    document.getElementById('bso-' + qty).classList.add('active');
-                    update();
-                });
+            // Quantity stepper
+            let qty = 1;
+            const qtyVal = document.getElementById('qty-val');
+            document.getElementById('qty-minus').addEventListener('click', () => {
+                if (qty > 1) { qty--; qtyVal.textContent = qty; }
             });
-
-            applyPromo.addEventListener('click', () => {
-                if (promo.value.trim()) alert('Promo "' + promo.value + '" applied!');
+            document.getElementById('qty-plus').addEventListener('click', () => {
+                qty++;
+                qtyVal.textContent = qty;
             });
-
-            update();
         });
     </script>
     <link rel="stylesheet" href="zelyte-shared.css">
@@ -842,7 +925,6 @@
         <div style="position:relative;">
             <button id="auth-btn">Sign In</button>
         </div>
-        <a href="lemon-lime.html" class="shop-button gradient-button">Shop Now</a>
     </div>
 
     <div class="page-wrap">
@@ -858,83 +940,79 @@
             <!-- Info -->
             <div class="product-info-col">
 
-                <!-- Breadcrumb pill -->
-                <div class="glass-card glass-breadcrumb">
-                    <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Products &nbsp;/&nbsp; Lemon Lime</div>
-                </div>
-
-                <!-- Title card -->
-                <div class="glass-card glass-title">
+                <!-- Title block -->
+                <div class="prod-title-block">
                     <span class="product-label">Active Hydration Pouch</span>
-                    <h1>Lemon Lime</h1>
-                    <p class="product-subheading">Electrolytes + 40mg Natural Caffeine · 15 pouches per tin</p>
-                </div>
-
-                <!-- Rating pill -->
-                <div class="glass-card glass-rating">
-                    <div class="product-rating">
+                    <h1 class="prod-heading">Lemon Lime</h1>
+                    <div class="prod-rating">
                         <span class="stars">★★★★★</span>
-                        <span class="count">4.9 · 1,156 reviews</span>
+                        <span class="rating-text">4.9 · 1,156 reviews</span>
                     </div>
                 </div>
 
-                <!-- Description card -->
-                <div class="glass-card glass-desc">
-                    <p class="product-description">Classic citrus with a focused kick — energizing hands-free hydration for peak performance. Zero sugar. Zero interruptions.</p>
+                <!-- Variant pills -->
+                <div class="variant-pill-wrap">
+                    <button class="variant-pill selected">
+                        3 Pack
+                        <span class="variant-badge">POPULAR</span>
+                    </button>
+                    <button class="variant-pill">5 Pack</button>
                 </div>
 
-                <!-- Feature tags -->
-                <div class="tags-glass-card">
-                    <span class="feature-tag">No Artificial Flavors</span>
-                    <span class="feature-tag">Zero Sugar</span>
-                    <span class="feature-tag">Natural Caffeine</span>
-                </div>
-
-                <!-- Purchase card -->
-                <div class="purchase-card">
+                <!-- Info card -->
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                    </div>
                     <div>
-                        <div class="price-row">
-                            <span class="price-main" id="price-display">$10.00</span>
-                            <span class="price-meta" id="price-meta-display">/ tin · $0.67/serving</span>
-                        </div>
-                        <div class="coming-soon-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>&nbsp;COMING SOON</div>
+                        <div class="info-card-heading">Hands-Free Hydration</div>
+                        <div class="info-card-desc">Absorbs through your gums — no bottle, no interruptions. Just pure performance.</div>
                     </div>
-                    <!-- Purchase Type Toggle -->
-                    <div class="pur-toggle">
-                        <button class="pur-tab active" id="tab-onetime">One-Time</button>
-                        <button class="pur-tab" id="tab-subscribe">Subscribe and Never Run Out</button>
+                </div>
+
+                <!-- Purchase option cards -->
+                <div class="option-cards-wrap">
+
+                    <!-- Option: 3 Tins (selected) -->
+                    <div class="option-card selected" id="opt-3">
+                        <span class="option-badge">SAVE 10%</span>
+                        <div class="option-row">
+                            <span class="opt-radio opt-radio-filled"></span>
+                            <span class="opt-name">Subscribe &amp; Save</span>
+                            <span class="opt-per">$9.00 / tin</span>
+                            <div class="opt-price-group">
+                                <span class="opt-price" id="sub-price">$27.00</span>
+                                <span class="opt-orig" id="sub-orig">$30.00</span>
+                            </div>
+                        </div>
+                        <hr class="option-divider">
+                        <ul class="benefit-list">
+                            <li>Free shipping</li>
+                            <li>Best value per tin</li>
+                            <li id="sub-save">Save $3.00</li>
+                        </ul>
                     </div>
 
-                    <!-- Bundle Selection -->
-                    <div class="bun-sel-wrap">
-                        <span class="purchase-row-label">Bundle</span>
-                        <div class="bundle-sel">
-                            <button class="bso active" id="bso-1">
-                                <span class="bso-qty">1 Tin</span>
-                                <span class="bso-price" id="bso-price-1">$10.00</span>
-                                <span class="bso-save" id="bso-save-1" style="display:none"></span>
-                            </button>
-                            <button class="bso" id="bso-3">
-                                <span class="bso-badge">POPULAR</span>
-                                <span class="bso-qty">3 Tins</span>
-                                <span class="bso-orig-price" id="bso-orig-3">$30.00</span>
-                                <span class="bso-price" id="bso-price-3">$27.00</span>
-                                <span class="bso-save" id="bso-save-3">Save 10%</span>
-                            </button>
-                            <button class="bso" id="bso-5">
-                                <span class="bso-qty">5 Tins</span>
-                                <span class="bso-orig-price" id="bso-orig-5">$50.00</span>
-                                <span class="bso-price" id="bso-price-5">$40.00</span>
-                                <span class="bso-save" id="bso-save-5">Save 20%</span>
-                            </button>
+                    <!-- Option: One Time Purchase (unselected) -->
+                    <div class="option-card" id="opt-1">
+                        <div class="option-row">
+                            <span class="opt-radio"></span>
+                            <span class="opt-name">One Time Purchase</span>
+                            <span class="opt-per" id="otp-per">$0.67 / pouch</span>
+                            <div class="opt-price-group">
+                                <span class="opt-price" id="otp-price">$30.00</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="purchase-row">
-                        <label for="promo">Promo Code</label>
-                        <div class="promo-row">
-                            <input type="text" id="promo" placeholder="Enter promo code">
-                            <button class="promo-apply" id="apply-promo">Apply</button>
-                        </div>
+
+                </div>
+
+                <!-- Bottom action row -->
+                <div class="action-row">
+                    <div class="qty-stepper">
+                        <button class="qty-step-btn" id="qty-minus">−</button>
+                        <span class="qty-step-val" id="qty-val">1</span>
+                        <button class="qty-step-btn" id="qty-plus">+</button>
                     </div>
                     <button class="add-cart-btn gradient-button" id="add-cart" disabled>Add to Cart — Coming Soon</button>
                 </div>

@@ -1568,6 +1568,44 @@ body {
 }
 
 /* =====================
+   EMAIL SIGNUP
+   ===================== */
+.email-signup-form {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.email-signup-input {
+    padding: 16px 24px;
+    font-size: 1.05rem;
+    font-family: inherit;
+    color: #1a73e8;
+    font-weight: 600;
+    background: #fff;
+    border: 3px solid #1a73e8;
+    border-radius: 10px;
+    outline: none;
+    width: 340px;
+    max-width: 100%;
+    box-shadow: 0 4px 20px rgba(26, 115, 232, 0.35), inset 0 1px 3px rgba(26, 115, 232, 0.08);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.email-signup-input::placeholder {
+    color: #1a73e8;
+    opacity: 0.75;
+    font-weight: 500;
+}
+
+.email-signup-input:focus {
+    border-color: #0d5bb8;
+    box-shadow: 0 0 0 5px rgba(26, 115, 232, 0.25), 0 4px 20px rgba(26, 115, 232, 0.3);
+}
+
+/* =====================
    FOOTER
    ===================== */
 .site-footer {
@@ -1877,6 +1915,25 @@ body {
     padding-top: 28px;
     border-top: 1px solid rgba(26, 115, 232, 0.15);
     letter-spacing: -0.2px;
+}
+
+.story-founder {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(26, 115, 232, 0.15);
+}
+
+.founder-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0d2357;
+    margin: 0;
+}
+
+.founder-title {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 4px 0 0;
 }
 
 .story-visual {
