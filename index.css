@@ -101,6 +101,9 @@ body {
 .header-bar.scrolled #auth-btn {
     color: #1a73e8;
 }
+.header-bar.scrolled .cart-icon svg {
+    stroke: #1a73e8;
+}
 
 .spacer { flex: 1; }
 
