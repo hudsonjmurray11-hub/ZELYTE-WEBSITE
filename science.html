@@ -375,72 +375,85 @@
             overflow: hidden;
         }
         .caffeine-bar-fill { height: 100%; border-radius: 100px; }
-        .caffeine-bar-fill.zelyte  { background: #3b82f6; width: 42%; }
+        .caffeine-bar-fill.zelyte  { background: #3b82f6; width: 53%; }
         .caffeine-bar-fill.espresso { background: rgba(255,255,255,0.25); width: 66%; }
         .caffeine-bar-fill.coffee   { background: rgba(255,255,255,0.2); width: 100%; }
         .caffeine-bar-fill.greentea { background: rgba(255,255,255,0.15); width: 29%; }
         .caffeine-bar-mg { font-size: 0.76rem; color: rgba(255,255,255,0.38); min-width: 44px; text-align: right; }
 
-        /* ── Ingredient transparency (light) ── */
-        .transparency-section { background: #f6f9ff; }
-        .transparency-section .section-label { color: #1a73e8; }
-        .transparency-section h2 {
-            background: linear-gradient(135deg, #1565c0 0%, #1e90ff 45%, #5ab4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .transparency-section .sci-sub { color: #555; }
+        /* ── Formula transparency (dark) ── */
+        .transparency-section { background: #001e4a; }
+        .transparency-section .section-label { color: rgba(255,255,255,0.5); }
+        .transparency-section h2 { color: #fff; }
+        .transparency-section .sci-sub { color: rgba(255,255,255,0.62); }
 
-        .ingredient-cols {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            margin-top: 52px;
+        .formula-table-wrap { margin-top: 52px; }
+        .formula-table-scroll {
+            overflow-x: auto;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .ingredient-col-head {
+        .formula-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #001a3a;
+            min-width: 560px;
+        }
+        .formula-table thead th {
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .formula-table tbody td {
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            vertical-align: top;
+        }
+        .formula-table tbody tr:last-child td { border-bottom: none; }
+        .formula-table tbody td:first-child { font-weight: 700; color: #fff; }
+        .formula-table tbody td:nth-child(2) { color: #7eb3ff; font-weight: 600; white-space: nowrap; }
+        .formula-table tbody td:nth-child(3) { white-space: nowrap; }
+        .formula-total-row td {
+            border-top: 1px solid rgba(255,255,255,0.18) !important;
+            background: rgba(255,255,255,0.04);
+            color: #7eb3ff !important;
+            font-weight: 700 !important;
+        }
+        .ingredient-panel {
+            margin-top: 28px;
+            padding: 22px 28px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+        }
+        .ingredient-panel-head {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 16px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 10px;
         }
-        .in-col .ingredient-col-head { color: #1a73e8; }
-        .out-col .ingredient-col-head { color: #999; }
-
-        .ingredient-list { display: flex; flex-direction: column; gap: 10px; }
-        .ingredient-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            background: #fff;
-            border-radius: 12px;
-            padding: 16px 20px;
-            border: 1px solid #dce8fb;
+        .ingredient-panel-list {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.65;
+            margin-bottom: 8px;
         }
-        .out-col .ingredient-row { border-color: #e8e8e8; background: #fafafa; }
-        .ingredient-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 1px;
+        .ingredient-panel-note {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.38);
+            line-height: 1.6;
         }
-        .in-icon { background: rgba(26,115,232,0.08); }
-        .out-icon { background: rgba(200,200,200,0.25); }
-        .ingredient-row-text strong {
-            display: block;
-            font-size: 0.93rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: #111;
-        }
-        .ingredient-row-text p { font-size: 0.84rem; color: #666; line-height: 1.5; }
-        .out-col .ingredient-row-text strong { color: #999; }
 
         /* ── CTA ── */
         .sci-cta-wrap { width: 100%; padding: 0 40px 100px; }
@@ -546,8 +559,8 @@
             .vs-callout { grid-template-columns: 1fr; }
             .vs-label { display: none; }
             .elec-grid { grid-template-columns: 1fr; }
-            .ingredient-cols { grid-template-columns: 1fr; }
-            .caffeine-stat-row { flex-direction: column; }
+            .formula-table-scroll { border-radius: 12px; }
+.caffeine-stat-row { flex-direction: column; }
             .sci-cta-wrap { padding: 0 20px 60px; }
             .sci-cta { padding: 56px 24px; }
             .sci-cta h2 { font-size: 1.6rem; }
@@ -585,7 +598,7 @@
     <div class="sci-hero">
         <span class="section-label">THE SCIENCE</span>
         <h1>Rethinking how<br><span class="blue">your body absorbs.</span></h1>
-        <p class="hero-sub">ZELYTE delivers electrolytes and natural caffeine through the buccal mucosa — the tissue lining your gums — for a direct absorption pathway that doesn't require swallowing or waiting.</p>
+        <p class="hero-sub">ZELYTE delivers electrolytes and caffeine through the buccal mucosa — the tissue lining your gums — for a direct absorption pathway that doesn't require swallowing or waiting.</p>
         <div class="hero-badge">FASTER DELIVERY &nbsp;·&nbsp; HANDS-FREE &nbsp;·&nbsp; NO LIQUID REQUIRED</div>
     </div>
 
@@ -607,7 +620,7 @@
                 <div class="step reveal-up">
                     <div class="step-num">02</div>
                     <h3>Release</h3>
-                    <p>Moisture activates the pouch, slowly releasing electrolytes and natural caffeine over 20–40 minutes. Controlled, steady, and continuous — no burst delivery.</p>
+                    <p>Moisture activates the pouch, slowly releasing electrolytes and caffeine over 20–40 minutes. Controlled, steady, and continuous — no burst delivery.</p>
                 </div>
                 <div class="step-divider"></div>
                 <div class="step reveal-right">
@@ -686,28 +699,28 @@
         </div>
     </section>
 
-    <!-- ── NATURAL CAFFEINE ── -->
+    <!-- ── CAFFEINE ── -->
     <section class="sci-section caffeine-section">
         <div class="sci-inner">
-            <span class="section-label reveal-up">NATURAL CAFFEINE</span>
-            <h2 class="reveal-up">Clean energy. No crash.</h2>
-            <p class="sci-sub reveal-up">ZELYTE contains 40mg of plant-derived caffeine per pouch — roughly half a cup of coffee — designed to support focus and alertness during training, competition, or the grind. Enough to feel it. Not enough to regret it.</p>
+            <span class="section-label reveal-up">CAFFEINE</span>
+            <h2 class="reveal-up">50mg. Precision-dosed.</h2>
+            <p class="sci-sub reveal-up">Each ZELYTE pouch contains 50mg caffeine anhydrous — a clinically studied dose that supports focus and endurance during training, competition, or the grind. Do not exceed 2 pouches per session (100mg total).</p>
             <div class="caffeine-inner">
                 <div class="caffeine-text">
-                    <p>Caffeine is one of the most studied compounds in performance research. Plant-derived caffeine — sourced from botanicals such as green tea or guaraná — functions identically to synthetic caffeine at the molecular level, and is preferred by consumers looking for clean-label products.</p>
-                    <p>At 40mg per pouch, ZELYTE provides a modest, controlled dose that supports focus and energy without the abrupt spike-and-crash associated with high-dose stimulants. No taurine, no synephrine, no proprietary blends. <sup>[6]</sup></p>
+                    <p>Caffeine is one of the most studied compounds in performance research. At 50mg per pouch, ZELYTE provides a moderate, controlled dose that supports focus and energy without the abrupt spike associated with high-dose stimulants. No taurine, no synephrine, no proprietary blends.</p>
+                    <p>Caffeine anhydrous is the standardized form used across performance research — consistent in dose and absorption characteristics. <sup>[6]</sup></p>
                     <div class="caffeine-stat-row">
                         <div class="caffeine-stat">
-                            <div class="num">40mg</div>
+                            <div class="num">50mg</div>
                             <div class="lbl">per pouch</div>
                         </div>
                         <div class="caffeine-stat">
                             <div class="num">0</div>
-                            <div class="lbl">artificial stimulants</div>
+                            <div class="lbl">added stimulants</div>
                         </div>
                         <div class="caffeine-stat">
-                            <div class="num">100%</div>
-                            <div class="lbl">plant-derived</div>
+                            <div class="num">100mg</div>
+                            <div class="lbl">max per session (2 pouches)</div>
                         </div>
                     </div>
                 </div>
@@ -717,7 +730,7 @@
                         <div class="caffeine-bar-item">
                             <span class="caffeine-bar-name">ZELYTE pouch</span>
                             <div class="caffeine-bar-track"><div class="caffeine-bar-fill zelyte"></div></div>
-                            <span class="caffeine-bar-mg">40 mg</span>
+                            <span class="caffeine-bar-mg">50 mg</span>
                         </div>
                         <div class="caffeine-bar-item">
                             <span class="caffeine-bar-name">Green tea (8 oz)</span>
@@ -740,113 +753,64 @@
         </div>
     </section>
 
-    <!-- ── INGREDIENT TRANSPARENCY ── -->
+    <!-- ── FORMULA TRANSPARENCY ── -->
     <section class="sci-section transparency-section">
         <div class="sci-inner">
             <span class="section-label reveal-up">WHAT'S INSIDE</span>
-            <h2 class="reveal-up">Everything you need.<br>Nothing you don't.</h2>
-            <p class="sci-sub reveal-up">We built ZELYTE around a short, clean ingredient list. Every component is here for a reason — and we're transparent about what's in it and what's not.</p>
-            <div class="ingredient-cols">
-                <div class="in-col">
-                    <span class="ingredient-col-head">What's in it</span>
-                    <div class="ingredient-list">
-                        <div class="ingredient-row reveal-left">
-                            <div class="ingredient-icon in-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Sodium, Potassium, Magnesium</strong>
-                                <p>Core electrolytes for fluid balance and muscle function.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-left">
-                            <div class="ingredient-icon in-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Natural Caffeine (40 mg, plant-derived)</strong>
-                                <p>Supports focus and alertness during activity.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-left">
-                            <div class="ingredient-icon in-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3"/><path d="M12 11v8M9 14h6"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Natural Flavors</strong>
-                                <p>Derived from natural botanical sources only.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-left">
-                            <div class="ingredient-icon in-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Stevia</strong>
-                                <p>Zero-calorie plant-based sweetener. No glycemic impact.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-left">
-                            <div class="ingredient-icon in-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 15h6"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Citric Acid</strong>
-                                <p>Provides a crisp, clean flavor profile. Naturally occurring.</p>
-                            </div>
-                        </div>
-                    </div>
+            <h2 class="reveal-up">Electrolyte + Caffeine Formula</h2>
+            <p class="sci-sub reveal-up">300mg total actives per pouch. Every compound is present for a documented reason — no proprietary blends, no hidden fillers.</p>
+
+            <div class="formula-table-wrap reveal-up">
+                <div class="formula-table-scroll">
+                    <table class="formula-table">
+                        <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                                <th>Compound Dose</th>
+                                <th>Elemental Yield</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sodium Chloride</td>
+                                <td>115mg</td>
+                                <td>~45mg sodium</td>
+                                <td>Supports sweat replacement and fluid balance</td>
+                            </tr>
+                            <tr>
+                                <td>Potassium Chloride</td>
+                                <td>85mg</td>
+                                <td>~45mg potassium</td>
+                                <td>Supports muscle contraction and fluid balance</td>
+                            </tr>
+                            <tr>
+                                <td>Magnesium Malate</td>
+                                <td>50mg</td>
+                                <td>~7.5mg magnesium</td>
+                                <td>Supports ATP production and muscle relaxation</td>
+                            </tr>
+                            <tr>
+                                <td>Caffeine Anhydrous</td>
+                                <td>50mg</td>
+                                <td>50mg caffeine</td>
+                                <td>Supports endurance and focus</td>
+                            </tr>
+                            <tr class="formula-total-row">
+                                <td>Total Actives</td>
+                                <td>300mg</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="out-col">
-                    <span class="ingredient-col-head">What's not in it</span>
-                    <div class="ingredient-list">
-                        <div class="ingredient-row reveal-right">
-                            <div class="ingredient-icon out-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Nicotine</strong>
-                                <p>Zero. ZELYTE contains no nicotine of any kind.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-right">
-                            <div class="ingredient-icon out-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Sugar</strong>
-                                <p>Zero sugar. Zero calories. Sweetened with stevia only.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-right">
-                            <div class="ingredient-icon out-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Artificial Flavors</strong>
-                                <p>All flavoring is derived from natural sources.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-right">
-                            <div class="ingredient-icon out-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>Artificial Colors</strong>
-                                <p>No synthetic dyes or colorants of any kind.</p>
-                            </div>
-                        </div>
-                        <div class="ingredient-row reveal-right">
-                            <div class="ingredient-icon out-icon">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </div>
-                            <div class="ingredient-row-text">
-                                <strong>High-Dose Stimulants</strong>
-                                <p>No taurine, no synephrine, no proprietary blends.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+
+            <div class="ingredient-panel reveal-up">
+                <span class="ingredient-panel-head">Full Ingredient List</span>
+                <p class="ingredient-panel-list">Sodium Chloride, Potassium Chloride, Magnesium Malate, Caffeine Anhydrous, Natural Flavors, Sucralose</p>
+                <p class="ingredient-panel-note">Sweetened with sucralose (zero-calorie, zero sugar). No artificial flavors. No added sugar. No nicotine.</p>
             </div>
         </div>
     </section>
@@ -855,7 +819,7 @@
     <div class="sci-cta-wrap">
         <div class="sci-cta">
             <h2>Built on science. Worn for performance.</h2>
-            <p>Zero sugar. Zero calories. 40 mg natural caffeine. Electrolytes that support your body where it counts.</p>
+            <p>Zero sugar. Zero calories. 50mg caffeine anhydrous. Electrolytes that support your body where it counts.</p>
             <a href="lemon-lime.html" class="btn-white">Shop Crispy Mint →</a>
         </div>
     </div>
