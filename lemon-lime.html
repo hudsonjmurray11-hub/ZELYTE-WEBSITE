@@ -854,6 +854,16 @@
             .product-bundles-grid { grid-template-columns: 1fr; gap: 12px; }
             .pb-card-featured { padding: 22px 16px; }
         }
+
+        @media (max-width: 600px) {
+            .page-wrap { padding: 80px 16px 48px; }
+            .detail-card { padding: 28px 20px; }
+            .detail-card h2 { font-size: 1.7rem; margin-bottom: 20px; }
+            .detail-row { flex-direction: column; }
+            .prod-heading { font-size: 2.2rem; }
+            .action-row { flex-wrap: wrap; gap: 12px; }
+            .action-row .add-cart-btn { width: 100%; }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -922,9 +932,6 @@
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
         </a>
-        <div style="position:relative;">
-            <button id="auth-btn">Sign In</button>
-        </div>
     </div>
 
     <div class="page-wrap">
@@ -1061,7 +1068,6 @@
                     </ul>
                     <p class="use-steps-note">One tin contains 15 pouches. Use one pouch per session for best results.</p>
                 </div>
-                <img src="ROWING ZELYTE.jpg" alt="Rowing with ZELYTE" class="detail-row-img">
             </div>
 
         </div>

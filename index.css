@@ -1757,6 +1757,34 @@ body {
         align-items: center;
         gap: 12px;
     }
+
+    /* Section headings */
+    .section-inner h2 { font-size: 1.55rem; }
+    .section-cta h2 { font-size: 1.6rem; }
+
+    /* Card padding tightening */
+    .step { padding: 28px 20px; }
+    .comparison-col { padding: 24px 20px; }
+    .faq-item { padding: 18px 20px; }
+    .benefit-card { padding: 24px 20px; }
+    .what-card { padding: 24px 20px; }
+    .ingredient-card { padding: 20px; }
+    .review-card { padding: 24px 20px; }
+
+    /* Flavor card: switch to column on narrow screens */
+    .flavor-card--rect {
+        flex-direction: column;
+        padding: 28px 20px;
+        text-align: center;
+        align-items: center;
+        gap: 20px;
+    }
+    .flavor-card--rect .flavor-img-wrap {
+        width: 200px;
+        height: 200px;
+        flex-shrink: 1;
+    }
+    .flavor-badge { align-self: center; }
 }
 
 /* =====================
