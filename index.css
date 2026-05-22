@@ -1764,6 +1764,9 @@ body {
 }
 
 @media (max-width: 600px) {
+    .shop-button { font-size: 0; padding: 8px 12px; }
+    .shop-button::after { content: "Shop"; font-size: 0.88rem; font-weight: 600; }
+
     .section-what,
     .section-how,
     .section-why,
