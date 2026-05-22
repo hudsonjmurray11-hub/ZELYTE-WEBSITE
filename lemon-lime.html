@@ -732,9 +732,32 @@
             color: #0d5bb8;
         }
 
+        /* ---- Product Bubble ---- */
+        .product-bubble {
+            background: #fff;
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .bubble-divider {
+            border: none;
+            border-top: 1px solid #e8f0fd;
+            margin: 0;
+        }
+        .product-bubble .info-card {
+            border: none;
+            box-shadow: none;
+            background: #f0f6ff;
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+
         /* ---- New Product Info Section ---- */
         .prod-title-block { display: flex; flex-direction: column; gap: 10px; }
-        .prod-heading { font-size: 3.8rem; font-weight: 800; color: #fff; line-height: 1.1; text-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+        .prod-heading { font-size: 3.8rem; font-weight: 800; color: #0d5bb8; line-height: 1.1; }
         .prod-rating { display: flex; align-items: center; gap: 8px; }
         .prod-rating .stars { color: #fbbf24; font-size: 1.25rem; letter-spacing: 1px; }
         .rating-text { font-size: 1.1rem; color: rgba(255,255,255,0.8); font-weight: 600; }
@@ -863,6 +886,7 @@
             .prod-heading { font-size: 2.2rem; }
             .action-row { flex-wrap: wrap; gap: 12px; }
             .action-row .add-cart-btn { width: 100%; }
+            .product-bubble { padding: 24px 20px; gap: 20px; }
         }
     </style>
     <script>
@@ -946,6 +970,7 @@
 
             <!-- Info -->
             <div class="product-info-col">
+                <div class="product-bubble">
 
                 <!-- Title block -->
                 <div class="prod-title-block">
@@ -957,6 +982,8 @@
                     </div>
                 </div>
 
+                <hr class="bubble-divider">
+
                 <!-- Variant pills -->
                 <div class="variant-pill-wrap">
                     <button class="variant-pill selected">
@@ -965,6 +992,8 @@
                     </button>
                     <button class="variant-pill">5 Pack</button>
                 </div>
+
+                <hr class="bubble-divider">
 
                 <!-- Info card -->
                 <div class="info-card">
@@ -976,6 +1005,8 @@
                         <div class="info-card-desc">Absorbs through your gums — no bottle, no interruptions. Just pure performance.</div>
                     </div>
                 </div>
+
+                <hr class="bubble-divider">
 
                 <!-- Purchase option cards -->
                 <div class="option-cards-wrap">
@@ -1014,6 +1045,8 @@
 
                 </div>
 
+                <hr class="bubble-divider">
+
                 <!-- Bottom action row -->
                 <div class="action-row">
                     <div class="qty-stepper">
@@ -1024,6 +1057,7 @@
                     <button class="add-cart-btn gradient-button" id="add-cart" disabled>Add to Cart — Coming Soon</button>
                 </div>
 
+                </div>
             </div>
         </div>
 

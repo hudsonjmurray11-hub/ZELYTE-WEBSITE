@@ -767,7 +767,15 @@ body {
 /* =====================
    WHAT IS ZELYTE
    ===================== */
-.section-what { background: #fff; margin-top: -120px; padding-top: 160px; }
+.section-what { background: #0d2357; margin-top: -120px; padding-top: 160px; }
+
+.section-what .section-label { color: rgba(255, 255, 255, 0.7); }
+.section-what .section-inner h2 { background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.section-what .section-sub { color: rgba(255, 255, 255, 0.75); }
+
+.section-what .what-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
+.section-what .what-card strong { color: #7dd3fc; }
+.section-what .what-card p { color: rgba(255, 255, 255, 0.72); }
 
 .what-cards {
     display: grid;
@@ -947,12 +955,12 @@ body {
    BENEFITS
    ===================== */
 .section-benefits {
-    background: #0d2357;
+    background: #fff;
     position: relative;
 }
 
 .section-benefits .section-label {
-    color: rgba(255, 255, 255, 0.7);
+    color: #1a73e8;
 }
 
 .benefits-headline {
@@ -963,26 +971,28 @@ body {
 }
 
 .section-benefits .section-inner > h2 {
-    color: #fff;
-    -webkit-text-fill-color: #fff;
-    background: none;
+    color: unset;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(135deg, #1565c0 0%, #1e90ff 40%, #5ab4ff 72%, #1e90ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 .section-benefits .benefit-card {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: #f6f9ff;
+    border: 1px solid #e0eaff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .section-benefits .benefit-card:hover {
-    background: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    background: #edf2ff;
+    box-shadow: 0 12px 32px rgba(26, 115, 232, 0.12);
     transform: translateY(-4px);
 }
 
-.section-benefits .benefit-card h3 { color: #fff; }
-.section-benefits .benefit-card p  { color: rgba(255, 255, 255, 0.72); }
+.section-benefits .benefit-card h3 { color: #0d2357; }
+.section-benefits .benefit-card p  { color: #555; }
 
 .benefits-grid {
     display: grid;
@@ -1360,10 +1370,14 @@ body {
    BUNDLE PACKS
    ===================== */
 .section-bundles {
-    background: #f0f4ff;
+    background: #0d2357;
     width: 100%;
     padding: 100px 40px;
 }
+
+.section-bundles .section-label { color: rgba(255, 255, 255, 0.7); }
+.section-bundles .section-inner > h2 { background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.section-bundles .section-sub { color: rgba(255, 255, 255, 0.72); }
 
 .bundles-grid {
     display: grid;
@@ -1374,8 +1388,8 @@ body {
 }
 
 .bundle-card {
-    background: #fff;
-    border: 1.5px solid #e0eaff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
     border-radius: 24px;
     padding: 44px 32px 36px;
     text-align: center;
@@ -1437,14 +1451,14 @@ body {
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #1a73e8;
+    color: rgba(255, 255, 255, 0.72);
 }
 .bundle-featured .bundle-qty { color: rgba(255, 255, 255, 0.72); }
 
 .bundle-name {
     font-size: 1.7rem;
     font-weight: 800;
-    color: #1e90ff;
+    color: #fff;
     line-height: 1;
 }
 .bundle-featured .bundle-name { color: #fff; }
@@ -1459,14 +1473,14 @@ body {
 .bundle-price {
     font-size: 2.4rem;
     font-weight: 900;
-    color: #111;
+    color: #fff;
     line-height: 1;
 }
 .bundle-featured .bundle-price { color: #fff; }
 
 .bundle-per {
     font-size: 0.85rem;
-    color: #999;
+    color: rgba(255, 255, 255, 0.55);
     font-weight: 500;
 }
 .bundle-featured .bundle-per { color: rgba(255, 255, 255, 0.65); }
@@ -1491,7 +1505,7 @@ body {
 
 .bundle-pouches {
     font-size: 0.85rem;
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 500;
 }
 .bundle-featured .bundle-pouches { color: rgba(255, 255, 255, 0.6); }
@@ -1505,11 +1519,11 @@ body {
     gap: 9px;
     width: 100%;
     text-align: left;
-    border-top: 1px solid #e8edf5;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 .bundle-features li {
     font-size: 0.9rem;
-    color: #555;
+    color: rgba(255, 255, 255, 0.82);
 }
 .bundle-featured .bundle-features { border-top-color: rgba(255, 255, 255, 0.22); }
 .bundle-featured .bundle-features li { color: rgba(255, 255, 255, 0.88); }
@@ -1577,6 +1591,12 @@ body {
 /* =====================
    EMAIL SIGNUP
    ===================== */
+.section-email-signup {
+    background: #fff;
+    width: 100%;
+    padding: 100px 40px;
+}
+
 .email-signup-form {
     display: flex;
     gap: 12px;
@@ -1889,8 +1909,11 @@ body {
 /* ── Our Story ── */
 .section-story {
     padding: 100px 40px;
-    background: #fff;
+    background: #0d2357;
     overflow: hidden;
+    border-radius: 32px;
+    margin: 0 24px;
+    width: calc(100% - 48px);
 }
 
 .story-inner {
@@ -1907,8 +1930,8 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #1a73e8;
-    background: rgba(26, 115, 232, 0.09);
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 100px;
     padding: 6px 14px;
     margin-bottom: 20px;
@@ -1920,7 +1943,7 @@ body {
     font-weight: 800;
     letter-spacing: -1px;
     line-height: 1.1;
-    background: linear-gradient(135deg, #0d2357 0%, #1a73e8 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1938,7 +1961,7 @@ body {
 
 .story-body p {
     font-size: 1.05rem;
-    color: #444;
+    color: rgba(255, 255, 255, 0.82);
     line-height: 1.9;
     margin-bottom: 18px;
 }
@@ -1956,19 +1979,19 @@ body {
 .story-founder {
     margin-top: 36px;
     padding-top: 28px;
-    border-top: 1px solid rgba(26, 115, 232, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .founder-name {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #0d2357;
+    color: #fff;
     margin: 0;
 }
 
 .founder-title {
     font-size: 0.95rem;
-    color: #666;
+    color: rgba(255, 255, 255, 0.6);
     margin: 4px 0 0;
 }
 
