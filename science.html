@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science — ZELYTE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #fff;
+            color: #222;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Poppins', system-ui, sans-serif; letter-spacing: -0.3px; }
+
+        /* ── Navbar ── */
+        .header-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            max-width: 900px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            z-index: 99;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,0.4);
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+        }
+        .spacer { flex: 1; }
+        .nav-links {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+        }
+        .nav-links a {
+            text-decoration: none; color: #1a73e8; font-weight: 600;
+            font-size: 0.88rem; letter-spacing: 0.4px;
+            padding: 7px 14px; border-radius: 8px; transition: background 0.2s, color 0.2s;
+        }
+        .nav-links a:hover { background: rgba(26, 115, 232, 0.1); color: #0d5bb8; }
+        .nav-links a.active { background: rgba(26, 115, 232, 0.12); color: #0d5bb8; }
+        .nav-logo { width: 130px; height: auto; max-height: 44px; object-fit: contain; }
+        .cart-icon { margin-right: 20px; display: flex; align-items: center; }
+
+        /* ── Gradient button ── */
+        @keyframes gradient-sweep {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-button {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: none;
+            background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
+            background-size: 300% 100%;
+            animation: gradient-sweep 3s ease infinite;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+        .gradient-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: linear-gradient(135deg, #60a5fa, #bae6fd, #93c5fd, #60a5fa);
+            background-size: 300% 100%;
+            animation: gradient-sweep 3s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .gradient-button:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5); }
+        .shop-button {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        /* ── Section label ── */
+        .section-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: #1a73e8;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        /* ── Hero ── */
+        .sci-hero {
+            width: 100%;
+            padding: 160px 40px 110px;
+            background: linear-gradient(160deg, #040c1e 0%, #091a4a 35%, #0f3595 70%, #1a5fd4 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .sci-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 65%, rgba(26, 115, 232, 0.3) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .sci-hero .section-label { color: rgba(255, 255, 255, 0.5); margin-bottom: 18px; }
+        .sci-hero h1 {
+            font-size: 3.6rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 22px;
+            letter-spacing: -1.5px;
+        }
+        .sci-hero h1 .blue { color: #7eb3ff; }
+        .sci-hero .hero-sub {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.68);
+            max-width: 560px;
+            margin: 0 auto 36px;
+            line-height: 1.75;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            padding: 8px 22px;
+            font-size: 0.73rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.75);
+            text-transform: uppercase;
+        }
+
+        /* ── Section commons ── */
+        .sci-section { width: 100%; padding: 100px 40px; }
+        .sci-inner { max-width: 1100px; margin: 0 auto; }
+        .sci-inner h2 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+        .sci-sub {
+            font-size: 1rem;
+            max-width: 640px;
+            line-height: 1.8;
+            margin-bottom: 52px;
+        }
+
+        /* ── Buccal section (dark) ── */
+        .buccal-section { background: #001e4a; }
+        .buccal-section .section-label { color: rgba(255,255,255,0.55); }
+        .buccal-section h2 { color: #fff; }
+        .buccal-section .sci-sub { color: rgba(255,255,255,0.62); }
+
+        .glass-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 100px;
+            padding: 10px 28px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+        }
+        .how-label-pill {
+            display: block;
+            text-align: center;
+            width: fit-content;
+            margin: 0 auto 52px;
+        }
+        .how-label-pill .section-label {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+            font-size: 1rem;
+            letter-spacing: 4px;
+        }
+
+        .steps { display: flex; align-items: stretch; gap: 0; }
+        .step {
+            flex: 1;
+            padding: 40px 36px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(26, 115, 232, 0.08);
+        }
+        .step-divider {
+            width: 40px;
+            height: 2px;
+            background: #1a73e8;
+            opacity: 0.25;
+            align-self: center;
+            flex-shrink: 0;
+        }
+        .step-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1a73e8;
+            opacity: 0.2;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .step h3 { font-size: 1.2rem; font-weight: 700; color: #1e90ff; margin-bottom: 12px; }
+        .step p { color: #555; font-size: 0.92rem; line-height: 1.65; }
+        .step sup { font-size: 0.65rem; color: #1a73e8; font-weight: 700; }
+
+        /* ── VS callout ── */
+        .vs-callout {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: center;
+            margin-top: 64px;
+        }
+        .vs-box {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+        }
+        .vs-box h4 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .vs-box.traditional h4 { color: rgba(255,255,255,0.35); }
+        .vs-box.zelyte-box { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.08); }
+        .vs-box.zelyte-box h4 { color: #7eb3ff; border-color: rgba(59,130,246,0.2); }
+        .vs-box ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .vs-box ul li { font-size: 0.88rem; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+        .vs-box.traditional li { color: rgba(255,255,255,0.5); }
+        .vs-box.zelyte-box li { color: rgba(255,255,255,0.82); }
+        .vs-icon-neg { color: rgba(248,113,113,0.7); flex-shrink: 0; margin-top: 1px; }
+        .vs-icon-pos { color: #60a5fa; flex-shrink: 0; margin-top: 1px; }
+        .vs-label {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.15);
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .vs-box sup { font-size: 0.62rem; color: rgba(96,165,250,0.7); font-weight: 700; }
+
+        /* ── Electrolytes section (light) ── */
+        .electrolytes-section { background: #fff; }
+        .electrolytes-section .section-label { color: #1a73e8; }
+        .electrolytes-section h2 {
+            background: linear-gradient(135deg, #1565c0 0%, #1e90ff 45%, #5ab4ff 75%, #1e90ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .electrolytes-section .sci-sub { color: #555; }
+
+        .elec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 52px;
+        }
+        .elec-card {
+            background: #f6f9ff;
+            border: 1px solid #dce8fb;
+            border-radius: 18px;
+            padding: 32px 28px;
+        }
+        .elec-card-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(26,115,232,0.08);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .elec-symbol {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(26,115,232,0.5);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .elec-card h3 { font-size: 1.1rem; font-weight: 700; color: #1a73e8; margin-bottom: 10px; }
+        .elec-card p { color: #555; font-size: 0.9rem; line-height: 1.68; }
+        .elec-card sup { font-size: 0.65rem; color: #1a73e8; font-weight: 700; }
+
+        /* ── Caffeine section (dark) ── */
+        .caffeine-section { background: linear-gradient(160deg, #0a1e52 0%, #1a4ab5 100%); }
+        .caffeine-section .section-label { color: rgba(255,255,255,0.5); }
+        .caffeine-section h2 { color: #fff; }
+        .caffeine-section .sci-sub { color: rgba(255,255,255,0.65); margin-bottom: 0; }
+
+        .caffeine-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+            margin-top: 52px;
+        }
+        .caffeine-text p {
+            color: rgba(255,255,255,0.68);
+            font-size: 0.95rem;
+            line-height: 1.78;
+            margin-bottom: 20px;
+        }
+        .caffeine-text sup { font-size: 0.65rem; color: rgba(96,165,250,0.8); font-weight: 700; }
+        .caffeine-stat-row { display: flex; gap: 16px; margin-top: 28px; }
+        .caffeine-stat {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 18px 20px;
+            flex: 1;
+        }
+        .caffeine-stat .num {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: #7eb3ff;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .caffeine-stat .lbl { font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+        .caffeine-compare {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 32px;
+        }
+        .caffeine-compare h4 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 24px;
+        }
+        .caffeine-bar-row { display: flex; flex-direction: column; gap: 16px; }
+        .caffeine-bar-item { display: flex; align-items: center; gap: 12px; }
+        .caffeine-bar-name { font-size: 0.8rem; color: rgba(255,255,255,0.6); min-width: 130px; }
+        .caffeine-bar-track {
+            flex: 1;
+            height: 8px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .caffeine-bar-fill { height: 100%; border-radius: 100px; }
+        .caffeine-bar-fill.zelyte  { background: #3b82f6; width: 42%; }
+        .caffeine-bar-fill.espresso { background: rgba(255,255,255,0.25); width: 66%; }
+        .caffeine-bar-fill.coffee   { background: rgba(255,255,255,0.2); width: 100%; }
+        .caffeine-bar-fill.greentea { background: rgba(255,255,255,0.15); width: 29%; }
+        .caffeine-bar-mg { font-size: 0.76rem; color: rgba(255,255,255,0.38); min-width: 44px; text-align: right; }
+
+        /* ── Ingredient transparency (light) ── */
+        .transparency-section { background: #f6f9ff; }
+        .transparency-section .section-label { color: #1a73e8; }
+        .transparency-section h2 {
+            background: linear-gradient(135deg, #1565c0 0%, #1e90ff 45%, #5ab4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .transparency-section .sci-sub { color: #555; }
+
+        .ingredient-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-top: 52px;
+        }
+        .ingredient-col-head {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .in-col .ingredient-col-head { color: #1a73e8; }
+        .out-col .ingredient-col-head { color: #999; }
+
+        .ingredient-list { display: flex; flex-direction: column; gap: 10px; }
+        .ingredient-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid #dce8fb;
+        }
+        .out-col .ingredient-row { border-color: #e8e8e8; background: #fafafa; }
+        .ingredient-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .in-icon { background: rgba(26,115,232,0.08); }
+        .out-icon { background: rgba(200,200,200,0.25); }
+        .ingredient-row-text strong {
+            display: block;
+            font-size: 0.93rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: #111;
+        }
+        .ingredient-row-text p { font-size: 0.84rem; color: #666; line-height: 1.5; }
+        .out-col .ingredient-row-text strong { color: #999; }
+
+        /* ── CTA ── */
+        .sci-cta-wrap { width: 100%; padding: 0 40px 100px; }
+        .sci-cta {
+            background: linear-gradient(135deg, #1252c4 0%, #1a73e8 100%);
+            border-radius: 20px;
+            padding: 72px 40px;
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .sci-cta h2 { color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 14px; }
+        .sci-cta p {
+            color: rgba(255,255,255,0.78);
+            font-size: 1rem;
+            max-width: 480px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .btn-white {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #fff;
+            color: #1a73e8;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26, 115, 232, 0.3), 0 0 40px rgba(96, 165, 250, 0.15); }
+
+        /* ── References ── */
+        .references-section { background: #fff; border-top: 1px solid #eff3fb; }
+        .references-section .sci-inner { max-width: 780px; }
+        .references-section .ref-heading {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #1a73e8;
+            margin-bottom: 24px;
+            display: block;
+        }
+        .ref-list { display: flex; flex-direction: column; gap: 10px; }
+        .ref-item {
+            font-size: 0.82rem;
+            color: #777;
+            line-height: 1.68;
+            padding-left: 32px;
+            position: relative;
+        }
+        .ref-item::before {
+            content: attr(data-num);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 700;
+            color: #1a73e8;
+            font-size: 0.78rem;
+        }
+        .ref-disclaimer {
+            margin-top: 36px;
+            padding: 16px 22px;
+            background: #f6f9ff;
+            border-left: 3px solid #1a73e8;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.65;
+        }
+        .ref-disclaimer strong { color: #1a73e8; }
+
+        /* ── Footer ── */
+        .site-footer { background: #111; padding: 48px 40px 32px; text-align: center; width: 100%; }
+        .footer-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        .footer-logo { width: 100px; filter: brightness(0) invert(1); opacity: 0.9; }
+        .footer-tagline { color: #aaa; font-size: 0.88rem; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-legal { color: #555; font-size: 0.75rem; max-width: 580px; line-height: 1.6; }
+
+        /* ── Reveal animations ── */
+        .reveal-up    { opacity: 0; transform: translateY(24px);  transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal-left  { opacity: 0; transform: translateX(-24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal-right { opacity: 0; transform: translateX(24px);  transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal-up.in-view, .reveal-left.in-view, .reveal-right.in-view { opacity: 1; transform: none; }
+
+        /* ── Mobile ── */
+        @media (max-width: 860px) {
+            .caffeine-inner { grid-template-columns: 1fr; gap: 40px; }
+            .elec-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .sci-hero { padding: 120px 20px 80px; }
+            .sci-hero h1 { font-size: 2.2rem; letter-spacing: -0.5px; }
+            .sci-hero .hero-sub { font-size: 1rem; }
+            .sci-section { padding: 70px 20px; }
+            .sci-inner h2 { font-size: 1.75rem; }
+            .steps { flex-direction: column; gap: 0; }
+            .step-divider { width: 2px; height: 28px; align-self: center; }
+            .vs-callout { grid-template-columns: 1fr; }
+            .vs-label { display: none; }
+            .elec-grid { grid-template-columns: 1fr; }
+            .ingredient-cols { grid-template-columns: 1fr; }
+            .caffeine-stat-row { flex-direction: column; }
+            .sci-cta-wrap { padding: 0 20px 60px; }
+            .sci-cta { padding: 56px 24px; }
+            .sci-cta h2 { font-size: 1.6rem; }
+            .header-bar { width: 90%; }
+            .nav-links { display: none; }
+            .shop-button { font-size: 0; padding: 8px 12px; }
+            .shop-button::after { content: "Shop"; font-size: 0.88rem; font-weight: 600; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-bar">
+        <a href="index.html"><img src="Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
+        <div class="spacer"></div>
+        <nav class="nav-links">
+            <a href="index.html#products">Products</a>
+            <a href="science.html" class="active">Science</a>
+            <a href="index.html#reviews">Reviews</a>
+            <a href="faq.html">FAQ</a>
+            <a href="index.html#about">About</a>
+        </nav>
+        <a href="lemon-lime.html" class="cart-icon" aria-label="Cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+        </a>
+        <a href="lemon-lime.html" class="shop-button gradient-button">Shop Now</a>
+    </div>
+
+    <!-- ── HERO ── -->
+    <div class="sci-hero">
+        <span class="section-label">THE SCIENCE</span>
+        <h1>Rethinking how<br><span class="blue">your body absorbs.</span></h1>
+        <p class="hero-sub">ZELYTE delivers electrolytes and natural caffeine through the buccal mucosa — the tissue lining your gums — for a direct absorption pathway that doesn't require swallowing or waiting.</p>
+        <div class="hero-badge">FASTER DELIVERY &nbsp;·&nbsp; HANDS-FREE &nbsp;·&nbsp; NO LIQUID REQUIRED</div>
+    </div>
+
+    <!-- ── BUCCAL ABSORPTION ── -->
+    <section class="sci-section buccal-section">
+        <div class="sci-inner">
+            <div class="how-label-pill">
+                <div class="glass-pill">
+                    <span class="section-label">HOW BUCCAL ABSORPTION WORKS</span>
+                </div>
+            </div>
+            <div class="steps">
+                <div class="step reveal-left">
+                    <div class="step-num">01</div>
+                    <h3>Place</h3>
+                    <p>Tuck the pouch between your upper lip and gum. It rests against the buccal mucosa — the thin, highly vascularized membrane lining the inside of your mouth — without any chewing or swallowing.</p>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step reveal-up">
+                    <div class="step-num">02</div>
+                    <h3>Release</h3>
+                    <p>Moisture activates the pouch, slowly releasing electrolytes and natural caffeine over 20–40 minutes. Controlled, steady, and continuous — no burst delivery.</p>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step reveal-right">
+                    <div class="step-num">03</div>
+                    <h3>Absorb</h3>
+                    <p>Compounds pass through the mucosal lining into the capillary bed beneath, entering the bloodstream without passing through the digestive system. <sup>[1,2]</sup></p>
+                </div>
+            </div>
+
+            <div class="vs-callout">
+                <div class="vs-box traditional reveal-left">
+                    <h4>Sports Drinks &amp; Supplements</h4>
+                    <ul>
+                        <li><span class="vs-icon-neg">✗</span> Swallowed → stomach → small intestine</li>
+                        <li><span class="vs-icon-neg">✗</span> Absorption delayed by gastric emptying</li>
+                        <li><span class="vs-icon-neg">✗</span> Requires a container or bottle to carry</li>
+                        <li><span class="vs-icon-neg">✗</span> Interrupts activity every time you drink</li>
+                    </ul>
+                </div>
+                <div class="vs-label reveal-up">VS</div>
+                <div class="vs-box zelyte-box reveal-right">
+                    <h4>ZELYTE Active Hydration Pouch</h4>
+                    <ul>
+                        <li><span class="vs-icon-pos">✓</span> Placed → buccal mucosa → capillary bed</li>
+                        <li><span class="vs-icon-pos">✓</span> Direct mucosal absorption pathway <sup>[1]</sup></li>
+                        <li><span class="vs-icon-pos">✓</span> Fits in your pocket — zero bulk or liquid</li>
+                        <li><span class="vs-icon-pos">✓</span> Completely hands-free during any activity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ELECTROLYTES ── -->
+    <section class="sci-section electrolytes-section">
+        <div class="sci-inner">
+            <span class="section-label reveal-up">WHY ELECTROLYTES MATTER</span>
+            <h2 class="reveal-up">The minerals that keep<br>your body in balance.</h2>
+            <p class="sci-sub reveal-up">Electrolytes are electrically charged minerals essential for fluid regulation, nerve signaling, and muscle contraction. During exercise they're lost through sweat — replenishing them supports your body's normal function. <sup style="font-size:0.65rem;color:#1a73e8;font-weight:700;">[3]</sup></p>
+            <div class="elec-grid">
+                <div class="elec-card reveal-left">
+                    <div class="elec-card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/>
+                        </svg>
+                    </div>
+                    <span class="elec-symbol">Na · Sodium</span>
+                    <h3>Sodium</h3>
+                    <p>The primary electrolyte lost in sweat. Sodium helps maintain fluid balance between cells and tissues, and supports normal nerve and muscle function during activity. <sup>[3]</sup></p>
+                </div>
+                <div class="elec-card reveal-up">
+                    <div class="elec-card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <span class="elec-symbol">K · Potassium</span>
+                    <h3>Potassium</h3>
+                    <p>Works alongside sodium to maintain the electrical gradients across cell membranes that allow muscles to contract normally. Potassium supports fluid regulation inside cells and normal muscle function. <sup>[4]</sup></p>
+                </div>
+                <div class="elec-card reveal-right">
+                    <div class="elec-card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="4"/>
+                            <line x1="12" y1="2" x2="12" y2="6"/>
+                            <line x1="12" y1="18" x2="12" y2="22"/>
+                            <line x1="2" y1="12" x2="6" y2="12"/>
+                            <line x1="18" y1="12" x2="22" y2="12"/>
+                        </svg>
+                    </div>
+                    <span class="elec-symbol">Mg · Magnesium</span>
+                    <h3>Magnesium</h3>
+                    <p>Involved in hundreds of enzymatic reactions, including those governing muscle contraction and relaxation. Magnesium supports normal muscle and nerve function and is a key mineral for sustained physical activity. <sup>[5]</sup></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── NATURAL CAFFEINE ── -->
+    <section class="sci-section caffeine-section">
+        <div class="sci-inner">
+            <span class="section-label reveal-up">NATURAL CAFFEINE</span>
+            <h2 class="reveal-up">Clean energy. No crash.</h2>
+            <p class="sci-sub reveal-up">ZELYTE contains 40mg of plant-derived caffeine per pouch — roughly half a cup of coffee — designed to support focus and alertness during training, competition, or the grind. Enough to feel it. Not enough to regret it.</p>
+            <div class="caffeine-inner">
+                <div class="caffeine-text">
+                    <p>Caffeine is one of the most studied compounds in performance research. Plant-derived caffeine — sourced from botanicals such as green tea or guaraná — functions identically to synthetic caffeine at the molecular level, and is preferred by consumers looking for clean-label products.</p>
+                    <p>At 40mg per pouch, ZELYTE provides a modest, controlled dose that supports focus and energy without the abrupt spike-and-crash associated with high-dose stimulants. No taurine, no synephrine, no proprietary blends. <sup>[6]</sup></p>
+                    <div class="caffeine-stat-row">
+                        <div class="caffeine-stat">
+                            <div class="num">40mg</div>
+                            <div class="lbl">per pouch</div>
+                        </div>
+                        <div class="caffeine-stat">
+                            <div class="num">0</div>
+                            <div class="lbl">artificial stimulants</div>
+                        </div>
+                        <div class="caffeine-stat">
+                            <div class="num">100%</div>
+                            <div class="lbl">plant-derived</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="caffeine-compare reveal-right">
+                    <h4>Caffeine content comparison</h4>
+                    <div class="caffeine-bar-row">
+                        <div class="caffeine-bar-item">
+                            <span class="caffeine-bar-name">ZELYTE pouch</span>
+                            <div class="caffeine-bar-track"><div class="caffeine-bar-fill zelyte"></div></div>
+                            <span class="caffeine-bar-mg">40 mg</span>
+                        </div>
+                        <div class="caffeine-bar-item">
+                            <span class="caffeine-bar-name">Green tea (8 oz)</span>
+                            <div class="caffeine-bar-track"><div class="caffeine-bar-fill greentea"></div></div>
+                            <span class="caffeine-bar-mg">~28 mg</span>
+                        </div>
+                        <div class="caffeine-bar-item">
+                            <span class="caffeine-bar-name">Espresso (1 shot)</span>
+                            <div class="caffeine-bar-track"><div class="caffeine-bar-fill espresso"></div></div>
+                            <span class="caffeine-bar-mg">~63 mg</span>
+                        </div>
+                        <div class="caffeine-bar-item">
+                            <span class="caffeine-bar-name">Drip coffee (8 oz)</span>
+                            <div class="caffeine-bar-track"><div class="caffeine-bar-fill coffee"></div></div>
+                            <span class="caffeine-bar-mg">~95 mg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── INGREDIENT TRANSPARENCY ── -->
+    <section class="sci-section transparency-section">
+        <div class="sci-inner">
+            <span class="section-label reveal-up">WHAT'S INSIDE</span>
+            <h2 class="reveal-up">Everything you need.<br>Nothing you don't.</h2>
+            <p class="sci-sub reveal-up">We built ZELYTE around a short, clean ingredient list. Every component is here for a reason — and we're transparent about what's in it and what's not.</p>
+            <div class="ingredient-cols">
+                <div class="in-col">
+                    <span class="ingredient-col-head">What's in it</span>
+                    <div class="ingredient-list">
+                        <div class="ingredient-row reveal-left">
+                            <div class="ingredient-icon in-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Sodium, Potassium, Magnesium</strong>
+                                <p>Core electrolytes for fluid balance and muscle function.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-left">
+                            <div class="ingredient-icon in-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Natural Caffeine (40 mg, plant-derived)</strong>
+                                <p>Supports focus and alertness during activity.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-left">
+                            <div class="ingredient-icon in-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3"/><path d="M12 11v8M9 14h6"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Natural Flavors</strong>
+                                <p>Derived from natural botanical sources only.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-left">
+                            <div class="ingredient-icon in-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Stevia</strong>
+                                <p>Zero-calorie plant-based sweetener. No glycemic impact.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-left">
+                            <div class="ingredient-icon in-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 15h6"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Citric Acid</strong>
+                                <p>Provides a crisp, clean flavor profile. Naturally occurring.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="out-col">
+                    <span class="ingredient-col-head">What's not in it</span>
+                    <div class="ingredient-list">
+                        <div class="ingredient-row reveal-right">
+                            <div class="ingredient-icon out-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Nicotine</strong>
+                                <p>Zero. ZELYTE contains no nicotine of any kind.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-right">
+                            <div class="ingredient-icon out-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Sugar</strong>
+                                <p>Zero sugar. Zero calories. Sweetened with stevia only.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-right">
+                            <div class="ingredient-icon out-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Artificial Flavors</strong>
+                                <p>All flavoring is derived from natural sources.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-right">
+                            <div class="ingredient-icon out-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>Artificial Colors</strong>
+                                <p>No synthetic dyes or colorants of any kind.</p>
+                            </div>
+                        </div>
+                        <div class="ingredient-row reveal-right">
+                            <div class="ingredient-icon out-icon">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </div>
+                            <div class="ingredient-row-text">
+                                <strong>High-Dose Stimulants</strong>
+                                <p>No taurine, no synephrine, no proprietary blends.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <div class="sci-cta-wrap">
+        <div class="sci-cta">
+            <h2>Built on science. Worn for performance.</h2>
+            <p>Zero sugar. Zero calories. 40 mg natural caffeine. Electrolytes that support your body where it counts.</p>
+            <a href="lemon-lime.html" class="btn-white">Shop Crispy Mint →</a>
+        </div>
+    </div>
+
+    <!-- ── REFERENCES ── -->
+    <section class="sci-section references-section">
+        <div class="sci-inner">
+            <span class="ref-heading">References</span>
+            <div class="ref-list">
+                <div class="ref-item" data-num="[1]">
+                    Shojaei A.H. (1998). Buccal mucosa as a route for systemic drug delivery: a review. <em>J Pharm Pharm Sci</em>, 1(1), 15–30. [placeholder — update with final citation]
+                </div>
+                <div class="ref-item" data-num="[2]">
+                    Boddupalli B.M. et al. (2010). Buccal drug delivery: A technical update. <em>J Adv Pharm Technol Res</em>, 1(2), 89–94. [placeholder]
+                </div>
+                <div class="ref-item" data-num="[3]">
+                    Shirreffs S.M., Sawka M.N. (2011). Fluid and electrolyte needs for training, competition, and recovery. <em>J Sports Sci</em>, 29 Suppl 1, S39–46. [placeholder]
+                </div>
+                <div class="ref-item" data-num="[4]">
+                    McDonough A.A., Thompson C.B., Youn J.H. (2002). Skeletal muscle regulates extracellular potassium. <em>Am J Physiol Renal Physiol</em>, 282(6), F967–74. [placeholder]
+                </div>
+                <div class="ref-item" data-num="[5]">
+                    Nielsen F.H., Lukaski H.C. (2006). Update on the relationship between magnesium and exercise. <em>Magnes Res</em>, 19(3), 180–9. [placeholder]
+                </div>
+                <div class="ref-item" data-num="[6]">
+                    Grgic J. et al. (2021). Wake up and smell the coffee: caffeine supplementation and exercise performance — an umbrella review of 21 published meta-analyses. <em>Br J Sports Med</em>, 54(11), 681–688. [placeholder]
+                </div>
+            </div>
+            <div class="ref-disclaimer">
+                <strong>Disclaimer:</strong> This product has not been evaluated by the Food and Drug Administration. ZELYTE is not intended to diagnose, treat, cure, or prevent any disease. Structure/function claims on this page describe the role of nutrients in supporting normal physiological function.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <img src="Zelyte (3).png" alt="ZELYTE" class="footer-logo">
+            <p class="footer-tagline">Active Hydration Pouches · Zero Sugar · Zero Calories · Hands-Free</p>
+            <div class="footer-links">
+                <a href="faq.html">FAQ</a>
+                <a href="index.html#about">About</a>
+                <a href="science.html">Science</a>
+                <a href="lemon-lime.html">Shop</a>
+            </div>
+            <p class="footer-legal">© 2026 ZELYTE Inc. All rights reserved. This product has not been evaluated by the FDA and is not intended to diagnose, treat, cure, or prevent any disease.</p>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.21/dist/lenis.css">
+    <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
+    <script>new Lenis({ autoRaf: true, autoToggle: true, anchors: true, allowNestedScroll: true, stopInertiaOnNavigate: true })</script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) entry.target.classList.add('in-view');
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(function (el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
