@@ -776,7 +776,7 @@ body {
 /* =====================
    WHAT IS ZELYTE
    ===================== */
-.section-what { background: #0d2357; margin-top: -120px; padding-top: 160px; }
+.section-what { background: #0d2357; margin-top: -120px; padding-top: 160px; border-radius: 32px; overflow: hidden; margin-left: 24px; margin-right: 24px; width: calc(100% - 48px); }
 
 .section-what .section-label { color: rgba(255, 255, 255, 0.7); }
 .section-what .section-inner h2 { background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -828,6 +828,10 @@ body {
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
     position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    margin: 0 24px;
+    width: calc(100% - 48px);
 }
 
 
@@ -1380,8 +1384,11 @@ body {
    ===================== */
 .section-bundles {
     background: #0d2357;
-    width: 100%;
+    width: calc(100% - 48px);
     padding: 100px 40px;
+    border-radius: 32px;
+    overflow: hidden;
+    margin: 0 24px;
 }
 
 .section-bundles .section-label { color: rgba(255, 255, 255, 0.7); }
