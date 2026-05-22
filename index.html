@@ -548,6 +548,8 @@
         var bounding = null;
         var lines = [], paths = [];
         var mouse = { x: -10, y: 0, lx: 0, ly: 0, sx: 0, sy: 0, v: 0, vs: 0, a: 0, set: false };
+        var isVisible = false;
+        var rafId = null;
 
         function updateBounding() { bounding = section.getBoundingClientRect(); }
 
@@ -637,6 +639,8 @@
         }
 
         function tick(time) {
+            rafId = null;
+            if (!isVisible) return;
             mouse.sx += (mouse.x - mouse.sx) * 0.1;
             mouse.sy += (mouse.y - mouse.sy) * 0.1;
             var dx = mouse.x - mouse.lx, dy = mouse.y - mouse.ly;
@@ -648,7 +652,7 @@
             mouse.a = Math.atan2(dy, dx);
             movePoints(time);
             drawLines();
-            requestAnimationFrame(tick);
+            rafId = requestAnimationFrame(tick);
         }
 
         window.addEventListener('mousemove', function(e) {
@@ -667,7 +671,11 @@
 
         setSize();
         setLines();
-        requestAnimationFrame(tick);
+
+        new IntersectionObserver(function(entries) {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !rafId) { rafId = requestAnimationFrame(tick); }
+        }, { threshold: 0 }).observe(section);
     }());
     </script>
 
@@ -738,9 +746,12 @@
         scene.add(points);
 
         var count = 0;
+        var isVisible = false;
+        var rafId = null;
 
         function animate() {
-            requestAnimationFrame(animate);
+            rafId = null;
+            if (!isVisible) return;
             var posAttr = geometry.attributes.position;
             var pos = posAttr.array;
             var i = 0;
@@ -755,6 +766,7 @@
             posAttr.needsUpdate = true;
             renderer.render(scene, camera);
             count += 0.03;
+            rafId = requestAnimationFrame(animate);
         }
 
         window.addEventListener('resize', function() {
@@ -765,7 +777,10 @@
             renderer.setSize(w, h);
         });
 
-        animate();
+        new IntersectionObserver(function(entries) {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible && !rafId) { rafId = requestAnimationFrame(animate); }
+        }, { threshold: 0 }).observe(section);
     }());
     </script>
     <script src="glowing-effect.js"></script>
