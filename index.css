@@ -98,6 +98,9 @@ body {
 .header-bar.scrolled .nav-links a:hover {
     background: rgba(26, 115, 232, 0.08);
 }
+.header-bar.scrolled #auth-btn {
+    color: #1a73e8;
+}
 
 .spacer { flex: 1; }
 
