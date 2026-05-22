@@ -9,6 +9,10 @@ h1, h2 {
     letter-spacing: -0.5px;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: #ffffff;
@@ -507,7 +511,7 @@ body {
 .hero-section {
     position: relative;
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1807,6 +1811,7 @@ body {
 .marquee-ticker {
     background: #1a73e8;
     height: 56px;
+    width: 100%;
     overflow: hidden;
     display: flex;
     align-items: center;
