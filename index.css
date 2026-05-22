@@ -1595,6 +1595,12 @@ body {
     background: #fff;
     width: 100%;
     padding: 100px 40px;
+    text-align: center;
+}
+
+.section-email-signup .section-sub {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .email-signup-form {
