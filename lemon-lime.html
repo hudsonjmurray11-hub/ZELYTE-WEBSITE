@@ -895,6 +895,66 @@
         }
         .action-row .add-cart-btn { width: auto; flex: 1; padding: 18px 20px; }
 
+        /* ── Product hook line ── */
+        .prod-hook {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2a4a7f;
+            line-height: 1.5;
+        }
+
+        /* ── 3-card benefit row ── */
+        .prod-benefit-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .prod-benefit-card {
+            background: #f0f6ff;
+            border: 1px solid #d0e4f8;
+            border-radius: 14px;
+            padding: 14px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-align: center;
+        }
+        .pbc-icon {
+            width: 40px;
+            height: 40px;
+            background: #e0eefb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .pbc-name {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: #0d5bb8;
+        }
+        .pbc-desc {
+            font-size: 0.75rem;
+            color: #5a7fa8;
+            line-height: 1.35;
+        }
+
+        /* ── Pack select wrapper ── */
+        .pack-select-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .pack-select-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #6b8ab5;
+            text-transform: uppercase;
+        }
+
         /* ---- Responsive ---- */
         @media (max-width: 900px) {
             .page-wrap { padding: 90px 24px 60px; }
@@ -919,6 +979,8 @@
             .action-row { flex-wrap: wrap; gap: 12px; }
             .action-row .add-cart-btn { width: 100%; }
             .product-bubble { padding: 24px 20px; gap: 20px; }
+            .prod-benefit-row { grid-template-columns: 1fr; gap: 8px; }
+            .prod-benefit-card { flex-direction: row; text-align: left; align-items: flex-start; }
         }
     </style>
     <script>
@@ -1014,27 +1076,53 @@
                     </div>
                 </div>
 
-                <hr class="bubble-divider">
+                <!-- Hook line -->
+                <p class="prod-hook">An active hydration pouch — electrolytes and caffeine absorbed through your gums, hands-free.</p>
 
-                <!-- Variant pills -->
-                <div class="variant-pill-wrap">
-                    <button class="variant-pill selected">
-                        3 Pack
-                        <span class="variant-badge">POPULAR</span>
-                    </button>
-                    <button class="variant-pill">5 Pack</button>
+                <!-- 3 benefit cards -->
+                <div class="prod-benefit-row">
+                    <div class="prod-benefit-card">
+                        <div class="pbc-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                                <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                            </svg>
+                        </div>
+                        <div class="pbc-name">Hands-Free</div>
+                        <div class="pbc-desc">Absorbs through your gums — no bottle, no interruptions.</div>
+                    </div>
+                    <div class="prod-benefit-card">
+                        <div class="pbc-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
+                        </div>
+                        <div class="pbc-name">Electrolytes + Caffeine</div>
+                        <div class="pbc-desc">Sodium, potassium, magnesium + 50mg caffeine anhydrous.</div>
+                    </div>
+                    <div class="prod-benefit-card">
+                        <div class="pbc-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                            </svg>
+                        </div>
+                        <div class="pbc-name">Zero Sugar</div>
+                        <div class="pbc-desc">Zero calories. Sweetened with sucralose.</div>
+                    </div>
                 </div>
 
                 <hr class="bubble-divider">
 
-                <!-- Info card -->
-                <div class="info-card">
-                    <div class="info-card-icon">
-                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-                    </div>
-                    <div>
-                        <div class="info-card-heading">Hands-Free Hydration</div>
-                        <div class="info-card-desc">Absorbs through your gums — no bottle, no interruptions. Just pure performance.</div>
+                <!-- Pack selector -->
+                <div class="pack-select-wrap">
+                    <span class="pack-select-label">Select Pack</span>
+                    <div class="variant-pill-wrap">
+                        <button class="variant-pill selected">
+                            3 Pack
+                            <span class="variant-badge">POPULAR</span>
+                        </button>
+                        <button class="variant-pill">5 Pack</button>
                     </div>
                 </div>
 
