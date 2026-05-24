@@ -1137,6 +1137,112 @@
             font-size: 1rem;
             flex-shrink: 0;
         }
+
+        /* ---- Checkout Modal ---- */
+        .checkout-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.55);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            transition: opacity 0.25s;
+        }
+        @media (min-width: 600px) {
+            .checkout-overlay { align-items: center; padding: 20px; }
+        }
+        .checkout-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .checkout-overlay.hidden .checkout-sheet {
+            transform: translateY(40px);
+        }
+        .checkout-sheet {
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            padding: 28px 24px 40px;
+            width: 100%;
+            max-width: 480px;
+            max-height: 92vh;
+            overflow-y: auto;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        @media (min-width: 600px) {
+            .checkout-sheet { border-radius: 24px; }
+        }
+        .checkout-back-btn {
+            background: none;
+            border: none;
+            color: #0d2357;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .checkout-summary {
+            background: #f4f7ff;
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+        }
+        .checkout-summary-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0d2357;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .checkout-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 6px;
+        }
+        .checkout-line.total {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0d2357;
+            margin-top: 10px;
+            border-top: 1px solid #dde5f5;
+            padding-top: 10px;
+            margin-bottom: 0;
+        }
+        #checkout-payment-element { margin-bottom: 16px; }
+        .checkout-pay-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1a73e8, #0d5bb8);
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: opacity 0.2s;
+        }
+        .checkout-pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .checkout-error {
+            color: #c0392b;
+            font-size: 13px;
+            margin-bottom: 12px;
+            padding: 10px 14px;
+            background: #fdf0ee;
+            border-radius: 8px;
+            display: none;
+        }
+        .checkout-error.visible { display: block; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1248,6 +1354,8 @@
                 qty++;
                 qtyVal.textContent = qty;
             });
+
+            window.getZelyteState = () => ({ pack: selectedPack, mode: currentMode, qty });
         });
     </script>
     <link rel="stylesheet" href="zelyte-shared.css">
@@ -1487,30 +1595,122 @@
     <script src="email-utils.js"></script>
     <script src="auth.js"></script>
     <script src="email-popup.js"></script>
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="checkout-overlay hidden" role="dialog" aria-modal="true">
+        <div class="checkout-sheet">
+            <button id="checkout-back" class="checkout-back-btn">← Back</button>
+            <div class="checkout-summary">
+                <div class="checkout-summary-title">Order Summary</div>
+                <div class="checkout-line">
+                    <span id="checkout-desc">Crispy Mint — 3 Pack</span>
+                    <span id="checkout-subtotal">$27.00</span>
+                </div>
+                <div class="checkout-line">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="checkout-line total">
+                    <span>Total</span>
+                    <span id="checkout-total">$27.00</span>
+                </div>
+            </div>
+            <div id="checkout-payment-element"></div>
+            <div id="checkout-error" class="checkout-error"></div>
+            <button id="checkout-pay-btn" class="checkout-pay-btn">Pay $27.00</button>
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
+        // Replace with your Stripe publishable key from dashboard.stripe.com → Developers → API keys
+        const STRIPE_PK = 'YOUR_STRIPE_PUBLISHABLE_KEY';
+
+        let stripeInstance, stripeElements;
+
         document.getElementById('add-cart').addEventListener('click', async function () {
             const btn = this;
-            const qty = parseInt(document.getElementById('qty-val')?.textContent) || 1;
+            const state = window.getZelyteState ? window.getZelyteState() : { pack: '3', mode: 'subscribe', qty: 1 };
+
             btn.disabled = true;
-            btn.textContent = 'Redirecting...';
+            btn.textContent = 'Loading...';
+
             try {
-                const res = await fetch('/api/checkout', {
+                const res = await fetch('/api/payment-intent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ priceId: 'price_1TajD9EQRyWAWeKLLvN64RCS', quantity: qty })
+                    body: JSON.stringify({ pack: state.pack, mode: state.mode, qty: state.qty })
                 });
                 const data = await res.json();
-                if (data.url) {
-                    window.location.href = data.url;
-                } else {
-                    alert('Something went wrong. Please try again.');
-                    btn.disabled = false;
-                    btn.textContent = 'Buy Now';
-                }
+                if (!data.clientSecret) throw new Error(data.error || 'Failed to start checkout');
+
+                // Update order summary
+                const dollars = (data.amount / 100).toFixed(2);
+                const qtyLabel = state.qty > 1 ? ` × ${state.qty}` : '';
+                document.getElementById('checkout-desc').textContent = `Crispy Mint — ${state.pack} Pack${qtyLabel}`;
+                document.getElementById('checkout-subtotal').textContent = `$${dollars}`;
+                document.getElementById('checkout-total').textContent = `$${dollars}`;
+                document.getElementById('checkout-pay-btn').textContent = `Pay $${dollars}`;
+
+                // Mount Stripe Payment Element
+                if (!stripeInstance) stripeInstance = Stripe(STRIPE_PK);
+                stripeElements = stripeInstance.elements({
+                    clientSecret: data.clientSecret,
+                    appearance: {
+                        theme: 'stripe',
+                        variables: {
+                            colorPrimary: '#1a73e8',
+                            borderRadius: '10px',
+                            fontFamily: 'Poppins, system-ui, sans-serif'
+                        }
+                    }
+                });
+                const paymentEl = stripeElements.create('payment');
+                document.getElementById('checkout-payment-element').innerHTML = '';
+                paymentEl.mount('#checkout-payment-element');
+
+                // Show modal
+                document.getElementById('checkout-modal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             } catch (e) {
                 alert('Something went wrong. Please try again.');
+            } finally {
                 btn.disabled = false;
                 btn.textContent = 'Buy Now';
+            }
+        });
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('checkout-back').addEventListener('click', closeCheckoutModal);
+        document.getElementById('checkout-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeCheckoutModal();
+        });
+
+        document.getElementById('checkout-pay-btn').addEventListener('click', async function () {
+            const btn = this;
+            const errorEl = document.getElementById('checkout-error');
+            const totalText = document.getElementById('checkout-total').textContent;
+
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            errorEl.classList.remove('visible');
+
+            const { error } = await stripeInstance.confirmPayment({
+                elements: stripeElements,
+                confirmParams: { return_url: window.location.origin + '/success.html' },
+                redirect: 'if_required'
+            });
+
+            if (error) {
+                errorEl.textContent = error.message;
+                errorEl.classList.add('visible');
+                btn.disabled = false;
+                btn.textContent = `Pay ${totalText}`;
+            } else {
+                window.location.href = '/success.html';
             }
         });
     </script>
