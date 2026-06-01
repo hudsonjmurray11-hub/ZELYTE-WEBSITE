@@ -48,7 +48,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    transition: opacity 2.2s ease, visibility 2.2s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 #splash-screen.fade-out {
@@ -214,6 +214,9 @@ body {
     height: 3px;
     background: linear-gradient(90deg, #60a5fa, #1a73e8, #1252c4, #1a73e8, #60a5fa);
     background-size: 200% 100%;
+    animation: none;
+}
+.cart-drawer.open::before {
     animation: gradient-sweep 3s ease infinite;
 }
 .cart-drawer.open {
@@ -1389,6 +1392,25 @@ body {
     border-radius: 32px;
     overflow: hidden;
     margin: 0 24px;
+    position: relative;
+}
+
+.droplets-wrap {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+.droplets-wrap img {
+    position: absolute;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.section-bundles .section-inner,
+.section-story .story-inner {
+    position: relative;
+    z-index: 1;
 }
 
 .section-bundles .section-label { color: rgba(255, 255, 255, 0.7); }
@@ -1710,7 +1732,7 @@ body {
 }
 
 /* =====================
-   PRODUCT IMAGE (lemon-lime page)
+   PRODUCT IMAGE (crispy-mint page)
    ===================== */
 .product-image {
     width: 100%;
@@ -1941,6 +1963,7 @@ body {
     border-radius: 32px;
     margin: 0 24px;
     width: calc(100% - 48px);
+    position: relative;
 }
 
 .story-inner {

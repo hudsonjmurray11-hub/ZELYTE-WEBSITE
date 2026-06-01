@@ -13,7 +13,7 @@
     }
 
     body {
-      background: linear-gradient(rgb(242, 242, 244), rgb(205, 220, 244), rgb(165, 199, 243), rgb(118, 179, 242), rgb(44, 159, 241));
+      background: transparent;
       overflow: hidden;
     }
 
@@ -21,6 +21,7 @@
       display: block;
       width: 100vw;
       height: 100vh;
+      will-change: opacity;
     }
 
 
@@ -145,11 +146,11 @@
 
     // === INTERACTION & ANIMATION SEQUENCE ===
     let phase = 'spin'; // 'spin' | 'fade' | 'done'
-    const spinDuration = 1800;
-    const fadeDuration = 600;
+    const spinDuration = 700;
+    const fadeDuration = 250;
     let isDragging = false;
     let prev = { x: 0, y: 0 }, vel = { x: 0, y: 0 };
-    let startTime = Date.now();
+    let startTime = null;
     let fadeStart = 0;
 
     function onDown(x, y) { isDragging = true; phase = 'done'; prev = { x, y }; }
@@ -171,9 +172,9 @@
     c.addEventListener('touchmove', e => onMove(e.touches[0].clientX, e.touches[0].clientY));
     c.addEventListener('touchend', onUp);
 
-    function animate() {
-      requestAnimationFrame(animate);
-      const now = Date.now();
+    let animRafId = null;
+    function animate(now) {
+      if (startTime === null) startTime = now;
 
       if (phase === 'spin') {
         const t = Math.min((now - startTime) / spinDuration, 1);
@@ -186,8 +187,14 @@
         }
       } else if (phase === 'fade') {
         const ft = Math.min((now - fadeStart) / fadeDuration, 1);
-        c.style.opacity = 1 - ft;
-        if (ft >= 1) phase = 'done';
+        const eased = ft * ft * (3 - 2 * ft); // smoothstep
+        c.style.opacity = 1 - eased;
+        if (ft >= 1) {
+          phase = 'done';
+          window.parent.postMessage('splash-done', '*');
+          renderer.render(scene, camera);
+          return; // stop the loop — splash is finished
+        }
       } else if (!isDragging) {
         group.rotation.y += vel.y;
         group.rotation.x += vel.x;
@@ -196,8 +203,9 @@
       }
 
       renderer.render(scene, camera);
+      animRafId = requestAnimationFrame(animate);
     }
-    animate();
+    animRafId = requestAnimationFrame(animate);
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;

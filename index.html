@@ -430,13 +430,24 @@
             splashScreen.addEventListener('transitionend', function handler(e) {
                 if (e.propertyName !== 'opacity') return;
                 splashScreen.removeEventListener('transitionend', handler);
+                splashScreen.remove(); // destroy iframe so THREE.js loop can't run
                 startReveal();
             });
 
-            setTimeout(() => {
+            let splashFired = false;
+            function triggerSplashFade() {
+                if (splashFired) return;
+                splashFired = true;
                 splashScreen.classList.add('fade-out');
                 if (headerBar) headerBar.classList.add('visible');
-            }, 450);
+            }
+
+            window.addEventListener('message', (e) => {
+                if (e.data === 'splash-done') triggerSplashFade();
+            });
+
+            // Fallback in case iframe never responds
+            setTimeout(triggerSplashFade, 2000);
         });
     </script>
 
@@ -810,6 +821,7 @@
             'MINT2.png'
         ];
         var count = 15; // per image
+        var flyers = [];
         imgs.forEach(function(src) {
             for (var i = 0; i < count; i++) {
                 var el = document.createElement('img');
@@ -825,11 +837,17 @@
                     'height:' + size + 'px',
                     'top:' + topPct + '%',
                     'left:0',
-                    'animation:' + dir + ' ' + duration + 's linear ' + delay + 's infinite'
+                    'animation-play-state:paused',
+                    'animation:' + dir + ' ' + duration + 's linear ' + delay + 's infinite paused'
                 ].join(';');
                 section.appendChild(el);
+                flyers.push(el);
             }
         });
+        new IntersectionObserver(function(entries) {
+            var state = entries[0].isIntersecting ? 'running' : 'paused';
+            flyers.forEach(function(el) { el.style.animationPlayState = state; });
+        }, { threshold: 0 }).observe(section);
     }());
     </script>
 
