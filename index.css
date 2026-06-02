@@ -177,7 +177,7 @@ body {
     background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    z-index: 199;
+    z-index: 1000;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -194,7 +194,7 @@ body {
     width: 390px;
     max-width: 100vw;
     height: 100%;
-    z-index: 200;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
     background: linear-gradient(160deg, rgba(219,234,255,0.88), rgba(235,244,255,0.84));
