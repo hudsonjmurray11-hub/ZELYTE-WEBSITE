@@ -179,38 +179,48 @@
             margin-top: -20px;
         }
 
-        .product-img-col .main-img {
+        .product-swiper {
+            width: 520px;
+            height: 620px;
+        }
+        .product-swiper .swiper-slide {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.55);
+        }
+        .product-swiper .swiper-slide img {
             width: 100%;
-            max-width: 560px;
-            aspect-ratio: 1 / 1;
+            height: 100%;
             object-fit: cover;
             object-position: center;
             display: block;
-            border-radius: 24px;
-            box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.55);
-            transition: transform 0.3s ease;
         }
-        .product-img-col .main-img:hover { transform: scale(1.03); }
 
-        .product-img-gallery {
+        .swiper-nav-row {
             display: flex;
-            gap: 20px;
-            margin-top: 48px;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 20px;
         }
-        .product-img-gallery img {
-            flex: 1;
-            width: 0;
-            height: 320px;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 1.5px solid rgba(255,255,255,0.35);
-            box-shadow: 0 0 16px 6px rgba(255, 255, 255, 0.5), 0 8px 24px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .swiper-nav-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.45);
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, transform 0.15s ease;
         }
-        .product-img-gallery img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.65), 0 12px 32px rgba(0,0,0,0.3);
+        .swiper-nav-btn:hover {
+            background: rgba(255,255,255,0.32);
+            transform: scale(1.08);
         }
 
         /* ---- Info Column ---- */
@@ -1365,6 +1375,7 @@
     </script>
     <link rel="stylesheet" href="zelyte-shared.css">
     <link rel="stylesheet" href="glowing-effect.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
 
@@ -1394,7 +1405,18 @@
 
             <!-- Image -->
             <div class="product-img-col">
-                <img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin" class="main-img">
+                <div class="swiper product-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin"></div>
+                        <div class="swiper-slide"><img src="ElevenLabs_image_topaz-image-upscale_2026-06-02T13_56_08.png" alt="Crispy Mint Product"></div>
+                        <div class="swiper-slide"><img src="ElevenLabs_image_gpt-image-2_increase the..._2026-06-02T13_42_51.png" alt="Crispy Mint Product"></div>
+                        <div class="swiper-slide"><img src="ElevenLabs_image_nano-banana-2_recreate the..._2026-06-02T14_10_38.png" alt="Crispy Mint Product"></div>
+                    </div>
+                </div>
+                <div class="swiper-nav-row">
+                    <button class="swiper-nav-btn" id="swiper-prev">&#8592;</button>
+                    <button class="swiper-nav-btn" id="swiper-next">&#8594;</button>
+                </div>
             </div>
 
             <!-- Info -->
@@ -1717,6 +1739,22 @@
             } else {
                 window.location.href = '/success.html';
             }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        new Swiper('.product-swiper', {
+            effect: 'cards',
+            grabCursor: true,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '#swiper-next',
+                prevEl: '#swiper-prev',
+            },
         });
     </script>
 </body>
