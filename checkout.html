@@ -10,297 +10,404 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f5f7fc;
-            color: #1a1a2e;
             min-height: 100vh;
+            background: linear-gradient(160deg, rgb(15,181,253), rgb(116,196,251), rgb(165,211,249), rgb(205,226,247), rgb(242,242,244));
+            background-attachment: fixed;
         }
 
-        .nav {
-            background: #0d2357;
-            padding: 18px 32px;
+        /* ---- Floating Pill Header ---- */
+        .header-bar {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            max-width: 940px;
+            height: 48px;
+            border-radius: 20px;
+            z-index: 999;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            padding: 0 20px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid rgba(255,255,255,0.55);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.09);
         }
-        .nav-logo {
-            color: #fff;
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: 0.04em;
-            text-decoration: none;
-        }
+        .nav-logo img { height: 26px; display: block; }
+        .nav-spacer { flex: 1; }
         .nav-back {
-            color: rgba(255,255,255,0.7);
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0d2357;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
+            gap: 5px;
+            opacity: 0.65;
+            transition: opacity 0.2s;
         }
-        .nav-back:hover { color: #fff; }
+        .nav-back:hover { opacity: 1; }
+        @media (max-width: 680px) {
+            .header-bar { width: 92%; top: 10px; }
+        }
 
+        /* ---- Page Layout ---- */
         .page {
             max-width: 1040px;
             margin: 0 auto;
-            padding: 48px 24px 80px;
+            padding: 96px 24px 80px;
             display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 40px;
+            grid-template-columns: 1fr 360px;
+            gap: 24px;
             align-items: start;
         }
-        @media (max-width: 800px) {
-            .page {
-                grid-template-columns: 1fr;
-                padding: 32px 20px 60px;
-            }
+        @media (max-width: 840px) {
+            .page { grid-template-columns: 1fr; padding: 78px 16px 60px; }
             .order-col { order: -1; }
         }
 
+        /* ---- Glass Card ---- */
         .card {
-            background: #fff;
+            background: rgba(255,255,255,0.62);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(255,255,255,0.55);
             border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 2px 16px rgba(13,35,87,0.07);
+            padding: 26px 28px 30px;
+            box-shadow:
+                inset 2px 3px 0px -2px rgba(255,255,255,0.9),
+                0 8px 32px rgba(13,35,87,0.1);
         }
+        .form-col .card + .card { margin-top: 18px; }
 
+        /* ---- Section Label ---- */
         .section-label {
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 800;
             color: #0d2357;
-            letter-spacing: 0.09em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
+            opacity: 0.65;
         }
 
+        /* ---- Form Grid ---- */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
+            gap: 13px;
+            margin-bottom: 13px;
         }
         .form-row.single { grid-template-columns: 1fr; }
         .form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
-        @media (max-width: 500px) {
+        @media (max-width: 520px) {
             .form-row, .form-row.triple { grid-template-columns: 1fr; }
         }
 
-        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field { display: flex; flex-direction: column; gap: 5px; }
 
         label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #666;
-            letter-spacing: 0.02em;
+            font-size: 11px;
+            font-weight: 700;
+            color: #1a3a6e;
+            letter-spacing: 0.04em;
         }
-        label .opt {
-            font-weight: 400;
-            color: #bbb;
-        }
+        label .opt { font-weight: 400; color: #9ab5d4; }
 
         input, select {
             font-family: 'Poppins', sans-serif;
-            font-size: 15px;
-            padding: 12px 14px;
-            border: 1.5px solid #dde3f0;
+            font-size: 14px;
+            padding: 11px 13px;
+            border: 1.5px solid rgba(26,115,232,0.2);
             border-radius: 10px;
             outline: none;
-            background: #fff;
+            background: rgba(255,255,255,0.82);
             color: #1a1a2e;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
             -webkit-appearance: none;
         }
+        input::placeholder { color: #aabbd4; }
         input:focus, select:focus {
             border-color: #1a73e8;
-            box-shadow: 0 0 0 3px rgba(26,115,232,0.12);
+            box-shadow: 0 0 0 3px rgba(26,115,232,0.13);
+            background: #fff;
         }
-        input.error, select.error { border-color: #e53935; }
+        input.error, select.error {
+            border-color: #e53935;
+            box-shadow: 0 0 0 3px rgba(229,57,53,0.09);
+        }
 
         .field-error {
-            font-size: 12px;
+            font-size: 11px;
             color: #e53935;
+            font-weight: 500;
             display: none;
         }
         .field-error.visible { display: block; }
 
-        .shipping-header {
-            margin-top: 28px;
-            margin-bottom: 22px;
-            padding-top: 24px;
-            border-top: 1px solid #eef0f8;
+        /* ---- Stripe Section ---- */
+        .stripe-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 26px;
+            color: #5a7ab0;
+            font-size: 13px;
+            font-weight: 500;
         }
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(26,115,232,0.22);
+            border-top-color: #1a73e8;
+            border-radius: 50%;
+            animation: spin 0.65s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Order summary */
+        .stripe-error-banner {
+            background: rgba(229,57,53,0.07);
+            border: 1px solid rgba(229,57,53,0.22);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: #c0392b;
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 14px;
+            display: none;
+        }
+        .stripe-error-banner.visible { display: block; }
+
+        /* ---- Order Summary ---- */
         .summary-product {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             margin-bottom: 20px;
         }
         .summary-icon {
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, #c7f0ff, #a8d8ff);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
             flex-shrink: 0;
+            box-shadow: 0 2px 12px rgba(26,115,232,0.18);
         }
         .summary-product-name {
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             color: #0d2357;
+            line-height: 1.3;
         }
         .summary-product-sub {
-            font-size: 12px;
-            color: #888;
+            font-size: 11px;
+            color: #5a7ab0;
             margin-top: 3px;
+            font-weight: 500;
         }
-
         .summary-line {
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: #5a7ab0;
+            margin-bottom: 9px;
+            font-weight: 500;
         }
         .summary-line.total {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800;
             color: #0d2357;
-            margin-top: 8px;
-            padding-top: 14px;
-            border-top: 1.5px solid #dde3f0;
+            margin-top: 10px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(26,115,232,0.15);
             margin-bottom: 0;
         }
-
-        .test-badge {
-            background: #fff8e1;
-            border: 1px solid #ffe082;
-            border-radius: 8px;
-            padding: 10px 14px;
-            font-size: 12px;
-            color: #7b5800;
-            margin-top: 18px;
-            line-height: 1.5;
+        .price-skeleton {
+            display: inline-block;
+            width: 44px;
+            height: 13px;
+            background: linear-gradient(90deg, rgba(26,115,232,0.08) 25%, rgba(26,115,232,0.18) 50%, rgba(26,115,232,0.08) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.2s infinite;
+            border-radius: 5px;
+            vertical-align: middle;
+        }
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        .submit-btn {
+        /* ---- Animated Gradient Button ---- */
+        @keyframes gradient-sweep {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .place-order-btn {
+            position: relative;
             width: 100%;
-            background: linear-gradient(135deg, #1a73e8, #0d5bb8);
             color: #fff;
             border: none;
+            background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
+            background-size: 300% 100%;
+            animation: gradient-sweep 3s ease infinite;
             border-radius: 100px;
-            padding: 17px;
-            font-size: 16px;
+            padding: 16px 32px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            margin-top: 24px;
-            transition: opacity 0.2s, transform 0.15s;
+            margin-top: 20px;
+            transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
             letter-spacing: 0.02em;
             display: block;
         }
-        .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .submit-btn:active { transform: translateY(0); }
+        .place-order-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 100px;
+            padding: 1.5px;
+            background: linear-gradient(135deg, #60a5fa, #bae6fd, #93c5fd, #60a5fa);
+            background-size: 300% 100%;
+            animation: gradient-sweep 3s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .place-order-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(26,115,232,0.5);
+        }
+        .place-order-btn:active:not(:disabled) { transform: translateY(0); }
+        .place-order-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            animation: none;
+            background: linear-gradient(135deg, #8aabcc, #7a9abf);
+        }
+        .place-order-btn:disabled::before { display: none; }
 
         .secure-note {
             text-align: center;
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 14px;
+            font-size: 11px;
+            color: rgba(10,30,80,0.45);
+            margin-top: 11px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-<nav class="nav">
-    <a href="index.html" class="nav-logo">ZELYTE</a>
+<!-- Floating Header -->
+<div class="header-bar">
+    <a href="index.html" class="nav-logo">
+        <img src="Zelyte (3).png" alt="ZELYTE">
+    </a>
+    <div class="nav-spacer"></div>
     <a href="javascript:history.back()" class="nav-back">&#8592; Back</a>
-</nav>
+</div>
 
 <div class="page">
 
-    <!-- Left: Customer form -->
+    <!-- Left Column: Form -->
     <div class="form-col">
+
+        <!-- Your Information -->
         <div class="card">
             <div class="section-label">Your Information</div>
-            <form id="checkout-form" novalidate>
-                <div class="form-row">
-                    <div class="field">
-                        <label for="fname">First Name</label>
-                        <input type="text" id="fname" name="fname" placeholder="Jane" autocomplete="given-name">
-                        <span class="field-error" id="fname-err">First name is required</span>
-                    </div>
-                    <div class="field">
-                        <label for="lname">Last Name</label>
-                        <input type="text" id="lname" name="lname" placeholder="Smith" autocomplete="family-name">
-                        <span class="field-error" id="lname-err">Last name is required</span>
-                    </div>
+            <div class="form-row">
+                <div class="field">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="fname" placeholder="Jane" autocomplete="given-name">
+                    <span class="field-error" id="fname-err">First name is required</span>
                 </div>
-                <div class="form-row single">
-                    <div class="field">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
-                        <span class="field-error" id="email-err">Enter a valid email address</span>
-                    </div>
+                <div class="field">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lname" placeholder="Smith" autocomplete="family-name">
+                    <span class="field-error" id="lname-err">Last name is required</span>
                 </div>
-
-                <div class="shipping-header">
-                    <div class="section-label">Shipping Address</div>
+            </div>
+            <div class="form-row single">
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
+                    <span class="field-error" id="email-err">Enter a valid email address</span>
                 </div>
-
-                <div class="form-row single">
-                    <div class="field">
-                        <label for="addr1">Address Line 1</label>
-                        <input type="text" id="addr1" name="addr1" placeholder="123 Main St" autocomplete="address-line1">
-                        <span class="field-error" id="addr1-err">Address is required</span>
-                    </div>
-                </div>
-                <div class="form-row single">
-                    <div class="field">
-                        <label for="addr2">Address Line 2 <span class="opt">(optional)</span></label>
-                        <input type="text" id="addr2" name="addr2" placeholder="Apt 4B" autocomplete="address-line2">
-                    </div>
-                </div>
-                <div class="form-row triple">
-                    <div class="field">
-                        <label for="city">City</label>
-                        <input type="text" id="city" name="city" placeholder="Austin" autocomplete="address-level2">
-                        <span class="field-error" id="city-err">City is required</span>
-                    </div>
-                    <div class="field">
-                        <label for="state">State</label>
-                        <input type="text" id="state" name="state" placeholder="TX" maxlength="2" autocomplete="address-level1">
-                        <span class="field-error" id="state-err">Required</span>
-                    </div>
-                    <div class="field">
-                        <label for="zip">ZIP Code</label>
-                        <input type="text" id="zip" name="zip" placeholder="78701" maxlength="10" autocomplete="postal-code">
-                        <span class="field-error" id="zip-err">Required</span>
-                    </div>
-                </div>
-                <div class="form-row single">
-                    <div class="field">
-                        <label for="country">Country</label>
-                        <select id="country" name="country" autocomplete="country-name">
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="GB">United Kingdom</option>
-                            <option value="AU">Australia</option>
-                            <option value="NZ">New Zealand</option>
-                            <option value="IE">Ireland</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
+
+        <!-- Shipping Address -->
+        <div class="card">
+            <div class="section-label">Shipping Address</div>
+            <div class="form-row single">
+                <div class="field">
+                    <label for="addr1">Address Line 1</label>
+                    <input type="text" id="addr1" name="addr1" placeholder="123 Main St" autocomplete="address-line1">
+                    <span class="field-error" id="addr1-err">Address is required</span>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="field">
+                    <label for="addr2">Address Line 2 <span class="opt">(optional)</span></label>
+                    <input type="text" id="addr2" name="addr2" placeholder="Apt 4B" autocomplete="address-line2">
+                </div>
+            </div>
+            <div class="form-row triple">
+                <div class="field">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="Austin" autocomplete="address-level2">
+                    <span class="field-error" id="city-err">City is required</span>
+                </div>
+                <div class="field">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" placeholder="TX" maxlength="2" autocomplete="address-level1">
+                    <span class="field-error" id="state-err">Required</span>
+                </div>
+                <div class="field">
+                    <label for="zip">ZIP Code</label>
+                    <input type="text" id="zip" name="zip" placeholder="78701" maxlength="10" autocomplete="postal-code">
+                    <span class="field-error" id="zip-err">Required</span>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="field">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" autocomplete="country-name">
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="AU">Australia</option>
+                        <option value="NZ">New Zealand</option>
+                        <option value="IE">Ireland</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="card">
+            <div class="section-label">Payment</div>
+            <div class="stripe-loading" id="stripe-loading">
+                <div class="spinner"></div>
+                Loading payment form&hellip;
+            </div>
+            <div id="stripe-payment-element"></div>
+            <div class="stripe-error-banner" id="stripe-error"></div>
+        </div>
+
     </div>
 
-    <!-- Right: Order summary -->
+    <!-- Right Column: Order Summary -->
     <div class="order-col">
         <div class="card">
             <div class="section-label">Order Summary</div>
@@ -313,7 +420,7 @@
             </div>
             <div class="summary-line">
                 <span id="summary-desc">Crispy Mint 3-Pack</span>
-                <span id="summary-price">$0.00</span>
+                <span id="summary-price"><span class="price-skeleton"></span></span>
             </div>
             <div class="summary-line">
                 <span>Shipping</span>
@@ -321,20 +428,20 @@
             </div>
             <div class="summary-line total">
                 <span>Total</span>
-                <span>$0.00</span>
-            </div>
-            <div class="test-badge">
-                &#9888;&#65039; Test mode — no payment collected.
+                <span id="summary-total"><span class="price-skeleton"></span></span>
             </div>
         </div>
 
-        <button class="submit-btn" id="place-order-btn" type="button">Place Order</button>
-        <div class="secure-note">&#128274; Secure checkout</div>
+        <button class="place-order-btn" id="place-order-btn" type="button" disabled>Place Order</button>
+        <div class="secure-note">&#128274; Secure &amp; encrypted checkout</div>
     </div>
 
 </div>
 
+<script src="https://js.stripe.com/v3/"></script>
 <script>
+    const STRIPE_PK = 'pk_live_51Smf0bEQRyWAWeKLcRcB1UGwfpzHuXE1eKb9u8VrfCgyv4zflshuWiE2eployxp5wqJuMNsgGLPhgOKU5nUPUrRg007FisTTBs';
+
     const params = new URLSearchParams(window.location.search);
     const pack = params.get('pack') || '3';
     const mode = params.get('mode') || 'subscribe';
@@ -348,26 +455,74 @@
     document.getElementById('summary-sub').textContent  = modeLabel;
     document.getElementById('summary-desc').textContent = `${packLabel}${qtyLabel}`;
 
+    let stripeInstance, stripeElements;
+
+    async function initStripe() {
+        try {
+            const res = await fetch('/api/payment-intent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pack, mode, qty })
+            });
+            const data = await res.json();
+            if (!data.clientSecret) throw new Error(data.error || 'Failed to initialize');
+
+            const dollars = (data.amount / 100).toFixed(2);
+            document.getElementById('summary-price').textContent = `$${dollars}`;
+            document.getElementById('summary-total').textContent = `$${dollars}`;
+
+            stripeInstance = Stripe(STRIPE_PK);
+            stripeElements = stripeInstance.elements({
+                clientSecret: data.clientSecret,
+                appearance: {
+                    theme: 'stripe',
+                    variables: {
+                        colorPrimary: '#1a73e8',
+                        borderRadius: '10px',
+                        fontFamily: 'Poppins, system-ui, sans-serif',
+                        colorBackground: 'rgba(255,255,255,0.85)',
+                    }
+                }
+            });
+
+            document.getElementById('stripe-loading').style.display = 'none';
+            const paymentEl = stripeElements.create('payment');
+            paymentEl.mount('#stripe-payment-element');
+
+            document.getElementById('place-order-btn').disabled = false;
+
+        } catch (err) {
+            document.getElementById('stripe-loading').style.display = 'none';
+            const banner = document.getElementById('stripe-error');
+            banner.textContent = 'Could not load payment form. Please refresh and try again.';
+            banner.classList.add('visible');
+        }
+    }
+
+    initStripe();
+
     function checkRequired(id) {
         const el = document.getElementById(id);
         const ok = el.value.trim().length > 0;
-        const errEl = document.getElementById(id + '-err');
         el.classList.toggle('error', !ok);
-        if (errEl) errEl.classList.toggle('visible', !ok);
+        const err = document.getElementById(id + '-err');
+        if (err) err.classList.toggle('visible', !ok);
         return ok;
     }
 
     function checkEmail(id) {
         const el = document.getElementById(id);
         const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
-        const errEl = document.getElementById(id + '-err');
         el.classList.toggle('error', !ok);
-        if (errEl) errEl.classList.toggle('visible', !ok);
+        const err = document.getElementById(id + '-err');
+        if (err) err.classList.toggle('visible', !ok);
         return ok;
     }
 
-    document.getElementById('place-order-btn').addEventListener('click', function () {
-        const results = [
+    document.getElementById('place-order-btn').addEventListener('click', async function () {
+        const btn = this;
+
+        const valid = [
             checkRequired('fname'),
             checkRequired('lname'),
             checkEmail('email'),
@@ -375,15 +530,33 @@
             checkRequired('city'),
             checkRequired('state'),
             checkRequired('zip'),
-        ];
-        if (!results.every(Boolean)) {
-            document.querySelector('input.error, select.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        ].every(Boolean);
+
+        if (!valid) {
+            document.querySelector('input.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
-        // TODO: When ready to charge, replace this with a /api/payment-intent call →
-        // Stripe Elements mount → stripeInstance.confirmPayment() → success.html.
-        window.location.href = `/success.html?pack=${encodeURIComponent(pack)}&mode=${encodeURIComponent(mode)}&qty=${encodeURIComponent(qty)}`;
+        btn.disabled = true;
+        btn.textContent = 'Processing…';
+
+        const errorEl = document.getElementById('stripe-error');
+        errorEl.classList.remove('visible');
+
+        const returnUrl = `${window.location.origin}/success.html?pack=${encodeURIComponent(pack)}&mode=${encodeURIComponent(mode)}&qty=${encodeURIComponent(qty)}`;
+
+        const { error } = await stripeInstance.confirmPayment({
+            elements: stripeElements,
+            confirmParams: { return_url: returnUrl },
+        });
+
+        if (error) {
+            errorEl.textContent = error.message;
+            errorEl.classList.add('visible');
+            btn.disabled = false;
+            btn.textContent = 'Place Order';
+            errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     });
 
     document.querySelectorAll('input, select').forEach(el => {
