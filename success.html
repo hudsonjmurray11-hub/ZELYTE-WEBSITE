@@ -24,38 +24,84 @@
             border-radius: 24px;
             padding: 60px 48px;
             max-width: 480px;
+            width: 100%;
         }
         .check {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #1a73e8, #0d5bb8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 28px;
         }
         h1 {
             font-size: 2rem;
             font-weight: 800;
             margin-bottom: 12px;
         }
-        p {
+        .tagline {
             color: rgba(255,255,255,0.72);
             line-height: 1.6;
+            margin-bottom: 28px;
+        }
+        .order-detail {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 16px 20px;
             margin-bottom: 32px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+        }
+        .order-detail .label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 6px;
+        }
+        .order-detail .value {
+            font-weight: 600;
+            font-size: 15px;
         }
         a {
             display: inline-block;
             background: #fff;
             color: #0d2357;
             font-weight: 700;
-            padding: 14px 32px;
+            padding: 14px 36px;
             border-radius: 100px;
             text-decoration: none;
+            transition: opacity 0.2s;
         }
+        a:hover { opacity: 0.88; }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="check">✓</div>
+        <div class="check">&#10003;</div>
         <h1>Order Confirmed!</h1>
-        <p>Thanks for your order. You'll receive a confirmation email shortly. Welcome to the ZELYTE team.</p>
+        <p class="tagline">Thanks for your order. You'll receive a confirmation email shortly. Welcome to the ZELYTE team.</p>
+        <div class="order-detail" id="order-detail" style="display:none">
+            <div class="label">Your Order</div>
+            <div class="value" id="order-value"></div>
+        </div>
         <a href="index.html">Back to Home</a>
     </div>
+    <script>
+        const p = new URLSearchParams(window.location.search);
+        const pack = p.get('pack');
+        const mode = p.get('mode');
+        const qty  = parseInt(p.get('qty') || '1', 10);
+        if (pack && mode) {
+            const modeLabel = mode === 'subscribe' ? 'Subscribe & Save' : 'One-Time Purchase';
+            const qtyLabel  = qty > 1 ? ` × ${qty}` : '';
+            document.getElementById('order-value').textContent = `Crispy Mint ${pack}-Pack${qtyLabel} · ${modeLabel}`;
+            document.getElementById('order-detail').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
