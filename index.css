@@ -918,7 +918,7 @@ body {
 .compare-inner {
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 48px;
 }
 
 .compare-content-zone {
@@ -927,10 +927,15 @@ body {
     gap: 36px;
 }
 
+.section-compare .section-label {
+    font-size: 1rem;
+    letter-spacing: 4px;
+}
+
 .compare-heading {
     font-family: 'Poppins', system-ui, sans-serif;
     font-weight: 900;
-    font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+    font-size: clamp(2.6rem, 5vw, 4rem);
     line-height: 1.0;
     text-transform: uppercase;
     letter-spacing: -1px;
@@ -952,37 +957,37 @@ body {
     border-collapse: collapse;
 }
 
-.cmat-attr-head { width: 38%; }
+.cmat-attr-head { width: 35%; }
 
 .cmat-col-head {
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #999;
     text-align: center;
-    padding: 0 12px 22px;
+    padding: 0 16px 28px;
     line-height: 1.4;
     border-bottom: 2px solid #e8eef8;
 }
 
 .zcol-head {
     color: #1a73e8;
-    font-size: 0.76rem;
+    font-size: 0.9rem;
 }
 
 .cmat-attr {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #0d2357;
-    padding: 20px 16px 20px 0;
+    padding: 24px 20px 24px 0;
     border-bottom: 1px solid #edf2fb;
     line-height: 1.4;
 }
 
 .cmatrix tbody td {
     text-align: center;
-    padding: 16px 12px;
+    padding: 20px 16px;
     border-bottom: 1px solid #edf2fb;
     vertical-align: middle;
 }
@@ -999,8 +1004,8 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #0d2357;
     flex-shrink: 0;
@@ -1009,15 +1014,15 @@ body {
 .cmark::after {
     content: '✓';
     color: #fff;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1;
 }
 
 .cempty {
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1.5px solid #dde4f0;
     flex-shrink: 0;
@@ -1027,8 +1032,8 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1.5px solid #dde4f0;
     flex-shrink: 0;
