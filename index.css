@@ -1650,9 +1650,20 @@ body {
 .bundle-features li {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.82);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+.bundle-features li svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #60a5fa;
 }
 .bundle-featured .bundle-features { border-top-color: rgba(255, 255, 255, 0.22); }
 .bundle-featured .bundle-features li { color: rgba(255, 255, 255, 0.88); }
+.bundle-featured .bundle-features li svg { color: #fff; }
 
 .bundle-cta {
     display: inline-block;
@@ -1677,6 +1688,19 @@ body {
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
     color: #0d5bb8;
     background: #f0f4ff;
+}
+
+.bundle-cta-gradient {
+    background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
+    background-size: 300% 100%;
+    animation: gradient-sweep 3s ease infinite;
+    color: #fff;
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 18px rgba(26, 115, 232, 0.45);
+}
+.bundle-cta-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(26, 115, 232, 0.6);
 }
 
 .bundles-grid .reveal-left.in-view  { transition-delay: 0s; }
