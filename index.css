@@ -749,7 +749,7 @@ body {
 
 .section-label {
     display: block;
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 2.5px;
     color: #1a73e8;
@@ -779,7 +779,7 @@ body {
 /* =====================
    WHAT IS ZELYTE
    ===================== */
-.section-what { background: #0d2357; margin-top: 24px; border-radius: 32px; overflow: hidden; margin-left: 24px; margin-right: 24px; width: calc(100% - 48px); }
+.section-what { background: #0d2357; margin-top: 24px; margin-bottom: 48px; border-radius: 32px; overflow: hidden; margin-left: 24px; margin-right: 24px; width: calc(100% - 48px); }
 
 .section-what .section-label { color: rgba(255, 255, 255, 0.7); }
 .section-what .section-inner h2 { background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -787,7 +787,7 @@ body {
 
 .section-what .what-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
 .section-what .what-card strong { color: #7dd3fc; }
-.section-what .what-card p { color: rgba(255, 255, 255, 0.72); }
+.section-what .what-card p { color: rgba(255, 255, 255, 0.88); }
 
 .what-cards {
     display: grid;
@@ -833,7 +833,7 @@ body {
     position: relative;
     border-radius: 32px;
     overflow: hidden;
-    margin: 0 24px;
+    margin: 0 24px 48px;
     width: calc(100% - 48px);
 }
 
@@ -913,7 +913,13 @@ body {
 /* =====================
    HOW ZELYTE COMPARES
    ===================== */
-.section-compare { background: #fff; }
+.section-compare {
+    background: #1a3a6e;
+    border-radius: 32px;
+    margin: 0 24px 48px;
+    width: calc(100% - 48px);
+    overflow: hidden;
+}
 
 .compare-inner {
     display: flex;
@@ -930,6 +936,11 @@ body {
 .section-compare .section-label {
     font-size: 1rem;
     letter-spacing: 4px;
+    color: rgba(255,255,255,0.7);
+}
+
+.section-compare .section-sub {
+    color: rgba(255,255,255,0.75);
 }
 
 .compare-heading {
@@ -940,7 +951,7 @@ body {
     text-transform: uppercase;
     letter-spacing: -1px;
     margin: 10px 0 0;
-    background: linear-gradient(135deg, #1565c0 0%, #1e90ff 40%, #5ab4ff 72%, #1e90ff 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 50%, #7dd3fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1007,7 +1018,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #0d2357;
+    background: #f59e0b;
     flex-shrink: 0;
 }
 
@@ -1048,6 +1059,37 @@ body {
     border-radius: 2px;
 }
 
+.section-compare .cmat-col-head {
+    color: rgba(255,255,255,0.6);
+    border-bottom-color: rgba(255,255,255,0.15);
+}
+
+.section-compare .cmat-attr {
+    color: rgba(255,255,255,0.90);
+    border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.section-compare .cmatrix tbody td {
+    border-bottom-color: rgba(255,255,255,0.10);
+}
+
+.section-compare .zcol {
+    background: rgba(255,255,255,0.08);
+}
+
+.section-compare .zcol-head {
+    color: #7dd3fc;
+}
+
+.section-compare .cempty,
+.section-compare .cpartial {
+    border-color: rgba(255,255,255,0.25);
+}
+
+.section-compare .cpartial::after {
+    background: rgba(255,255,255,0.35);
+}
+
 @media (max-width: 900px) {
     .compare-heading { font-size: 2.6rem; }
 }
@@ -1056,12 +1098,16 @@ body {
    BENEFITS
    ===================== */
 .section-benefits {
-    background: #fff;
+    background: #1a3a6e;
+    border-radius: 32px;
+    margin: 0 24px 48px;
+    width: calc(100% - 48px);
+    overflow: hidden;
     position: relative;
 }
 
 .section-benefits .section-label {
-    color: #1a73e8;
+    color: #f59e0b;
 }
 
 .benefits-headline {
@@ -1071,42 +1117,48 @@ body {
     background-clip: text;
 }
 
+.section-benefits .section-sub {
+    color: rgba(255,255,255,0.75);
+}
+
 .section-benefits .section-inner > h2 {
     color: unset;
     -webkit-text-fill-color: transparent;
-    background: linear-gradient(135deg, #1565c0 0%, #1e90ff 40%, #5ab4ff 72%, #1e90ff 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 50%, #7dd3fc 100%);
     -webkit-background-clip: text;
     background-clip: text;
 }
 
 .section-benefits .benefit-card {
-    background: #f6f9ff;
-    border: 1px solid #e0eaff;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-top: 3px solid #7dd3fc;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .section-benefits .benefit-card:hover {
-    background: #edf2ff;
-    box-shadow: 0 12px 32px rgba(26, 115, 232, 0.12);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
     transform: translateY(-4px);
 }
 
-.section-benefits .benefit-card h3 { color: #0d2357; }
-.section-benefits .benefit-card p  { color: #555; }
+.section-benefits .benefit-card h3 { color: #ffffff; font-size: 1.2rem; }
+.section-benefits .benefit-card p  { color: rgba(255,255,255,0.82); font-size: 1rem; }
 
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 32px;
     margin-top: 52px;
 }
 
 .benefit-card {
     background: #fff;
     border-radius: 16px;
-    padding: 32px 28px;
-    border: 1px solid #eee;
+    padding: 36px 32px;
+    border: 1px solid #e0eaff;
+    border-top: 3px solid #1a73e8;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .benefit-card:hover {
@@ -1120,22 +1172,31 @@ body {
 }
 
 .benefit-card h3 {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #1e90ff;
     margin-bottom: 10px;
 }
 
 .benefit-card p {
-    color: #555;
-    font-size: 0.9rem;
+    color: #3a3a3a;
+    font-size: 1rem;
     line-height: 1.65;
 }
 
 /* =====================
    FLAVORS
    ===================== */
-.section-flavors { background: #fff; position: relative; overflow: hidden; }
+.section-flavors {
+    background: #ffffff;
+    border-radius: 32px;
+    margin: 0 24px 48px;
+    width: calc(100% - 48px);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #edf2fb;
+    box-shadow: 0 2px 40px rgba(26, 115, 232, 0.07);
+}
 .section-flavors .section-inner { position: relative; z-index: 2; }
 
 @keyframes fly-ltr {
@@ -1476,7 +1537,7 @@ body {
     padding: 100px 40px;
     border-radius: 32px;
     overflow: hidden;
-    margin: 0 24px;
+    margin: 0 24px 48px;
     position: relative;
 }
 
@@ -1656,7 +1717,7 @@ body {
 }
 .bundle-features li {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.90);
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -1708,6 +1769,8 @@ body {
 .bundle-cta-gradient:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 28px rgba(26, 115, 232, 0.6);
+    background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #c97e0a);
+    background-size: 300% 100%;
 }
 
 .bundles-grid .reveal-left.in-view  { transition-delay: 0s; }
@@ -1749,10 +1812,15 @@ body {
    EMAIL SIGNUP
    ===================== */
 .section-email-signup {
-    background: #fff;
-    width: 100%;
+    background: #ffffff;
+    width: calc(100% - 48px);
     padding: 100px 40px;
     text-align: center;
+    border-radius: 32px;
+    margin: 0 24px 48px;
+    overflow: hidden;
+    border: 1px solid #edf2fb;
+    box-shadow: 0 2px 40px rgba(26, 115, 232, 0.07);
 }
 
 .section-email-signup .section-sub {
@@ -1915,7 +1983,8 @@ body {
     .section-science,
     .section-reviews,
     .section-faq,
-    .section-bundles { padding: 72px 20px; }
+    .section-bundles,
+    .section-email-signup { padding: 72px 20px; }
 
     .hero-section {
         padding: 100px 20px 48px;
@@ -2071,13 +2140,15 @@ body {
 
 /* ── Our Story ── */
 .section-story {
-    padding: 100px 40px;
-    background: #0d2357;
+    padding: 120px 60px;
+    background: #ffffff;
     overflow: hidden;
     border-radius: 32px;
-    margin: 0 24px;
+    margin: 0 24px 48px;
     width: calc(100% - 48px);
     position: relative;
+    border: 1px solid #edf2fb;
+    box-shadow: 0 2px 40px rgba(26, 115, 232, 0.07);
 }
 
 .story-inner {
@@ -2088,14 +2159,30 @@ body {
     align-items: center;
 }
 
+.story-inner::before {
+    content: '\201C';
+    position: absolute;
+    top: -60px;
+    left: -10px;
+    font-size: 22rem;
+    font-family: 'Poppins', sans-serif;
+    color: #0d2357;
+    opacity: 0.04;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
 .story-badge {
     display: inline-block;
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.12);
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
     border-radius: 100px;
     padding: 6px 14px;
     margin-bottom: 20px;
@@ -2103,11 +2190,11 @@ body {
 
 .section-story h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-size: clamp(3rem, 5vw, 4rem);
     font-weight: 800;
     letter-spacing: -1px;
     line-height: 1.1;
-    background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%);
+    background: linear-gradient(135deg, #1565c0 0%, #1e90ff 40%, #5ab4ff 72%, #1e90ff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2125,7 +2212,7 @@ body {
 
 .story-body p {
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.82);
+    color: #444;
     line-height: 1.9;
     margin-bottom: 18px;
 }
@@ -2143,19 +2230,19 @@ body {
 .story-founder {
     margin-top: 36px;
     padding-top: 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid rgba(26, 115, 232, 0.15);
 }
 
 .founder-name {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #fff;
+    color: #0d2357;
     margin: 0;
 }
 
 .founder-title {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: #666;
     margin: 4px 0 0;
 }
 
