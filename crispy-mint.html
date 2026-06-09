@@ -12,6 +12,23 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 16px;
+            z-index: 9999;
+            padding: 12px 20px;
+            background: #1a73e8;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 0 0 8px 8px;
+            text-decoration: none;
+            transition: top 0.15s;
+        }
+        .skip-link:focus { top: 0; }
+
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: #ffffff;
@@ -257,8 +274,8 @@
         .glass-desc     { padding: 12px 18px; }
 
         /* ---- Text Styles ---- */
-        .breadcrumb { font-size: 0.8rem; color: rgba(255,255,255,0.8); font-weight: 600; letter-spacing: 0.5px; }
-        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .breadcrumb { font-size: 0.8rem; color: rgba(255,255,255,0.92); font-weight: 600; letter-spacing: 0.5px; }
+        .breadcrumb a { color: rgba(255,255,255,0.92); text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
 
         .product-label {
@@ -334,7 +351,7 @@
 
         .price-row { display: flex; align-items: baseline; gap: 8px; }
         .price-main { font-size: 2.2rem; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .price-meta { font-size: 0.95rem; color: rgba(255,255,255,0.7); }
+        .price-meta { font-size: 0.95rem; color: rgba(255,255,255,0.92); }
 
         .coming-soon-badge {
             display: inline-flex;
@@ -353,10 +370,10 @@
         }
 
         .purchase-row { display: flex; flex-direction: column; gap: 8px; }
-        .purchase-row label {
+        .purchase-row label { /* color updated below for contrast */
             font-size: 0.8rem;
             font-weight: 700;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.92);
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
@@ -369,14 +386,18 @@
             background: rgba(255,255,255,0.15);
             color: #fff;
             width: 100%;
-            outline: none;
-            transition: border-color 0.2s;
+            outline: 2px solid transparent;
+            transition: border-color 0.2s, outline-color 0.2s;
             backdrop-filter: blur(8px);
         }
         .purchase-row select option { background: #1a73e8; color: #fff; }
-        .purchase-row input::placeholder { color: rgba(255,255,255,0.5); }
+        .purchase-row input::placeholder { color: rgba(255,255,255,0.75); }
         .purchase-row select:focus,
-        .purchase-row input:focus { border-color: rgba(255,255,255,0.7); }
+        .purchase-row input:focus {
+            border-color: rgba(255,255,255,0.92);
+            outline: 3px solid rgba(255,255,255,0.9);
+            outline-offset: 2px;
+        }
 
         .qty-row {
             display: flex;
@@ -648,7 +669,7 @@
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.9);
         }
         .bso-orig-price {
             font-size: 0.72rem;
@@ -749,11 +770,11 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.9);
         }
         .pb-name { font-size: 1rem; font-weight: 800; color: #fff; }
         .pb-price { font-size: 1.55rem; font-weight: 900; color: #fff; line-height: 1; margin-top: 2px; }
-        .pb-per { font-size: 0.68rem; color: rgba(255,255,255,0.55); }
+        .pb-per { font-size: 0.68rem; color: rgba(255,255,255,0.9); }
         .pb-savings {
             font-size: 0.72rem;
             font-weight: 700;
@@ -815,7 +836,7 @@
         .prod-heading { font-size: 2.6rem; font-weight: 800; color: #0d5bb8; line-height: 1.1; }
         .prod-rating { display: flex; align-items: center; gap: 8px; }
         .prod-rating .stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
-        .rating-text { font-size: 0.95rem; color: #7a99c4; font-weight: 600; }
+        .rating-text { font-size: 0.95rem; color: #4d6e9e; font-weight: 600; }
 
         /* Variant pills — white/blue */
         .variant-pill-wrap { display: flex; gap: 12px; }
@@ -1266,6 +1287,9 @@
             cursor: pointer;
             transition: background 0.2s;
             z-index: 1;
+            text-align: left;
+            width: 100%;
+            font-family: inherit;
         }
         .pack-card:hover { background: #eef4ff; }
         .pack-card-left { display: flex; flex-direction: column; gap: 3px; }
@@ -1288,7 +1312,7 @@
         }
         .pack-card-sub {
             font-size: 0.88rem;
-            color: #7a99c4;
+            color: #4d6e9e;
             font-weight: 500;
         }
         .pack-card-right {
@@ -1306,7 +1330,7 @@
         }
         .pack-card-orig {
             font-size: 0.85rem;
-            color: #b0bec5;
+            color: #8294a3;
             text-decoration: line-through;
             min-height: 1.2em;
         }
@@ -1444,6 +1468,7 @@
             packCards.forEach(card => {
                 card.addEventListener('click', () => {
                     selectedPack = card.dataset.pack;
+                    packCards.forEach(c => c.setAttribute('aria-pressed', c.dataset.pack === selectedPack ? 'true' : 'false'));
                     updateBorderPosition();
                     const saveEl = document.getElementById('pack-save-line');
                     if (saveEl) saveEl.textContent = PACK_PRICES[currentMode][selectedPack].save;
@@ -1474,6 +1499,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
     <div id="header-bar" class="header-bar">
@@ -1495,23 +1521,23 @@
         <a href="index.html" class="shop-button gradient-button">Home</a>
     </div>
 
-    <div class="page-wrap">
+    <main id="main-content" class="page-wrap">
 
         <!-- Product Hero -->
         <div class="product-hero">
 
             <!-- Image -->
             <div class="product-img-col">
-                <div class="swiper product-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin"></div>
-                        <div class="swiper-slide"><img src="ElevenLabs_image_topaz-image-upscale_2026-06-02T13_56_08.png" alt="Crispy Mint Product"></div>
-                        <div class="swiper-slide"><img src="ElevenLabs_image_nano-banana-2_recreate the..._2026-06-02T14_10_38.png" alt="Crispy Mint Product"></div>
+                <div class="swiper product-swiper" aria-label="Product images" aria-roledescription="carousel">
+                    <div class="swiper-wrapper" aria-live="off">
+                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 1 of 3"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin"></div>
+                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 2 of 3"><img src="ElevenLabs_image_topaz-image-upscale_2026-06-02T13_56_08.png" alt="Crispy Mint Product"></div>
+                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 3 of 3"><img src="ElevenLabs_image_nano-banana-2_recreate the..._2026-06-02T14_10_38.png" alt="Crispy Mint Product"></div>
                     </div>
                 </div>
                 <div class="swiper-nav-row">
-                    <button class="swiper-nav-btn" id="swiper-prev">&#8592;</button>
-                    <button class="swiper-nav-btn" id="swiper-next">&#8594;</button>
+                    <button class="swiper-nav-btn" id="swiper-prev" aria-label="Previous image">&#8592;</button>
+                    <button class="swiper-nav-btn" id="swiper-next" aria-label="Next image">&#8594;</button>
                 </div>
             </div>
 
@@ -1577,7 +1603,7 @@
                     <div class="pack-cards-wrap" id="pack-cards-wrap">
                         <div class="pack-selected-border" id="pack-selected-border"></div>
 
-                        <div class="pack-card" data-pack="3">
+                        <button class="pack-card" data-pack="3" type="button" aria-pressed="true">
                             <div class="pack-card-left">
                                 <div class="pack-card-name">
                                     3 Pack
@@ -1589,9 +1615,9 @@
                                 <div class="pack-card-price" id="pack-3-price">$27.00</div>
                                 <div class="pack-card-orig" id="pack-3-orig">$30.00</div>
                             </div>
-                        </div>
+                        </button>
 
-                        <div class="pack-card" data-pack="5">
+                        <button class="pack-card" data-pack="5" type="button" aria-pressed="false">
                             <div class="pack-card-left">
                                 <div class="pack-card-name">5 Pack</div>
                                 <div class="pack-card-sub" id="pack-5-sub">$9.00 / tin</div>
@@ -1600,7 +1626,7 @@
                                 <div class="pack-card-price" id="pack-5-price">$45.00</div>
                                 <div class="pack-card-orig" id="pack-5-orig">$50.00</div>
                             </div>
-                        </div>
+                        </button>
                     </div>
 
                     <!-- Subscribe benefits (shown only in subscribe mode) -->
@@ -1739,7 +1765,7 @@
             </div>
             <div class="howto-note">One tin contains 15 pouches &nbsp;·&nbsp; Use one pouch per session for best results.</div>
         </section>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -1751,6 +1777,8 @@
                 <a href="index.html#about">About</a>
                 <a href="index.html#science">Science</a>
                 <a href="crispy-mint.html">Shop</a>
+                <a href="terms.html">Terms</a>
+                <a href="accessibility.html">Accessibility</a>
             </div>
             <p class="footer-legal">© 2026 ZELYTE Inc. All rights reserved. This product has not been evaluated by the FDA and is not intended to diagnose, treat, cure, or prevent any disease.</p>
         </div>

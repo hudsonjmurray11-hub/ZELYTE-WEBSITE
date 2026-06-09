@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Splash Screen -->
     <div id="splash-screen">
         <iframe src="zelyte-3d-logo.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
@@ -92,9 +93,10 @@
         </div>
     </div>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
-        <div class="pouch-scene" id="pouchScene"></div>
+        <div class="pouch-scene" id="pouchScene" aria-hidden="true"></div>
         <div class="hero-content">
             <div class="hero-badge">ZERO SUGAR &nbsp;·&nbsp; ZERO CALORIES &nbsp;·&nbsp; HANDS-FREE</div>
             <h1><span class="hero-blue">HYDRATION THAT</span><br><span class="hero-gold">MOVES WITH YOU.</span></h1>
@@ -402,6 +404,7 @@
             <h2 class="reveal-up">Be the first to know.</h2>
             <p class="section-sub reveal-up">Early access, new flavors, and exclusive drops — straight to your inbox. No spam, ever.</p>
             <form id="email-signup-form" class="email-signup-form reveal-up" novalidate>
+                <label for="signup-email" class="visually-hidden">Email address</label>
                 <input type="email" id="signup-email" class="email-signup-input" placeholder="Enter your email" required>
                 <button type="submit" class="gradient-button email-signup-btn">Get Early Access →</button>
             </form>
@@ -409,6 +412,7 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">
@@ -419,6 +423,8 @@
                 <a href="#about">About</a>
                 <a href="science.html">Science</a>
                 <a href="crispy-mint.html">Shop</a>
+                <a href="terms.html">Terms</a>
+                <a href="accessibility.html">Accessibility</a>
             </div>
             <p class="footer-legal">© 2026 ZELYTE Inc. All rights reserved. This product has not been evaluated by the FDA and is not intended to diagnose, treat, cure, or prevent any disease.</p>
         </div>
@@ -871,7 +877,7 @@
     </script>
 
     <!-- Liquid Glass SVG Filter -->
-    <div style="position:absolute;width:0;height:0;overflow:hidden;z-index:-1;">
+    <div aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;z-index:-1;">
       <svg xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="liquid-glass-nav" primitiveUnits="objectBoundingBox" x="0" y="0" width="1" height="1">
