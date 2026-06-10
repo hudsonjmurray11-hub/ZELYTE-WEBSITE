@@ -240,6 +240,47 @@
       color: rgba(255,255,255,0.25);
       margin: 14px 0 6px;
     }
+
+    .auth-forgot {
+      display: block;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin: -4px 0 6px;
+      padding: 0;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .auth-forgot:hover { color: rgba(255,255,255,0.65); }
+
+    .auth-back {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 12px;
+      padding: 0;
+      text-align: center;
+      transition: color 0.2s;
+    }
+    .auth-back:hover { color: rgba(255,255,255,0.75); }
+
+    .auth-resend-btn {
+      background: none;
+      border: none;
+      color: #60a5fa;
+      font-size: 0.84rem;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .auth-resend-btn:hover { color: #93c5fd; }
   `;
   document.head.appendChild(styleEl);
 
@@ -258,8 +299,10 @@
       <form id="auth-form" novalidate>
         <input type="email" id="auth-email" class="auth-field" placeholder="Email address" required autocomplete="email">
         <input type="password" id="auth-password" class="auth-field" placeholder="Password (min 6 chars)" required minlength="6" autocomplete="current-password">
+        <button type="button" id="auth-forgot" class="auth-forgot">Forgot password?</button>
         <p id="auth-msg" class="auth-msg"></p>
         <button type="submit" id="auth-submit" class="auth-submit">Sign In</button>
+        <button type="button" id="auth-back" class="auth-back" hidden>← Back to sign in</button>
       </form>
     </div>
   `;
@@ -275,6 +318,8 @@
   const passInp   = document.getElementById('auth-password');
   const msgEl     = document.getElementById('auth-msg');
   const submitBtn = document.getElementById('auth-submit');
+  const forgotBtn = document.getElementById('auth-forgot');
+  const backBtn   = document.getElementById('auth-back');
   const titleEl   = document.getElementById('auth-title');
   const navBtn    = document.getElementById('auth-btn');
 
@@ -298,11 +343,19 @@
 
   function setMode(m) {
     mode = m;
-    const label = m === 'signin' ? 'Sign In' : 'Sign Up';
+    const isReset = m === 'reset';
+    const label = isReset ? 'Reset Password' : (m === 'signin' ? 'Sign In' : 'Sign Up');
     titleEl.textContent = label;
-    submitBtn.textContent = label;
-    passInp.autocomplete = m === 'signin' ? 'current-password' : 'new-password';
-    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === m));
+    submitBtn.textContent = isReset ? 'Send Reset Link' : label;
+    passInp.style.display = isReset ? 'none' : '';
+    passInp.required = !isReset;
+    forgotBtn.style.display = (m === 'signin') ? '' : 'none';
+    backBtn.hidden = !isReset;
+    modal.querySelector('.auth-tabs').style.display = isReset ? 'none' : '';
+    if (!isReset) {
+      passInp.autocomplete = m === 'signin' ? 'current-password' : 'new-password';
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === m));
+    }
     showMsg('');
   }
 
@@ -316,7 +369,7 @@
     if (on) {
       submitBtn.textContent = 'Please wait…';
     } else {
-      submitBtn.textContent = mode === 'signin' ? 'Sign In' : 'Sign Up';
+      submitBtn.textContent = mode === 'reset' ? 'Send Reset Link' : (mode === 'signin' ? 'Sign In' : 'Sign Up');
     }
   }
 
@@ -392,6 +445,24 @@
     tab.addEventListener('click', function () { setMode(tab.dataset.tab); });
   });
 
+  // Forgot password / back
+  forgotBtn.addEventListener('click', function () { setMode('reset'); });
+  backBtn.addEventListener('click', function () { setMode('signin'); });
+
+  // Resend confirmation email (delegated — button injected dynamically into msgEl)
+  msgEl.addEventListener('click', async function (e) {
+    if (e.target.id !== 'auth-resend') return;
+    e.target.disabled = true;
+    e.target.textContent = 'Sending…';
+    const email = emailInp.value.trim();
+    const { error } = await window._sb.auth.resend({ type: 'signup', email });
+    if (error) {
+      showMsg(error.message, 'error');
+    } else {
+      showMsg('Confirmation email resent — check your inbox!', 'success');
+    }
+  });
+
   // Close modal
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', closeModal);
@@ -405,13 +476,15 @@
     const email    = emailInp.value.trim();
     const password = passInp.value;
 
-    if (!email || !password) return;
+    if (!email || (mode !== 'reset' && !password)) return;
 
     setLoading(true);
     showMsg('');
 
     let result;
-    if (mode === 'signin') {
+    if (mode === 'reset') {
+      result = await window._sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
+    } else if (mode === 'signin') {
       result = await window._sb.auth.signInWithPassword({ email, password });
     } else {
       result = await window._sb.auth.signUp({ email, password });
@@ -420,11 +493,21 @@
     setLoading(false);
 
     if (result.error) {
-      showMsg(result.error.message, 'error');
+      const msg = result.error.message;
+      if (mode === 'signin' && msg.toLowerCase().includes('email not confirmed')) {
+        msgEl.innerHTML = 'Email not confirmed. <button type="button" id="auth-resend" class="auth-resend-btn">Resend confirmation</button>';
+        msgEl.className = 'auth-msg error';
+      } else {
+        showMsg(msg, 'error');
+      }
       return;
     }
 
-    if (mode === 'signup') {
+    if (mode === 'reset') {
+      showMsg('Password reset email sent — check your inbox!', 'success');
+      form.reset();
+      setTimeout(() => setMode('signin'), 3000);
+    } else if (mode === 'signup') {
       showMsg('Check your email to confirm your account!', 'success');
       form.reset();
     } else {
