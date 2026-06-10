@@ -1,14 +1,10 @@
-// Email capture popup — timed, dismissible, one-time per visitor.
+// Email capture popup — timed, dismissible, shows on every visit.
 // Requires supabase.js to be loaded first.
-// Uses localStorage key 'zelyte_popup_seen' to suppress after first dismiss/submit.
 
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'zelyte_popup_seen';
-  const DELAY_MS    = 6000;
-
-  if (localStorage.getItem(STORAGE_KEY)) return;
+  const DELAY_MS = 6000;
 
   // ── Styles ─────────────────────────────────────────────────────────────────
   const styleEl = document.createElement('style');
@@ -31,14 +27,16 @@
 
     .ep-modal {
       position: relative;
-      width: 100%;
-      max-width: 420px;
+      width: 90vw;
+      max-width: min(820px, 90vw);
+      max-height: 90vh;
+      overflow-y: auto;
       background: rgba(6,12,28,0.95);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 22px;
-      padding: 44px 36px 36px;
+      padding: 60px 60px 52px;
       box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.04) inset;
       transform: translateY(14px);
       transition: transform 0.3s;
@@ -76,7 +74,7 @@
     }
 
     .ep-headline {
-      font-size: 1.55rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #fff;
       line-height: 1.2;
@@ -85,7 +83,7 @@
     }
 
     .ep-sub {
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       color: rgba(255,255,255,0.5);
       line-height: 1.55;
       margin-bottom: 26px;
@@ -204,7 +202,6 @@
   }
 
   function close() {
-    localStorage.setItem(STORAGE_KEY, '1');
     overlay.classList.remove('ep-open');
     setTimeout(() => overlay.remove(), 300);
   }
@@ -256,7 +253,6 @@
     }
 
     showMsg("You're on the list!", 'success');
-    localStorage.setItem(STORAGE_KEY, '1');
     setTimeout(close, 2500);
   });
 })();
