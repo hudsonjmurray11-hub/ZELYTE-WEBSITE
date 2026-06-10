@@ -814,13 +814,79 @@ main {
 /* =====================
    WHAT IS ZELYTE
    ===================== */
-.section-what { background: #0d2357; margin-top: 24px; margin-bottom: 48px; border-radius: 32px; overflow: hidden; margin-left: 24px; margin-right: 24px; width: calc(100% - 48px); }
+.section-what {
+    background: linear-gradient(135deg, #060f2a 0%, #0d2357 45%, #0e2f6e 100%);
+    margin-top: 24px; margin-bottom: 48px; border-radius: 32px; overflow: hidden;
+    margin-left: 24px; margin-right: 24px; width: calc(100% - 48px);
+    position: relative;
+}
+.section-what::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30,144,255,0.16) 0%, transparent 68%);
+    pointer-events: none;
+    z-index: 0;
+}
+.section-what .section-inner { position: relative; z-index: 1; }
 
-.section-what .section-label { color: rgba(255, 255, 255, 0.7); }
-.section-what .section-inner h2 { background: linear-gradient(135deg, #ffffff 0%, #c7f0ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.section-what .section-sub { color: rgba(255, 255, 255, 0.75); }
+.section-what .section-label { color: rgba(255, 255, 255, 0.65); letter-spacing: 3px; }
+.section-what .section-inner h2 {
+    font-size: 3.2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #7dd3fc 50%, #38bdf8 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-what .section-sub { color: rgba(255, 255, 255, 0.78); max-width: 520px; }
 
-.section-what .what-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
+/* Two-column header: text left, images right */
+.what-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 64px;
+}
+.what-text-col {
+    flex: 1;
+    min-width: 0;
+}
+.what-text-col .section-sub { margin-bottom: 0; }
+.what-images-col {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Tins image — screen blend removes black bg, keeps bright tins */
+.what-tins-img {
+    width: 240px;
+    height: auto;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 8px 28px rgba(30,144,255,0.4));
+}
+
+/* Pouch image — slanted, glow traces the transparent pouch shape */
+.what-pouch-img {
+    width: 180px;
+    height: auto;
+    display: block;
+    transform: rotate(-15deg) translateY(-20px);
+    filter: drop-shadow(0 16px 48px rgba(100, 200, 255, 0.6));
+}
+
+.section-what .what-card {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(100, 180, 255, 0.22);
+    backdrop-filter: blur(6px);
+    transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
+}
+.section-what .what-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(100, 180, 255, 0.5);
+    box-shadow: 0 12px 40px rgba(30, 144, 255, 0.22);
+}
 .section-what .what-card strong { color: #7dd3fc; }
 .section-what .what-card p { color: rgba(255, 255, 255, 0.88); }
 
@@ -2008,6 +2074,11 @@ main {
     .pouch-scene { display: block; }
 
     .section-what { margin-top: 16px; }
+    .what-header { flex-direction: column; gap: 32px; margin-bottom: 40px; }
+    .what-images-col { justify-content: center; }
+    .what-tins-img { width: 150px; }
+    .what-pouch-img { width: 130px; transform: rotate(-12deg) translateY(-10px); }
+    .section-what .section-inner h2 { font-size: 2.2rem; }
 }
 
 @media (max-width: 600px) {
