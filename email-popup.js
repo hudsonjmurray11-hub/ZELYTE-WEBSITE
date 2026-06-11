@@ -213,7 +213,17 @@
 
   // ── Trigger after delay ────────────────────────────────────────────────────
   overlay.style.display = 'none';
-  setTimeout(open, DELAY_MS);
+
+  async function maybeOpen() {
+    if (window._sb) {
+      const { data: { session } } = await window._sb.auth.getSession();
+      if (session) return;
+    }
+    if (sessionStorage.getItem('ep_seen')) return;
+    sessionStorage.setItem('ep_seen', '1');
+    setTimeout(open, DELAY_MS);
+  }
+  maybeOpen();
 
   // ── Events ─────────────────────────────────────────────────────────────────
   closeBtn.addEventListener('click', close);
