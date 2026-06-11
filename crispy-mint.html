@@ -186,7 +186,7 @@
         /* ---- Product Hero Row ---- */
         .product-hero {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             min-height: calc(100vh - 100px);
             gap: 64px;
         }
@@ -198,7 +198,6 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            margin-top: -20px;
         }
 
         .product-swiper {
@@ -206,7 +205,7 @@
             height: 620px;
         }
         .product-swiper .swiper-slide {
-            border-radius: 24px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 40px rgba(13, 35, 87, 0.14), 0 2px 8px rgba(13, 35, 87, 0.07);
         }
@@ -833,7 +832,22 @@
 
         /* ---- New Product Info Section ---- */
         .prod-title-block { display: flex; flex-direction: column; gap: 6px; }
-        .prod-heading { font-size: 2.6rem; font-weight: 800; color: #0d5bb8; line-height: 1.1; }
+
+        @keyframes heading-shine {
+            0%   { background-position: 0% center; }
+            100% { background-position: 100% center; }
+        }
+        .prod-heading {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(90deg, #0d2357 0%, #1565c0 30%, #1a73e8 50%, #60a5fa 70%, #bae6fd 100%);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heading-shine 5s ease-in-out infinite alternate;
+        }
         .prod-rating { display: flex; align-items: center; gap: 8px; }
         .prod-rating .stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
         .rating-text { font-size: 0.95rem; color: #4d6e9e; font-weight: 600; }
@@ -939,50 +953,32 @@
         }
         .action-row .add-cart-btn { width: auto; flex: 1; padding: 14px 16px; }
 
-        /* ── Product hook line ── */
-        .prod-hook {
-            font-size: 0.92rem;
+        /* ── Tagline ── */
+        .prod-tagline {
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #2a4a7f;
-            line-height: 1.5;
+            color: #5a7fa8;
+            line-height: 1.45;
+            margin-top: 2px;
         }
 
-        /* ── 3-card benefit row ── */
-        .prod-benefit-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        .prod-benefit-card {
-            background: #f0f6ff;
-            border: 1px solid #d0e4f8;
-            border-radius: 12px;
-            padding: 10px 8px;
+        /* ── Stat chips ── */
+        .prod-stat-row {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            text-align: center;
+            gap: 7px;
         }
-        .pbc-icon {
-            width: 32px;
-            height: 32px;
-            background: #e0eefb;
-            border-radius: 8px;
-            display: flex;
+        .prod-stat-chip {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .pbc-name {
-            font-size: 0.72rem;
-            font-weight: 800;
+            gap: 5px;
+            background: #eef4ff;
+            border: 1.5px solid #c7d9f5;
+            border-radius: 100px;
+            padding: 6px 11px;
+            font-size: 0.82rem;
+            font-weight: 700;
             color: #0d5bb8;
-        }
-        .pbc-desc {
-            font-size: 0.68rem;
-            color: #5a7fa8;
-            line-height: 1.3;
+            white-space: nowrap;
         }
 
         /* ── Pack select wrapper ── */
@@ -1547,43 +1543,24 @@
 
                 <!-- Title block -->
                 <div class="prod-title-block">
-                    <span class="product-label">Active Hydration Pouch</span>
+                    <span class="product-label">ZELYTE</span>
                     <h1 class="prod-heading">Crispy Mint</h1>
-                    </div>
+                    <p class="prod-tagline">Electrolyte &amp; Caffeine Pouches</p>
+                </div>
 
-                <!-- Hook line -->
-                <p class="prod-hook">An active hydration pouch — electrolytes and caffeine absorbed through your gums, hands-free.</p>
-
-                <!-- 3 benefit cards -->
-                <div class="prod-benefit-row">
-                    <div class="prod-benefit-card">
-                        <div class="pbc-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-                                <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-                            </svg>
-                        </div>
-                        <div class="pbc-name">Hands-Free</div>
-                        <div class="pbc-desc">Absorbs through your gums — no bottle, no interruptions.</div>
+                <!-- Stat chips -->
+                <div class="prod-stat-row">
+                    <div class="prod-stat-chip">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        50mg Caffeine
                     </div>
-                    <div class="prod-benefit-card">
-                        <div class="pbc-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                            </svg>
-                        </div>
-                        <div class="pbc-name">Electrolytes + Caffeine</div>
-                        <div class="pbc-desc">Sodium, potassium, magnesium + 50mg caffeine anhydrous.</div>
+                    <div class="prod-stat-chip">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/></svg>
+                        3 Electrolytes
                     </div>
-                    <div class="prod-benefit-card">
-                        <div class="pbc-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
-                            </svg>
-                        </div>
-                        <div class="pbc-name">Zero Sugar</div>
-                        <div class="pbc-desc">Zero calories. Sweetened with sucralose.</div>
+                    <div class="prod-stat-chip">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                        Zero Sugar
                     </div>
                 </div>
 
@@ -1818,10 +1795,12 @@
     <script>
         new Swiper('.product-swiper', {
             effect: 'cards',
+            cardsEffect: { perSlideOffset: 8, perSlideRotate: 2, rotate: true, slideShadows: false },
             grabCursor: true,
             loop: true,
+            speed: 600,
             autoplay: {
-                delay: 3000,
+                delay: 3500,
                 disableOnInteraction: false,
             },
             navigation: {
