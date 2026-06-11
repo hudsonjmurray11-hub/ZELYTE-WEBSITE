@@ -40,9 +40,7 @@
 
     /* User dropdown */
     .auth-user-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
+      position: fixed;
       background: rgba(10,18,36,0.97);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -421,14 +419,16 @@
         return;
       }
 
+      const rect = navBtn.getBoundingClientRect();
       userMenuEl = document.createElement('div');
       userMenuEl.className = 'auth-user-menu';
+      userMenuEl.style.top  = (rect.bottom + 8) + 'px';
+      userMenuEl.style.right = (window.innerWidth - rect.right) + 'px';
       userMenuEl.innerHTML = `
         <p class="user-email">${session.user.email}</p>
         <button class="menu-signout">Sign Out</button>
       `;
-      navBtn.parentElement.style.position = 'relative';
-      navBtn.parentElement.appendChild(userMenuEl);
+      document.body.appendChild(userMenuEl);
 
       userMenuEl.querySelector('.menu-signout').addEventListener('click', async function () {
         await window._sb.auth.signOut();
