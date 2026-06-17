@@ -1333,18 +1333,6 @@ main {
     position: relative;
 }
 
-.droplets-wrap {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-.droplets-wrap img {
-    position: absolute;
-    user-select: none;
-    -webkit-user-drag: none;
-}
 .section-bundles .section-inner,
 .section-story .story-inner {
     position: relative;
