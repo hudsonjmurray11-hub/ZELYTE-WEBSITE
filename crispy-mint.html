@@ -250,7 +250,6 @@
         }
         .glass-breadcrumb { padding: 7px 16px; border-radius: 100px; width: fit-content; }
         .glass-title    { padding: 16px 20px; }
-        .glass-rating   { padding: 7px 16px; border-radius: 100px; display: flex; align-items: center; width: fit-content; }
         .glass-desc     { padding: 12px 18px; }
 
         /* ---- Text Styles ---- */
@@ -280,9 +279,6 @@
             color: rgba(255,255,255,0.82);
             font-weight: 500;
         }
-        .product-rating { display: flex; align-items: center; gap: 6px; }
-        .product-rating .stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
-        .product-rating .count { font-size: 0.9rem; color: rgba(255,255,255,0.8); font-weight: 600; }
         .product-description { font-size: 0.95rem; color: rgba(255,255,255,0.88); line-height: 1.6; }
 
         /* ---- Feature Tags ---- */
@@ -829,9 +825,6 @@
             background-clip: text;
             animation: heading-shine 5s ease-in-out infinite alternate;
         }
-        .prod-rating { display: flex; align-items: center; gap: 8px; }
-        .prod-rating .stars { color: #fbbf24; font-size: 1rem; letter-spacing: 1px; }
-        .rating-text { font-size: 0.95rem; color: #4d6e9e; font-weight: 600; }
 
         /* Variant pills — white/blue */
         .variant-pill-wrap { display: flex; gap: 12px; }
@@ -1005,6 +998,14 @@
             color: rgba(255,255,255,0.62);
             max-width: 600px;
             line-height: 1.75;
+        }
+        .ing-disclaimer {
+            max-width: 640px;
+            margin: 40px auto 0;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.6);
         }
         .ingredients-grid {
             display: grid;
@@ -1697,6 +1698,7 @@
                 </div>
 
             </div>
+            <p class="ing-disclaimer">These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
         </section>
 
         <!-- How to Use Section -->
