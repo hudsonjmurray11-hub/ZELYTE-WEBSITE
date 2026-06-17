@@ -1769,16 +1769,16 @@
         update();
     })();
     </script>
-    <script src="glowing-effect.js"></script>
+    <script defer src="glowing-effect.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.21/dist/lenis.css">
     <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
     <script>new Lenis({ autoRaf: true, autoToggle: true, anchors: true, allowNestedScroll: true, stopInertiaOnNavigate: true })</script>
     <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js"></script>
-    <script src="email-utils.js"></script>
-    <script src="auth.js"></script>
-    <script src="mobile-nav.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="supabase.js"></script>
+    <script defer src="email-utils.js"></script>
+    <script defer src="auth.js"></script>
+    <script defer src="mobile-nav.js"></script>
     <script>
         document.getElementById('add-cart').addEventListener('click', function () {
             const state = window.getZelyteState ? window.getZelyteState() : { pack: '3', mode: 'subscribe', qty: 1 };
