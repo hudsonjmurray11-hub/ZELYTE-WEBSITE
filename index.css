@@ -165,6 +165,9 @@ main {
     background: rgba(255, 255, 255, 0.10);
 }
 
+/* <picture> wrappers must not affect grid/flex layout — img stays the box */
+picture { display: contents; }
+
 .shop-button {
     padding: 8px 16px;
     background: linear-gradient(160deg, #4f9cf9 0%, #1a73e8 50%, #1252c4 100%);
@@ -619,6 +622,8 @@ main {
 .section-how {
     background-color: #001e4a;
     background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), url('Ocean.jpg');
+    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), -webkit-image-set(url('Ocean.webp') type('image/webp'), url('Ocean.jpg') type('image/jpeg'));
+    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), image-set(url('Ocean.webp') type('image/webp'), url('Ocean.jpg') type('image/jpeg'));
     background-size: auto, cover;
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;

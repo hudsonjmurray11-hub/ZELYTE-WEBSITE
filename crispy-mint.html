@@ -189,6 +189,7 @@
             object-position: center;
             display: block;
         }
+        picture { display: contents; }
 
         .swiper-nav-row {
             display: flex;
@@ -1491,9 +1492,9 @@
             <div class="product-img-col">
                 <div class="swiper product-swiper" aria-label="Product images" aria-roledescription="carousel">
                     <div class="swiper-wrapper" aria-live="off">
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 1 of 3"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin" fetchpriority="high" decoding="async"></div>
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 2 of 3"><img src="ElevenLabs_image_topaz-image-upscale_2026-06-02T13_56_08.png" alt="Crispy Mint Product" loading="lazy" decoding="async"></div>
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 3 of 3"><img src="ElevenLabs_image_nano-banana-2_recreate the..._2026-06-02T14_10_38.png" alt="Crispy Mint Product" loading="lazy" decoding="async"></div>
+                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 1 of 3"><picture><source srcset="NEWCRISPYMINT.webp" type="image/webp"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin" fetchpriority="high" decoding="async"></picture></div>
+                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 2 of 3"><picture><source srcset="crispy-product-2.webp" type="image/webp"><img src="crispy-product-2.jpg" alt="Crispy Mint Product" loading="lazy" decoding="async"></picture></div>
+                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 3 of 3"><picture><source srcset="crispy-product-3.webp" type="image/webp"><img src="crispy-product-3.jpg" alt="Crispy Mint Product" loading="lazy" decoding="async"></picture></div>
                     </div>
                 </div>
                 <div class="swiper-nav-row">
