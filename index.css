@@ -386,6 +386,10 @@ picture { display: contents; }
 
 .pouch-float.is-dragging { animation-play-state: paused; }
 
+/* Stop the orbit/bob animations while the hero is off-screen (saves CPU/battery) */
+.pouch-scene.paused .ring-orbit,
+.pouch-scene.paused .pouch-float { animation-play-state: paused; }
+
 /* Orbit container — centered at can center (0×0 point), rotates whole ring */
 .ring-orbit {
     position: absolute;

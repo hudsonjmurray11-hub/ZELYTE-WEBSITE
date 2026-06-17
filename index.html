@@ -471,7 +471,11 @@
             const centerX   = canRect.left - sceneRect.left + canRect.width  / 2;
             const centerY   = canRect.top  - sceneRect.top  + canRect.height / 2;
 
-            RINGS.forEach(function (ring, ringIdx) {
+            // On small screens the outer rings sit entirely off-screen, so only
+            // build the inner rings there — big node-count cut, no visible change.
+            const ringsToBuild = window.innerWidth < 768 ? RINGS.slice(0, 3) : RINGS;
+
+            ringsToBuild.forEach(function (ring, ringIdx) {
                 const halfW = ring.width / 2;
 
                 // All rings — wrapped in a rotating orbit container
@@ -530,6 +534,13 @@
 
                 scene.appendChild(orbitDiv);
             });
+
+            // Pause the orbit/bob animations whenever the hero leaves the viewport.
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(function (entries) {
+                    scene.classList.toggle('paused', !entries[0].isIntersecting);
+                }, { threshold: 0 }).observe(scene);
+            }
         }
 
         window.addEventListener('load', buildScene);
