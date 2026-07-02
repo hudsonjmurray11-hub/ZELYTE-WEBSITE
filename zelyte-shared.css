@@ -4,3 +4,15 @@
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* Respect users who prefer reduced motion: stop infinite/looping animations
+   (marquee, gradient sweeps, button pulse, hero pouch orbit) and make
+   transitions effectively instant. Content still reaches its final state. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

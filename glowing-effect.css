@@ -34,7 +34,6 @@
             #bae6fd 15%,
             #0d47a1 20%
         );
-    background-attachment: fixed;
     opacity: var(--glow-active, 0);
     transition: opacity 0.3s;
     -webkit-mask-clip: padding-box, border-box;

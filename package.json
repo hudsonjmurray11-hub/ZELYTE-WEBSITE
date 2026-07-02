@@ -1,8 +1,7 @@
 {
-  "name": "hudson",
+  "name": "zelyte-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "auth.js",
+  "description": "Zelyte — Active Hydration Pouches storefront",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
