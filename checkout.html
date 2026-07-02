@@ -442,38 +442,43 @@
 <script>
     const STRIPE_PK = 'pk_live_51Smf0bEQRyWAWeKLcRcB1UGwfpzHuXE1eKb9u8VrfCgyv4zflshuWiE2eployxp5wqJuMNsgGLPhgOKU5nUPUrRg007FisTTBs';
 
+    // Display prices only — the server (api/payment-intent.js) recomputes the
+    // authoritative amount from pack/mode/qty when the order is placed.
+    const PRICES = {
+        subscribe: { '3': 2700, '5': 4500 },
+        onetime:   { '3': 3000, '5': 5000 }
+    };
+
     const params = new URLSearchParams(window.location.search);
-    const pack = params.get('pack') || '3';
-    const mode = params.get('mode') || 'subscribe';
-    const qty  = parseInt(params.get('qty') || '1', 10);
+    let pack = params.get('pack') || '3';
+    let mode = params.get('mode') || 'subscribe';
+    if (!PRICES[mode] || !PRICES[mode][pack]) { pack = '3'; mode = 'subscribe'; }
+    const qty = Math.min(10, Math.max(1, parseInt(params.get('qty') || '1', 10) || 1));
 
     const modeLabel = mode === 'subscribe' ? 'Subscribe & Save' : 'One-Time Purchase';
     const packLabel = `Crispy Mint — ${pack} Pack`;
     const qtyLabel  = qty > 1 ? ` × ${qty}` : '';
+    const amount    = PRICES[mode][pack] * qty;
+    const dollars   = (amount / 100).toFixed(2);
 
-    document.getElementById('summary-name').textContent = packLabel;
-    document.getElementById('summary-sub').textContent  = modeLabel;
-    document.getElementById('summary-desc').textContent = `${packLabel}${qtyLabel}`;
+    document.getElementById('summary-name').textContent  = packLabel;
+    document.getElementById('summary-sub').textContent   = modeLabel;
+    document.getElementById('summary-desc').textContent  = `${packLabel}${qtyLabel}`;
+    document.getElementById('summary-price').textContent = `$${dollars}`;
+    document.getElementById('summary-total').textContent = `$${dollars}`;
 
     let stripeInstance, stripeElements;
 
-    async function initStripe() {
+    // Deferred-intent flow: mount the Payment Element immediately; the
+    // PaymentIntent (one-time) or Subscription (subscribe) is created on the
+    // server only at submit time, once we have the customer's details.
+    function initStripe() {
         try {
-            const res = await fetch('/api/payment-intent', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ pack, mode, qty })
-            });
-            const data = await res.json();
-            if (!data.clientSecret) throw new Error(data.error || 'Failed to initialize');
-
-            const dollars = (data.amount / 100).toFixed(2);
-            document.getElementById('summary-price').textContent = `$${dollars}`;
-            document.getElementById('summary-total').textContent = `$${dollars}`;
-
             stripeInstance = Stripe(STRIPE_PK);
             stripeElements = stripeInstance.elements({
-                clientSecret: data.clientSecret,
+                mode: mode === 'subscribe' ? 'subscription' : 'payment',
+                amount,
+                currency: 'usd',
                 appearance: {
                     theme: 'stripe',
                     variables: {
@@ -543,19 +548,51 @@
         const errorEl = document.getElementById('stripe-error');
         errorEl.classList.remove('visible');
 
-        const returnUrl = `${window.location.origin}/success.html?pack=${encodeURIComponent(pack)}&mode=${encodeURIComponent(mode)}&qty=${encodeURIComponent(qty)}`;
-
-        const { error } = await stripeInstance.confirmPayment({
-            elements: stripeElements,
-            confirmParams: { return_url: returnUrl },
-        });
-
-        if (error) {
-            errorEl.textContent = error.message;
+        function fail(message) {
+            errorEl.textContent = message;
             errorEl.classList.add('visible');
             btn.disabled = false;
             btn.textContent = 'Place Order';
             errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        try {
+            // Validate the payment details collected by the Payment Element
+            const { error: submitError } = await stripeElements.submit();
+            if (submitError) { fail(submitError.message); return; }
+
+            // Create the PaymentIntent / Subscription with the customer's details
+            const res = await fetch('/api/payment-intent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    pack, mode, qty,
+                    email: document.getElementById('email').value.trim(),
+                    name: `${document.getElementById('fname').value.trim()} ${document.getElementById('lname').value.trim()}`,
+                    shipping: {
+                        line1: document.getElementById('addr1').value.trim(),
+                        line2: document.getElementById('addr2').value.trim(),
+                        city: document.getElementById('city').value.trim(),
+                        state: document.getElementById('state').value.trim(),
+                        postal_code: document.getElementById('zip').value.trim(),
+                        country: document.getElementById('country').value
+                    }
+                })
+            });
+            const data = await res.json();
+            if (!data.clientSecret) throw new Error(data.error || 'Failed to initialize payment');
+
+            const returnUrl = `${window.location.origin}/success.html?pack=${encodeURIComponent(pack)}&mode=${encodeURIComponent(mode)}&qty=${encodeURIComponent(qty)}`;
+
+            const { error } = await stripeInstance.confirmPayment({
+                elements: stripeElements,
+                clientSecret: data.clientSecret,
+                confirmParams: { return_url: returnUrl },
+            });
+
+            if (error) fail(error.message);
+        } catch (err) {
+            fail('Something went wrong placing your order. Please try again.');
         }
     });
 
