@@ -447,22 +447,64 @@
         }
         .promo-apply:hover { background: rgba(26, 115, 232, 0.65); }
 
-        .add-cart-btn {
-            padding: 16px;
-            font-size: 1.05rem;
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ---- Notify Me (Coming Soon) ---- */
+        .notify-block { display: flex; flex-direction: column; gap: 10px; }
+        .notify-pill {
+            align-self: flex-start;
+            font-size: 0.68rem;
             font-weight: 800;
-            color: #fff;
+            padding: 4px 11px;
+            border-radius: 100px;
+            background: #fef9c3;
+            color: #854d0e;
+            letter-spacing: 1px;
+        }
+        .notify-sub { font-size: 0.95rem; color: #4d6e9e; font-weight: 500; }
+        .notify-form { display: flex; gap: 10px; }
+        .notify-input {
+            flex: 1;
+            min-width: 0;
+            padding: 13px 16px;
+            border: 1.5px solid #c7d9f5;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #0d1f3c;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .notify-input:focus {
+            border-color: #0d5bb8;
+            box-shadow: 0 0 0 3px rgba(13, 91, 184, 0.15);
+        }
+        .notify-input::placeholder { color: #8aa4c8; }
+        .notify-btn {
+            padding: 13px 22px;
             border: none;
-            border-radius: 12px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: inherit;
             cursor: pointer;
-            width: 100%;
-            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
-        .add-cart-btn:disabled {
-            background: #b0bec5;
-            opacity: 0.7;
-            cursor: default;
-        }
+        .notify-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+        .notify-msg { font-size: 0.88rem; min-height: 18px; }
+        .notify-msg.success { color: #16a34a; }
+        .notify-msg.error { color: #dc2626; }
 
         /* ---- Details Section ---- */
         .product-details {
@@ -931,28 +973,6 @@
         .benefit-list li { font-size: 1rem; color: #4a6fa0; display: flex; gap: 10px; align-items: center; }
         .benefit-list li::before { content: "✓"; color: #0d5bb8; font-weight: 800; font-size: 1.05rem; }
 
-        /* Action row */
-        .action-row { display: flex; align-items: center; gap: 16px; }
-        .qty-stepper {
-            display: flex; align-items: center;
-            border: 1.5px solid #c7d9f5; border-radius: 100px;
-            overflow: hidden; background: #fff;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(13,91,184,0.08);
-        }
-        .qty-step-btn {
-            width: 42px; height: 44px; background: transparent; border: none;
-            font-size: 1.4rem; font-weight: 700; cursor: pointer; color: #0d5bb8;
-            transition: background 0.15s; font-family: inherit;
-        }
-        .qty-step-btn:hover { background: #e8f0fd; }
-        .qty-step-val {
-            width: 44px; text-align: center; font-weight: 800; font-size: 1rem; color: #0d5bb8;
-            border-left: 1px solid #c7d9f5; border-right: 1px solid #c7d9f5;
-            line-height: 44px;
-        }
-        .action-row .add-cart-btn { width: auto; flex: 1; padding: 14px 16px; }
-
         /* ── Tagline ── */
         .prod-tagline {
             font-size: 1.1rem;
@@ -1204,8 +1224,8 @@
             .detail-card h2 { font-size: 1.7rem; margin-bottom: 20px; }
             .detail-row { flex-direction: column; }
             .prod-heading { font-size: 2.2rem; }
-            .action-row { flex-wrap: wrap; gap: 12px; }
-            .action-row .add-cart-btn { width: 100%; }
+            .notify-form { flex-direction: column; }
+            .notify-btn { width: 100%; }
             .product-bubble { padding: 24px 20px; gap: 20px; }
             .prod-benefit-row { grid-template-columns: 1fr; gap: 8px; }
             .prod-benefit-card { flex-direction: row; text-align: left; align-items: flex-start; }
@@ -1476,18 +1496,6 @@
                 requestAnimationFrame(updateBorderPosition);
             });
 
-            // Quantity stepper
-            let qty = 1;
-            const qtyVal = document.getElementById('qty-val');
-            document.getElementById('qty-minus').addEventListener('click', () => {
-                if (qty > 1) { qty--; qtyVal.textContent = qty; }
-            });
-            document.getElementById('qty-plus').addEventListener('click', () => {
-                qty++;
-                qtyVal.textContent = qty;
-            });
-
-            window.getZelyteState = () => ({ pack: selectedPack, mode: currentMode, qty });
         });
     </script>
     <link rel="stylesheet" href="zelyte-shared.css">
@@ -1617,14 +1625,16 @@
 
                 <hr class="bubble-divider">
 
-                <!-- Bottom action row -->
-                <div class="action-row">
-                    <div class="qty-stepper">
-                        <button class="qty-step-btn" id="qty-minus">−</button>
-                        <span class="qty-step-val" id="qty-val">1</span>
-                        <button class="qty-step-btn" id="qty-plus">+</button>
-                    </div>
-                    <button class="add-cart-btn gradient-button" id="add-cart" disabled>Coming Soon</button>
+                <!-- Coming Soon — notify me at launch -->
+                <div class="notify-block">
+                    <span class="notify-pill">COMING SOON</span>
+                    <p class="notify-sub">Be the first to know when Crispy Mint drops.</p>
+                    <form id="notify-form" class="notify-form" novalidate>
+                        <label for="notify-email" class="visually-hidden">Email address</label>
+                        <input type="email" id="notify-email" class="notify-input" placeholder="Enter your email" required autocomplete="email">
+                        <button type="submit" class="notify-btn gradient-button" id="notify-submit">Notify Me →</button>
+                    </form>
+                    <p id="notify-msg" class="notify-msg" role="status"></p>
                 </div>
 
                 </div>
@@ -1786,10 +1796,42 @@
     <script src="email-utils.js"></script>
     <script src="auth.js"></script>
     <script>
-        document.getElementById('add-cart').addEventListener('click', function () {
-            const state = window.getZelyteState ? window.getZelyteState() : { pack: '3', mode: 'subscribe', qty: 1 };
-            window.location.href = `/checkout.html?pack=${encodeURIComponent(state.pack)}&mode=${encodeURIComponent(state.mode)}&qty=${encodeURIComponent(state.qty)}`;
+    (function () {
+        var form  = document.getElementById('notify-form');
+        var input = document.getElementById('notify-email');
+        var btn   = document.getElementById('notify-submit');
+        var msgEl = document.getElementById('notify-msg');
+        if (!form) return;
+
+        function showMsg(text, type) {
+            msgEl.textContent = text;
+            msgEl.className = 'notify-msg' + (type ? ' ' + type : '');
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var email = input.value.trim();
+            if (!email) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Please wait…';
+            showMsg('');
+
+            var res = await window._zelyteSubmitEmail(email, 'product-page');
+
+            btn.disabled = false;
+            btn.textContent = 'Notify Me →';
+
+            if (res.alreadySubscribed) {
+                showMsg("You're already on the list!", 'success');
+            } else if (res.error) {
+                showMsg('Something went wrong — please try again.', 'error');
+            } else {
+                form.reset();
+                showMsg("You're on the list — we'll email you at launch.", 'success');
+            }
         });
+    })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
