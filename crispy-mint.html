@@ -437,7 +437,7 @@
         }
 
         /* ---- Notify Me (Coming Soon) ---- */
-        .notify-block { display: flex; flex-direction: column; gap: 10px; }
+        .notify-block { display: flex; flex-direction: column; gap: 8px; }
         .notify-pill {
             align-self: flex-start;
             font-size: 0.68rem;
@@ -453,7 +453,7 @@
         .notify-input {
             flex: 1;
             min-width: 0;
-            padding: 13px 16px;
+            padding: 11px 16px;
             border: 1.5px solid #c7d9f5;
             border-radius: 100px;
             font-size: 0.95rem;
@@ -469,7 +469,7 @@
         }
         .notify-input::placeholder { color: #8aa4c8; }
         .notify-btn {
-            padding: 13px 22px;
+            padding: 11px 22px;
             border: none;
             border-radius: 100px;
             font-weight: 700;
@@ -830,7 +830,7 @@
         .product-bubble {
             background: #fff;
             border-radius: 24px;
-            padding: 24px;
+            padding: 20px;
             box-shadow: 0 8px 48px rgba(13,35,87,0.12), 0 2px 10px rgba(13,35,87,0.07), 0 0 0 1px rgba(13,35,87,0.05);
             display: flex;
             flex-direction: column;
@@ -857,7 +857,7 @@
             100% { background-position: 100% center; }
         }
         .prod-heading {
-            font-size: 2.6rem;
+            font-size: 2.15rem;
             font-weight: 800;
             line-height: 1.1;
             background: linear-gradient(90deg, #0d2357 0%, #1565c0 30%, #1a73e8 50%, #60a5fa 70%, #bae6fd 100%);
@@ -891,6 +891,116 @@
             padding: 3px 9px; border-radius: 100px; letter-spacing: 0.5px;
             white-space: nowrap; box-shadow: 0 2px 8px rgba(255,180,0,0.4);
         }
+
+        /* Flavor selector (reuses .variant-pill) */
+        .flavor-select-label {
+            font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em;
+            text-transform: uppercase; color: rgba(255,255,255,0.85);
+            margin-bottom: 10px;
+        }
+        .flavor-pills.variant-pill-wrap { flex-wrap: wrap; gap: 10px; }
+        .flavor-pills .variant-pill { flex: 1 1 auto; padding: 12px 18px; font-size: 1rem; text-align: center; }
+        @media (max-width: 480px) {
+            .flavor-pills .variant-pill { flex-basis: 100%; }
+        }
+        /* Bundle mix customizer (shown only for the Bundle flavor) */
+        .bundle-mix {
+            display: none; flex-direction: column; gap: 8px; padding: 10px 14px;
+            background: #f7f9ff; border: 1.5px solid #e0eafc; border-radius: 16px;
+        }
+        .bundle-mix.visible { display: flex; }
+        .bundle-mix-head { display: flex; align-items: baseline; justify-content: space-between; }
+        .bundle-mix-title {
+            font-size: 0.72rem; font-weight: 800; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #6b8ab5;
+        }
+        .bundle-mix-total { font-size: 0.82rem; font-weight: 800; color: #0d5bb8; font-variant-numeric: tabular-nums; }
+        .bundle-mix-row { display: flex; align-items: center; justify-content: space-between; }
+        .bundle-mix-flavor { display: flex; align-items: center; gap: 9px; font-size: 0.98rem; font-weight: 700; color: #0d1f3c; }
+        .mix-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .mix-dot-mint { background: #1a73e8; }
+        .mix-dot-cherry { background: #a01235; }
+        .mix-stepper {
+            display: flex; align-items: center; gap: 2px;
+            border: 1.5px solid #c7d9f5; border-radius: 100px; background: #fff;
+        }
+        .mix-btn {
+            width: 30px; height: 30px; border: none; background: transparent;
+            font-size: 1.2rem; font-weight: 700; color: #0d5bb8; cursor: pointer;
+            border-radius: 50%; line-height: 1; transition: background 0.15s, opacity 0.15s;
+        }
+        .mix-btn:hover:not(:disabled) { background: #eef4ff; }
+        .mix-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .mix-count { min-width: 28px; text-align: center; font-size: 1rem; font-weight: 800; color: #0d1f3c; font-variant-numeric: tabular-nums; }
+
+        /* ===================================================================
+           Per-flavor theming — additive overrides toggled from applyFlavor().
+           Default (no class) = blue (Crispy Mint). Left untouched above.
+           =================================================================== */
+
+        /* Smooth swap on the recolored buy-box surfaces */
+        .product-bubble .info-card,
+        .prod-stat-chip,
+        .variant-pill,
+        .pack-card,
+        .pack-card-price,
+        .pack-selected-border,
+        .bubble-divider,
+        .bundle-mix {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ---- Black Cherry: deep burgundy / cherry ---- */
+        body.theme-cherry .prod-heading {
+            background: linear-gradient(90deg, #4a0d1f 0%, #7a0f2a 30%, #a01235 50%, #e0234e 72%, #ff8fa8 100%);
+            -webkit-background-clip: text; background-clip: text;
+        }
+        body.theme-cherry .gradient-button {
+            background: linear-gradient(135deg, #6b0f2a, #a01235, #d61e4c, #e0234e, #ff5c7a, #e0234e, #d61e4c, #a01235, #6b0f2a);
+            background-size: 300% 100%;
+        }
+        body.theme-cherry .gradient-button::before {
+            background: linear-gradient(135deg, #ff5c7a, #ffd0da, #ff8fa8, #ff5c7a);
+            background-size: 300% 100%;
+        }
+        body.theme-cherry .gradient-button:hover { box-shadow: 0 6px 24px rgba(224,35,78,0.5); }
+        body.theme-cherry .ingredients-section { background: #2e0a16; }
+        body.theme-cherry .product-label,
+        body.theme-cherry .detail-label,
+        body.theme-cherry .howto-header .detail-label { color: #a01235; }
+        body.theme-cherry .prod-stat-chip { background: #fdeef2; border-color: #f3c6d2; color: #a01235; }
+        body.theme-cherry .prod-stat-chip svg { stroke: #a01235; }
+        body.theme-cherry .variant-pill { border-color: #f3c6d2; color: #a01235; }
+        body.theme-cherry .variant-pill.selected { background: #a01235; border-color: #a01235; color: #fff; }
+        body.theme-cherry .pack-card-price { color: #a01235; }
+        body.theme-cherry .pack-card-name { color: #2e0a16; }
+        body.theme-cherry .pack-card-sub { color: #9a5568; }
+        body.theme-cherry .pack-card:hover { background: #fdeef2; }
+        body.theme-cherry .pack-selected-border { border-color: #a01235; }
+        body.theme-cherry .product-bubble .info-card { background: #fdeef2; }
+        body.theme-cherry .bubble-divider { border-top-color: #f3d6de; }
+        body.theme-cherry .notify-sub { color: #9a5568; }
+        body.theme-cherry .pack-select-label { color: #b06b80; }
+        body.theme-cherry .notify-input:focus { border-color: #a01235; box-shadow: 0 0 0 3px rgba(160,18,53,0.15); }
+        body.theme-cherry .swiper-nav-btn { color: #a01235; border-color: #f3c6d2; }
+
+        /* ---- Bundle: blended blue + cherry (heading / CTA / panel only) ---- */
+        body.theme-bundle .prod-heading {
+            background: linear-gradient(90deg, #0d2357 0%, #1a73e8 28%, #7b2d8e 55%, #a01235 78%, #e0234e 100%);
+            -webkit-background-clip: text; background-clip: text;
+        }
+        body.theme-bundle .gradient-button {
+            background: linear-gradient(135deg, #0d47a1, #1a73e8, #7b2d8e, #a01235, #e0234e, #a01235, #7b2d8e, #1a73e8, #0d47a1);
+            background-size: 300% 100%;
+        }
+        body.theme-bundle .gradient-button::before {
+            background: linear-gradient(135deg, #60a5fa, #ff8fa8, #93c5fd, #e0234e);
+            background-size: 300% 100%;
+        }
+        body.theme-bundle .ingredients-section { background: linear-gradient(135deg, #0d2357, #2e0a16); }
+        /* Bundle mix only ever shows under the bundle theme — blend its accents blue↔cherry */
+        body.theme-bundle .bundle-mix { border-color: #d9c4e0; }
+        body.theme-bundle .bundle-mix-total { color: #a01235; }
 
         /* Info card — white/blue */
         .info-card {
@@ -949,11 +1059,11 @@
 
         /* ── Tagline ── */
         .prod-tagline {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #5a7fa8;
             line-height: 1.45;
-            margin-top: 2px;
+            margin-top: 0;
         }
 
         /* ── Stat chips ── */
@@ -993,7 +1103,7 @@
         .ingredients-section {
             background: #0d2357;
             border-radius: 32px;
-            margin: 0 24px 32px;
+            margin: 40px 24px 32px;
             width: calc(100% - 48px);
             padding: 80px 60px;
             overflow: hidden;
@@ -1188,7 +1298,7 @@
             .product-bundles-header { flex-direction: column; gap: 4px; }
             .product-bundles-grid { grid-template-columns: 1fr; gap: 12px; }
             .pb-card-featured { padding: 22px 16px; }
-            .ingredients-section { padding: 60px 32px; margin: 0 16px 24px; width: calc(100% - 32px); }
+            .ingredients-section { padding: 60px 32px; margin: 32px 16px 24px; width: calc(100% - 32px); }
             .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
             .ingredients-header h2 { font-size: 2.2rem; }
             .howto-section { padding: 60px 32px; margin: 0 16px 40px; width: calc(100% - 32px); }
@@ -1211,7 +1321,7 @@
             .product-bubble { padding: 24px 20px; gap: 20px; }
             .prod-benefit-row { grid-template-columns: 1fr; gap: 8px; }
             .prod-benefit-card { flex-direction: row; text-align: left; align-items: flex-start; }
-            .ingredients-section { padding: 48px 20px; margin: 0 12px 20px; width: calc(100% - 24px); }
+            .ingredients-section { padding: 48px 20px; margin: 24px 12px 20px; width: calc(100% - 24px); }
             .ingredients-grid { grid-template-columns: 1fr; }
             .ingredients-header h2 { font-size: 1.9rem; }
             .howto-section { padding: 48px 20px; margin: 0 12px 40px; width: calc(100% - 24px); }
@@ -1278,7 +1388,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 13px 16px;
+            padding: 11px 16px;
             background: #f7f9ff;
             border: 1.5px solid #e0eafc;
             border-radius: 18px;
@@ -1391,8 +1501,45 @@
                 }
             };
 
+            // ---- Flavors ---- (prices are flavor-agnostic; this only swaps copy + imagery)
+            const FLAVORS = {
+                'crispy-mint': {
+                    name: 'Crispy Mint',
+                    sub: 'Electrolyte & Caffeine Pouches',
+                    ingredient: 'Natural Mint Flavor',
+                    slides: [
+                        { img: 'NEWCRISPYMINT.png', webp: 'NEWCRISPYMINT.webp' },
+                        { img: 'crispy-product-2.jpg', webp: 'crispy-product-2.webp' },
+                        { img: 'crispy-product-3.jpg', webp: 'crispy-product-3.webp' }
+                    ]
+                },
+                'black-cherry': {
+                    name: 'Black Cherry',
+                    sub: 'Electrolyte & Caffeine Pouches',
+                    ingredient: 'Natural Black Cherry Flavor',
+                    slides: [
+                        { img: 'ZELYTE_BLACKCHERRY.png' }
+                    ]
+                },
+                'bundle': {
+                    name: 'Bundle — Both Flavors',
+                    sub: 'Crispy Mint + Black Cherry',
+                    ingredient: 'Natural Mint & Black Cherry Flavor',
+                    slides: [
+                        { img: 'NEWCRISPYMINT.png', webp: 'NEWCRISPYMINT.webp' },
+                        { img: 'ZELYTE_BLACKCHERRY.png' }
+                    ]
+                }
+            };
+
             let currentMode = 'subscribe';
             let selectedPack = '3';
+            let currentFlavor = new URLSearchParams(window.location.search).get('flavor') || 'crispy-mint';
+            if (!FLAVORS[currentFlavor]) currentFlavor = 'crispy-mint';
+
+            // Bundle mix: how many of the pack's tins are Crispy Mint (cherry = packSize - mint).
+            const defaultMint = n => Math.ceil(n / 2); // 3 -> 2, 5 -> 3
+            let bundleMintCount = defaultMint(parseInt(selectedPack, 10));
 
             const modeSlider = document.getElementById('pricing-mode-slider');
             const packSelectedBorder = document.getElementById('pack-selected-border');
@@ -1470,13 +1617,95 @@
                     updateBorderPosition();
                     const saveEl = document.getElementById('pack-save-line');
                     if (saveEl) saveEl.textContent = PACK_PRICES[currentMode][selectedPack].save;
+                    updateBundleMix();
                 });
+            });
+
+            // ---- Flavor selector ----
+            const flavorPills = document.querySelectorAll('#flavor-select .variant-pill');
+            const headingEl = document.querySelector('.prod-heading');
+            const taglineEl = document.querySelector('.prod-tagline');
+            const ingNameEl = document.getElementById('ing-flavor-name');
+            const bundleMixEl = document.getElementById('bundle-mix');
+            const mixCountMintEl = document.getElementById('mix-count-mint');
+            const mixCountCherryEl = document.getElementById('mix-count-cherry');
+            const mixTotalEl = document.getElementById('bundle-mix-total');
+
+            function buildSlideHTML(s, alt) {
+                const source = s.webp ? '<source srcset="' + s.webp + '" type="image/webp">' : '';
+                return '<div class="swiper-slide" aria-roledescription="slide"><picture>' + source +
+                    '<img src="' + s.img + '" alt="' + alt + '" decoding="async"></picture></div>';
+            }
+
+            // Show/refresh the bundle mix. Cherry is always packSize - mint; both stay in [1, packSize-1].
+            function updateBundleMix() {
+                if (!bundleMixEl) return;
+                if (currentFlavor !== 'bundle') {
+                    bundleMixEl.classList.remove('visible');
+                    return;
+                }
+                const packSize = parseInt(selectedPack, 10);
+                bundleMintCount = Math.max(1, Math.min(packSize - 1, bundleMintCount));
+                const cherry = packSize - bundleMintCount;
+                mixCountMintEl.textContent = String(bundleMintCount);
+                mixCountCherryEl.textContent = String(cherry);
+                mixTotalEl.textContent = packSize + ' tins';
+                bundleMixEl.querySelectorAll('.mix-btn').forEach(btn => {
+                    const dir = parseInt(btn.dataset.dir, 10);
+                    // How this button would change the mint count.
+                    const mintDelta = btn.dataset.flavor === 'mint' ? dir : -dir;
+                    const nextMint = bundleMintCount + mintDelta;
+                    btn.disabled = nextMint < 1 || nextMint > packSize - 1;
+                });
+                bundleMixEl.classList.add('visible');
+            }
+
+            if (bundleMixEl) {
+                bundleMixEl.addEventListener('click', e => {
+                    const btn = e.target.closest('.mix-btn');
+                    if (!btn || btn.disabled) return;
+                    const dir = parseInt(btn.dataset.dir, 10);
+                    bundleMintCount += btn.dataset.flavor === 'mint' ? dir : -dir;
+                    updateBundleMix();
+                });
+            }
+
+            function applyFlavor(flavor) {
+                currentFlavor = FLAVORS[flavor] ? flavor : 'crispy-mint';
+                const f = FLAVORS[currentFlavor];
+                if (headingEl) headingEl.textContent = f.name;
+                if (taglineEl) taglineEl.textContent = f.sub;
+                if (ingNameEl) ingNameEl.textContent = f.ingredient;
+                document.title = f.name + ' — ZELYTE';
+                document.body.classList.remove('theme-cherry', 'theme-bundle');
+                if (currentFlavor === 'black-cherry') document.body.classList.add('theme-cherry');
+                else if (currentFlavor === 'bundle') document.body.classList.add('theme-bundle');
+                flavorPills.forEach(p => {
+                    const on = p.dataset.flavor === currentFlavor;
+                    p.classList.toggle('selected', on);
+                    p.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+                if (window.productSwiper) {
+                    const html = f.slides.map(s => buildSlideHTML(s, f.name));
+                    window.productSwiper.removeAllSlides();
+                    window.productSwiper.appendSlide(html);
+                    window.productSwiper.update();
+                    window.productSwiper.slideTo(0, 0);
+                }
+                updateBundleMix();
+            }
+
+            flavorPills.forEach(pill => {
+                pill.addEventListener('click', () => applyFlavor(pill.dataset.flavor));
             });
 
             // Init border position after layout
             requestAnimationFrame(() => {
                 requestAnimationFrame(updateBorderPosition);
             });
+
+            // Apply initial flavor (respects ?flavor= deep-link)
+            applyFlavor(currentFlavor);
 
         });
     </script>
@@ -1568,6 +1797,16 @@
 
                 <hr class="bubble-divider">
 
+                <!-- Flavor selector -->
+                <div class="flavor-select-block">
+                    <div class="flavor-select-label">Choose your flavor</div>
+                    <div class="variant-pill-wrap flavor-pills" id="flavor-select" role="group" aria-label="Choose flavor">
+                        <button class="variant-pill selected" type="button" data-flavor="crispy-mint" aria-pressed="true">Crispy Mint</button>
+                        <button class="variant-pill" type="button" data-flavor="black-cherry" aria-pressed="false">Black Cherry</button>
+                        <button class="variant-pill" type="button" data-flavor="bundle" aria-pressed="false">Bundle · Both<span class="variant-badge">SAVE</span></button>
+                    </div>
+                </div>
+
                 <!-- Pricing block -->
                 <div class="pricing-block">
 
@@ -1606,6 +1845,30 @@
                                 <div class="pack-card-orig" id="pack-5-orig">$50.00</div>
                             </div>
                         </button>
+                    </div>
+
+                    <!-- Bundle mix (shown only when Bundle flavor is selected) -->
+                    <div class="bundle-mix" id="bundle-mix" role="group" aria-label="Customize your bundle mix">
+                        <div class="bundle-mix-head">
+                            <span class="bundle-mix-title">Your mix</span>
+                            <span class="bundle-mix-total" id="bundle-mix-total">3 tins</span>
+                        </div>
+                        <div class="bundle-mix-row">
+                            <span class="bundle-mix-flavor"><span class="mix-dot mix-dot-mint"></span>Crispy Mint</span>
+                            <div class="mix-stepper">
+                                <button type="button" class="mix-btn" data-flavor="mint" data-dir="-1" aria-label="One fewer Crispy Mint">&minus;</button>
+                                <span class="mix-count" id="mix-count-mint" aria-live="polite">2</span>
+                                <button type="button" class="mix-btn" data-flavor="mint" data-dir="1" aria-label="One more Crispy Mint">+</button>
+                            </div>
+                        </div>
+                        <div class="bundle-mix-row">
+                            <span class="bundle-mix-flavor"><span class="mix-dot mix-dot-cherry"></span>Black Cherry</span>
+                            <div class="mix-stepper">
+                                <button type="button" class="mix-btn" data-flavor="cherry" data-dir="-1" aria-label="One fewer Black Cherry">&minus;</button>
+                                <span class="mix-count" id="mix-count-cherry" aria-live="polite">1</span>
+                                <button type="button" class="mix-btn" data-flavor="cherry" data-dir="1" aria-label="One more Black Cherry">+</button>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Subscribe benefits (shown only in subscribe mode) -->
@@ -1693,7 +1956,7 @@
                             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                         </svg>
                     </div>
-                    <div class="ing-name-row"><span class="ing-name">Natural Mint Flavor</span></div>
+                    <div class="ing-name-row"><span class="ing-name" id="ing-flavor-name">Natural Mint Flavor</span></div>
                     <p class="ing-desc">Crisp, refreshing mint taste with zero artificial ingredients.</p>
                 </div>
 
@@ -1831,7 +2094,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        new Swiper('.product-swiper', {
+        window.productSwiper = new Swiper('.product-swiper', {
             effect: 'cards',
             cardsEffect: { perSlideOffset: 8, perSlideRotate: 2, rotate: true, slideShadows: false },
             grabCursor: true,

@@ -1031,6 +1031,17 @@ picture { display: contents; }
     margin-right: auto;
 }
 
+.flavors-grid--two {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 760px) {
+    .flavors-grid--two { grid-template-columns: 1fr; }
+}
+
 
 .flavor-card-info {
     display: flex;
