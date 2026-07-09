@@ -167,6 +167,7 @@
         .product-hero {
             display: flex;
             align-items: flex-start;
+            justify-content: center;
             min-height: calc(100vh - 100px);
             gap: 64px;
         }
@@ -174,22 +175,21 @@
         /* ---- Image Column ---- */
         .product-img-col {
             flex: 1;
-            max-width: 640px;
+            max-width: 480px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
-        .product-swiper {
-            width: 520px;
-            height: 620px;
-        }
-        .product-swiper .swiper-slide {
-            border-radius: 12px;
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 8px 40px rgba(13, 35, 87, 0.14), 0 2px 8px rgba(13, 35, 87, 0.07);
         }
-        .product-swiper .swiper-slide img {
+        .gallery-main img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -198,33 +198,57 @@
         }
         picture { display: contents; }
 
-        .swiper-nav-row {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .swiper-nav-btn {
-            width: 48px;
-            height: 48px;
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: 1.5px solid #d0e4f8;
-            background: #ffffff;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
+            background: rgba(255, 255, 255, 0.92);
             color: #0d5bb8;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background 0.2s ease, transform 0.15s ease;
-            box-shadow: 0 2px 10px rgba(13,35,87,0.08);
+            box-shadow: 0 2px 10px rgba(13,35,87,0.12);
         }
-        .swiper-nav-btn:hover {
-            background: #e8f0fd;
-            transform: scale(1.08);
+        .gallery-arrow:hover {
+            background: #ffffff;
+            transform: translateY(-50%) scale(1.08);
         }
+        #gallery-prev { left: 14px; }
+        #gallery-next { right: 14px; }
+        .gallery-main.single-image .gallery-arrow { display: none; }
+
+        .gallery-thumbs {
+            display: flex;
+            gap: 12px;
+        }
+        .gallery-thumb {
+            width: 90px;
+            aspect-ratio: 3 / 4;
+            padding: 0;
+            border: 2px solid rgba(13, 35, 87, 0.12);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.15s ease;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .gallery-thumb:hover { transform: translateY(-2px); }
+        .gallery-thumb.active { border-color: #0d5bb8; }
 
         /* ---- Info Column ---- */
         .product-info-col {
@@ -982,7 +1006,8 @@
         body.theme-cherry .notify-sub { color: #9a5568; }
         body.theme-cherry .pack-select-label { color: #b06b80; }
         body.theme-cherry .notify-input:focus { border-color: #a01235; box-shadow: 0 0 0 3px rgba(160,18,53,0.15); }
-        body.theme-cherry .swiper-nav-btn { color: #a01235; border-color: #f3c6d2; }
+        body.theme-cherry .gallery-arrow { color: #a01235; border-color: #f3c6d2; }
+        body.theme-cherry .gallery-thumb.active { border-color: #a01235; }
 
         /* ---- Bundle: blended blue + cherry (heading / CTA / panel only) ---- */
         body.theme-bundle .prod-heading {
@@ -1289,7 +1314,7 @@
             .page-wrap { padding: 90px 24px 60px; }
             .product-hero { flex-direction: column; gap: 32px; }
             .product-img-col { max-width: 420px; width: 100%; margin-top: 0; align-self: center; }
-            .product-swiper { width: 100%; height: 420px; }
+            .gallery-thumb { width: 76px; }
             .product-info-col { max-width: 100%; }
             .glass-card h1 { font-size: 3.2rem; }
             .product-details { grid-template-columns: 1fr; margin-top: 32px; }
@@ -1311,7 +1336,7 @@
         @media (max-width: 600px) {
             .page-wrap { padding: 80px 16px 48px; }
             .product-img-col { max-width: calc(100vw - 48px); }
-            .product-swiper { height: 340px; }
+            .gallery-thumb { width: 64px; }
             .detail-card { padding: 28px 20px; }
             .detail-card h2 { font-size: 1.7rem; margin-bottom: 20px; }
             .detail-row { flex-direction: column; }
@@ -1508,9 +1533,8 @@
                     sub: 'Electrolyte & Caffeine Pouches',
                     ingredient: 'Natural Mint Flavor',
                     slides: [
-                        { img: 'NEWCRISPYMINT.png', webp: 'NEWCRISPYMINT.webp' },
-                        { img: 'crispy-product-2.jpg', webp: 'crispy-product-2.webp' },
-                        { img: 'crispy-product-3.jpg', webp: 'crispy-product-3.webp' }
+                        { img: 'crispy-product-3.jpg', webp: 'crispy-product-3.webp' },
+                        { img: 'ZELYTE_HOW_TO_USE.png' }
                     ]
                 },
                 'black-cherry': {
@@ -1518,7 +1542,8 @@
                     sub: 'Electrolyte & Caffeine Pouches',
                     ingredient: 'Natural Black Cherry Flavor',
                     slides: [
-                        { img: 'ZELYTE_BLACKCHERRY.png' }
+                        { img: 'ZELYTE_BLACKCHERRY.png' },
+                        { img: 'ZELYTE_HOW_TO_USE.png' }
                     ]
                 },
                 'bundle': {
@@ -1527,7 +1552,8 @@
                     ingredient: 'Natural Mint & Black Cherry Flavor',
                     slides: [
                         { img: 'NEWCRISPYMINT.png', webp: 'NEWCRISPYMINT.webp' },
-                        { img: 'ZELYTE_BLACKCHERRY.png' }
+                        { img: 'ZELYTE_BLACKCHERRY.png' },
+                        { img: 'ZELYTE_HOW_TO_USE.png' }
                     ]
                 }
             };
@@ -1631,11 +1657,49 @@
             const mixCountCherryEl = document.getElementById('mix-count-cherry');
             const mixTotalEl = document.getElementById('bundle-mix-total');
 
-            function buildSlideHTML(s, alt) {
+            // ---- Image gallery ----
+            const galleryMain = document.getElementById('gallery-main');
+            const galleryThumbs = document.getElementById('gallery-thumbs');
+            let gallerySlides = [];
+            let galleryAlt = '';
+            let galleryIndex = 0;
+
+            function buildPictureHTML(s, alt, imgAttrs) {
                 const source = s.webp ? '<source srcset="' + s.webp + '" type="image/webp">' : '';
-                return '<div class="swiper-slide" aria-roledescription="slide"><picture>' + source +
-                    '<img src="' + s.img + '" alt="' + alt + '" decoding="async"></picture></div>';
+                return '<picture>' + source + '<img src="' + s.img + '" alt="' + alt + '" decoding="async"' + (imgAttrs || '') + '></picture>';
             }
+
+            function showGalleryImage(i) {
+                if (!gallerySlides.length) return;
+                galleryIndex = (i + gallerySlides.length) % gallerySlides.length;
+                const oldPicture = document.getElementById('gallery-main-picture');
+                const wrap = document.createElement('div');
+                wrap.innerHTML = buildPictureHTML(gallerySlides[galleryIndex], galleryAlt, ' id="gallery-main-img"');
+                const newPicture = wrap.firstChild;
+                newPicture.id = 'gallery-main-picture';
+                oldPicture.replaceWith(newPicture);
+                galleryThumbs.querySelectorAll('.gallery-thumb').forEach((t, ti) => {
+                    t.classList.toggle('active', ti === galleryIndex);
+                });
+            }
+
+            function renderGallery(slides, alt) {
+                gallerySlides = slides;
+                galleryAlt = alt;
+                galleryMain.classList.toggle('single-image', slides.length < 2);
+                galleryThumbs.style.display = slides.length < 2 ? 'none' : '';
+                galleryThumbs.innerHTML = slides.map((s, i) =>
+                    '<button class="gallery-thumb" type="button" aria-label="View image ' + (i + 1) + '">' +
+                    buildPictureHTML(s, '') + '</button>'
+                ).join('');
+                galleryThumbs.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+                    t.addEventListener('click', () => showGalleryImage(i));
+                });
+                showGalleryImage(0);
+            }
+
+            document.getElementById('gallery-prev').addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+            document.getElementById('gallery-next').addEventListener('click', () => showGalleryImage(galleryIndex + 1));
 
             // Show/refresh the bundle mix. Cherry is always packSize - mint; both stay in [1, packSize-1].
             function updateBundleMix() {
@@ -1685,13 +1749,7 @@
                     p.classList.toggle('selected', on);
                     p.setAttribute('aria-pressed', on ? 'true' : 'false');
                 });
-                if (window.productSwiper) {
-                    const html = f.slides.map(s => buildSlideHTML(s, f.name));
-                    window.productSwiper.removeAllSlides();
-                    window.productSwiper.appendSlide(html);
-                    window.productSwiper.update();
-                    window.productSwiper.slideTo(0, 0);
-                }
+                renderGallery(f.slides, f.name);
                 updateBundleMix();
             }
 
@@ -1711,7 +1769,6 @@
     </script>
     <link rel="stylesheet" href="zelyte-shared.css">
     <link rel="stylesheet" href="glowing-effect.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <script type="application/ld+json">
     {
@@ -1755,16 +1812,14 @@
 
             <!-- Image -->
             <div class="product-img-col">
-                <div class="swiper product-swiper" aria-label="Product images" aria-roledescription="carousel">
-                    <div class="swiper-wrapper" aria-live="off">
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 1 of 3"><picture><source srcset="NEWCRISPYMINT.webp" type="image/webp"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin" fetchpriority="high" decoding="async"></picture></div>
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 2 of 3"><picture><source srcset="crispy-product-2.webp" type="image/webp"><img src="crispy-product-2.jpg" alt="Crispy Mint Product" loading="lazy" decoding="async"></picture></div>
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 3 of 3"><picture><source srcset="crispy-product-3.webp" type="image/webp"><img src="crispy-product-3.jpg" alt="Crispy Mint Product" loading="lazy" decoding="async"></picture></div>
-                    </div>
+                <div class="gallery-main" id="gallery-main" aria-label="Product images">
+                    <button class="gallery-arrow" id="gallery-prev" aria-label="Previous image">&#8592;</button>
+                    <picture id="gallery-main-picture"><source srcset="crispy-product-3.webp" type="image/webp"><img id="gallery-main-img" src="crispy-product-3.jpg" alt="Crispy Mint" fetchpriority="high" decoding="async"></picture>
+                    <button class="gallery-arrow" id="gallery-next" aria-label="Next image">&#8594;</button>
                 </div>
-                <div class="swiper-nav-row">
-                    <button class="swiper-nav-btn" id="swiper-prev" aria-label="Previous image">&#8592;</button>
-                    <button class="swiper-nav-btn" id="swiper-next" aria-label="Next image">&#8594;</button>
+                <div class="gallery-thumbs" id="gallery-thumbs" role="group" aria-label="Image thumbnails">
+                    <button class="gallery-thumb active" type="button" aria-label="View image 1"><picture><source srcset="crispy-product-3.webp" type="image/webp"><img src="crispy-product-3.jpg" alt="" decoding="async"></picture></button>
+                    <button class="gallery-thumb" type="button" aria-label="View image 2"><picture><img src="ZELYTE_HOW_TO_USE.png" alt="" loading="lazy" decoding="async"></picture></button>
                 </div>
             </div>
 
@@ -2092,23 +2147,6 @@
         });
     })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        window.productSwiper = new Swiper('.product-swiper', {
-            effect: 'cards',
-            cardsEffect: { perSlideOffset: 8, perSlideRotate: 2, rotate: true, slideShadows: false },
-            grabCursor: true,
-            loop: true,
-            speed: 600,
-            autoplay: {
-                delay: 3500,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: '#swiper-next',
-                prevEl: '#swiper-prev',
-            },
-        });
-    </script>
+
 </body>
 </html>
