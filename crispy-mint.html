@@ -195,6 +195,7 @@
             object-fit: cover;
             object-position: center;
             display: block;
+            cursor: zoom-in;
         }
         picture { display: contents; }
 
@@ -250,6 +251,54 @@
         .gallery-thumb:hover { transform: translateY(-2px); }
         .gallery-thumb.active { border-color: #0d5bb8; }
 
+        /* ---- Fullscreen lightbox ---- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(6, 12, 26, 0.92);
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: min(92vw, 1100px);
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 12px 60px rgba(0, 0, 0, 0.5);
+        }
+        .lightbox .gallery-arrow { position: fixed; }
+        #lightbox-prev { left: 20px; }
+        #lightbox-next { right: 20px; }
+        .lightbox.single-image .gallery-arrow { display: none; }
+        .lightbox-close {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 2;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.08);
+        }
+
         /* ---- Info Column ---- */
         .product-info-col {
             flex: 1;
@@ -281,15 +330,6 @@
         .breadcrumb a { color: rgba(255,255,255,0.92); text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
 
-        .product-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #1a73e8;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
         .glass-card h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -989,7 +1029,6 @@
         }
         body.theme-cherry .gradient-button:hover { box-shadow: 0 6px 24px rgba(224,35,78,0.5); }
         body.theme-cherry .ingredients-section { background: #2e0a16; }
-        body.theme-cherry .product-label,
         body.theme-cherry .detail-label,
         body.theme-cherry .howto-header .detail-label { color: #a01235; }
         body.theme-cherry .prod-stat-chip { background: #fdeef2; border-color: #f3c6d2; color: #a01235; }
@@ -1520,11 +1559,11 @@
             const PACK_PRICES = {
                 subscribe: {
                     '3': { price: 27.00, per: '$9.00 / tin', orig: '$30.00', save: 'Save $3.00' },
-                    '5': { price: 45.00, per: '$9.00 / tin', orig: '$50.00', save: 'Save $5.00' }
+                    '5': { price: 40.00, per: '$8.00 / tin', orig: '$50.00', save: 'Save $10.00' }
                 },
                 onetime: {
-                    '3': { price: 30.00, per: '$0.67 / pouch', orig: '', save: '' },
-                    '5': { price: 50.00, per: '$0.67 / pouch', orig: '', save: '' }
+                    '3': { price: 30.00, per: '$10.00 / tin', orig: '', save: '' },
+                    '5': { price: 45.00, per: '$9.00 / tin', orig: '$50.00', save: '' }
                 }
             };
 
@@ -1534,6 +1573,7 @@
                     name: 'Crispy Mint',
                     sub: 'Electrolyte & Caffeine Pouches',
                     ingredient: 'Natural Mint Flavor',
+                    notify: 'Be the first to know when Crispy Mint drops.',
                     slides: [
                         { img: 'crispy-product-3.jpg', webp: 'crispy-product-3.webp' },
                         { img: 'ZELYTE_HOW_TO_USE.png' }
@@ -1543,6 +1583,7 @@
                     name: 'Black Cherry',
                     sub: 'Electrolyte & Caffeine Pouches',
                     ingredient: 'Natural Black Cherry Flavor',
+                    notify: 'Be the first to know when Black Cherry drops.',
                     slides: [
                         { img: 'ZELYTE_BLACKCHERRY.png' },
                         { img: 'ZELYTE_HOW_TO_USE.png' }
@@ -1552,6 +1593,7 @@
                     name: 'Bundle — Both Flavors',
                     sub: 'Crispy Mint + Black Cherry',
                     ingredient: 'Natural Mint & Black Cherry Flavor',
+                    notify: 'Be the first to know when ZELYTE drops.',
                     slides: [
                         { img: 'NEWCRISPYMINT.png', webp: 'NEWCRISPYMINT.webp' },
                         { img: 'ZELYTE_BLACKCHERRY.png' },
@@ -1654,6 +1696,7 @@
             const headingEl = document.querySelector('.prod-heading');
             const taglineEl = document.querySelector('.prod-tagline');
             const ingNameEl = document.getElementById('ing-flavor-name');
+            const notifySubEl = document.querySelector('.notify-sub');
             const bundleMixEl = document.getElementById('bundle-mix');
             const mixCountMintEl = document.getElementById('mix-count-mint');
             const mixCountCherryEl = document.getElementById('mix-count-cherry');
@@ -1683,6 +1726,7 @@
                 galleryThumbs.querySelectorAll('.gallery-thumb').forEach((t, ti) => {
                     t.classList.toggle('active', ti === galleryIndex);
                 });
+                if (lightboxOpen) renderLightboxImage();
             }
 
             function renderGallery(slides, alt) {
@@ -1702,6 +1746,51 @@
 
             document.getElementById('gallery-prev').addEventListener('click', () => showGalleryImage(galleryIndex - 1));
             document.getElementById('gallery-next').addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+
+            // ---- Fullscreen lightbox ----
+            const lightbox = document.getElementById('lightbox');
+            let lightboxOpen = false;
+
+            function renderLightboxImage() {
+                const oldPicture = document.getElementById('lightbox-picture');
+                const wrap = document.createElement('div');
+                wrap.innerHTML = buildPictureHTML(gallerySlides[galleryIndex], galleryAlt);
+                const newPicture = wrap.firstChild;
+                newPicture.id = 'lightbox-picture';
+                oldPicture.replaceWith(newPicture);
+            }
+
+            function openLightbox() {
+                if (!gallerySlides.length) return;
+                renderLightboxImage();
+                lightbox.classList.toggle('single-image', gallerySlides.length < 2);
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                lightboxOpen = true;
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('open');
+                document.body.style.overflow = '';
+                lightboxOpen = false;
+            }
+
+            galleryMain.addEventListener('click', e => {
+                if (e.target.closest('.gallery-arrow')) return;
+                if (e.target.closest('picture')) openLightbox();
+            });
+            document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+            document.getElementById('lightbox-prev').addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+            document.getElementById('lightbox-next').addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+            lightbox.addEventListener('click', e => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', e => {
+                if (!lightboxOpen) return;
+                if (e.key === 'Escape') closeLightbox();
+                else if (e.key === 'ArrowLeft') showGalleryImage(galleryIndex - 1);
+                else if (e.key === 'ArrowRight') showGalleryImage(galleryIndex + 1);
+            });
 
             // Show/refresh the bundle mix. Cherry is always packSize - mint; both stay in [1, packSize-1].
             function updateBundleMix() {
@@ -1742,6 +1831,7 @@
                 if (headingEl) headingEl.textContent = f.name;
                 if (taglineEl) taglineEl.textContent = f.sub;
                 if (ingNameEl) ingNameEl.textContent = f.ingredient;
+                if (notifySubEl) notifySubEl.textContent = f.notify;
                 document.title = f.name + ' — ZELYTE';
                 document.body.classList.remove('theme-cherry', 'theme-bundle');
                 if (currentFlavor === 'black-cherry') document.body.classList.add('theme-cherry');
@@ -1785,7 +1875,7 @@
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
         "lowPrice": "27.00",
-        "highPrice": "50.00",
+        "highPrice": "45.00",
         "availability": "https://schema.org/PreOrder",
         "url": "https://zelyte.shop/crispy-mint.html"
       }
@@ -1831,7 +1921,6 @@
 
                 <!-- Title block -->
                 <div class="prod-title-block">
-                    <span class="product-label">ZELYTE</span>
                     <h1 class="prod-heading">Crispy Mint</h1>
                     <p class="prod-tagline">Electrolyte &amp; Caffeine Pouches</p>
                 </div>
@@ -1899,10 +1988,10 @@
                         <button class="pack-card" data-pack="5" type="button" aria-pressed="false">
                             <div class="pack-card-left">
                                 <div class="pack-card-name">5 Pack</div>
-                                <div class="pack-card-sub" id="pack-5-sub">$9.00 / tin</div>
+                                <div class="pack-card-sub" id="pack-5-sub">$8.00 / tin</div>
                             </div>
                             <div class="pack-card-right">
-                                <div class="pack-card-price" id="pack-5-price">$45.00</div>
+                                <div class="pack-card-price" id="pack-5-price">$40.00</div>
                                 <div class="pack-card-orig" id="pack-5-orig">$50.00</div>
                             </div>
                         </button>
@@ -2072,6 +2161,14 @@
             <div class="howto-note">One tin contains 15 pouches &nbsp;·&nbsp; Use one pouch per session for best results.</div>
         </section>
     </main>
+
+    <!-- Fullscreen image lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Product image viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&#10005;</button>
+        <button class="gallery-arrow" id="lightbox-prev" aria-label="Previous image">&#8592;</button>
+        <picture id="lightbox-picture"><img src="crispy-product-3.jpg" alt="" decoding="async"></picture>
+        <button class="gallery-arrow" id="lightbox-next" aria-label="Next image">&#8594;</button>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
