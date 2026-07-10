@@ -1048,6 +1048,7 @@
         body.theme-cherry .bubble-divider { border-top-color: #f3d6de; }
         body.theme-cherry .notify-sub { color: #9a5568; }
         body.theme-cherry .pack-select-label { color: #b06b80; }
+        body.theme-cherry .team-order-link { color: #a01235; }
         body.theme-cherry .notify-input:focus { border-color: #a01235; box-shadow: 0 0 0 3px rgba(160,18,53,0.15); }
         body.theme-cherry .gallery-arrow { color: #a01235; border-color: #f3c6d2; }
         body.theme-cherry .gallery-thumb.active { border-color: #a01235; }
@@ -1556,18 +1557,31 @@
             flex-shrink: 0;
         }
 
+        /* Team / bulk order link — compact single line */
+        .team-order-link {
+            display: block;
+            text-align: center;
+            margin: 10px 0 2px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0d5bb8;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .team-order-link:hover { text-decoration: underline; opacity: 0.85; }
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // ---- Pricing block ----
             const PACK_PRICES = {
                 subscribe: {
-                    '3': { price: 27.00, per: '$9.00 / tin', orig: '$30.00', save: 'Save $3.00' },
-                    '5': { price: 40.00, per: '$8.00 / tin', orig: '$50.00', save: 'Save $10.00' }
+                    '3': { price: 30.00, per: '$10.00 / tin', orig: '$33.00', save: 'Save $3.00' },
+                    '5': { price: 45.00, per: '$9.00 / tin', orig: '$55.00', save: 'Save $10.00' }
                 },
                 onetime: {
-                    '3': { price: 30.00, per: '$10.00 / tin', orig: '', save: '' },
-                    '5': { price: 45.00, per: '$9.00 / tin', orig: '$50.00', save: '' }
+                    '3': { price: 33.00, per: '$11.00 / tin', orig: '', save: '' },
+                    '5': { price: 50.00, per: '$10.00 / tin', orig: '$55.00', save: '' }
                 }
             };
 
@@ -1878,8 +1892,8 @@
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
-        "lowPrice": "27.00",
-        "highPrice": "45.00",
+        "lowPrice": "30.00",
+        "highPrice": "50.00",
         "availability": "https://schema.org/PreOrder",
         "url": "https://zelyte.shop/crispy-mint.html"
       }
@@ -1981,22 +1995,22 @@
                                     3 Pack
                                     <span class="pack-popular-badge">POPULAR</span>
                                 </div>
-                                <div class="pack-card-sub" id="pack-3-sub">$9.00 / tin</div>
+                                <div class="pack-card-sub" id="pack-3-sub">$10.00 / tin</div>
                             </div>
                             <div class="pack-card-right">
-                                <div class="pack-card-price" id="pack-3-price">$27.00</div>
-                                <div class="pack-card-orig" id="pack-3-orig">$30.00</div>
+                                <div class="pack-card-price" id="pack-3-price">$30.00</div>
+                                <div class="pack-card-orig" id="pack-3-orig">$33.00</div>
                             </div>
                         </button>
 
                         <button class="pack-card" data-pack="5" type="button" aria-pressed="false">
                             <div class="pack-card-left">
                                 <div class="pack-card-name">5 Pack</div>
-                                <div class="pack-card-sub" id="pack-5-sub">$8.00 / tin</div>
+                                <div class="pack-card-sub" id="pack-5-sub">$9.00 / tin</div>
                             </div>
                             <div class="pack-card-right">
-                                <div class="pack-card-price" id="pack-5-price">$40.00</div>
-                                <div class="pack-card-orig" id="pack-5-orig">$50.00</div>
+                                <div class="pack-card-price" id="pack-5-price">$45.00</div>
+                                <div class="pack-card-orig" id="pack-5-orig">$55.00</div>
                             </div>
                         </button>
                     </div>
@@ -2032,6 +2046,9 @@
                     </ul>
 
                 </div>
+
+                <!-- Team / bulk orders -->
+                <a class="team-order-link" href="mailto:hudsonjmurray11@gmail.com?subject=ZELYTE%20Team%20%2F%20Bulk%20Order%20Inquiry">Ordering for a team? Get bulk pricing &rarr;</a>
 
                 <hr class="bubble-divider">
 
