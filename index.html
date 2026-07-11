@@ -45,7 +45,7 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Splash Screen -->
     <div id="splash-screen">
-        <iframe src="zelyte-3d-logo.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+        <iframe src="zelyte-3d-logo.html?v=glb4" frameborder="0" style="width: 100%; height: 100%;"></iframe>
     </div>
 
     <!-- Header Bar -->
@@ -454,8 +454,8 @@
                 if (e.data === 'splash-done') triggerSplashFade();
             });
 
-            // Fallback in case iframe never responds
-            setTimeout(triggerSplashFade, 2000);
+            // Fallback in case iframe never responds (allow time for the 3D model to load + spin)
+            setTimeout(triggerSplashFade, 3000);
         });
     </script>
 
