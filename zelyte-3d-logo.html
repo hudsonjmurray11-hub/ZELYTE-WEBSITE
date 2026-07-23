@@ -74,7 +74,7 @@
 
     // Load the 3D logo model (uses its own baked "Zelyte Blue" PBR material).
     const loader = new THREE.GLTFLoader();
-    loader.load('zelyte-logo-3d.glb', (gltf) => {
+    loader.load('images/zelyte-logo-3d.glb', (gltf) => {
       const model = gltf.scene;
 
       // Center on origin and normalize size to fit the camera (camera is at z=7).

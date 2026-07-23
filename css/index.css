@@ -625,9 +625,9 @@ picture { display: contents; }
    ===================== */
 .section-how {
     background-color: #001e4a;
-    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), url('Ocean.jpg');
-    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), -webkit-image-set(url('Ocean.webp') type('image/webp'), url('Ocean.jpg') type('image/jpeg'));
-    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), image-set(url('Ocean.webp') type('image/webp'), url('Ocean.jpg') type('image/jpeg'));
+    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), url('../images/Ocean.jpg');
+    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), -webkit-image-set(url('../images/Ocean.webp') type('image/webp'), url('../images/Ocean.jpg') type('image/jpeg'));
+    background-image: linear-gradient(rgba(0, 25, 60, 0.48), rgba(0, 25, 60, 0.48)), image-set(url('../images/Ocean.webp') type('image/webp'), url('../images/Ocean.jpg') type('image/jpeg'));
     background-size: auto, cover;
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
