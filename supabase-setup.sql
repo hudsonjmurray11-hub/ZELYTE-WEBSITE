@@ -13,3 +13,8 @@ alter table email_signups enable row level security;
 drop policy if exists "public_insert" on email_signups;
 create policy "public_insert" on email_signups
   for insert with check (true);
+
+-- Flavor preference captured by the two-step email popup
+-- ('crispy-mint' | 'black-cherry' | 'both').
+alter table email_signups
+  add column if not exists flavor_preference text;

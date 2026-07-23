@@ -2,8 +2,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Amounts in cents
 const PRICES = {
-    subscribe: { '3': 2700, '5': 4500 },
-    onetime:   { '3': 3000, '5': 5000 }
+    subscribe: { '3': 3000, '5': 4500 },
+    onetime:   { '3': 3300, '5': 5000 }
 };
 
 // Fixed product id so the recurring price can reference it without any

@@ -30,6 +30,7 @@
 
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script>
     // Scene
     const scene = new THREE.Scene();
@@ -37,10 +38,22 @@
     camera.position.set(0, 0, 7);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0x000000, 0);
     document.body.appendChild(renderer.domElement);
+
+    // Size the canvas + camera to the current viewport. `setSize` writes inline pixel
+    // styles onto the canvas, so if this ever ran with a stale/zero iframe size the logo
+    // would get pinned small at the top-left — hence the zero-dimension guard and the
+    // re-run hooks below (load + ResizeObserver) that correct any bad first read.
+    function resize() {
+      const w = window.innerWidth, h = window.innerHeight;
+      if (!w || !h) return; // ignore bogus 0-size layout frames
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    resize();
 
     // Lighting
     scene.add(new THREE.AmbientLight(0xffffff, 0.35));
@@ -54,104 +67,50 @@
     d3.position.set(0, 5, -2);
     scene.add(d3);
 
-    const extrudeOpts = {
-      depth: 0.5,
-      bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.03,
-      bevelSegments: 8
-    };
-
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x4a86c8,
-      metalness: 0.15,
-      roughness: 0.35,
-      flatShading: false
-    });
-
-    // === PIECE 1: TOP BAR (parallelogram) ===
-    const bar1 = new THREE.Shape();
-    bar1.moveTo(-0.842, 1.383);  // TL
-    bar1.lineTo(1.018, 1.383);  // TR
-    bar1.lineTo(0.900, 1.218);  // BR
-    bar1.lineTo(-0.900, 1.218);  // BL
-    bar1.closePath();
-
-    // === PIECE 2: SECOND BAR (parallelogram) ===
-    const bar2 = new THREE.Shape();
-    bar2.moveTo(-0.942, 1.090);  // TL
-    bar2.lineTo(0.808, 1.090);  // TR
-    bar2.lineTo(0.648, 0.865);  // BR
-    bar2.lineTo(-1.018, 0.865);  // BL
-    bar2.closePath();
-
-    // === PIECE 3: MIDDLE SECTION (upper diagonal + third bar) ===
-    const mid = new THREE.Shape();
-    mid.moveTo(-0.068, 0.863);   // top-left
-    mid.lineTo(0.645, 0.863);   // top-right
-    mid.lineTo(0.190, 0.235);   // diagonal down to inner-right corner
-    mid.lineTo(0.818, 0.233);   // third bar extends right
-    mid.lineTo(0.343, -0.242);   // diagonal down to bottom-right
-    mid.lineTo(-0.825, -0.242);   // bottom-left
-    mid.lineTo(-0.500, 0.235);   // back up left side to inner-left corner
-    mid.closePath();
-
-    // === PIECE 4: BOTTOM BOLT (triangle) ===
-    const bot = new THREE.Shape();
-    bot.moveTo(-0.247, -0.245);  // top-left
-    bot.lineTo(0.340, -0.245);  // top-right
-    bot.lineTo(-0.800, -1.380);  // bottom point
-    bot.closePath();
-
-    // Build group
+    // Rotating container — the GLB model is loaded into this group so all
+    // downstream spin / fade / drag code keeps operating on `group` unchanged.
     const group = new THREE.Group();
-
-    [bar1, bar2, mid, bot].forEach(shape => {
-      const geo = new THREE.ExtrudeGeometry(shape, extrudeOpts);
-
-      // Merge duplicate vertices and recompute smooth normals to eliminate seam lines
-      const merged = new THREE.BufferGeometry();
-      const posAttr = geo.getAttribute('position');
-      const map = {};
-      const newPositions = [];
-      const indexMap = [];
-
-      for (let i = 0; i < posAttr.count; i++) {
-        const x = posAttr.getX(i), y = posAttr.getY(i), z = posAttr.getZ(i);
-        const key = x.toFixed(5) + ',' + y.toFixed(5) + ',' + z.toFixed(5);
-        if (map[key] === undefined) {
-          map[key] = newPositions.length / 3;
-          newPositions.push(x, y, z);
-        }
-        indexMap.push(map[key]);
-      }
-
-      merged.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3));
-      const oldIndex = geo.getIndex();
-      if (oldIndex) {
-        const newIdx = [];
-        for (let i = 0; i < oldIndex.count; i++) newIdx.push(indexMap[oldIndex.getX(i)]);
-        merged.setIndex(newIdx);
-      } else {
-        merged.setIndex(indexMap);
-      }
-      merged.computeVertexNormals();
-
-      const mesh = new THREE.Mesh(merged, material);
-      mesh.position.z = -extrudeOpts.depth / 2;
-      group.add(mesh);
-    });
-
     scene.add(group);
+
+    // Load the 3D logo model (uses its own baked "Zelyte Blue" PBR material).
+    const loader = new THREE.GLTFLoader();
+    loader.load('images/zelyte-logo-3d.glb', (gltf) => {
+      const model = gltf.scene;
+
+      // Center on origin and normalize size to fit the camera (camera is at z=7).
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      model.position.sub(center);
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const targetSize = 2.8; // ~matches the old logo's footprint
+      if (maxDim > 0) model.scale.setScalar(targetSize / maxDim);
+
+      // Lighten the logo to a softer blue (overrides the GLB's darker baked color).
+      model.traverse((o) => {
+        if (o.isMesh && o.material) {
+          o.material.color.setHex(0x5aa6e6);
+        }
+      });
+
+      group.add(model);
+      modelLoaded = true;
+      startTime = null; // begin the spin timer now that the model is visible
+    }, undefined, () => {
+      // If the model fails to load, don't trap the visitor behind the splash —
+      // hand control straight back to the page.
+      window.parent.postMessage('splash-done', '*');
+    });
 
     // === INTERACTION & ANIMATION SEQUENCE ===
     let phase = 'spin'; // 'spin' | 'fade' | 'done'
-    const spinDuration = 700;
+    const spinDuration = 900; // a touch slower than the original 700ms
     const fadeDuration = 250;
     let isDragging = false;
     let prev = { x: 0, y: 0 }, vel = { x: 0, y: 0 };
     let startTime = null;
     let fadeStart = 0;
+    let modelLoaded = false;
 
     function onDown(x, y) { isDragging = true; phase = 'done'; prev = { x, y }; }
     function onMove(x, y) {
@@ -174,6 +133,13 @@
 
     let animRafId = null;
     function animate(now) {
+      // Hold the splash (no spin/fade) until the GLB has loaded and is on screen.
+      if (!modelLoaded) {
+        renderer.render(scene, camera);
+        animRafId = requestAnimationFrame(animate);
+        return;
+      }
+
       if (startTime === null) startTime = now;
 
       if (phase === 'spin') {
@@ -207,11 +173,12 @@
     }
     animRafId = requestAnimationFrame(animate);
 
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+    // Re-apply the size whenever layout changes. The ResizeObserver fires the moment the
+    // iframe receives its real dimensions, which deterministically closes the load-timing
+    // race that intermittently left the logo small in the top-left corner.
+    window.addEventListener('resize', resize);
+    window.addEventListener('load', resize);
+    new ResizeObserver(resize).observe(document.documentElement);
 
 
   </script>

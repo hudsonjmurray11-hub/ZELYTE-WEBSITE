@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <title>Crispy Mint — ZELYTE</title>
     <meta name="description" content="Crispy Mint — ZELYTE's Active Hydration Pouch. Electrolytes, caffeine, and zero sugar in a crisp mint flavor, absorbed through your gums. No water, no bottle, hands-free.">
     <link rel="canonical" href="https://zelyte.shop/crispy-mint.html">
     <meta property="og:title" content="Crispy Mint — ZELYTE">
     <meta property="og:description" content="Electrolytes, caffeine, and zero sugar in a crisp mint pouch — absorbed through your gums. No water, no bottle.">
-    <meta property="og:image" content="https://zelyte.shop/NEWCRISPYMINT.png">
+    <meta property="og:image" content="https://zelyte.shop/images/NEWCRISPYMINT.png">
     <meta property="og:url" content="https://zelyte.shop/crispy-mint.html">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="ZELYTE">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Crispy Mint — ZELYTE">
     <meta name="twitter:description" content="Electrolytes, caffeine, and zero sugar in a crisp mint pouch — hands-free hydration.">
-    <meta name="twitter:image" content="https://zelyte.shop/NEWCRISPYMINT.png">
+    <meta name="twitter:image" content="https://zelyte.shop/images/NEWCRISPYMINT.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -167,6 +171,7 @@
         .product-hero {
             display: flex;
             align-items: flex-start;
+            justify-content: center;
             min-height: calc(100vh - 100px);
             gap: 64px;
         }
@@ -174,55 +179,127 @@
         /* ---- Image Column ---- */
         .product-img-col {
             flex: 1;
-            max-width: 640px;
+            max-width: 480px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
-        .product-swiper {
-            width: 520px;
-            height: 620px;
-        }
-        .product-swiper .swiper-slide {
-            border-radius: 12px;
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 8px 40px rgba(13, 35, 87, 0.14), 0 2px 8px rgba(13, 35, 87, 0.07);
         }
-        .product-swiper .swiper-slide img {
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            cursor: zoom-in;
+        }
+        picture { display: contents; }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid #d0e4f8;
+            background: rgba(255, 255, 255, 0.92);
+            color: #0d5bb8;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, transform 0.15s ease;
+            box-shadow: 0 2px 10px rgba(13,35,87,0.12);
+        }
+        .gallery-arrow:hover {
+            background: #ffffff;
+            transform: translateY(-50%) scale(1.08);
+        }
+        #gallery-prev { left: 14px; }
+        #gallery-next { right: 14px; }
+        .gallery-main.single-image .gallery-arrow { display: none; }
+
+        .gallery-thumbs {
+            display: flex;
+            gap: 12px;
+        }
+        .gallery-thumb {
+            width: 90px;
+            aspect-ratio: 3 / 4;
+            padding: 0;
+            border: 2px solid rgba(13, 35, 87, 0.12);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.15s ease;
+        }
+        .gallery-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
             display: block;
         }
-        picture { display: contents; }
+        .gallery-thumb:hover { transform: translateY(-2px); }
+        .gallery-thumb.active { border-color: #0d5bb8; }
 
-        .swiper-nav-row {
-            display: flex;
-            gap: 16px;
+        /* ---- Fullscreen lightbox ---- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: none;
+            align-items: center;
             justify-content: center;
-            margin-top: 20px;
+            padding: 24px;
+            background: rgba(6, 12, 26, 0.92);
         }
-        .swiper-nav-btn {
-            width: 48px;
-            height: 48px;
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: min(92vw, 1100px);
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 12px 60px rgba(0, 0, 0, 0.5);
+        }
+        .lightbox .gallery-arrow { position: fixed; }
+        #lightbox-prev { left: 20px; }
+        #lightbox-next { right: 20px; }
+        .lightbox.single-image .gallery-arrow { display: none; }
+        .lightbox-close {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 2;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            border: 1.5px solid #d0e4f8;
-            background: #ffffff;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            color: #0d5bb8;
-            font-size: 20px;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background 0.2s ease, transform 0.15s ease;
-            box-shadow: 0 2px 10px rgba(13,35,87,0.08);
         }
-        .swiper-nav-btn:hover {
-            background: #e8f0fd;
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: scale(1.08);
         }
 
@@ -257,15 +334,6 @@
         .breadcrumb a { color: rgba(255,255,255,0.92); text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
 
-        .product-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #1a73e8;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
         .glass-card h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -437,7 +505,7 @@
         }
 
         /* ---- Notify Me (Coming Soon) ---- */
-        .notify-block { display: flex; flex-direction: column; gap: 10px; }
+        .notify-block { display: flex; flex-direction: column; gap: 8px; }
         .notify-pill {
             align-self: flex-start;
             font-size: 0.68rem;
@@ -453,7 +521,7 @@
         .notify-input {
             flex: 1;
             min-width: 0;
-            padding: 13px 16px;
+            padding: 11px 16px;
             border: 1.5px solid #c7d9f5;
             border-radius: 100px;
             font-size: 0.95rem;
@@ -469,7 +537,7 @@
         }
         .notify-input::placeholder { color: #8aa4c8; }
         .notify-btn {
-            padding: 13px 22px;
+            padding: 11px 22px;
             border: none;
             border-radius: 100px;
             font-weight: 700;
@@ -830,7 +898,7 @@
         .product-bubble {
             background: #fff;
             border-radius: 24px;
-            padding: 24px;
+            padding: 20px;
             box-shadow: 0 8px 48px rgba(13,35,87,0.12), 0 2px 10px rgba(13,35,87,0.07), 0 0 0 1px rgba(13,35,87,0.05);
             display: flex;
             flex-direction: column;
@@ -857,7 +925,7 @@
             100% { background-position: 100% center; }
         }
         .prod-heading {
-            font-size: 2.6rem;
+            font-size: 2.15rem;
             font-weight: 800;
             line-height: 1.1;
             background: linear-gradient(90deg, #0d2357 0%, #1565c0 30%, #1a73e8 50%, #60a5fa 70%, #bae6fd 100%);
@@ -891,6 +959,117 @@
             padding: 3px 9px; border-radius: 100px; letter-spacing: 0.5px;
             white-space: nowrap; box-shadow: 0 2px 8px rgba(255,180,0,0.4);
         }
+
+        /* Flavor selector (reuses .variant-pill) */
+        .flavor-select-label {
+            font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em;
+            text-transform: uppercase; color: rgba(255,255,255,0.85);
+            margin-bottom: 10px;
+        }
+        .flavor-pills.variant-pill-wrap { flex-wrap: wrap; gap: 10px; }
+        .flavor-pills .variant-pill { flex: 1 1 auto; padding: 12px 18px; font-size: 1rem; text-align: center; }
+        @media (max-width: 480px) {
+            .flavor-pills .variant-pill { flex-basis: 100%; }
+        }
+        /* Bundle mix customizer (shown only for the Bundle flavor) */
+        .bundle-mix {
+            display: none; flex-direction: column; gap: 8px; padding: 10px 14px;
+            background: #f7f9ff; border: 1.5px solid #e0eafc; border-radius: 16px;
+        }
+        .bundle-mix.visible { display: flex; }
+        .bundle-mix-head { display: flex; align-items: baseline; justify-content: space-between; }
+        .bundle-mix-title {
+            font-size: 0.72rem; font-weight: 800; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #6b8ab5;
+        }
+        .bundle-mix-total { font-size: 0.82rem; font-weight: 800; color: #0d5bb8; font-variant-numeric: tabular-nums; }
+        .bundle-mix-row { display: flex; align-items: center; justify-content: space-between; }
+        .bundle-mix-flavor { display: flex; align-items: center; gap: 9px; font-size: 0.98rem; font-weight: 700; color: #0d1f3c; }
+        .mix-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .mix-dot-mint { background: #1a73e8; }
+        .mix-dot-cherry { background: #a01235; }
+        .mix-stepper {
+            display: flex; align-items: center; gap: 2px;
+            border: 1.5px solid #c7d9f5; border-radius: 100px; background: #fff;
+        }
+        .mix-btn {
+            width: 30px; height: 30px; border: none; background: transparent;
+            font-size: 1.2rem; font-weight: 700; color: #0d5bb8; cursor: pointer;
+            border-radius: 50%; line-height: 1; transition: background 0.15s, opacity 0.15s;
+        }
+        .mix-btn:hover:not(:disabled) { background: #eef4ff; }
+        .mix-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .mix-count { min-width: 28px; text-align: center; font-size: 1rem; font-weight: 800; color: #0d1f3c; font-variant-numeric: tabular-nums; }
+
+        /* ===================================================================
+           Per-flavor theming — additive overrides toggled from applyFlavor().
+           Default (no class) = blue (Crispy Mint). Left untouched above.
+           =================================================================== */
+
+        /* Smooth swap on the recolored buy-box surfaces */
+        .product-bubble .info-card,
+        .prod-stat-chip,
+        .variant-pill,
+        .pack-card,
+        .pack-card-price,
+        .pack-selected-border,
+        .bubble-divider,
+        .bundle-mix {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ---- Black Cherry: deep burgundy / cherry ---- */
+        body.theme-cherry .prod-heading {
+            background: linear-gradient(90deg, #4a0d1f 0%, #7a0f2a 30%, #a01235 50%, #e0234e 72%, #ff8fa8 100%);
+            -webkit-background-clip: text; background-clip: text;
+        }
+        body.theme-cherry .gradient-button {
+            background: linear-gradient(135deg, #6b0f2a, #a01235, #d61e4c, #e0234e, #ff5c7a, #e0234e, #d61e4c, #a01235, #6b0f2a);
+            background-size: 300% 100%;
+        }
+        body.theme-cherry .gradient-button::before {
+            background: linear-gradient(135deg, #ff5c7a, #ffd0da, #ff8fa8, #ff5c7a);
+            background-size: 300% 100%;
+        }
+        body.theme-cherry .gradient-button:hover { box-shadow: 0 6px 24px rgba(224,35,78,0.5); }
+        body.theme-cherry .ingredients-section { background: #2e0a16; }
+        body.theme-cherry .detail-label,
+        body.theme-cherry .howto-header .detail-label { color: #a01235; }
+        body.theme-cherry .prod-stat-chip { background: #fdeef2; border-color: #f3c6d2; color: #a01235; }
+        body.theme-cherry .prod-stat-chip svg { stroke: #a01235; }
+        body.theme-cherry .variant-pill { border-color: #f3c6d2; color: #a01235; }
+        body.theme-cherry .variant-pill.selected { background: #a01235; border-color: #a01235; color: #fff; }
+        body.theme-cherry .pack-card-price { color: #a01235; }
+        body.theme-cherry .pack-card-name { color: #2e0a16; }
+        body.theme-cherry .pack-card-sub { color: #9a5568; }
+        body.theme-cherry .pack-card:hover { background: #fdeef2; }
+        body.theme-cherry .pack-selected-border { border-color: #a01235; }
+        body.theme-cherry .product-bubble .info-card { background: #fdeef2; }
+        body.theme-cherry .bubble-divider { border-top-color: #f3d6de; }
+        body.theme-cherry .notify-sub { color: #9a5568; }
+        body.theme-cherry .pack-select-label { color: #b06b80; }
+        body.theme-cherry .team-order-link { color: #a01235; }
+        body.theme-cherry .notify-input:focus { border-color: #a01235; box-shadow: 0 0 0 3px rgba(160,18,53,0.15); }
+        body.theme-cherry .gallery-arrow { color: #a01235; border-color: #f3c6d2; }
+        body.theme-cherry .gallery-thumb.active { border-color: #a01235; }
+
+        /* ---- Bundle: blended blue + cherry (heading / CTA / panel only) ---- */
+        body.theme-bundle .prod-heading {
+            background: linear-gradient(90deg, #0d2357 0%, #1a73e8 28%, #7b2d8e 55%, #a01235 78%, #e0234e 100%);
+            -webkit-background-clip: text; background-clip: text;
+        }
+        body.theme-bundle .gradient-button {
+            background: linear-gradient(135deg, #0d47a1, #1a73e8, #7b2d8e, #a01235, #e0234e, #a01235, #7b2d8e, #1a73e8, #0d47a1);
+            background-size: 300% 100%;
+        }
+        body.theme-bundle .gradient-button::before {
+            background: linear-gradient(135deg, #60a5fa, #ff8fa8, #93c5fd, #e0234e);
+            background-size: 300% 100%;
+        }
+        body.theme-bundle .ingredients-section { background: linear-gradient(135deg, #0d2357, #2e0a16); }
+        /* Bundle mix only ever shows under the bundle theme — blend its accents blue↔cherry */
+        body.theme-bundle .bundle-mix { border-color: #d9c4e0; }
+        body.theme-bundle .bundle-mix-total { color: #a01235; }
 
         /* Info card — white/blue */
         .info-card {
@@ -949,21 +1128,23 @@
 
         /* ── Tagline ── */
         .prod-tagline {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #5a7fa8;
             line-height: 1.45;
-            margin-top: 2px;
+            margin-top: 0;
         }
 
         /* ── Stat chips ── */
         .prod-stat-row {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 7px;
         }
         .prod-stat-chip {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
             background: #eef4ff;
             border: 1.5px solid #c7d9f5;
@@ -993,7 +1174,7 @@
         .ingredients-section {
             background: #0d2357;
             border-radius: 32px;
-            margin: 0 24px 32px;
+            margin: 40px 24px 32px;
             width: calc(100% - 48px);
             padding: 80px 60px;
             overflow: hidden;
@@ -1179,7 +1360,7 @@
             .page-wrap { padding: 90px 24px 60px; }
             .product-hero { flex-direction: column; gap: 32px; }
             .product-img-col { max-width: 420px; width: 100%; margin-top: 0; align-self: center; }
-            .product-swiper { width: 100%; height: 420px; }
+            .gallery-thumb { width: 76px; }
             .product-info-col { max-width: 100%; }
             .glass-card h1 { font-size: 3.2rem; }
             .product-details { grid-template-columns: 1fr; margin-top: 32px; }
@@ -1188,7 +1369,7 @@
             .product-bundles-header { flex-direction: column; gap: 4px; }
             .product-bundles-grid { grid-template-columns: 1fr; gap: 12px; }
             .pb-card-featured { padding: 22px 16px; }
-            .ingredients-section { padding: 60px 32px; margin: 0 16px 24px; width: calc(100% - 32px); }
+            .ingredients-section { padding: 60px 32px; margin: 32px 16px 24px; width: calc(100% - 32px); }
             .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
             .ingredients-header h2 { font-size: 2.2rem; }
             .howto-section { padding: 60px 32px; margin: 0 16px 40px; width: calc(100% - 32px); }
@@ -1201,7 +1382,7 @@
         @media (max-width: 600px) {
             .page-wrap { padding: 80px 16px 48px; }
             .product-img-col { max-width: calc(100vw - 48px); }
-            .product-swiper { height: 340px; }
+            .gallery-thumb { width: 64px; }
             .detail-card { padding: 28px 20px; }
             .detail-card h2 { font-size: 1.7rem; margin-bottom: 20px; }
             .detail-row { flex-direction: column; }
@@ -1211,7 +1392,7 @@
             .product-bubble { padding: 24px 20px; gap: 20px; }
             .prod-benefit-row { grid-template-columns: 1fr; gap: 8px; }
             .prod-benefit-card { flex-direction: row; text-align: left; align-items: flex-start; }
-            .ingredients-section { padding: 48px 20px; margin: 0 12px 20px; width: calc(100% - 24px); }
+            .ingredients-section { padding: 48px 20px; margin: 24px 12px 20px; width: calc(100% - 24px); }
             .ingredients-grid { grid-template-columns: 1fr; }
             .ingredients-header h2 { font-size: 1.9rem; }
             .howto-section { padding: 48px 20px; margin: 0 12px 40px; width: calc(100% - 24px); }
@@ -1278,7 +1459,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 13px 16px;
+            padding: 11px 16px;
             background: #f7f9ff;
             border: 1.5px solid #e0eafc;
             border-radius: 18px;
@@ -1376,23 +1557,77 @@
             flex-shrink: 0;
         }
 
+        /* Team / bulk order link — compact single line */
+        .team-order-link {
+            display: block;
+            text-align: center;
+            margin: 10px 0 2px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0d5bb8;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .team-order-link:hover { text-decoration: underline; opacity: 0.85; }
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // ---- Pricing block ----
             const PACK_PRICES = {
                 subscribe: {
-                    '3': { price: 27.00, per: '$9.00 / tin', orig: '$30.00', save: 'Save $3.00' },
-                    '5': { price: 45.00, per: '$9.00 / tin', orig: '$50.00', save: 'Save $5.00' }
+                    '3': { price: 30.00, per: '$10.00 / tin', orig: '$33.00', save: 'Save $3.00' },
+                    '5': { price: 45.00, per: '$9.00 / tin', orig: '$55.00', save: 'Save $10.00' }
                 },
                 onetime: {
-                    '3': { price: 30.00, per: '$0.67 / pouch', orig: '', save: '' },
-                    '5': { price: 50.00, per: '$0.67 / pouch', orig: '', save: '' }
+                    '3': { price: 33.00, per: '$11.00 / tin', orig: '', save: '' },
+                    '5': { price: 50.00, per: '$10.00 / tin', orig: '$55.00', save: '' }
+                }
+            };
+
+            // ---- Flavors ---- (prices are flavor-agnostic; this only swaps copy + imagery)
+            const FLAVORS = {
+                'crispy-mint': {
+                    name: 'Crispy Mint',
+                    sub: 'Electrolyte & Caffeine Pouches',
+                    ingredient: 'Natural Mint Flavor',
+                    notify: 'Be the first to know when Crispy Mint drops.',
+                    slides: [
+                        { img: 'images/crispy-product-3.jpg', webp: 'images/crispy-product-3.webp' },
+                        { img: 'images/ZELYTE_HOW_TO_USE.png' }
+                    ]
+                },
+                'black-cherry': {
+                    name: 'Black Cherry',
+                    sub: 'Electrolyte & Caffeine Pouches',
+                    ingredient: 'Natural Black Cherry Flavor',
+                    notify: 'Be the first to know when Black Cherry drops.',
+                    slides: [
+                        { img: 'images/ZELYTE_BLACKCHERRY.png' },
+                        { img: 'images/ZELYTE_HOW_TO_USE.png' }
+                    ]
+                },
+                'bundle': {
+                    name: 'Bundle — Both Flavors',
+                    sub: 'Crispy Mint + Black Cherry',
+                    ingredient: 'Natural Mint & Black Cherry Flavor',
+                    notify: 'Be the first to know when ZELYTE drops.',
+                    slides: [
+                        { img: 'images/NEWCRISPYMINT.png', webp: 'images/NEWCRISPYMINT.webp' },
+                        { img: 'images/ZELYTE_BLACKCHERRY.png' },
+                        { img: 'images/ZELYTE_HOW_TO_USE.png' }
+                    ]
                 }
             };
 
             let currentMode = 'subscribe';
             let selectedPack = '3';
+            let currentFlavor = new URLSearchParams(window.location.search).get('flavor') || 'crispy-mint';
+            if (!FLAVORS[currentFlavor]) currentFlavor = 'crispy-mint';
+
+            // Bundle mix: how many of the pack's tins are Crispy Mint (cherry = packSize - mint).
+            const defaultMint = n => Math.ceil(n / 2); // 3 -> 2, 5 -> 3
+            let bundleMintCount = defaultMint(parseInt(selectedPack, 10));
 
             const modeSlider = document.getElementById('pricing-mode-slider');
             const packSelectedBorder = document.getElementById('pack-selected-border');
@@ -1470,7 +1705,166 @@
                     updateBorderPosition();
                     const saveEl = document.getElementById('pack-save-line');
                     if (saveEl) saveEl.textContent = PACK_PRICES[currentMode][selectedPack].save;
+                    updateBundleMix();
                 });
+            });
+
+            // ---- Flavor selector ----
+            const flavorPills = document.querySelectorAll('#flavor-select .variant-pill');
+            const headingEl = document.querySelector('.prod-heading');
+            const taglineEl = document.querySelector('.prod-tagline');
+            const ingNameEl = document.getElementById('ing-flavor-name');
+            const notifySubEl = document.querySelector('.notify-sub');
+            const bundleMixEl = document.getElementById('bundle-mix');
+            const mixCountMintEl = document.getElementById('mix-count-mint');
+            const mixCountCherryEl = document.getElementById('mix-count-cherry');
+            const mixTotalEl = document.getElementById('bundle-mix-total');
+
+            // ---- Image gallery ----
+            const galleryMain = document.getElementById('gallery-main');
+            const galleryThumbs = document.getElementById('gallery-thumbs');
+            let gallerySlides = [];
+            let galleryAlt = '';
+            let galleryIndex = 0;
+
+            function buildPictureHTML(s, alt, imgAttrs) {
+                const source = s.webp ? '<source srcset="' + s.webp + '" type="image/webp">' : '';
+                return '<picture>' + source + '<img src="' + s.img + '" alt="' + alt + '" decoding="async"' + (imgAttrs || '') + '></picture>';
+            }
+
+            function showGalleryImage(i) {
+                if (!gallerySlides.length) return;
+                galleryIndex = (i + gallerySlides.length) % gallerySlides.length;
+                const oldPicture = document.getElementById('gallery-main-picture');
+                const wrap = document.createElement('div');
+                wrap.innerHTML = buildPictureHTML(gallerySlides[galleryIndex], galleryAlt, ' id="gallery-main-img"');
+                const newPicture = wrap.firstChild;
+                newPicture.id = 'gallery-main-picture';
+                oldPicture.replaceWith(newPicture);
+                galleryThumbs.querySelectorAll('.gallery-thumb').forEach((t, ti) => {
+                    t.classList.toggle('active', ti === galleryIndex);
+                });
+                if (lightboxOpen) renderLightboxImage();
+            }
+
+            function renderGallery(slides, alt) {
+                gallerySlides = slides;
+                galleryAlt = alt;
+                galleryMain.classList.toggle('single-image', slides.length < 2);
+                galleryThumbs.style.display = slides.length < 2 ? 'none' : '';
+                galleryThumbs.innerHTML = slides.map((s, i) =>
+                    '<button class="gallery-thumb" type="button" aria-label="View image ' + (i + 1) + '">' +
+                    buildPictureHTML(s, '') + '</button>'
+                ).join('');
+                galleryThumbs.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+                    t.addEventListener('click', () => showGalleryImage(i));
+                });
+                showGalleryImage(0);
+            }
+
+            document.getElementById('gallery-prev').addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+            document.getElementById('gallery-next').addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+
+            // ---- Fullscreen lightbox ----
+            const lightbox = document.getElementById('lightbox');
+            let lightboxOpen = false;
+
+            function renderLightboxImage() {
+                const oldPicture = document.getElementById('lightbox-picture');
+                const wrap = document.createElement('div');
+                wrap.innerHTML = buildPictureHTML(gallerySlides[galleryIndex], galleryAlt);
+                const newPicture = wrap.firstChild;
+                newPicture.id = 'lightbox-picture';
+                oldPicture.replaceWith(newPicture);
+            }
+
+            function openLightbox() {
+                if (!gallerySlides.length) return;
+                renderLightboxImage();
+                lightbox.classList.toggle('single-image', gallerySlides.length < 2);
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                lightboxOpen = true;
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('open');
+                document.body.style.overflow = '';
+                lightboxOpen = false;
+            }
+
+            galleryMain.addEventListener('click', e => {
+                if (e.target.closest('.gallery-arrow')) return;
+                if (e.target.closest('picture')) openLightbox();
+            });
+            document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+            document.getElementById('lightbox-prev').addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+            document.getElementById('lightbox-next').addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+            lightbox.addEventListener('click', e => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', e => {
+                if (!lightboxOpen) return;
+                if (e.key === 'Escape') closeLightbox();
+                else if (e.key === 'ArrowLeft') showGalleryImage(galleryIndex - 1);
+                else if (e.key === 'ArrowRight') showGalleryImage(galleryIndex + 1);
+            });
+
+            // Show/refresh the bundle mix. Cherry is always packSize - mint; both stay in [1, packSize-1].
+            function updateBundleMix() {
+                if (!bundleMixEl) return;
+                if (currentFlavor !== 'bundle') {
+                    bundleMixEl.classList.remove('visible');
+                    return;
+                }
+                const packSize = parseInt(selectedPack, 10);
+                bundleMintCount = Math.max(1, Math.min(packSize - 1, bundleMintCount));
+                const cherry = packSize - bundleMintCount;
+                mixCountMintEl.textContent = String(bundleMintCount);
+                mixCountCherryEl.textContent = String(cherry);
+                mixTotalEl.textContent = packSize + ' tins';
+                bundleMixEl.querySelectorAll('.mix-btn').forEach(btn => {
+                    const dir = parseInt(btn.dataset.dir, 10);
+                    // How this button would change the mint count.
+                    const mintDelta = btn.dataset.flavor === 'mint' ? dir : -dir;
+                    const nextMint = bundleMintCount + mintDelta;
+                    btn.disabled = nextMint < 1 || nextMint > packSize - 1;
+                });
+                bundleMixEl.classList.add('visible');
+            }
+
+            if (bundleMixEl) {
+                bundleMixEl.addEventListener('click', e => {
+                    const btn = e.target.closest('.mix-btn');
+                    if (!btn || btn.disabled) return;
+                    const dir = parseInt(btn.dataset.dir, 10);
+                    bundleMintCount += btn.dataset.flavor === 'mint' ? dir : -dir;
+                    updateBundleMix();
+                });
+            }
+
+            function applyFlavor(flavor) {
+                currentFlavor = FLAVORS[flavor] ? flavor : 'crispy-mint';
+                const f = FLAVORS[currentFlavor];
+                if (headingEl) headingEl.textContent = f.name;
+                if (taglineEl) taglineEl.textContent = f.sub;
+                if (ingNameEl) ingNameEl.textContent = f.ingredient;
+                if (notifySubEl) notifySubEl.textContent = f.notify;
+                document.title = f.name + ' — ZELYTE';
+                document.body.classList.remove('theme-cherry', 'theme-bundle');
+                if (currentFlavor === 'black-cherry') document.body.classList.add('theme-cherry');
+                else if (currentFlavor === 'bundle') document.body.classList.add('theme-bundle');
+                flavorPills.forEach(p => {
+                    const on = p.dataset.flavor === currentFlavor;
+                    p.classList.toggle('selected', on);
+                    p.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+                renderGallery(f.slides, f.name);
+                updateBundleMix();
+            }
+
+            flavorPills.forEach(pill => {
+                pill.addEventListener('click', () => applyFlavor(pill.dataset.flavor));
             });
 
             // Init border position after layout
@@ -1478,25 +1872,27 @@
                 requestAnimationFrame(updateBorderPosition);
             });
 
+            // Apply initial flavor (respects ?flavor= deep-link)
+            applyFlavor(currentFlavor);
+
         });
     </script>
-    <link rel="stylesheet" href="zelyte-shared.css">
-    <link rel="stylesheet" href="glowing-effect.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/zelyte-shared.css">
+    <link rel="stylesheet" href="css/glowing-effect.css">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org/",
       "@type": "Product",
       "name": "ZELYTE Crispy Mint Active Hydration Pouch",
-      "image": "https://zelyte.shop/NEWCRISPYMINT.png",
+      "image": "https://zelyte.shop/images/NEWCRISPYMINT.png",
       "description": "Crispy Mint ZELYTE Active Hydration Pouch — electrolytes, caffeine, and zero sugar absorbed through your gums. Hands-free, no water, no bottle. 15 pouches per tin.",
       "brand": { "@type": "Brand", "name": "ZELYTE" },
       "category": "Hydration Supplement",
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
-        "lowPrice": "27.00",
+        "lowPrice": "30.00",
         "highPrice": "50.00",
         "availability": "https://schema.org/PreOrder",
         "url": "https://zelyte.shop/crispy-mint.html"
@@ -1509,7 +1905,7 @@
 
     <!-- Header -->
     <div id="header-bar" class="header-bar">
-        <a href="index.html"><img src="Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
+        <a href="index.html"><img src="images/Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
         <div class="spacer"></div>
         <nav class="nav-links">
             <a href="science.html">Science</a>
@@ -1526,16 +1922,14 @@
 
             <!-- Image -->
             <div class="product-img-col">
-                <div class="swiper product-swiper" aria-label="Product images" aria-roledescription="carousel">
-                    <div class="swiper-wrapper" aria-live="off">
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 1 of 3"><picture><source srcset="NEWCRISPYMINT.webp" type="image/webp"><img src="NEWCRISPYMINT.png" alt="Crispy Mint Tin" fetchpriority="high" decoding="async"></picture></div>
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 2 of 3"><picture><source srcset="crispy-product-2.webp" type="image/webp"><img src="crispy-product-2.jpg" alt="Crispy Mint Product" loading="lazy" decoding="async"></picture></div>
-                        <div class="swiper-slide" aria-roledescription="slide" aria-label="Image 3 of 3"><picture><source srcset="crispy-product-3.webp" type="image/webp"><img src="crispy-product-3.jpg" alt="Crispy Mint Product" loading="lazy" decoding="async"></picture></div>
-                    </div>
+                <div class="gallery-main" id="gallery-main" aria-label="Product images">
+                    <button class="gallery-arrow" id="gallery-prev" aria-label="Previous image">&#8592;</button>
+                    <picture id="gallery-main-picture"><source srcset="images/crispy-product-3.webp" type="image/webp"><img id="gallery-main-img" src="images/crispy-product-3.jpg" alt="Crispy Mint" fetchpriority="high" decoding="async"></picture>
+                    <button class="gallery-arrow" id="gallery-next" aria-label="Next image">&#8594;</button>
                 </div>
-                <div class="swiper-nav-row">
-                    <button class="swiper-nav-btn" id="swiper-prev" aria-label="Previous image">&#8592;</button>
-                    <button class="swiper-nav-btn" id="swiper-next" aria-label="Next image">&#8594;</button>
+                <div class="gallery-thumbs" id="gallery-thumbs" role="group" aria-label="Image thumbnails">
+                    <button class="gallery-thumb active" type="button" aria-label="View image 1"><picture><source srcset="images/crispy-product-3.webp" type="image/webp"><img src="images/crispy-product-3.jpg" alt="" decoding="async"></picture></button>
+                    <button class="gallery-thumb" type="button" aria-label="View image 2"><picture><img src="images/ZELYTE_HOW_TO_USE.png" alt="" loading="lazy" decoding="async"></picture></button>
                 </div>
             </div>
 
@@ -1545,7 +1939,6 @@
 
                 <!-- Title block -->
                 <div class="prod-title-block">
-                    <span class="product-label">ZELYTE</span>
                     <h1 class="prod-heading">Crispy Mint</h1>
                     <p class="prod-tagline">Electrolyte &amp; Caffeine Pouches</p>
                 </div>
@@ -1564,9 +1957,23 @@
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
                         Zero Sugar
                     </div>
+                    <div class="prod-stat-chip">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d5bb8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/></svg>
+                        15 Pouches / Tin
+                    </div>
                 </div>
 
                 <hr class="bubble-divider">
+
+                <!-- Flavor selector -->
+                <div class="flavor-select-block">
+                    <div class="flavor-select-label">Choose your flavor</div>
+                    <div class="variant-pill-wrap flavor-pills" id="flavor-select" role="group" aria-label="Choose flavor">
+                        <button class="variant-pill selected" type="button" data-flavor="crispy-mint" aria-pressed="true">Crispy Mint</button>
+                        <button class="variant-pill" type="button" data-flavor="black-cherry" aria-pressed="false">Black Cherry</button>
+                        <button class="variant-pill" type="button" data-flavor="bundle" aria-pressed="false">Bundle · Both<span class="variant-badge">SAVE</span></button>
+                    </div>
+                </div>
 
                 <!-- Pricing block -->
                 <div class="pricing-block">
@@ -1588,11 +1995,11 @@
                                     3 Pack
                                     <span class="pack-popular-badge">POPULAR</span>
                                 </div>
-                                <div class="pack-card-sub" id="pack-3-sub">$9.00 / tin</div>
+                                <div class="pack-card-sub" id="pack-3-sub">$10.00 / tin</div>
                             </div>
                             <div class="pack-card-right">
-                                <div class="pack-card-price" id="pack-3-price">$27.00</div>
-                                <div class="pack-card-orig" id="pack-3-orig">$30.00</div>
+                                <div class="pack-card-price" id="pack-3-price">$30.00</div>
+                                <div class="pack-card-orig" id="pack-3-orig">$33.00</div>
                             </div>
                         </button>
 
@@ -1603,19 +2010,45 @@
                             </div>
                             <div class="pack-card-right">
                                 <div class="pack-card-price" id="pack-5-price">$45.00</div>
-                                <div class="pack-card-orig" id="pack-5-orig">$50.00</div>
+                                <div class="pack-card-orig" id="pack-5-orig">$55.00</div>
                             </div>
                         </button>
                     </div>
 
+                    <!-- Bundle mix (shown only when Bundle flavor is selected) -->
+                    <div class="bundle-mix" id="bundle-mix" role="group" aria-label="Customize your bundle mix">
+                        <div class="bundle-mix-head">
+                            <span class="bundle-mix-title">Your mix</span>
+                            <span class="bundle-mix-total" id="bundle-mix-total">3 tins</span>
+                        </div>
+                        <div class="bundle-mix-row">
+                            <span class="bundle-mix-flavor"><span class="mix-dot mix-dot-mint"></span>Crispy Mint</span>
+                            <div class="mix-stepper">
+                                <button type="button" class="mix-btn" data-flavor="mint" data-dir="-1" aria-label="One fewer Crispy Mint">&minus;</button>
+                                <span class="mix-count" id="mix-count-mint" aria-live="polite">2</span>
+                                <button type="button" class="mix-btn" data-flavor="mint" data-dir="1" aria-label="One more Crispy Mint">+</button>
+                            </div>
+                        </div>
+                        <div class="bundle-mix-row">
+                            <span class="bundle-mix-flavor"><span class="mix-dot mix-dot-cherry"></span>Black Cherry</span>
+                            <div class="mix-stepper">
+                                <button type="button" class="mix-btn" data-flavor="cherry" data-dir="-1" aria-label="One fewer Black Cherry">&minus;</button>
+                                <span class="mix-count" id="mix-count-cherry" aria-live="polite">1</span>
+                                <button type="button" class="mix-btn" data-flavor="cherry" data-dir="1" aria-label="One more Black Cherry">+</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Subscribe benefits (shown only in subscribe mode) -->
                     <ul class="pack-save-benefits visible" id="pack-save-benefits">
-                        <li>Free shipping</li>
                         <li>Best value per tin</li>
                         <li id="pack-save-line">Save $3.00</li>
                     </ul>
 
                 </div>
+
+                <!-- Team / bulk orders -->
+                <a class="team-order-link" href="mailto:hudsonjmurray11@gmail.com?subject=ZELYTE%20Team%20%2F%20Bulk%20Order%20Inquiry">Ordering for a team? Get bulk pricing &rarr;</a>
 
                 <hr class="bubble-divider">
 
@@ -1693,7 +2126,7 @@
                             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                         </svg>
                     </div>
-                    <div class="ing-name-row"><span class="ing-name">Natural Mint Flavor</span></div>
+                    <div class="ing-name-row"><span class="ing-name" id="ing-flavor-name">Natural Mint Flavor</span></div>
                     <p class="ing-desc">Crisp, refreshing mint taste with zero artificial ingredients.</p>
                 </div>
 
@@ -1749,10 +2182,18 @@
         </section>
     </main>
 
+    <!-- Fullscreen image lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Product image viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&#10005;</button>
+        <button class="gallery-arrow" id="lightbox-prev" aria-label="Previous image">&#8592;</button>
+        <picture id="lightbox-picture"><img src="images/crispy-product-3.jpg" alt="" decoding="async"></picture>
+        <button class="gallery-arrow" id="lightbox-next" aria-label="Next image">&#8594;</button>
+    </div>
+
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">
-            <img src="Zelyte (3).png" alt="ZELYTE" class="footer-logo" loading="lazy" decoding="async">
+            <img src="images/Zelyte (3).png" alt="ZELYTE" class="footer-logo" loading="lazy" decoding="async">
             <p class="footer-tagline">Active Hydration Pouches · Zero Sugar · Zero Calories · Hands-Free</p>
             <div class="footer-links">
                 <a href="faq.html">FAQ</a>
@@ -1781,16 +2222,16 @@
         update();
     })();
     </script>
-    <script defer src="glowing-effect.js"></script>
+    <script defer src="js/glowing-effect.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.21/dist/lenis.css">
     <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
     <script>new Lenis({ autoRaf: true, autoToggle: true, anchors: true, allowNestedScroll: true, stopInertiaOnNavigate: true })</script>
     <!-- Supabase -->
     <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script defer src="supabase.js"></script>
-    <script defer src="email-utils.js"></script>
-    <script defer src="auth.js"></script>
-    <script defer src="mobile-nav.js"></script>
+    <script defer src="js/supabase.js"></script>
+    <script defer src="js/email-utils.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/mobile-nav.js"></script>
     <script>
     (function () {
         var form  = document.getElementById('notify-form');
@@ -1829,23 +2270,6 @@
         });
     })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        new Swiper('.product-swiper', {
-            effect: 'cards',
-            cardsEffect: { perSlideOffset: 8, perSlideRotate: 2, rotate: true, slideShadows: false },
-            grabCursor: true,
-            loop: true,
-            speed: 600,
-            autoplay: {
-                delay: 3500,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: '#swiper-next',
-                prevEl: '#swiper-prev',
-            },
-        });
-    </script>
+
 </body>
 </html>
