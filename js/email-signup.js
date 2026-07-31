@@ -40,14 +40,14 @@
       background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.22);
       border-radius: 10px;
-      color: #fff;
+      color: var(--chalk);
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s, background 0.2s;
       box-sizing: border-box;
     }
     .email-signup-input:focus {
-      border-color: rgba(96,165,250,0.7);
+      border-color: rgba(var(--voltage-rgb),0.7);
       background: rgba(255,255,255,0.14);
     }
     .email-signup-input::placeholder { color: rgba(255,255,255,0.4); }

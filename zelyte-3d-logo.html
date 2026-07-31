@@ -60,10 +60,10 @@
     const d1 = new THREE.DirectionalLight(0xffffff, 0.9);
     d1.position.set(4, 4, 6);
     scene.add(d1);
-    const d2 = new THREE.DirectionalLight(0x5599dd, 0.5);
+    const d2 = new THREE.DirectionalLight(0xffffff, 0.5);
     d2.position.set(-3, -2, -4);
     scene.add(d2);
-    const d3 = new THREE.DirectionalLight(0x88bbff, 0.3);
+    const d3 = new THREE.DirectionalLight(0xc7cdd1, 0.3);
     d3.position.set(0, 5, -2);
     scene.add(d3);
 
@@ -86,10 +86,10 @@
       const targetSize = 2.8; // ~matches the old logo's footprint
       if (maxDim > 0) model.scale.setScalar(targetSize / maxDim);
 
-      // Lighten the logo to a softer blue (overrides the GLB's darker baked color).
+      // Brand voltage blue (overrides the GLB's baked color).
       model.traverse((o) => {
         if (o.isMesh && o.material) {
-          o.material.color.setHex(0x5aa6e6);
+          o.material.color.setHex(0x2447f5);
         }
       });
 

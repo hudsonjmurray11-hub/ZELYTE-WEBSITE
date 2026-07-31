@@ -10,14 +10,13 @@
     <title>Order Confirmed — ZELYTE</title>
     <meta name="description" content="Thank you for your ZELYTE order.">
     <meta name="robots" content="noindex, nofollow">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/zelyte-shared.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #0d2357;
-            color: #fff;
+            font-family: var(--font-body);
+            background: var(--asphalt);
+            color: var(--chalk);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -36,7 +35,7 @@
         .check {
             width: 72px;
             height: 72px;
-            background: linear-gradient(135deg, #1a73e8, #0d5bb8);
+            background: var(--voltage);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -76,8 +75,8 @@
         }
         a {
             display: inline-block;
-            background: #fff;
-            color: #0d2357;
+            background: var(--white);
+            color: var(--asphalt);
             font-weight: 700;
             padding: 14px 36px;
             border-radius: 100px;

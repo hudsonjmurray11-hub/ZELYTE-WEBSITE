@@ -29,8 +29,8 @@
             left: 16px;
             z-index: 9999;
             padding: 12px 20px;
-            background: #1a73e8;
-            color: #fff;
+            background: var(--voltage);
+            color: var(--chalk);
             font-weight: 700;
             font-size: 0.95rem;
             border-radius: 0 0 8px 8px;
@@ -40,9 +40,9 @@
         .skip-link:focus { top: 0; }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f8f9fb;
-            color: #222;
+            font-family: var(--font-body);
+            background: var(--chalk);
+            color: var(--asphalt);
         }
 
         /* Header */
@@ -74,24 +74,23 @@
             gap: 4px;
         }
         .nav-links a {
-            text-decoration: none; color: #1a73e8; font-weight: 600;
+            text-decoration: none; color: var(--voltage); font-weight: 600;
             font-size: 0.88rem; letter-spacing: 0.4px;
             padding: 7px 14px; border-radius: 8px; transition: background 0.2s, color 0.2s;
         }
-        .nav-links a:hover { background: rgba(26, 115, 232, 0.1); color: #0d5bb8; }
+        .nav-links a:hover { background: rgba(var(--voltage-rgb), 0.1); color: var(--voltage); }
         .nav-logo { width: 130px; height: auto; max-height: 44px; object-fit: contain; }
         .shop-button {
             padding: 8px 16px;
-            background: linear-gradient(160deg, #4f9cf9 0%, #1a73e8 50%, #1252c4 100%);
-            color: #fff;
+            background: var(--voltage);
+            color: var(--chalk);
             text-decoration: none; border-radius: 8px; font-weight: 600;
-            box-shadow: 0 2px 12px rgba(26, 115, 232, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-            animation: btn-pulse 2.5s ease-in-out infinite;
+            box-shadow: none;
             transition: transform 0.15s, box-shadow 0.3s;
         }
         .shop-button:hover {
-            background: linear-gradient(160deg, #60a5fa 0%, #2563eb 50%, #1d4ed8 100%);
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            background: var(--voltage);
+            box-shadow: none;
             animation-play-state: paused;
         }
 
@@ -99,19 +98,18 @@
         .page-hero {
             width: 100%;
             padding: 160px 40px 80px;
-            background: linear-gradient(to bottom, rgb(44, 159, 241) 0%, rgb(165, 199, 243) 60%, #ffffff 100%);
+            background: var(--chalk);
             text-align: center;
         }
         .page-hero h1 {
             font-size: 3rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--asphalt);
             margin-bottom: 16px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.2);
         }
         .page-hero p {
             font-size: 1rem;
-            color: rgba(255,255,255,0.85);
+            color: var(--iron);
             max-width: 480px;
             margin: 0 auto;
             line-height: 1.6;
@@ -132,7 +130,7 @@
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 2.5px;
-            color: #1a73e8;
+            color: var(--voltage);
             text-transform: uppercase;
             margin-bottom: 8px;
             display: block;
@@ -141,20 +139,20 @@
         .terms-section h2 {
             font-size: 1.4rem;
             font-weight: 800;
-            color: #111;
+            color: var(--asphalt);
             margin-bottom: 20px;
             line-height: 1.3;
         }
 
         .terms-card {
-            background: #fff;
-            border: 1px solid #e0e8f5;
+            background: var(--white);
+            border: 1px solid var(--frost);
             border-radius: 12px;
             padding: 28px 32px;
         }
 
         .terms-card p {
-            color: #555;
+            color: var(--iron);
             font-size: 0.95rem;
             line-height: 1.75;
             margin-bottom: 14px;
@@ -170,7 +168,7 @@
         }
         .terms-card ul li {
             font-size: 0.95rem;
-            color: #555;
+            color: var(--iron);
             line-height: 1.65;
             padding-left: 20px;
             position: relative;
@@ -179,28 +177,28 @@
             content: '–';
             position: absolute;
             left: 0;
-            color: #1a73e8;
+            color: var(--voltage);
             font-weight: 700;
         }
 
-        .terms-card strong { color: #0d2357; font-weight: 700; }
+        .terms-card strong { color: var(--asphalt); font-weight: 700; }
 
         .warning-card {
-            background: #fff8ec;
-            border: 1px solid #fde68a;
-            border-left: 4px solid #f59e0b;
+            background: var(--white);
+            border: 1px solid var(--frost);
+            border-left: 4px solid var(--iron);
             border-radius: 12px;
             padding: 22px 28px;
         }
         .warning-card p {
-            color: #78350f;
+            color: var(--iron);
             font-size: 0.95rem;
             line-height: 1.7;
         }
 
         /* Footer */
         .site-footer {
-            background: #111;
+            background: var(--asphalt);
             padding: 48px 40px 32px;
             text-align: center;
         }
@@ -208,16 +206,16 @@
             max-width: 1100px; margin: 0 auto;
             display: flex; flex-direction: column; align-items: center; gap: 16px;
         }
-        .footer-logo { width: 100px; filter: brightness(0) invert(1); opacity: 0.9; }
-        .footer-tagline { color: #aaa; font-size: 0.88rem; }
+        .footer-logo { opacity: 0.95; }
+        .footer-tagline { color: var(--frost); font-size: 0.88rem; }
         .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .footer-links a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-        .footer-links a:hover { color: #fff; }
-        .footer-legal { color: #555; font-size: 0.75rem; max-width: 580px; line-height: 1.6; }
+        .footer-links a { color: var(--frost); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--chalk); }
+        .footer-legal { color: var(--frost); font-size: 0.75rem; max-width: 580px; line-height: 1.6; }
 
         @keyframes btn-pulse {
-            0%, 100% { box-shadow: 0 4px 18px rgba(26, 115, 232, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22); }
-            50%       { box-shadow: 0 6px 28px rgba(37, 99, 235, 0.7), 0 0 50px rgba(96, 165, 250, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22); }
+            0%, 100% { box-shadow: none; }
+            50%       { box-shadow: none; }
         }
 
         @keyframes gradient-sweep {
@@ -228,12 +226,10 @@
 
         .gradient-button {
             position: relative;
-            color: #fff;
+            color: var(--chalk);
             text-decoration: none;
             box-shadow: none;
-            background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
-            background-size: 300% 100%;
-            animation: gradient-sweep 3s ease infinite;
+            background: var(--voltage);
             transition: transform 0.15s, box-shadow 0.2s;
         }
         .gradient-button::before {
@@ -242,18 +238,12 @@
             inset: 0;
             border-radius: inherit;
             padding: 1.5px;
-            background: linear-gradient(135deg, #60a5fa, #bae6fd, #93c5fd, #60a5fa);
-            background-size: 300% 100%;
-            animation: gradient-sweep 3s ease infinite;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
+            display: none;
             pointer-events: none;
         }
         .gradient-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5);
+            box-shadow: none;
         }
 
         @media (max-width: 600px) {
@@ -270,7 +260,7 @@
 
     <!-- Header -->
     <div class="header-bar">
-        <a href="index.html"><img src="images/Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
+        <a href="index.html" class="brand-lockup" aria-label="ZELYTE home" style="font-size:22px"><img src="images/zelyte-icon-voltage.png" alt="" class="brand-icon"><span class="brand-word">ZELYTE</span></a>
         <div class="spacer"></div>
         <nav class="nav-links">
             <a href="science.html">Science</a>
@@ -401,7 +391,7 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">
-            <img src="images/Zelyte (3).png" alt="ZELYTE" class="footer-logo" loading="lazy" decoding="async">
+            <span class="brand-lockup brand-lockup--dark footer-logo" style="font-size:20px"><img src="images/zelyte-icon-white.png" alt="" class="brand-icon"><span class="brand-word">ZELYTE</span></span>
             <p class="footer-tagline">Active Hydration Pouches · Zero Sugar · Zero Calories · Hands-Free</p>
             <div class="footer-links">
                 <a href="faq.html">FAQ</a>

@@ -30,8 +30,8 @@
       width: min(1100px, calc(100vw - 32px));
       max-height: calc(100vh - 32px);
       max-height: calc(100dvh - 32px);
-      background: #fff;
-      color: #0b1220;
+      background: var(--white);
+      color: var(--asphalt);
       border-radius: 22px;
       overflow: hidden;
       display: grid;
@@ -48,7 +48,7 @@
       display: block;
       min-height: 100%;
       overflow: hidden;
-      background: #060f2a;
+      background: var(--asphalt);
     }
     .ep-media picture { display: block; height: 100%; }
     .ep-media img {
@@ -62,7 +62,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(6,15,42,0.45), transparent 45%);
+      background: rgba(var(--asphalt-rgb), 0.35);
       pointer-events: none;
     }
     .ep-media-badge {
@@ -70,8 +70,8 @@
       bottom: 18px;
       left: 18px;
       z-index: 1;
-      background: #1a73e8;
-      color: #fff;
+      background: var(--voltage);
+      color: var(--chalk);
       font-size: 0.68rem;
       font-weight: 800;
       letter-spacing: 2.5px;
@@ -87,7 +87,7 @@
       flex-direction: column;
       justify-content: center;
       overflow-y: auto;
-      font-family: 'Poppins', system-ui, sans-serif;
+      font-family: var(--font-body);
     }
 
     .ep-close {
@@ -95,9 +95,9 @@
       top: 14px;
       right: 14px;
       z-index: 2;
-      background: #f1f3f6;
+      background: var(--chalk);
       border: none;
-      color: #5b6472;
+      color: var(--iron);
       width: 34px;
       height: 34px;
       border-radius: 10px;
@@ -108,7 +108,7 @@
       justify-content: center;
       transition: background 0.2s, color 0.2s;
     }
-    .ep-close:hover { background: #e3e7ee; color: #0b1220; }
+    .ep-close:hover { background: var(--chalk); color: var(--asphalt); }
 
     .ep-progress {
       display: flex;
@@ -118,24 +118,25 @@
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: #8a93a3;
+      color: var(--iron);
       margin-bottom: 18px;
     }
     .ep-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #dfe4ec;
+      background: var(--chalk);
       transition: background 0.2s;
     }
-    .ep-dot.ep-dot-active { background: #1a73e8; }
+    .ep-dot.ep-dot-active { background: var(--voltage); }
 
     .ep-badge {
       display: inline-block;
+      font-family: var(--font-mono);
       font-size: 0.68rem;
-      font-weight: 800;
+      font-weight: 500;
       letter-spacing: 3px;
-      color: #1a73e8;
+      color: var(--voltage);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -143,7 +144,7 @@
     .ep-headline {
       font-size: 1.9rem;
       font-weight: 800;
-      color: #0b1220;
+      color: var(--asphalt);
       line-height: 1.2;
       margin: 0 0 10px;
       letter-spacing: -0.3px;
@@ -151,7 +152,7 @@
 
     .ep-sub {
       font-size: 1rem;
-      color: #5b6472;
+      color: var(--iron);
       line-height: 1.55;
       margin: 0 0 24px;
     }
@@ -177,8 +178,8 @@
       gap: 16px;
       width: 100%;
       padding: 12px 18px;
-      background: #fff;
-      border: 2px solid #e5e9f0;
+      background: var(--white);
+      border: 2px solid var(--frost);
       border-radius: 16px;
       cursor: pointer;
       text-align: left;
@@ -187,31 +188,31 @@
     }
     .ep-flavor:hover,
     .ep-flavor:focus-visible {
-      border-color: #1a73e8;
-      box-shadow: 0 4px 18px rgba(26,115,232,0.15);
+      border-color: var(--voltage);
+      box-shadow: none;
       transform: translateY(-1px);
       outline: none;
     }
     .ep-flavor.ep-flavor-selected {
-      border-color: #1a73e8;
-      background: #f0f6ff;
+      border-color: var(--voltage);
+      background: var(--chalk);
     }
     .ep-flavor-name {
       display: block;
       font-size: 1.02rem;
       font-weight: 700;
-      color: #0b1220;
+      color: var(--asphalt);
     }
     .ep-flavor-desc {
       display: block;
       font-size: 0.84rem;
-      color: #5b6472;
+      color: var(--iron);
       margin-top: 2px;
     }
-    .ep-flavor--cherry .ep-flavor-name { color: #a01235; }
+    .ep-flavor--cherry .ep-flavor-name { color: var(--cherry); }
     .ep-flavor-arrow {
       margin-left: auto;
-      color: #b6bfcc;
+      color: var(--frost);
       font-size: 1.1rem;
       flex-shrink: 0;
     }
@@ -219,7 +220,7 @@
     .ep-social {
       font-size: 0.85rem;
       font-weight: 600;
-      color: #1a73e8;
+      color: var(--voltage);
       margin: 0 0 12px;
     }
 
@@ -232,18 +233,18 @@
     .ep-input {
       width: 100%;
       padding: 14px 16px;
-      background: #fff;
-      border: 2px solid #e5e9f0;
+      background: var(--white);
+      border: 2px solid var(--frost);
       border-radius: 12px;
-      color: #0b1220;
+      color: var(--asphalt);
       font-size: 0.95rem;
       font-family: inherit;
       outline: none;
       box-sizing: border-box;
       transition: border-color 0.2s;
     }
-    .ep-input:focus { border-color: #1a73e8; }
-    .ep-input::placeholder { color: #9aa3b2; }
+    .ep-input:focus { border-color: var(--voltage); }
+    .ep-input::placeholder { color: var(--iron); }
 
     .ep-submit {
       width: 100%;
@@ -253,18 +254,16 @@
       font-size: 0.95rem;
       font-weight: 700;
       font-family: inherit;
-      color: #fff;
+      color: var(--chalk);
       cursor: pointer;
       letter-spacing: 0.3px;
-      background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
-      background-size: 300% 100%;
-      animation: zelyte-gradient-sweep 3s ease infinite;
-      box-shadow: 0 4px 20px rgba(26,115,232,0.45);
+      background: var(--voltage);
+      box-shadow: none;
       transition: transform 0.15s, box-shadow 0.2s;
     }
     .ep-submit:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 28px rgba(26,115,232,0.6);
+      box-shadow: none;
     }
     .ep-submit:disabled {
       opacity: 0.55;
@@ -282,14 +281,14 @@
     }
     .ep-trust li {
       font-size: 0.8rem;
-      color: #5b6472;
+      color: var(--iron);
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .ep-trust li::before {
       content: '✓';
-      color: #1a73e8;
+      color: var(--voltage);
       font-weight: 800;
     }
 
@@ -306,7 +305,7 @@
       display: inline-block;
       margin-top: 14px;
       font-size: 0.82rem;
-      color: #8a93a3;
+      color: var(--iron);
       cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 2px;
@@ -317,7 +316,7 @@
       transition: color 0.2s;
     }
     .ep-back:hover,
-    .ep-dismiss:hover { color: #0b1220; }
+    .ep-dismiss:hover { color: var(--asphalt); }
 
     .ep-success {
       text-align: center;
@@ -381,7 +380,7 @@
             <div class="ep-progress" aria-hidden="true">
               <span class="ep-dot ep-dot-active"></span><span class="ep-dot"></span> Step 1 of 2
             </div>
-            <span class="ep-badge">Zelyte · Early Access</span>
+            <span class="ep-badge">ZELYTE · Early Access</span>
             <h2 class="ep-headline" id="ep-headline-1">Which flavor are you most excited to try?</h2>
             <p class="ep-sub">Zero sugar. Electrolytes + caffeine. Pick your first pouch.</p>
             <div class="ep-flavors">
@@ -414,7 +413,7 @@
             <div class="ep-progress" aria-hidden="true">
               <span class="ep-dot ep-dot-active"></span><span class="ep-dot ep-dot-active"></span> Step 2 of 2
             </div>
-            <span class="ep-badge">Zelyte · Early Access</span>
+            <span class="ep-badge">ZELYTE · Early Access</span>
             <h2 class="ep-headline" id="ep-headline-2">Great choice.</h2>
             <p class="ep-sub">Drop your email and be the first in line when we launch. Early supporters get launch-day pricing.</p>
             <p class="ep-social">Join the early supporters already on the list.</p>
