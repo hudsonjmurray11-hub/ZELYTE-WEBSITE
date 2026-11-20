@@ -17,7 +17,7 @@ async function ensureProduct() {
         if (err.code !== 'resource_missing') throw err;
         return await stripe.products.create({
             id: PRODUCT_ID,
-            name: 'ZELYTE Crispy Mint — Tin (15 pouches)'
+            name: 'ZELYTE Crispy Mint — Tin (18 pouches)'
         });
     }
 }

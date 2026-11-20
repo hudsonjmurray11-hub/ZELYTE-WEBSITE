@@ -387,14 +387,14 @@
               <button type="button" class="ep-flavor" data-flavor="crispy-mint">
                 <span>
                   <span class="ep-flavor-name">Crispy Mint</span>
-                  <span class="ep-flavor-desc">Cool, clean, refreshing</span>
+                  <span class="ep-flavor-desc">Cool and clean.</span>
                 </span>
                 <span class="ep-flavor-arrow" aria-hidden="true">→</span>
               </button>
               <button type="button" class="ep-flavor ep-flavor--cherry" data-flavor="black-cherry">
                 <span>
                   <span class="ep-flavor-name">Black Cherry</span>
-                  <span class="ep-flavor-desc">Bold, dark, juicy</span>
+                  <span class="ep-flavor-desc">Dark and tart, not sweet.</span>
                 </span>
                 <span class="ep-flavor-arrow" aria-hidden="true">→</span>
               </button>

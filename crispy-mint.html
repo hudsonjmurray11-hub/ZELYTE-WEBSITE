@@ -1537,6 +1537,7 @@
             gap: 8px;
             align-items: center;
         }
+        .pack-save-benefits li[hidden] { display: none; }
         .pack-save-benefits li::before {
             content: "✓";
             color: var(--voltage);
@@ -1569,7 +1570,7 @@
                 },
                 onetime: {
                     '3': { price: 33.00, per: '$11.00 / tin', orig: '', save: '' },
-                    '5': { price: 50.00, per: '$10.00 / tin', orig: '$55.00', save: '' }
+                    '5': { price: 50.00, per: '$10.00 / tin', orig: '$55.00', save: 'Save $5.00' }
                 }
             };
 
@@ -1579,6 +1580,7 @@
                     name: 'Crispy Mint',
                     sub: 'Electrolyte & Caffeine Pouches',
                     ingredient: 'Natural Mint Flavor',
+                    ingredientDesc: 'Cool and clean. Zero artificial ingredients.',
                     notify: 'Be the first to know when Crispy Mint drops.',
                     slides: [
                         { img: 'images/crispy-product-3.jpg', webp: 'images/crispy-product-3.webp' },
@@ -1589,6 +1591,7 @@
                     name: 'Black Cherry',
                     sub: 'Electrolyte & Caffeine Pouches',
                     ingredient: 'Natural Black Cherry Flavor',
+                    ingredientDesc: 'Dark and tart, not sweet. Zero artificial ingredients.',
                     notify: 'Be the first to know when Black Cherry drops.',
                     slides: [
                         { img: 'images/ZELYTE_BLACKCHERRY.png' },
@@ -1599,6 +1602,7 @@
                     name: 'Bundle — Both Flavors',
                     sub: 'Crispy Mint + Black Cherry',
                     ingredient: 'Natural Mint & Black Cherry Flavor',
+                    ingredientDesc: 'Crispy Mint: cool and clean. Black Cherry: dark and tart, not sweet.',
                     notify: 'Be the first to know when ZELYTE drops.',
                     slides: [
                         { img: 'images/NEWCRISPYMINT.png', webp: 'images/NEWCRISPYMINT.webp' },
@@ -1648,13 +1652,19 @@
                     origEl.textContent = data.orig;
                     subEl.textContent  = data.per;
                 });
+                updateBenefits();
+            }
+
+            // Savings lines under the pack cards. "Best value per tin" only applies
+            // to the 5 Pack; the save line shows in either mode when there is a saving.
+            function updateBenefits() {
+                const save = PACK_PRICES[currentMode][selectedPack].save;
                 const saveEl = document.getElementById('pack-save-line');
-                if (saveEl) saveEl.textContent = PACK_PRICES[currentMode][selectedPack].save;
-                if (currentMode === 'subscribe') {
-                    benefitsList.classList.add('visible');
-                } else {
-                    benefitsList.classList.remove('visible');
-                }
+                const bestEl = document.getElementById('pack-best-value');
+                const showBest = currentMode === 'subscribe' && selectedPack === '5';
+                if (saveEl) { saveEl.textContent = save; saveEl.hidden = !save; }
+                if (bestEl) bestEl.hidden = !showBest;
+                benefitsList.classList.toggle('visible', Boolean(save) || showBest);
             }
 
             function updateBorderPosition() {
@@ -1680,8 +1690,6 @@
                     // Slide the pill: 0 = subscribe (left), 1 = onetime (right)
                     modeSlider.style.transform = i === 0 ? 'translateX(0)' : 'translateX(100%)';
                     updatePricing(true);
-                    const saveEl = document.getElementById('pack-save-line');
-                    if (saveEl) saveEl.textContent = PACK_PRICES[currentMode][selectedPack].save;
                 });
             });
 
@@ -1691,17 +1699,18 @@
                     selectedPack = card.dataset.pack;
                     packCards.forEach(c => c.setAttribute('aria-pressed', c.dataset.pack === selectedPack ? 'true' : 'false'));
                     updateBorderPosition();
-                    const saveEl = document.getElementById('pack-save-line');
-                    if (saveEl) saveEl.textContent = PACK_PRICES[currentMode][selectedPack].save;
+                    updateBenefits();
                     updateBundleMix();
                 });
             });
+            updateBenefits();
 
             // ---- Flavor selector ----
             const flavorPills = document.querySelectorAll('#flavor-select .variant-pill');
             const headingEl = document.querySelector('.prod-heading');
             const taglineEl = document.querySelector('.prod-tagline');
             const ingNameEl = document.getElementById('ing-flavor-name');
+            const ingDescEl = document.getElementById('ing-flavor-desc');
             const notifySubEl = document.querySelector('.notify-sub');
             const bundleMixEl = document.getElementById('bundle-mix');
             const mixCountMintEl = document.getElementById('mix-count-mint');
@@ -1837,6 +1846,7 @@
                 if (headingEl) headingEl.textContent = f.name;
                 if (taglineEl) taglineEl.textContent = f.sub;
                 if (ingNameEl) ingNameEl.textContent = f.ingredient;
+                if (ingDescEl) ingDescEl.textContent = f.ingredientDesc;
                 if (notifySubEl) notifySubEl.textContent = f.notify;
                 document.title = f.name + ' — ZELYTE';
                 document.body.classList.remove('theme-cherry', 'theme-bundle');
@@ -1873,7 +1883,7 @@
       "@type": "Product",
       "name": "ZELYTE Crispy Mint Active Hydration Pouch",
       "image": "https://zelyte.shop/images/NEWCRISPYMINT.png",
-      "description": "Crispy Mint ZELYTE Active Hydration Pouch — electrolytes, caffeine, and zero sugar absorbed through your gums. Hands-free, no water, no bottle. 15 pouches per tin.",
+      "description": "Crispy Mint ZELYTE Active Hydration Pouch — electrolytes, caffeine, and zero sugar absorbed through your gums. Hands-free, no water, no bottle. 18 pouches per tin.",
       "brand": { "@type": "Brand", "name": "ZELYTE" },
       "category": "Hydration Supplement",
       "offers": {
@@ -1946,7 +1956,7 @@
                     </div>
                     <div class="prod-stat-chip">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--voltage)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/></svg>
-                        15 Pouches / Tin
+                        18 Pouches / Tin
                     </div>
                 </div>
 
@@ -1980,7 +1990,7 @@
                             <div class="pack-card-left">
                                 <div class="pack-card-name">
                                     3 Pack
-                                    <span class="pack-popular-badge">POPULAR</span>
+                                    <span class="pack-popular-badge">STARTER</span>
                                 </div>
                                 <div class="pack-card-sub" id="pack-3-sub">$10.00 / tin</div>
                             </div>
@@ -2026,9 +2036,9 @@
                         </div>
                     </div>
 
-                    <!-- Subscribe benefits (shown only in subscribe mode) -->
+                    <!-- Savings lines (toggled by updateBenefits()) -->
                     <ul class="pack-save-benefits visible" id="pack-save-benefits">
-                        <li>Best value per tin</li>
+                        <li id="pack-best-value">Best value per tin</li>
                         <li id="pack-save-line">Save $3.00</li>
                     </ul>
 
@@ -2114,7 +2124,7 @@
                         </svg>
                     </div>
                     <div class="ing-name-row"><span class="ing-name" id="ing-flavor-name">Natural Mint Flavor</span></div>
-                    <p class="ing-desc">Crisp, refreshing mint taste with zero artificial ingredients.</p>
+                    <p class="ing-desc" id="ing-flavor-desc">Cool and clean. Zero artificial ingredients.</p>
                 </div>
 
                 <div class="ing-card">
@@ -2165,7 +2175,7 @@
                 </div>
 
             </div>
-            <div class="howto-note">One tin contains 15 pouches &nbsp;·&nbsp; Use one pouch per session for best results.</div>
+            <div class="howto-note">One tin contains 18 pouches &nbsp;·&nbsp; Use one pouch per session for best results.</div>
         </section>
     </main>
 
