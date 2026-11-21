@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <title>The Science — ZELYTE</title>
     <meta name="description" content="The science behind ZELYTE: how buccal (gum) absorption delivers electrolytes and caffeine without a drink. Why it works and what's inside every pouch.">
     <link rel="canonical" href="https://zelyte.shop/science.html">
     <meta property="og:title" content="The Science — ZELYTE">
     <meta property="og:description" content="How buccal absorption delivers electrolytes and caffeine through your gums — no liquid required.">
-    <meta property="og:image" content="https://zelyte.shop/NEWCRISPYMINT.png">
+    <meta property="og:image" content="https://zelyte.shop/images/NEWCRISPYMINT.png">
     <meta property="og:url" content="https://zelyte.shop/science.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ZELYTE">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Science — ZELYTE">
     <meta name="twitter:description" content="How buccal absorption delivers electrolytes and caffeine through your gums — no liquid required.">
-    <meta name="twitter:image" content="https://zelyte.shop/NEWCRISPYMINT.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="zelyte-shared.css">
+    <meta name="twitter:image" content="https://zelyte.shop/images/NEWCRISPYMINT.png">
+    <link rel="stylesheet" href="css/zelyte-shared.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -29,8 +30,8 @@
             left: 16px;
             z-index: 9999;
             padding: 12px 20px;
-            background: #1a73e8;
-            color: #fff;
+            background: var(--voltage);
+            color: var(--chalk);
             font-weight: 700;
             font-size: 0.95rem;
             border-radius: 0 0 8px 8px;
@@ -40,13 +41,13 @@
         .skip-link:focus { top: 0; }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #fff;
-            color: #222;
+            font-family: var(--font-body);
+            background: var(--chalk);
+            color: var(--asphalt);
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Poppins', system-ui, sans-serif; letter-spacing: -0.3px; }
+        h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.03em; }
 
         /* ── Navbar ── */
         .header-bar {
@@ -77,12 +78,12 @@
             gap: 4px;
         }
         .nav-links a {
-            text-decoration: none; color: #1a73e8; font-weight: 600;
+            text-decoration: none; color: var(--voltage); font-weight: 600;
             font-size: 0.88rem; letter-spacing: 0.4px;
             padding: 7px 14px; border-radius: 8px; transition: background 0.2s, color 0.2s;
         }
-        .nav-links a:hover { background: rgba(26, 115, 232, 0.1); color: #0d5bb8; }
-        .nav-links a.active { background: rgba(26, 115, 232, 0.12); color: #0d5bb8; }
+        .nav-links a:hover { background: rgba(var(--voltage-rgb), 0.1); color: var(--voltage); }
+        .nav-links a.active { background: rgba(var(--voltage-rgb), 0.12); color: var(--voltage); }
         .nav-logo { width: 130px; height: auto; max-height: 44px; object-fit: contain; }
 
         /* ── Gradient button ── */
@@ -93,12 +94,10 @@
         }
         .gradient-button {
             position: relative;
-            color: #fff;
+            color: var(--chalk);
             text-decoration: none;
             box-shadow: none;
-            background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
-            background-size: 300% 100%;
-            animation: gradient-sweep 3s ease infinite;
+            background: var(--voltage);
             transition: transform 0.15s, box-shadow 0.2s;
         }
         .gradient-button::before {
@@ -107,16 +106,10 @@
             inset: 0;
             border-radius: inherit;
             padding: 1.5px;
-            background: linear-gradient(135deg, #60a5fa, #bae6fd, #93c5fd, #60a5fa);
-            background-size: 300% 100%;
-            animation: gradient-sweep 3s ease infinite;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
+            display: none;
             pointer-events: none;
         }
-        .gradient-button:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5); }
+        .gradient-button:hover { transform: translateY(-2px); box-shadow: none; }
         .shop-button {
             padding: 8px 16px;
             border-radius: 8px;
@@ -130,7 +123,7 @@
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 2.5px;
-            color: #1a73e8;
+            color: var(--voltage);
             text-transform: uppercase;
             margin-bottom: 12px;
         }
@@ -139,7 +132,7 @@
         .sci-hero {
             width: 100%;
             padding: 160px 40px 110px;
-            background: linear-gradient(160deg, #040c1e 0%, #091a4a 35%, #0f3595 70%, #1a5fd4 100%);
+            background: var(--asphalt);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -148,19 +141,19 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 50% 65%, rgba(26, 115, 232, 0.3) 0%, transparent 65%);
+            background: transparent;
             pointer-events: none;
         }
         .sci-hero .section-label { color: rgba(255, 255, 255, 0.5); margin-bottom: 18px; }
         .sci-hero h1 {
             font-size: 3.6rem;
             font-weight: 900;
-            color: #fff;
+            color: var(--chalk);
             line-height: 1.1;
             margin-bottom: 22px;
             letter-spacing: -1.5px;
         }
-        .sci-hero h1 .blue { color: #7eb3ff; }
+        .sci-hero h1 .blue { color: var(--voltage); }
         .sci-hero .hero-sub {
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.68);
@@ -198,9 +191,9 @@
         }
 
         /* ── Buccal section (dark) ── */
-        .buccal-section { background: #001e4a; }
+        .buccal-section { background: var(--asphalt); }
         .buccal-section .section-label { color: rgba(255,255,255,0.55); }
-        .buccal-section h2 { color: #fff; }
+        .buccal-section h2 { color: var(--chalk); }
         .buccal-section .sci-sub { color: rgba(255,255,255,0.62); }
 
         .glass-pill {
@@ -230,14 +223,14 @@
         .step {
             flex: 1;
             padding: 40px 36px;
-            background: #fff;
+            background: var(--white);
             border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(26, 115, 232, 0.08);
+            box-shadow: none;
         }
         .step-divider {
             width: 40px;
             height: 2px;
-            background: #1a73e8;
+            background: var(--voltage);
             opacity: 0.25;
             align-self: center;
             flex-shrink: 0;
@@ -245,14 +238,14 @@
         .step-num {
             font-size: 2.5rem;
             font-weight: 900;
-            color: #1a73e8;
+            color: var(--voltage);
             opacity: 0.2;
             line-height: 1;
             margin-bottom: 16px;
         }
-        .step h3 { font-size: 1.2rem; font-weight: 700; color: #1e90ff; margin-bottom: 12px; }
-        .step p { color: #555; font-size: 0.92rem; line-height: 1.65; }
-        .step sup { font-size: 0.65rem; color: #1a73e8; font-weight: 700; }
+        .step h3 { font-size: 1.2rem; font-weight: 700; color: var(--voltage); margin-bottom: 12px; }
+        .step p { color: var(--iron); font-size: 0.92rem; line-height: 1.65; }
+        .step sup { font-size: 0.65rem; color: var(--voltage); font-weight: 700; }
 
         /* ── VS callout ── */
         .vs-callout {
@@ -278,14 +271,14 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .vs-box.traditional h4 { color: rgba(255,255,255,0.35); }
-        .vs-box.zelyte-box { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.08); }
-        .vs-box.zelyte-box h4 { color: #7eb3ff; border-color: rgba(59,130,246,0.2); }
+        .vs-box.zelyte-box { border-color: rgba(var(--voltage-rgb),0.4); background: rgba(var(--voltage-rgb),0.08); }
+        .vs-box.zelyte-box h4 { color: var(--chalk); border-color: rgba(var(--voltage-rgb),0.2); }
         .vs-box ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
         .vs-box ul li { font-size: 0.88rem; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
         .vs-box.traditional li { color: rgba(255,255,255,0.5); }
         .vs-box.zelyte-box li { color: rgba(255,255,255,0.82); }
         .vs-icon-neg { color: rgba(248,113,113,0.7); flex-shrink: 0; margin-top: 1px; }
-        .vs-icon-pos { color: #60a5fa; flex-shrink: 0; margin-top: 1px; }
+        .vs-icon-pos { color: var(--voltage); flex-shrink: 0; margin-top: 1px; }
         .vs-label {
             font-size: 1.2rem;
             font-weight: 900;
@@ -293,18 +286,18 @@
             text-align: center;
             letter-spacing: 2px;
         }
-        .vs-box sup { font-size: 0.62rem; color: rgba(96,165,250,0.7); font-weight: 700; }
+        .vs-box sup { font-size: 0.62rem; color: var(--frost); font-weight: 700; }
 
         /* ── Electrolytes section (light) ── */
         .electrolytes-section { background: #fff; }
-        .electrolytes-section .section-label { color: #1a73e8; }
+        .electrolytes-section .section-label { color: var(--voltage); }
         .electrolytes-section h2 {
-            background: linear-gradient(135deg, #1565c0 0%, #1e90ff 45%, #5ab4ff 75%, #1e90ff 100%);
+            background: var(--voltage);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .electrolytes-section .sci-sub { color: #555; }
+        .electrolytes-section .sci-sub { color: var(--iron); }
 
         .elec-grid {
             display: grid;
@@ -313,15 +306,15 @@
             margin-top: 52px;
         }
         .elec-card {
-            background: #f6f9ff;
-            border: 1px solid #dce8fb;
+            background: var(--chalk);
+            border: 1px solid var(--chalk);
             border-radius: 18px;
             padding: 32px 28px;
         }
         .elec-card-icon {
             width: 52px;
             height: 52px;
-            background: rgba(26,115,232,0.08);
+            background: rgba(var(--voltage-rgb),0.08);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -333,18 +326,18 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(26,115,232,0.5);
+            color: rgba(var(--voltage-rgb),0.5);
             margin-bottom: 8px;
             display: block;
         }
-        .elec-card h3 { font-size: 1.1rem; font-weight: 700; color: #1a73e8; margin-bottom: 10px; }
-        .elec-card p { color: #555; font-size: 0.9rem; line-height: 1.68; }
-        .elec-card sup { font-size: 0.65rem; color: #1a73e8; font-weight: 700; }
+        .elec-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--voltage); margin-bottom: 10px; }
+        .elec-card p { color: var(--iron); font-size: 0.9rem; line-height: 1.68; }
+        .elec-card sup { font-size: 0.65rem; color: var(--voltage); font-weight: 700; }
 
         /* ── Caffeine section (dark) ── */
-        .caffeine-section { background: linear-gradient(160deg, #0a1e52 0%, #1a4ab5 100%); }
+        .caffeine-section { background: var(--asphalt); }
         .caffeine-section .section-label { color: rgba(255,255,255,0.5); }
-        .caffeine-section h2 { color: #fff; }
+        .caffeine-section h2 { color: var(--chalk); }
         .caffeine-section .sci-sub { color: rgba(255,255,255,0.65); margin-bottom: 0; }
 
         .caffeine-inner {
@@ -360,7 +353,7 @@
             line-height: 1.78;
             margin-bottom: 20px;
         }
-        .caffeine-text sup { font-size: 0.65rem; color: rgba(96,165,250,0.8); font-weight: 700; }
+        .caffeine-text sup { font-size: 0.65rem; color: var(--frost); font-weight: 700; }
         .caffeine-stat-row { display: flex; gap: 16px; margin-top: 28px; }
         .caffeine-stat {
             background: rgba(255,255,255,0.08);
@@ -372,7 +365,7 @@
         .caffeine-stat .num {
             font-size: 1.9rem;
             font-weight: 900;
-            color: #7eb3ff;
+            color: var(--voltage);
             line-height: 1;
             margin-bottom: 4px;
         }
@@ -403,16 +396,16 @@
             overflow: hidden;
         }
         .caffeine-bar-fill { height: 100%; border-radius: 100px; }
-        .caffeine-bar-fill.zelyte  { background: #3b82f6; width: 53%; }
+        .caffeine-bar-fill.zelyte  { background: var(--voltage); width: 53%; }
         .caffeine-bar-fill.espresso { background: rgba(255,255,255,0.25); width: 66%; }
         .caffeine-bar-fill.coffee   { background: rgba(255,255,255,0.2); width: 100%; }
         .caffeine-bar-fill.greentea { background: rgba(255,255,255,0.15); width: 29%; }
         .caffeine-bar-mg { font-size: 0.76rem; color: rgba(255,255,255,0.38); min-width: 44px; text-align: right; }
 
         /* ── Formula transparency (dark) ── */
-        .transparency-section { background: #001e4a; }
+        .transparency-section { background: var(--asphalt); }
         .transparency-section .section-label { color: rgba(255,255,255,0.5); }
-        .transparency-section h2 { color: #fff; }
+        .transparency-section h2 { color: var(--chalk); }
         .transparency-section .sci-sub { color: rgba(255,255,255,0.62); }
 
         .formula-table-wrap { margin-top: 52px; }
@@ -424,7 +417,7 @@
         .formula-table {
             width: 100%;
             border-collapse: collapse;
-            background: #001a3a;
+            background: var(--asphalt);
             min-width: 560px;
         }
         .formula-table thead th {
@@ -446,13 +439,13 @@
             vertical-align: top;
         }
         .formula-table tbody tr:last-child td { border-bottom: none; }
-        .formula-table tbody td:first-child { font-weight: 700; color: #fff; }
-        .formula-table tbody td:nth-child(2) { color: #7eb3ff; font-weight: 600; white-space: nowrap; }
+        .formula-table tbody td:first-child { font-weight: 700; color: var(--chalk); }
+        .formula-table tbody td:nth-child(2) { color: var(--chalk); font-weight: 600; white-space: nowrap; }
         .formula-table tbody td:nth-child(3) { white-space: nowrap; }
         .formula-total-row td {
             border-top: 1px solid rgba(255,255,255,0.18) !important;
             background: rgba(255,255,255,0.04);
-            color: #7eb3ff !important;
+            color: var(--chalk) !important;
             font-weight: 700 !important;
         }
         .ingredient-panel {
@@ -486,16 +479,16 @@
         /* ── CTA ── */
         .sci-cta-wrap { width: 100%; padding: 0 40px 100px; }
         .sci-cta {
-            background: linear-gradient(135deg, #1252c4 0%, #1a73e8 100%);
+            background: var(--asphalt);
             border-radius: 20px;
             padding: 72px 40px;
             text-align: center;
             max-width: 1100px;
             margin: 0 auto;
         }
-        .sci-cta h2 { color: #fff; font-size: 2.1rem; font-weight: 800; margin-bottom: 14px; }
+        .sci-cta h2 { color: var(--chalk); font-size: 2.1rem; font-weight: 800; margin-bottom: 14px; }
         .sci-cta p {
-            color: rgba(255,255,255,0.78);
+            color: var(--frost);
             font-size: 1rem;
             max-width: 480px;
             margin: 0 auto 36px;
@@ -504,32 +497,32 @@
         .btn-white {
             display: inline-block;
             padding: 14px 36px;
-            background: #fff;
-            color: #1a73e8;
+            background: var(--voltage);
+            color: var(--chalk);
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 6px;
             font-weight: 700;
             font-size: 1rem;
             transition: transform 0.15s, box-shadow 0.15s;
         }
-        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26, 115, 232, 0.3), 0 0 40px rgba(96, 165, 250, 0.15); }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: none; }
 
         /* ── References ── */
-        .references-section { background: #fff; border-top: 1px solid #eff3fb; }
+        .references-section { background: var(--chalk); border-top: 1px solid var(--frost); }
         .references-section .sci-inner { max-width: 780px; }
         .references-section .ref-heading {
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: #1a73e8;
+            color: var(--voltage);
             margin-bottom: 24px;
             display: block;
         }
         .ref-list { display: flex; flex-direction: column; gap: 10px; }
         .ref-item {
             font-size: 0.82rem;
-            color: #777;
+            color: var(--iron);
             line-height: 1.68;
             padding-left: 32px;
             position: relative;
@@ -540,30 +533,30 @@
             left: 0;
             top: 0;
             font-weight: 700;
-            color: #1a73e8;
+            color: var(--voltage);
             font-size: 0.78rem;
         }
         .ref-disclaimer {
             margin-top: 36px;
             padding: 16px 22px;
-            background: #f6f9ff;
-            border-left: 3px solid #1a73e8;
+            background: var(--chalk);
+            border-left: 3px solid var(--voltage);
             border-radius: 0 8px 8px 0;
             font-size: 0.8rem;
-            color: #666;
+            color: var(--iron);
             line-height: 1.65;
         }
-        .ref-disclaimer strong { color: #1a73e8; }
+        .ref-disclaimer strong { color: var(--voltage); }
 
         /* ── Footer ── */
-        .site-footer { background: #111; padding: 48px 40px 32px; text-align: center; width: 100%; }
+        .site-footer { background: var(--asphalt); padding: 48px 40px 32px; text-align: center; width: 100%; }
         .footer-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-        .footer-logo { width: 100px; filter: brightness(0) invert(1); opacity: 0.9; }
-        .footer-tagline { color: #aaa; font-size: 0.88rem; }
+        .footer-logo { opacity: 0.95; }
+        .footer-tagline { color: var(--frost); font-size: 0.88rem; }
         .footer-links { display: flex; gap: 20px; }
-        .footer-links a { color: #888; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-        .footer-links a:hover { color: #fff; }
-        .footer-legal { color: #555; font-size: 0.75rem; max-width: 580px; line-height: 1.6; }
+        .footer-links a { color: var(--frost); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--chalk); }
+        .footer-legal { color: var(--frost); font-size: 0.75rem; max-width: 580px; line-height: 1.6; }
 
         /* ── Reveal animations ── */
         .reveal-up    { opacity: 0; transform: translateY(24px);  transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -604,7 +597,7 @@
 
     <!-- Header -->
     <div class="header-bar">
-        <a href="index.html"><img src="Zelyte (3).png" alt="Zelyte logo" class="nav-logo"></a>
+        <a href="index.html" class="brand-lockup" aria-label="ZELYTE home" style="font-size:22px"><img src="images/zelyte-icon-voltage.png" alt="" class="brand-icon"><span class="brand-word">ZELYTE</span></a>
         <div class="spacer"></div>
         <nav class="nav-links">
             <a href="science.html" class="active">Science</a>
@@ -676,15 +669,17 @@
     </section>
 
     <!-- ── ELECTROLYTES ── -->
+    <div class="split" role="presentation"><span class="split-label">ELECTROLYTES</span></div>
+
     <section class="sci-section electrolytes-section">
         <div class="sci-inner">
             <span class="section-label reveal-up">WHY ELECTROLYTES MATTER</span>
             <h2 class="reveal-up">The minerals that keep<br>your body in balance.</h2>
-            <p class="sci-sub reveal-up">Electrolytes are electrically charged minerals essential for fluid regulation, nerve signaling, and muscle contraction. During exercise they're lost through sweat — replenishing them supports your body's normal function. <sup style="font-size:0.65rem;color:#1a73e8;font-weight:700;">[3]</sup></p>
+            <p class="sci-sub reveal-up">Electrolytes are electrically charged minerals essential for fluid regulation, nerve signaling, and muscle contraction. During exercise they're lost through sweat — replenishing them supports your body's normal function. <sup style="font-size:0.65rem;color:var(--voltage);font-weight:700;">[3]</sup></p>
             <div class="elec-grid">
                 <div class="elec-card reveal-left">
                     <div class="elec-card-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--voltage)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/>
                         </svg>
                     </div>
@@ -694,7 +689,7 @@
                 </div>
                 <div class="elec-card reveal-up">
                     <div class="elec-card-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--voltage)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                         </svg>
                     </div>
@@ -704,7 +699,7 @@
                 </div>
                 <div class="elec-card reveal-right">
                     <div class="elec-card-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--voltage)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="4"/>
                             <line x1="12" y1="2" x2="12" y2="6"/>
                             <line x1="12" y1="18" x2="12" y2="22"/>
@@ -846,6 +841,8 @@
     </div>
 
     <!-- ── REFERENCES ── -->
+    <div class="split" role="presentation"><span class="split-label">REFERENCES</span></div>
+
     <section class="sci-section references-section">
         <div class="sci-inner">
             <span class="ref-heading">References</span>
@@ -879,7 +876,7 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">
-            <img src="Zelyte (3).png" alt="ZELYTE" class="footer-logo" loading="lazy" decoding="async">
+            <span class="brand-lockup brand-lockup--dark footer-logo" style="font-size:20px"><img src="images/zelyte-icon-white.png" alt="" class="brand-icon"><span class="brand-word">ZELYTE</span></span>
             <p class="footer-tagline">Active Hydration Pouches · Zero Sugar · Zero Calories · Hands-Free</p>
             <div class="footer-links">
                 <a href="faq.html">FAQ</a>
@@ -894,10 +891,10 @@
     </footer>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script defer src="supabase.js"></script>
-    <script defer src="email-utils.js"></script>
-    <script defer src="auth.js"></script>
-    <script defer src="mobile-nav.js"></script>
+    <script defer src="js/supabase.js"></script>
+    <script defer src="js/email-utils.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/mobile-nav.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.21/dist/lenis.css">
     <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
     <script>new Lenis({ autoRaf: true, autoToggle: true, anchors: true, allowNestedScroll: true, stopInertiaOnNavigate: true })</script>

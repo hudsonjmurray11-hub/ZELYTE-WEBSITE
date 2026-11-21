@@ -1,0 +1,212 @@
+/* ==========================================================================
+   ZELYTE shared brand layer — loaded by every page before its own styles.
+   Tokens, brand fonts, base typography, badge utilities, logo lockup,
+   and the Split divider. All fields flat: no gradients, no glows.
+   ========================================================================== */
+
+/* 1. Brand tokens */
+:root {
+  --chalk:   #E9EBEA; /* page background everywhere — never pure #FFF */
+  --asphalt: #0C0E10; /* primary text, wordmark, dark bands */
+  --voltage: #2447F5; /* ONLY accent: links, buttons, hovers, the icon */
+  --iron:    #45494D; /* secondary text, hairlines on chalk */
+  --frost:   #C7CDD1; /* captions/hairlines on dark blocks */
+  --white:   #FFFFFF; /* cards/panels sitting on chalk only */
+  --mint:    #4E8FD6; /* Crispy Mint flavor accent only */
+  --cherry:  #6E1B2E; /* Black Cherry flavor accent only */
+
+  /* rgb triplets for rgba() alpha work */
+  --voltage-rgb: 36, 71, 245;
+  --asphalt-rgb: 12, 14, 16;
+  --cherry-rgb:  110, 27, 46;
+  --mint-rgb:    78, 143, 214;
+
+  --font-display: 'Archivo Black', system-ui, sans-serif;
+  --font-body:    'Barlow', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+/* 2. Brand fonts */
+@font-face {
+  font-family: 'Archivo Black';
+  src: url('../ZELYTE_Brand_Fonts/Archivo-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow';
+  src: url('../ZELYTE_Brand_Fonts/Barlow-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow';
+  src: url('../ZELYTE_Brand_Fonts/Barlow-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow';
+  src: url('../ZELYTE_Brand_Fonts/Barlow-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow';
+  src: url('../ZELYTE_Brand_Fonts/Barlow-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../ZELYTE_Brand_Fonts/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../ZELYTE_Brand_Fonts/JetBrainsMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3. Base typography */
+body {
+  font-family: var(--font-body);
+  color: var(--asphalt);
+  background: var(--chalk);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* 4. Mono badge utilities (replaces gold badges) */
+.badge-mono,
+.badge-mono--inverse {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+.badge-mono {
+  color: var(--asphalt);
+  background: var(--chalk);
+  border: 1px solid var(--asphalt);
+}
+.badge-mono--inverse {
+  color: var(--chalk);
+  background: var(--asphalt);
+  border: 1px solid var(--asphalt);
+}
+
+/* 5. Logo lockup: icon + ZELYTE wordmark on one baseline */
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  text-decoration: none;
+  line-height: 1;
+}
+.brand-lockup .brand-icon {
+  height: 1.3em; /* ~1.3x the wordmark cap height */
+  width: auto;
+  display: block;
+}
+.brand-word {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--asphalt);
+}
+.brand-lockup--dark .brand-word { color: var(--chalk); }
+
+/* 6. The Split — timing-line section divider (25:00 piece scale).
+   Tick marks are drawn with single-color background layers; visually flat. */
+.split {
+  display: block;
+  border: 0;
+  height: 5px;
+  width: calc(100% - 48px);
+  max-width: 1100px;
+  position: relative;
+  overflow: visible;
+  color: var(--iron);
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-size:
+    100% 1px,
+    1px 5px, 1px 5px,
+    1px 3px, 1px 3px, 1px 3px, 1px 3px;
+  background-position:
+    0 100%,
+    0 0, 100% 0,
+    20% 2px, 40% 2px, 60% 2px, 80% 2px;
+  background-repeat: no-repeat;
+}
+.split::before,
+.split::after {
+  position: absolute;
+  top: 9px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: currentColor;
+}
+.split::before { content: "00:00"; left: 0; }
+.split::after  { content: "25:00"; right: 0; }
+.split--dark { color: var(--frost); }
+.split-label {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: currentColor;
+}
+/* Breathing room around the divider + space for the timestamps below the rule */
+hr.split, .split { margin: 40px auto 30px; }
+
+/* 7. Neutralize retired glow-effect wrappers left in markup */
+.glowing-effect, .glowing-inner { border: 0 !important; box-shadow: none !important; }
+.glowing-inner::after { content: none !important; }
+
+/* Respect users who prefer reduced motion: stop infinite/looping animations
+   (marquee, button pulse, hero pouch orbit) and make transitions effectively
+   instant. Content still reaches its final state. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -9,9 +9,9 @@
   styleEl.textContent = `
     /* Nav auth button */
     #auth-btn {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.22);
-      color: #fff;
+      background: transparent;
+      border: 1px solid var(--iron);
+      color: var(--asphalt);
       padding: 7px 14px;
       border-radius: 8px;
       font-size: 0.88rem;
@@ -22,14 +22,14 @@
       transition: background 0.2s;
       white-space: nowrap;
     }
-    #auth-btn:hover { background: rgba(255,255,255,0.22); }
+    #auth-btn:hover { background: rgba(var(--asphalt-rgb),0.06); }
     #auth-btn.auth-btn--avatar {
       width: 34px;
       height: 34px;
       padding: 0;
       margin-right: 12px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #1a73e8, #3b82f6);
+      background: var(--voltage);
       border: 2px solid rgba(255,255,255,0.35);
       font-size: 0.88rem;
       font-weight: 700;
@@ -41,7 +41,7 @@
     /* User dropdown */
     .auth-user-menu {
       position: fixed;
-      background: rgba(10,18,36,0.97);
+      background: rgba(var(--asphalt-rgb),0.97);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255,255,255,0.12);
@@ -96,7 +96,7 @@
       transform: translate(-50%, -46%);
       width: 92%;
       max-width: 400px;
-      background: rgba(8,15,30,0.94);
+      background: rgba(var(--asphalt-rgb),0.94);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid rgba(255,255,255,0.12);
@@ -131,12 +131,13 @@
       justify-content: center;
       transition: background 0.2s, color 0.2s;
     }
-    .auth-close:hover { background: rgba(255,255,255,0.16); color: #fff; }
+    .auth-close:hover { background: rgba(255,255,255,0.16); color: var(--chalk); }
 
     .auth-logo-text {
       text-align: center;
+      font-family: var(--font-display);
       font-size: 0.72rem;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 2.5px;
       color: rgba(255,255,255,0.35);
       text-transform: uppercase;
@@ -146,7 +147,7 @@
     .auth-title {
       font-size: 1.35rem;
       font-weight: 700;
-      color: #fff;
+      color: var(--chalk);
       text-align: center;
       margin-bottom: 22px;
       letter-spacing: -0.2px;
@@ -173,8 +174,8 @@
       transition: background 0.2s, color 0.2s;
     }
     .auth-tab.active {
-      background: rgba(26,115,232,0.28);
-      color: #fff;
+      background: rgba(var(--voltage-rgb),0.28);
+      color: var(--chalk);
     }
 
     .auth-field {
@@ -183,7 +184,7 @@
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.14);
       border-radius: 10px;
-      color: #fff;
+      color: var(--chalk);
       font-size: 0.95rem;
       margin-bottom: 11px;
       outline: none;
@@ -191,7 +192,7 @@
       box-sizing: border-box;
     }
     .auth-field:focus {
-      border-color: rgba(26,115,232,0.7);
+      border-color: rgba(var(--voltage-rgb),0.7);
       background: rgba(255,255,255,0.1);
     }
     .auth-field::placeholder { color: rgba(255,255,255,0.3); }
@@ -215,16 +216,14 @@
       cursor: pointer;
       letter-spacing: 0.3px;
       position: relative;
-      color: #fff;
-      background: linear-gradient(135deg, #0d47a1, #1565c0, #1a73e8, #3b82f6, #60a5fa, #3b82f6, #1a73e8, #1565c0, #0d47a1);
-      background-size: 300% 100%;
-      animation: zelyte-gradient-sweep 3s ease infinite;
+      color: var(--chalk);
+      background: var(--voltage);
       transition: transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 18px rgba(26,115,232,0.4);
+      box-shadow: none;
     }
     .auth-submit:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(26,115,232,0.55);
+      box-shadow: none;
     }
     .auth-submit:disabled {
       opacity: 0.55;
@@ -271,14 +270,14 @@
     .auth-resend-btn {
       background: none;
       border: none;
-      color: #60a5fa;
+      color: var(--voltage);
       font-size: 0.84rem;
       cursor: pointer;
       padding: 0;
       text-decoration: underline;
       text-underline-offset: 2px;
     }
-    .auth-resend-btn:hover { color: #93c5fd; }
+    .auth-resend-btn:hover { color: var(--frost); }
   `;
   document.head.appendChild(styleEl);
 

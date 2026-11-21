@@ -2,8 +2,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Amounts in cents
 const PRICES = {
-    subscribe: { '3': 2700, '5': 4500 },
-    onetime:   { '3': 3000, '5': 5000 }
+    subscribe: { '3': 3000, '5': 4500 },
+    onetime:   { '3': 3300, '5': 5000 }
 };
 
 // Fixed product id so the recurring price can reference it without any
@@ -17,7 +17,7 @@ async function ensureProduct() {
         if (err.code !== 'resource_missing') throw err;
         return await stripe.products.create({
             id: PRODUCT_ID,
-            name: 'ZELYTE Crispy Mint — Tin (15 pouches)'
+            name: 'ZELYTE Crispy Mint — Tin (18 pouches)'
         });
     }
 }
